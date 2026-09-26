@@ -1,17 +1,18 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ConflictException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { Model } from 'mongoose';
 import { User } from './auth.model';
-import { InjectModel } from '@nestjs/mongoose';
+import { InjectRepository } from '@nestjs/typeorm';
 import { LoginDto } from './dto/login-dto';
 import { JwtPayload } from './typings/payload.typing';
 import { JwtService } from '@nestjs/jwt';
 import { PasswordService } from 'src/helpers/password.service';
+import { Repository } from 'typeorm';
+import { ENVIRONMENT } from 'src/helpers/configs/environment';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel('users') private readonly userModel: Model<User>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
     private readonly passwordService: PasswordService,
   ) {}
@@ -22,16 +23,28 @@ export class AuthService {
    * @returns created user details
    */
   public async register(createUserDto: CreateUserDto) {
+    const existingUser = await this.userRepository.findOne({
+      where: [
+        { email: createUserDto.email },
+        { username: createUserDto.username },
+      ],
+    });
+
+    if (existingUser) {
+      throw new ConflictException('Username or email is already in use');
+    }
+
     const hashedPassword = await this.passwordService.hashPassword(
       createUserDto.password,
     );
 
-    const userSchema = new this.userModel({
+    const user = this.userRepository.create({
       email: createUserDto.email,
       password: hashedPassword,
       username: createUserDto.username,
     });
-    return userSchema.save();
+    const savedUser = await this.userRepository.save(user);
+    return this._publicUser(savedUser);
   }
 
   /**
@@ -40,7 +53,14 @@ export class AuthService {
    * @returns user with login details
    */
   public async login(loginDto: LoginDto) {
-    const userInDb = await this.findUser(loginDto.username);
+    const userInDb = await this.userRepository.findOne({
+      where: { username: loginDto.username },
+      select: ['id', 'email', 'username', 'password'],
+    });
+
+    if (!userInDb) {
+      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+    }
     const isPasswordValid = await this.passwordService.comparePassword(
       loginDto.password,
       userInDb.password,
@@ -53,13 +73,13 @@ export class AuthService {
     // generate and sign token
     const token = this._createToken(userInDb);
 
-    return { token, userInDb };
+    return { token, user: this._publicUser(userInDb) };
   }
 
-  private _createToken({ username }: CreateUserDto) {
-    const expiresIn = '15h';
+  private _createToken({ id, username }: User) {
+    const expiresIn = ENVIRONMENT.EXPIRES_TIME;
 
-    const user: JwtPayload = { username };
+    const user: JwtPayload = { id, username };
     const accessToken = this.jwtService.sign(user);
     return {
       expiresIn,
@@ -67,11 +87,15 @@ export class AuthService {
     };
   }
 
-  async findUser(username: string) {
-    const userInDb = await this.userModel.findOne({ username }).exec();
+  async findUser(userId: string) {
+    const userInDb = await this.userRepository.findOne({ where: { id: userId } });
     if (!userInDb) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
     return userInDb;
+  }
+
+  private _publicUser({ id, email, username }: User) {
+    return { id, email, username };
   }
 }

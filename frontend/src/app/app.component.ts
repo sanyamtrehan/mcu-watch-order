@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieTokenService } from './services/cookie-token.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,5 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
-  constructor() {}
+  constructor(public readonly cookieTokenService: CookieTokenService) {}
 }

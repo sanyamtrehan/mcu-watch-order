@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
@@ -8,7 +8,15 @@ import { McuModule } from './mcu/mcu.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(ENVIRONMENT.MONGO_DB_CONNECTION),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: ENVIRONMENT.DATABASE_URL,
+      autoLoadEntities: true,
+      synchronize: false,
+      ssl: ENVIRONMENT.DATABASE_SSL
+        ? { rejectUnauthorized: false }
+        : false,
+    }),
     AuthModule,
     McuModule,
   ],

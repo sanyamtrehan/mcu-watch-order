@@ -1,13 +1,22 @@
-import * as mongoose from 'mongoose';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-export const UserSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  username: { type: String, required: true, unique: true },
-});
+@Entity({ name: 'users' })
+export class User {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-export interface User {
+  @Column({ unique: true })
   email: string;
+
+  @Column({ select: false })
   password: string;
+
+  @Column({ unique: true })
   username: string;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }

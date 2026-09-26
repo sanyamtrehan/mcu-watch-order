@@ -45,6 +45,11 @@ export class SignInComponent implements OnInit {
   }
 
   login() {
+    if (this.signInForm.invalid) {
+      this.signInForm.markAllAsTouched();
+      return;
+    }
+
     this.authService.login(this.signInForm.value).subscribe(
       (res) => {
         alert(res.message);
@@ -59,6 +64,11 @@ export class SignInComponent implements OnInit {
   }
 
   register() {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
     this.authService.register(this.registerForm.value).subscribe(
       (res) => {
         alert(res.message);

@@ -13,13 +13,19 @@ export class CookieTokenService {
    */
   setToken(token: string, expiresIn: string) {
     const now = new Date();
-    // removes h from 100000s
-    const expiresInHours = expiresIn.slice(0, -1);
-    const expiryDate = new Date(
-      now.getTime() + Number(expiresInHours) * 3600000
-    );
-    this.cookieService.set('token', token, 100000, '/', '');
-    this.cookieService.set('expiresIn', String(expiryDate), 100000, '/', '');
+    const match = /^(\d+)([smhd])$/.exec(expiresIn);
+    const multipliers: Record<string, number> = {
+      s: 1000,
+      m: 60000,
+      h: 3600000,
+      d: 86400000,
+    };
+    const expiryDate = match
+      ? new Date(now.getTime() + Number(match[1]) * multipliers[match[2]])
+      : new Date(now.getTime() + 3600000);
+
+    this.cookieService.set('token', token, expiryDate, '/', '');
+    this.cookieService.set('expiresIn', expiryDate.toISOString(), expiryDate, '/', '');
   }
 
   setTokenOnly(token: string) {
@@ -37,15 +43,15 @@ export class CookieTokenService {
    * checks if token exist
    */
   tokenExist(): boolean {
-    // token exist
+    const token = this.cookieService.get('token');
     const tokenExpiry = this.cookieService.get('expiresIn');
-    if (new Date() > new Date(tokenExpiry)) {
-      // token expired
-      this.cookieService.delete('token');
-      this.cookieService.delete('expiresIn');
+    const expiryDate = new Date(tokenExpiry);
+
+    if (!token || !tokenExpiry || Number.isNaN(expiryDate.getTime()) || new Date() >= expiryDate) {
+      this.deleteToken();
       return false;
     }
-    // token exist and still valid
+
     return true;
   }
 
@@ -54,6 +60,7 @@ export class CookieTokenService {
    */
   deleteToken(): void {
     this.cookieService.delete('token', '/');
+    this.cookieService.delete('expiresIn', '/');
   }
 
   /**

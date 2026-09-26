@@ -1,19 +1,19 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 import { Data } from '../helpers/marvel-data';
 import { Exceptions } from '../helpers/exceptions';
 import { Mcu } from './mcu.model';
-import { Model } from 'mongoose';
+import { InjectRepository } from '@nestjs/typeorm';
 import { PasswordService } from 'src/helpers/password.service';
 import { ENVIRONMENT } from 'src/helpers/configs/environment';
 import { FilterMcuDto } from './dto/filter-mcu.dto';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class McuService {
   data: Record<string, any> = Data;
   exceptions: string[] = Exceptions;
   constructor(
-    @InjectModel('mcu') private readonly mcuModel: Model<Mcu>,
+    @InjectRepository(Mcu) private readonly mcuRepository: Repository<Mcu>,
     private readonly passwordService: PasswordService,
   ) {}
 
@@ -41,16 +41,15 @@ export class McuService {
         );
       }
     }
-    return this.mcuModel.insertMany(formattedData);
+    return this.mcuRepository.upsert(formattedData, ['name', 'releaseDate']);
   }
 
   public async getData(filterMcuDto: FilterMcuDto) {
-    return this.mcuModel
-      .find()
-      .sort({ releaseDate: 1 })
-      .skip((filterMcuDto.page - 1) * filterMcuDto.limit)
-      .limit(filterMcuDto.limit)
-      .exec();
+    return this.mcuRepository.find({
+      order: { releaseDate: 'ASC' },
+      skip: (filterMcuDto.page - 1) * filterMcuDto.limit,
+      take: filterMcuDto.limit,
+    });
   }
 
   /**
@@ -65,10 +64,12 @@ export class McuService {
   ): Record<string, any>[] {
     const formattedData: Record<string, any>[] = [];
     for (const [key, value] of Object.entries(seasons)) {
-      value.forEach((element: { name: string; releaseDate: Date }) => {
-        element.name = `${this._getShowName(showName)} ${key}E${element.name}`;
-      });
-      formattedData.push(...value);
+      formattedData.push(
+        ...value.map((element: { name: string; releaseDate: Date }) => ({
+          ...element,
+          name: `${this._getShowName(showName)} ${key}E${element.name}`,
+        })),
+      );
     }
     return formattedData;
   }

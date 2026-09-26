@@ -1,11 +1,13 @@
-import * as mongoose from 'mongoose';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-export const McuSchema = new mongoose.Schema({
-  name: { type: String, require: true },
-  releaseDate: { type: Date, require: true },
-});
+@Entity({ name: 'catalog_items' })
+export class Mcu {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-export interface Mcu {
+  @Column()
   name: string;
+
+  @Column({ name: 'release_date', type: 'date' })
   releaseDate: Date;
 }

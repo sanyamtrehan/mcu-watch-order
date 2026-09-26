@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MainComponent } from './main/main.component';
 import { TokenInterceptor } from './helper/token.interceptor';
 import { TempComponent } from './main/temp/temp.component';
+import { AuthGuard } from './helper/auth.guard';
 
 @NgModule({
   declarations: [AppComponent, SignInComponent, NavBarComponent, MainComponent, TempComponent],
@@ -32,6 +33,7 @@ import { TempComponent } from './main/temp/temp.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

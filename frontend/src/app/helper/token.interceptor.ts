@@ -21,11 +21,9 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // if token exist only attach token if not login api
-    if (
-      this.cookieTokenService.tokenExist() &&
-      request.url !== '/api/v1/auth/login'
-    ) {
+    const isAuthRequest = /(^|\/)api\/v1\/auth\/(login|register)$/.test(request.url);
+
+    if (this.cookieTokenService.tokenExist() && !isAuthRequest) {
       const requestToken = this.cookieTokenService.getToken();
       // add token in modified request
       const modifiedReq = request.clone({
@@ -41,10 +39,6 @@ export class TokenInterceptor implements HttpInterceptor {
           return throwError(err);
         })
       );
-    }
-
-    if (!this.cookieTokenService.tokenExist()) {
-      this.router.navigate(['']);
     }
 
     return next.handle(request);
