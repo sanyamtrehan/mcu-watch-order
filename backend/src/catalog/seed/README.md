@@ -17,6 +17,8 @@ from the sequel to its immediate predecessor. It deliberately does not imply
 watch order and does not yet include inferred crossovers or spin-offs.
 
 Run `npm run catalog:validate` from `backend/` before importing a seed change.
+Run `npm run catalog:import` after migrations to upsert the validated seed into
+Postgres and rebuild the derived release order.
 
 The source was manually gathered from Wikipedia before this repository was
 converted to a backend-owned catalog. The snapshot includes the Marvel

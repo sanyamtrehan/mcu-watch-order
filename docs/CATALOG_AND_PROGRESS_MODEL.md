@@ -59,6 +59,6 @@ The repository's current flat data is useful as a starting source, but it is not
 ## Delivery Order
 
 1. Complete the Postgres and JWT foundation. Done.
-2. Add the normalized catalog schema and seed/import pipeline.
+2. Add the normalized catalog schema and seed/import pipeline. Done.
 3. Add authenticated progress and dashboard API endpoints.
 4. Build the dashboard UI, filters, and order switcher.
