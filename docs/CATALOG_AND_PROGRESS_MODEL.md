@@ -29,14 +29,69 @@ Movies and specials have one watch unit directly under their title. Series conta
 
 ## Progress
 
-`watch_progress` should reference a user and a watch unit. It records watched/unwatched status and watched-at time. Aggregates are calculated, not stored as competing counters:
+The canonical cloud table, `watch_progress`, references `auth.users(id)` and a
+watch unit. It records watched/unwatched status and watched-at time. Supabase
+Row Level Security ensures an authenticated user can only read or change their
+own progress rows. Aggregates are calculated, not stored as competing counters:
 
 - Overall progress: watched units divided by all units in the selected ordering.
 - Title progress: watched units belonging to one title divided by that title's units.
 - Season progress: watched episodes divided by that season's episodes.
-- Next item: the first unwatched ordering entry after the user's most recently completed position.
+- Next item: the first unwatched ordering entry in the selected ordering.
 
-The current migration creates the initial `watch_progress` table. A follow-up migration will make it reference the normalized `watch_units` table rather than the temporary catalog table.
+## Anonymous-First Tracking
+
+The tracker should work before someone creates or signs into an account. The
+dashboard is therefore a public catalog experience, not an auth gate.
+
+For an anonymous visitor, progress is stored in versioned browser
+`localStorage`, keyed by stable `watch_unit` IDs. The local record should hold
+only what is needed to reconstruct progress, for example:
+
+```ts
+type LocalProgress = {
+  version: 1;
+  watchedUnitIds: string[];
+  updatedAt: string;
+};
+```
+
+The dashboard derives the same totals from local IDs that it does from cloud
+progress: overall completion, movie completion, episode completion, title and
+season completion, and the next item in the chosen ordering. It must tolerate
+catalog changes by ignoring IDs that no longer exist in the current catalog.
+
+Authentication is an optional sync feature:
+
+1. Visitors can browse, mark units watched, and undo marks without an account.
+2. Signing in reads that user's Supabase progress.
+3. If anonymous progress exists, the app presents a deliberate merge step and
+   uploads the union of watched unit IDs to that user's `watch_progress` rows.
+4. After a successful merge, Supabase becomes the source of truth for that
+   browser session. Local data is retained only until the merge is confirmed.
+
+The first account workflow is administrator-created Supabase Auth users with
+email/password sign-in. Public sign-up can be added later without changing the
+progress schema or RLS rules.
+
+This anonymous-local tracker and merge flow are documented design decisions;
+they are not implemented in the current Next.js UI yet.
+
+## Dashboard Contract
+
+The initial dashboard should prioritize tracking over catalog polish:
+
+- A selectable ordering, beginning with release order. Chronological order is
+  unavailable until it has curated positions for every watch unit.
+- Overall watched/total progress and percentage for the selected ordering.
+- Scoped totals for movies, episodes, completed titles, series, and seasons.
+- The next unwatched watch unit, plus a practical continuation queue.
+- Mark watched and undo controls for movies, specials, and individual episodes.
+- Filters by media kind, series, title, and season once the visual system is
+  defined.
+
+Sequel, spin-off, and crossover links enrich title detail; they never silently
+change the selected watch order.
 
 ## Ordering Rules
 
@@ -51,14 +106,17 @@ The current migration creates the initial `watch_progress` table. A follow-up mi
 1. Import source data into a staging format.
 2. Normalize and validate titles, seasons, episodes, and dates.
 3. Review exceptions and manually assign chronological placements and title relationships.
-4. Upsert the resulting catalog through an admin-only Nest endpoint or migration seed.
+4. Upsert the resulting catalog through an admin-only import script or migration seed.
 5. Preserve stable IDs and source references so catalog refreshes do not erase user progress.
 
 The repository's current flat data is useful as a starting source, but it is not the production catalog model.
 
 ## Delivery Order
 
-1. Complete the Postgres and JWT foundation. Done.
-2. Add the normalized catalog schema and seed/import pipeline. Done.
-3. Add authenticated progress and dashboard API endpoints.
-4. Build the dashboard UI, filters, and order switcher.
+1. Complete the Postgres foundation, normalized schema, and seed/import pipeline. Done.
+2. Move cloud identities and progress access to Supabase Auth and RLS. Done.
+3. Build the anonymous local-progress store and explicit account-merge flow.
+4. Build the dashboard UI, filters, order switcher, and title detail around the
+   agreed design system.
+5. Retire the legacy Angular/Nest applications after the new experience has
+   production parity.
