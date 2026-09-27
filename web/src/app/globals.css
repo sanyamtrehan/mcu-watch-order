@@ -1,12 +1,12 @@
 :root {
-  --ink: #15161a;
-  --ink-soft: #262a31;
-  --surface: #f5f2eb;
-  --panel: #fffaf1;
-  --panel-dark: #1b1d22;
-  --line: #d8d1c3;
-  --muted: #6e6a62;
-  --muted-dark: #a8a096;
+  --ink: #f4efe6;
+  --ink-soft: #ded8ce;
+  --surface: #101114;
+  --panel: #181a1f;
+  --panel-dark: #0b0c0f;
+  --line: #35383f;
+  --muted: #aaa59d;
+  --muted-dark: #c9c2b8;
   --accent: #b51e2f;
   --accent-strong: #861421;
   --gold: #c5a15c;

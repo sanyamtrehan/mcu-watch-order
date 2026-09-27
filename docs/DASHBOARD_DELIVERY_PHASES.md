@@ -28,6 +28,18 @@ preserves its choices; no local progress is sent to Supabase.
 Acceptance: the first viewport answers progress, next item, current ordering,
 and primary tracking action without a login or marketing screen.
 
+## Phase 2.5: Dark Visual Foundation
+
+- Make the cinematic dark palette in `DESIGN.md` the application default.
+- Retune panel, border, metadata, action, active-control, and image-overlay
+  contrast for prolonged dashboard use.
+- Keep the existing dashboard layout and tracking behavior unchanged; a light
+  theme is deferred until it earns a concrete user need.
+
+Acceptance: all dashboard controls and text meet a deliberate dark-surface
+contrast system, including active filters, disabled chronology, progress bars,
+and local-progress states.
+
 ## Phase 3: Tracking Controls And Catalog Navigation
 
 - Add the horizontal filter rail for media kind, watched state, series, title,

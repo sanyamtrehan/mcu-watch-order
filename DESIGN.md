@@ -55,18 +55,21 @@ Label and contrast sweep:
 
 ## Visual Identity
 
-The palette should feel cinematic without becoming all-black. Use a warm near-black for focus, an off-white surface for clarity, a precise red accent for MCU recognition, and small amounts of teal/steel for system states.
+The product defaults to a cinematic dark interface. Use a warm near-black as the
+main surface, layered charcoal panels for depth, a precise red accent for MCU
+recognition, and small amounts of teal/steel for system states. A light theme
+can be evaluated later, but it is not the default or a Phase 2 concern.
 
 ```css
 :root {
-  --color-ink: #15161a;
-  --color-ink-soft: #262a31;
-  --color-surface: #f5f2eb;
-  --color-panel: #fffaf1;
-  --color-panel-dark: #1b1d22;
-  --color-line: #d8d1c3;
-  --color-muted: #6e6a62;
-  --color-muted-dark: #a8a096;
+  --color-ink: #f4efe6;
+  --color-ink-soft: #ded8ce;
+  --color-surface: #101114;
+  --color-panel: #181a1f;
+  --color-panel-dark: #0b0c0f;
+  --color-line: #35383f;
+  --color-muted: #aaa59d;
+  --color-muted-dark: #c9c2b8;
   --color-accent: #b51e2f;
   --color-accent-strong: #861421;
   --color-gold: #c5a15c;
@@ -78,6 +81,15 @@ The palette should feel cinematic without becoming all-black. Use a warm near-bl
 ```
 
 Do not let the product become a single red theme. Red is for action, active state, and the most important progress mark. Teal is for filters/sync system feedback. Gold is a rare editorial accent for chronology and relationship details.
+
+Dark-mode contrast rules:
+
+- Primary text on `--color-panel` uses `--color-ink`; supporting text uses
+  `--color-muted` and must remain readable at small metadata sizes.
+- Primary actions are white text on red. Active filter/order states must never
+  use a light foreground on a light background.
+- Hairline borders establish panels and rows; shadows are secondary and kept
+  subtle.
 
 ## Typography
 
