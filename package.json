@@ -1,0 +1,10 @@
+{
+  "name": "mcu-watch-order",
+  "private": true,
+  "scripts": {
+    "supabase": "supabase"
+  },
+  "devDependencies": {
+    "supabase": "2.118.0"
+  }
+}
