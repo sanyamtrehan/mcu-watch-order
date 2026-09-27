@@ -2,21 +2,27 @@
 
 import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useGSAP } from "@gsap/react";
-import { Check, ChevronRight, Cloud, Filter, Film, RotateCcw, Tv } from "lucide-react";
+import { Check, ChevronRight, Cloud, Film, RotateCcw, Tv, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import type { DashboardUnit } from "@/lib/catalog/dashboard";
+import type { DashboardUnit, ReleaseOrderCatalog } from "@/lib/catalog/dashboard";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, writeLocalProgress } from "@/lib/progress/local-progress";
 import styles from "./page.module.css";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-type Props = { units: DashboardUnit[] };
+type Props = { catalog: ReleaseOrderCatalog };
 type KindFilter = "all" | "movie" | "episode" | "special";
+type WatchStateFilter = "all" | "unwatched" | "watched";
 
-export function LocalDashboard({ units }: Props) {
+export function LocalDashboard({ catalog }: Props) {
+  const { units, relationships } = catalog;
   const shell = useRef<HTMLElement>(null);
   const [kindFilter, setKindFilter] = useState<KindFilter>("all");
+  const [watchStateFilter, setWatchStateFilter] = useState<WatchStateFilter>("unwatched");
+  const [seriesFilter, setSeriesFilter] = useState("all");
+  const [titleFilter, setTitleFilter] = useState("all");
+  const [seasonFilter, setSeasonFilter] = useState("all");
   const validUnitIds = useMemo(() => new Set(units.map((unit) => unit.id)), [units]);
   const serializedProgress = useSyncExternalStore(subscribeToLocalProgress, getLocalProgressSnapshot, getServerProgressSnapshot);
   const watchedUnitIds = useMemo(() => new Set(parseLocalProgress(serializedProgress, validUnitIds).watchedUnitIds), [serializedProgress, validUnitIds]);
@@ -37,7 +43,21 @@ export function LocalDashboard({ units }: Props) {
   const upcoming = units.filter((unit) => !watchedUnitIds.has(unit.id));
   const movies = units.filter((unit) => unit.unitKind === "movie");
   const episodes = units.filter((unit) => unit.unitKind === "episode");
-  const visibleUpcoming = upcoming.filter((unit) => kindFilter === "all" || unit.unitKind === kindFilter);
+  const titles = [...new Map(units.map((unit) => [unit.titleId, { id: unit.titleId, title: unit.title, kind: unit.titleKind }])).values()].sort((a, b) => a.title.localeCompare(b.title));
+  const series = titles.filter((title) => title.kind === "series");
+  const titleScope = titleFilter !== "all" ? titleFilter : seriesFilter;
+  const seasons = [...new Map(units.filter((unit) => unit.titleId === titleScope && unit.seasonId).map((unit) => [unit.seasonId!, unit.seasonNumber!])).entries()].sort(([, a], [, b]) => a - b);
+  const visibleUnits = units.filter((unit) => {
+    const watchedValue = watchedUnitIds.has(unit.id);
+    return (kindFilter === "all" || unit.unitKind === kindFilter)
+      && (watchStateFilter === "all" || (watchStateFilter === "watched" ? watchedValue : !watchedValue))
+      && (seriesFilter === "all" || unit.titleId === seriesFilter)
+      && (titleFilter === "all" || unit.titleId === titleFilter)
+      && (seasonFilter === "all" || unit.seasonId === seasonFilter);
+  });
+  const selectedTitle = titles.find((title) => title.id === titleFilter || title.id === seriesFilter);
+  const selectedTitleUnits = selectedTitle ? units.filter((unit) => unit.titleId === selectedTitle.id) : [];
+  const selectedTitleRelations = selectedTitle ? relationships.filter((relation) => relation.fromTitleId === selectedTitle.id || relation.toTitleId === selectedTitle.id) : [];
   const titleCounts = new Map<string, { watched: number; total: number }>();
 
   for (const unit of units) {
@@ -64,6 +84,14 @@ export function LocalDashboard({ units }: Props) {
     if (watchedValue) next.add(unitId);
     else next.delete(unitId);
     writeLocalProgress(next);
+  }
+
+  function resetFilters() {
+    setKindFilter("all");
+    setWatchStateFilter("unwatched");
+    setSeriesFilter("all");
+    setTitleFilter("all");
+    setSeasonFilter("all");
   }
 
   return (
@@ -100,19 +128,29 @@ export function LocalDashboard({ units }: Props) {
           </article>
 
           <section className={`${styles.filterTile} ${styles.tile}`} data-entrance aria-label="Queue filters">
-            <div className={styles.tileHeading}><div><p className={styles.kicker}>Queue filter</p><h2>Find your lane</h2></div><Filter size={18} aria-hidden="true" /></div>
+            <div className={styles.tileHeading}><div><p className={styles.kicker}>Queue filter</p><h2>Find your lane</h2></div><button className={styles.resetButton} type="button" onClick={resetFilters} aria-label="Reset queue filters" title="Reset filters"><X size={17} /></button></div>
             <div className={styles.filterRail}>
               <FilterButton active={kindFilter === "all"} onClick={() => setKindFilter("all")}>All</FilterButton>
               <FilterButton active={kindFilter === "movie"} onClick={() => setKindFilter("movie")}><Film size={15} /> Films</FilterButton>
               <FilterButton active={kindFilter === "episode"} onClick={() => setKindFilter("episode")}><Tv size={15} /> Episodes</FilterButton>
               <FilterButton active={kindFilter === "special"} onClick={() => setKindFilter("special")}>Specials</FilterButton>
             </div>
-            <p className={styles.filterHint}>{visibleUpcoming.length} unwatched items match this view.</p>
+            <div className={styles.filterRail}>
+              <FilterButton active={watchStateFilter === "unwatched"} onClick={() => setWatchStateFilter("unwatched")}>Unwatched</FilterButton>
+              <FilterButton active={watchStateFilter === "watched"} onClick={() => setWatchStateFilter("watched")}>Watched</FilterButton>
+              <FilterButton active={watchStateFilter === "all"} onClick={() => setWatchStateFilter("all")}>Both</FilterButton>
+            </div>
+            <div className={styles.selectFilters}>
+              <label>Series<select value={seriesFilter} onChange={(event) => { setSeriesFilter(event.target.value); setTitleFilter("all"); setSeasonFilter("all"); }}><option value="all">All series</option>{series.map((title) => <option key={title.id} value={title.id}>{title.title}</option>)}</select></label>
+              <label>Title<select value={titleFilter} onChange={(event) => { setTitleFilter(event.target.value); setSeriesFilter("all"); setSeasonFilter("all"); }}><option value="all">All titles</option>{titles.map((title) => <option key={title.id} value={title.id}>{title.title}</option>)}</select></label>
+              <label>Season<select disabled={seasons.length === 0} value={seasonFilter} onChange={(event) => setSeasonFilter(event.target.value)}><option value="all">All seasons</option>{seasons.map(([id, number]) => <option key={id} value={id}>Season {number}</option>)}</select></label>
+            </div>
+            <p className={styles.filterHint}>{visibleUnits.length} items match this view.</p>
           </section>
 
           <section className={`${styles.queueTile} ${styles.tile}`} data-entrance aria-label="Continuation queue">
-            <div className={styles.tileHeading}><div><p className={styles.kicker}>Up next</p><h2>Release queue</h2></div><span>{visibleUpcoming.length} remaining</span></div>
-            <ol className={styles.queueList}>{visibleUpcoming.slice(0, 5).map((unit) => <WatchUnitRow key={unit.id} unit={unit} watched={false} onChange={setWatched} />)}</ol>
+            <div className={styles.tileHeading}><div><p className={styles.kicker}>Up next</p><h2>Release queue</h2></div><span>{visibleUnits.length} in view</span></div>
+            <ol className={styles.queueList}>{visibleUnits.slice(0, 5).map((unit) => <WatchUnitRow key={unit.id} unit={unit} watched={watchedUnitIds.has(unit.id)} onChange={setWatched} />)}</ol>
           </section>
 
           <section className={`${styles.metricsTile} ${styles.tile}`} data-entrance aria-label="Progress totals">
@@ -121,6 +159,8 @@ export function LocalDashboard({ units }: Props) {
             <Metric label="Titles complete" watched={totals.titlesCompleted} total={totals.titlesTotal} />
           </section>
         </section>
+
+        {selectedTitle && <TitleProgressPanel title={selectedTitle} units={selectedTitleUnits} relationships={selectedTitleRelations} watchedUnitIds={watchedUnitIds} />}
 
         {watched.length > 0 && <section className={styles.recentlyWatched} data-entrance><div><p className={styles.kicker}>Recently watched</p><h2>Undo a mark without losing your place.</h2></div><div className={styles.recentList}>{watched.slice(-3).reverse().map((unit) => <div className={styles.recentRow} key={unit.id}><span><Check size={16} /> {unit.title}</span><button type="button" onClick={() => setWatched(unit.id, false)} aria-label={`Undo watched status for ${unit.title}`}><RotateCcw size={15} /> Undo</button></div>)}</div></section>}
 
@@ -158,6 +198,20 @@ function UnitTitle({ unit, heading }: { unit: DashboardUnit; heading: "h2" | "h3
 
 function WatchButton({ unit, watched, onChange, compact = false }: { unit: DashboardUnit; watched: boolean; onChange: (unitId: string, watchedValue: boolean) => void; compact?: boolean }) {
   return <button className={compact ? styles.compactWatch : styles.watchButton} type="button" onClick={() => onChange(unit.id, !watched)}>{watched ? <><RotateCcw size={16} /> Undo</> : <><Check size={16} /> Mark watched</>}</button>;
+}
+
+function TitleProgressPanel({ title, units, relationships, watchedUnitIds }: { title: { id: string; title: string; kind: DashboardUnit["titleKind"] }; units: DashboardUnit[]; relationships: ReleaseOrderCatalog["relationships"]; watchedUnitIds: Set<string> }) {
+  const watched = units.filter((unit) => watchedUnitIds.has(unit.id)).length;
+  const seasons = [...new Map(units.filter((unit) => unit.seasonId).map((unit) => [unit.seasonId!, { number: unit.seasonNumber!, total: 0, watched: 0 }])).entries()];
+  for (const unit of units) {
+    if (!unit.seasonId) continue;
+    const season = seasons.find(([id]) => id === unit.seasonId)?.[1];
+    if (!season) continue;
+    season.total += 1;
+    season.watched += Number(watchedUnitIds.has(unit.id));
+  }
+
+  return <section className={styles.titlePanel} data-entrance><div><p className={styles.kicker}>{title.kind}</p><h2>{title.title}</h2><p>{watched} of {units.length} watch units completed.</p></div><div className={styles.titlePanelDetails}>{seasons.length > 0 && <div><h3>Seasons</h3><ul>{seasons.sort(([, a], [, b]) => a.number - b.number).map(([id, season]) => <li key={id}>Season {season.number}<span>{season.watched} / {season.total}</span></li>)}</ul></div>}{relationships.length > 0 && <div><h3>Connected titles</h3><ul>{relationships.map((relationship) => <li key={`${relationship.fromTitleId}-${relationship.toTitleId}`}>{relationship.fromTitleId === title.id ? relationship.toTitle : relationship.fromTitle}<span>{relationship.type}</span></li>)}</ul></div>}</div></section>;
 }
 
 function subscribeToLocalProgress(onStoreChange: () => void) { window.addEventListener("storage", onStoreChange); window.addEventListener(LOCAL_PROGRESS_EVENT, onStoreChange); return () => { window.removeEventListener("storage", onStoreChange); window.removeEventListener(LOCAL_PROGRESS_EVENT, onStoreChange); }; }
