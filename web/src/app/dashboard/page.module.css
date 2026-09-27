@@ -76,12 +76,12 @@
 .recentRow span, .recentRow button { align-items: center; display: inline-flex; font-size: .85rem; gap: .45rem; }
 .recentRow span svg { color: var(--success); }
 .recentRow button { background: transparent; border: 0; color: var(--muted); cursor: pointer; min-height: 40px; }
-.orderStory { align-items: stretch; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); min-height: 440px; }
+.orderStory { align-items: stretch; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); min-height: 640px; }
 .storyCopy { align-content: center; background: var(--ink); color: white; padding: clamp(2rem, 5vw, 5rem); }
 .storyCopy .kicker { color: var(--gold); }
 .storyCopy h2 { font-size: clamp(2rem, 4vw, 4.25rem); line-height: .95; max-width: 36rem; }
 .storyCopy > p:last-child { color: #c0b9af; line-height: 1.55; margin: 1.5rem 0 0; max-width: 28rem; }
-.storyMedia { background: linear-gradient(0deg, rgb(15 16 20 / .72), rgb(15 16 20 / .1)), url("https://picsum.photos/seed/timeline-console/1200/900") center / cover; filter: grayscale(.15) contrast(1.1) saturate(.85); min-height: 340px; overflow: hidden; }
+.storyMedia { background: linear-gradient(0deg, rgb(15 16 20 / .72), rgb(15 16 20 / .1)), url("https://picsum.photos/seed/timeline-console/1200/900") center / cover; filter: grayscale(.15) contrast(1.1) saturate(.85); min-height: 640px; overflow: hidden; }
 .storyMedia > div { color: white; display: grid; height: 100%; padding: clamp(2rem, 5vw, 4.5rem); place-content: end start; }
 .storyMedia span { font-size: clamp(4rem, 9vw, 9rem); font-weight: 760; line-height: .8; }
 .storyMedia p { font-size: .92rem; line-height: 1.4; margin: .9rem 0 0; max-width: 13rem; }

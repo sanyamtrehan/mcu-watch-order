@@ -37,6 +37,19 @@ export function LocalDashboard({ catalog }: Props) {
       ease: "none",
       scrollTrigger: { trigger: "[data-story]", start: "top 82%", end: "bottom 30%", scrub: true },
     });
+
+    const media = gsap.matchMedia();
+    media.add("(min-width: 900px)", () => {
+      ScrollTrigger.create({
+        trigger: "[data-story]",
+        start: "top top+=88",
+        end: "bottom bottom",
+        pin: "[data-story-copy]",
+        pinSpacing: false,
+      });
+    });
+
+    return () => media.revert();
   }, { scope: shell });
 
   const watched = units.filter((unit) => watchedUnitIds.has(unit.id));
@@ -80,10 +93,20 @@ export function LocalDashboard({ catalog }: Props) {
   const percentage = totals.total ? Math.round((totals.watched / totals.total) * 100) : 0;
 
   function setWatched(unitId: string, watchedValue: boolean) {
-    const next = new Set(watchedUnitIds);
-    if (watchedValue) next.add(unitId);
-    else next.delete(unitId);
-    writeLocalProgress(next);
+    const persist = () => {
+      const next = new Set(watchedUnitIds);
+      if (watchedValue) next.add(unitId);
+      else next.delete(unitId);
+      writeLocalProgress(next);
+    };
+
+    const row = shell.current?.querySelector(`[data-watch-unit="${unitId}"]`);
+    if (watchedValue && row && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.to(row, { height: 0, opacity: 0, paddingBlock: 0, duration: 0.22, ease: "power2.in", onComplete: persist });
+      return;
+    }
+
+    persist();
   }
 
   function resetFilters() {
@@ -165,7 +188,7 @@ export function LocalDashboard({ catalog }: Props) {
         {watched.length > 0 && <section className={styles.recentlyWatched} data-entrance><div><p className={styles.kicker}>Recently watched</p><h2>Undo a mark without losing your place.</h2></div><div className={styles.recentList}>{watched.slice(-3).reverse().map((unit) => <div className={styles.recentRow} key={unit.id}><span><Check size={16} /> {unit.title}</span><button type="button" onClick={() => setWatched(unit.id, false)} aria-label={`Undo watched status for ${unit.title}`}><RotateCcw size={15} /> Undo</button></div>)}</div></section>}
 
         <section className={styles.orderStory} data-story>
-          <div className={styles.storyCopy}><p className={styles.kicker}>The order is the tool</p><h2>Release order stays factual. Chronology is editorial.</h2><p>Every item has a stable position, so your place survives catalog improvements and an eventual account sync.</p></div>
+          <div className={styles.storyCopy} data-story-copy><p className={styles.kicker}>The order is the tool</p><h2>Release order stays factual. Chronology is editorial.</h2><p>Every item has a stable position, so your place survives catalog improvements and an eventual account sync.</p></div>
           <div className={styles.storyMedia} data-backdrop><div><span>489</span><p>curated watch units in the current release sequence</p></div></div>
         </section>
 
@@ -188,7 +211,7 @@ function Metric({ label, watched, total }: { label: string; watched: number; tot
 }
 
 function WatchUnitRow({ unit, watched, onChange }: { unit: DashboardUnit; watched: boolean; onChange: (unitId: string, watchedValue: boolean) => void }) {
-  return <li><span className={styles.position}>{String(unit.position).padStart(2, "0")}</span><div><UnitTitle unit={unit} heading="h3" /><p>{formatDate(unit.releaseDate)}</p></div><WatchButton unit={unit} watched={watched} onChange={onChange} compact /></li>;
+  return <li data-watch-unit={unit.id}><span className={styles.position}>{String(unit.position).padStart(2, "0")}</span><div><UnitTitle unit={unit} heading="h3" /><p>{formatDate(unit.releaseDate)}</p></div><WatchButton unit={unit} watched={watched} onChange={onChange} compact /></li>;
 }
 
 function UnitTitle({ unit, heading }: { unit: DashboardUnit; heading: "h2" | "h3" }) {
