@@ -4,39 +4,65 @@
 
 MCU Watch Order is a tracking-first catalog for people who want a clear answer to three questions: what should I watch next, how much have I finished, and where does this title sit in a larger viewing order.
 
-The interface should feel closer to a premium media control room than a fan wiki. It can borrow the confidence of Plex, the tracking clarity of Trakt, the cinematic restraint of film distribution sites, and the compactness of MBUI-style media dashboards, but it must stay lightweight enough for repeated use. The dashboard is the product.
+The interface should feel like a monitor inside Avengers headquarters: a dense,
+purposeful sci-fi tracking console with real data visualizations, precision
+numerals, and controlled neon signal colors on a midnight surface. It is not a
+fan wiki, a generic SaaS dashboard, or a media landing page. The dashboard is
+the product.
 
-The first screen should never be a marketing page. It should open directly into the catalog, progress, next item, order switcher, and filters.
+The first screen should never be a marketing page. It should open directly into
+the analytical dashboard: overall progress, current continuation, progress by
+title/season, order controls, and a link to the full catalog table.
+
+The product has two deliberately different working surfaces:
+
+- `/dashboard` is the Avengers-monitor command screen. It explains progress
+  through real analytical views, including radial completion, season matrices,
+  content-type split, and a compact continuation panel.
+- `/catalog` is the flat operational inventory. It renders every watch unit in
+  a dense table first, keeps watched rows visible and editable, and offers a
+  card-grid view as an alternate inspection mode.
 
 ## Design Plan
 
 ```text
 seed = len(prompt) % 97 = 64
 random.choice(hero) -> Artistic Asymmetry; random.choice(font) -> Geist
-random.sample(components, 3) -> Gapless dashboard bento, horizontal filter rail, compact continuation queue
-random.sample(motion, 2) -> scroll-pinned progress story, image scale/fade scroll
+random.sample(components, 3) -> Gapless telemetry matrix, radial progress instrument, compact continuation queue
+random.sample(motion, 2) -> data-channel draw-in, focused panel transition
 ```
 
 AIDA structure for future pages:
 
-- Navigation: compact split bar with order switcher, search, account/sync action, and minimal icon controls.
-- Attention: dashboard hero with asymmetric next-up panel and progress summary.
-- Interest: gapless bento of totals, filters, queue, and catalog health.
-- Desire: pinned progress/story section for order comparison, title relationships, and continuation context.
-- Action: account merge/sync panel or final footer action, depending on auth state.
+- Navigation: compact command bar with order switcher, dashboard/catalog route
+  switch, search/filter controls, and account/sync action.
+- Attention: immediate telemetry band with a radial overall-progress
+  instrument, current continuation, and order state. This is data, never a
+  promotional hero.
+- Interest: gapless telemetry matrix of title/season completion, media split,
+  completion distribution, and continuation queue.
+- Desire: focused title inspection panel that expands a show into seasons and
+  related titles; it is analytical context, not an editorial story section.
+- Action: account merge/sync panel, shown only when it has a real state to
+  communicate.
 
 Hero math:
 
-- Use a wide H1 container: `max-width: 72rem`.
-- H1 size: `clamp(2.75rem, 6vw, 6rem)` with `line-height: .9`.
-- Copy target: 6 to 9 words so the heading resolves in 2 to 3 lines on mobile and 1 to 2 lines on desktop.
-- No stamp icons, random badges, stat clutter, or pill-tag stacks in the hero.
+- Dashboard headings are compact operational labels, not large marketing
+  headlines. Use `clamp(1.5rem, 2.8vw, 2.75rem)` with a wide data rail.
+- Large type is reserved for primary numerical instruments, such as `58%` or
+  `17 / 20`, not sentence-length copy.
+- No stamps, decorative badges, marketing CTAs, or filler copy.
 
 Bento density:
 
 - Desktop grid: 12 columns, dense flow, fixed row rhythm.
-- Required first dashboard composition: next-up panel `span 7 x 2`, progress panel `span 5 x 2`, filters `span 4 x 2`, continuation queue `span 8 x 2`, stats strip `span 12 x 1`.
-- Occupancy: rows 1-2 are 7 + 5 = 12 columns; rows 3-4 are 4 + 8 = 12 columns; row 5 is 12 columns. Zero empty cells.
+- Required dashboard composition: primary radial instrument `span 4 x 2`,
+  continuation panel `span 4 x 2`, content split `span 4 x 2`; season/title
+  telemetry `span 8 x 3`, current queue `span 4 x 3`; filter and order rail
+  `span 12 x 1`.
+- Occupancy: rows 1-2 are 4 + 4 + 4 = 12 columns; rows 3-5 are 8 + 4 = 12;
+  the control rail is 12. Zero empty cells.
 - CSS modules should use `grid-auto-flow: dense`; if Tailwind is introduced later, use `grid-flow-dense`.
 
 Label and contrast sweep:
@@ -55,32 +81,38 @@ Label and contrast sweep:
 
 ## Visual Identity
 
-The product defaults to a cinematic dark interface. Use a warm near-black as the
-main surface, layered charcoal panels for depth, a precise red accent for MCU
-recognition, and small amounts of teal/steel for system states. A light theme
-can be evaluated later, but it is not the default or a Phase 2 concern.
+The product defaults to a midnight tactical interface. Use a blue-black console
+surface, layered panels, restrained grid lines, and distinct cyan, magenta,
+cobalt, and red data channels. A light theme can be evaluated later, but it is
+not the default or a Phase 2 concern.
 
 ```css
 :root {
-  --color-ink: #f4efe6;
-  --color-ink-soft: #ded8ce;
-  --color-surface: #101114;
-  --color-panel: #181a1f;
-  --color-panel-dark: #0b0c0f;
-  --color-line: #35383f;
-  --color-muted: #aaa59d;
-  --color-muted-dark: #c9c2b8;
+  --color-ink: #e9f1ff;
+  --color-ink-soft: #c2ccdc;
+  --color-surface: #080b1a;
+  --color-panel: #0f1428;
+  --color-panel-dark: #070916;
+  --color-line: #28314e;
+  --color-muted: #8290ad;
+  --color-muted-dark: #b8c4dc;
   --color-accent: #b51e2f;
   --color-accent-strong: #861421;
-  --color-gold: #c5a15c;
-  --color-teal: #2e7a78;
-  --color-success: #247653;
-  --color-warning: #b46a16;
+  --color-cyan: #24d7ff;
+  --color-magenta: #f42ab9;
+  --color-cobalt: #6077ff;
+  --color-teal: #32bfc0;
+  --color-success: #38d48e;
+  --color-warning: #f0ad45;
   --color-danger: #b51e2f;
 }
 ```
 
-Do not let the product become a single red theme. Red is for action, active state, and the most important progress mark. Teal is for filters/sync system feedback. Gold is a rare editorial accent for chronology and relationship details.
+Do not turn this into a purple-gradient interface. Cyan, magenta, cobalt, and
+teal represent separate data channels, not decoration: for example overall
+completion, films, series/episodes, and sync/system state. Red remains an MCU
+action color, not the dominant palette. Backgrounds use subtle grid texture and
+panel contrast, never floating gradient orbs.
 
 Dark-mode contrast rules:
 
@@ -93,7 +125,8 @@ Dark-mode contrast rules:
 
 ## Typography
 
-Primary font: Geist.
+Primary font: Geist. Use Geist Mono for numerical instruments, tabular values,
+axis labels, and compact status data.
 
 Fallback stack:
 
@@ -122,10 +155,11 @@ Global page shell:
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 15% 0%, rgba(181, 30, 47, .14), transparent 28rem),
-    radial-gradient(circle at 88% 12%, rgba(46, 122, 120, .14), transparent 24rem),
-    var(--color-surface);
+  background-color: var(--color-surface);
+  background-image:
+    linear-gradient(rgba(96, 119, 255, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 119, 255, .045) 1px, transparent 1px);
+  background-size: 28px 28px;
   color: var(--color-ink);
 }
 ```
@@ -140,8 +174,8 @@ The nav is a functional toolbar, not a brand billboard.
 
 Desktop:
 
-- Left: wordmark plus selected order.
-- Center: segmented order switcher when enough width exists.
+- Left: wordmark plus dashboard/catalog route switch.
+- Center: segmented order switcher and terse system state.
 - Right: search icon button, filter icon button, sync/account button.
 
 Mobile:
@@ -153,13 +187,16 @@ Use lucide icons when implementation adds the icon dependency: `Search`, `Slider
 
 ## Dashboard Anatomy
 
-The dashboard should contain these surfaces in the first viewport on desktop:
+The dashboard should contain these analytical surfaces in the first viewport on
+desktop:
 
-- Overall progress with watched/total and percentage.
-- Next unwatched watch unit with one primary action.
-- Order switcher for release and chronological.
-- Filter rail for media kind, series, title, season, and watched state.
-- Continuation queue with compact rows.
+- A radial overall-progress instrument with watched/total and percentage.
+- A content split instrument for films, episodes, and completed titles.
+- A compact next-unwatched continuation panel with one primary action.
+- A season/title telemetry matrix. Each show receives segmented season status,
+  such as `S1 13/13`, `S2 13/13`, `S3 4/13`; films use a single completion
+  marker rather than a long progress bar.
+- A short continuation queue and an order/filter command rail.
 
 The first implementation can be CSS modules. Use these component names consistently:
 
@@ -213,14 +250,17 @@ Filters should be dense and tactile:
 
 Avoid a full sidebar until the catalog has enough data to justify it.
 
-### Progress Hero
+### Telemetry Instruments
 
-Use asymmetry:
-
-- Left: huge progress number, selected order, completion copy.
-- Right: next-up title, metadata, primary action, and a small backdrop strip.
-
-Do not place raw stats inside the main heading. Stats belong in metric tiles.
+- Use radial rings only for whole-to-total measures: overall completion,
+  films, episodes, and a selected title.
+- Use short segmented blocks for season completion. Each block has a text
+  equivalent and uses data-channel color deliberately.
+- Use sparklines or line charts only when the underlying sequence is useful,
+  such as completion by release era or episodes completed over time.
+- Do not use a wide single-line progress bar as the main visualization for a
+  show or the full catalog. It communicates too little at dashboard scale.
+- Every visual needs visible text values; color is never the only state signal.
 
 ### Continuation Queue
 
@@ -289,14 +329,19 @@ Apply `grayscale(.15) contrast(1.1) saturate(.85)` and a dark radial overlay so 
 
 ## Motion
 
-Use GSAP when the UI moves beyond simple hover transitions. Add `gsap` and `@gsap/react` only when implementing those sections.
+Use GSAP when the UI moves beyond simple hover transitions. The motion should
+feel like a monitor receiving a real signal, not a landing-page scroll show.
 
 Required motion patterns:
 
-- Hover physics: clickable rows and image strips scale inner media to `1.04` over `600ms`.
-- Watch action: check icon scales from `.75` to `1`, row background flashes success, progress bar advances.
-- Image scale/fade scroll: title backdrops enter at `scale(.92)` and settle to `1`.
-- Scroll-pinned progress story: on catalog explainer pages, pin the order summary while release/chronological examples scroll.
+- Hover physics: clickable rows and instruments brighten their border/data
+  channel briefly; do not move the layout.
+- Watch action: check icon resolves from `.75` to `1`, the affected season
+  segment fills, and radial totals tick forward.
+- Telemetry draw-in: charts and radial arcs animate from empty to their real
+  values on first entry, then update from the prior value.
+- Panel focus: selecting a show sharpens its telemetry panel while surrounding
+  panels soften slightly. No automatic long-form scroll story on the dashboard.
 
 Respect reduced motion:
 
