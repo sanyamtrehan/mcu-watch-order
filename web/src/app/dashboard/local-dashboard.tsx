@@ -4,13 +4,12 @@ import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useGSAP } from "@gsap/react";
 import { Check, ChevronRight, Cloud, Film, RotateCcw, Tv, UserRound, X } from "lucide-react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { DashboardUnit, ReleaseOrderCatalog } from "@/lib/catalog/dashboard";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, writeLocalProgress } from "@/lib/progress/local-progress";
 import { createClient as createBrowserClient } from "@/lib/supabase/client";
 import styles from "./page.module.css";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(useGSAP);
 
 type Account = { id: string; email: string };
 type Props = { catalog: ReleaseOrderCatalog; account: Account | null; initialRemoteWatchedUnitIds: string[] };
@@ -38,25 +37,6 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     gsap.from("[data-entrance]", { y: 20, opacity: 0, duration: 0.65, stagger: 0.08, ease: "power3.out" });
-    gsap.fromTo("[data-backdrop]", { scale: 0.92, opacity: 0.46 }, {
-      scale: 1,
-      opacity: 0.78,
-      ease: "none",
-      scrollTrigger: { trigger: "[data-story]", start: "top 82%", end: "bottom 30%", scrub: true },
-    });
-
-    const media = gsap.matchMedia();
-    media.add("(min-width: 900px)", () => {
-      ScrollTrigger.create({
-        trigger: "[data-story]",
-        start: "top top+=88",
-        end: "bottom bottom",
-        pin: "[data-story-copy]",
-        pinSpacing: false,
-      });
-    });
-
-    return () => media.revert();
   }, { scope: shell });
 
   const watched = units.filter((unit) => watchedUnitIds.has(unit.id));
@@ -78,6 +58,19 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
   const selectedTitle = titles.find((title) => title.id === titleFilter || title.id === seriesFilter);
   const selectedTitleUnits = selectedTitle ? units.filter((unit) => unit.titleId === selectedTitle.id) : [];
   const selectedTitleRelations = selectedTitle ? relationships.filter((relation) => relation.fromTitleId === selectedTitle.id || relation.toTitleId === selectedTitle.id) : [];
+  const titleProgress = titles.map((title) => {
+    const titleUnits = units.filter((unit) => unit.titleId === title.id);
+    const watchedCount = titleUnits.filter((unit) => watchedUnitIds.has(unit.id)).length;
+    const seasonCounts = [...new Map(titleUnits.filter((unit) => unit.seasonId).map((unit) => [unit.seasonNumber!, { watched: 0, total: 0 }])).entries()];
+    for (const unit of titleUnits) {
+      if (!unit.seasonNumber) continue;
+      const season = seasonCounts.find(([number]) => number === unit.seasonNumber)?.[1];
+      if (!season) continue;
+      season.total += 1;
+      season.watched += Number(watchedUnitIds.has(unit.id));
+    }
+    return { ...title, watchedCount, total: titleUnits.length, seasonCounts };
+  });
   const titleCounts = new Map<string, { watched: number; total: number }>();
 
   for (const unit of units) {
@@ -150,8 +143,8 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
         <section className={styles.progressHero} data-entrance>
           <div>
             <p className={styles.kicker}>Release order</p>
-            <h1>Know exactly what comes next.</h1>
-            <p className={styles.heroCopy}>Progress is saved to this device. Create an account later when you are ready to sync it.</p>
+            <h1>Progress overview.</h1>
+            <p className={styles.heroCopy}>Release-order completion across films, specials, and every individual episode.</p>
           </div>
           <div className={styles.heroProgress} aria-label={`${percentage}% of release order completed`}>
             <span>{percentage}%</span>
@@ -209,6 +202,8 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
           </section>
         </section>
 
+        <TitleAnalytics titles={titleProgress} />
+
         <AccountMergePanel account={account} localWatchedUnitIds={localWatchedUnitIds} remoteWatchedUnitIds={remoteWatchedUnitIds} hasPendingMerge={hasPendingMerge} syncState={syncState} syncError={syncError} onMerge={async () => {
           if (!account) return;
           setSyncState("saving");
@@ -234,19 +229,13 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
 
         {watched.length > 0 && <section className={styles.recentlyWatched} data-entrance><div><p className={styles.kicker}>Recently watched</p><h2>Undo a mark without losing your place.</h2></div><div className={styles.recentList}>{watched.slice(-3).reverse().map((unit) => <div className={styles.recentRow} key={unit.id}><span><Check size={16} /> {unit.title}</span><button type="button" onClick={() => setWatched(unit.id, false)} aria-label={`Undo watched status for ${unit.title}`}><RotateCcw size={15} /> Undo</button></div>)}</div></section>}
 
-        <section className={styles.orderStory} data-story>
-          <div className={styles.storyCopy} data-story-copy><p className={styles.kicker}>The order is the tool</p><h2>Release order stays factual. Chronology is editorial.</h2><p>Every item has a stable position, so your place survives catalog improvements and an eventual account sync.</p></div>
-          <div className={styles.storyMedia} data-backdrop><div><span>489</span><p>curated watch units in the current release sequence</p></div></div>
-        </section>
-
-        <footer className={styles.footerAction}><div><p className={styles.kicker}>Keep it yours</p><h2>Start local. Sync when it matters.</h2></div><a href="/login"><Cloud size={17} /> Sync this progress <ChevronRight size={17} /></a></footer>
       </div>
     </main>
   );
 }
 
 function CommandNav({ account }: { account: Account | null }) {
-  return <header className={styles.commandNav}><a className={styles.wordmark} href="/dashboard">MCU <span>Watch Order</span></a><div className={styles.orderSwitcher} aria-label="Watch order"><button type="button" aria-pressed="true">Release</button><button type="button" disabled title="Needs curated positions">Chronological</button></div>{account ? <form action="/auth/signout" method="post"><button className={styles.accountButton} type="submit" title={`Sign out ${account.email}`}><UserRound size={16} /><span>{account.email}</span></button></form> : <a className={styles.syncLink} href="/login"><Cloud size={16} /> <span>Sync</span></a>}</header>;
+  return <header className={styles.commandNav}><a className={styles.wordmark} href="/dashboard">MCU <span>Watch Order</span></a><div className={styles.navCenter}><nav><a href="/dashboard" aria-current="page">Dashboard</a><a href="/catalog">Catalog</a></nav><div className={styles.orderSwitcher} aria-label="Watch order"><button type="button" aria-pressed="true">Release</button><button type="button" disabled title="Needs curated positions">Chronological</button></div></div>{account ? <form action="/auth/signout" method="post"><button className={styles.accountButton} type="submit" title={`Sign out ${account.email}`}><UserRound size={16} /><span>{account.email}</span></button></form> : <a className={styles.syncLink} href="/login"><Cloud size={16} /> <span>Sync</span></a>}</header>;
 }
 
 function FilterButton({ active, children, onClick }: { active: boolean; children: React.ReactNode; onClick: () => void }) {
@@ -282,6 +271,10 @@ function TitleProgressPanel({ title, units, relationships, watchedUnitIds }: { t
   }
 
   return <section className={styles.titlePanel} data-entrance><div><p className={styles.kicker}>{title.kind}</p><h2>{title.title}</h2><p>{watched} of {units.length} watch units completed.</p></div><div className={styles.titlePanelDetails}>{seasons.length > 0 && <div><h3>Seasons</h3><ul>{seasons.sort(([, a], [, b]) => a.number - b.number).map(([id, season]) => <li key={id}>Season {season.number}<span>{season.watched} / {season.total}</span></li>)}</ul></div>}{relationships.length > 0 && <div><h3>Connected titles</h3><ul>{relationships.map((relationship) => <li key={`${relationship.fromTitleId}-${relationship.toTitleId}`}>{relationship.fromTitleId === title.id ? relationship.toTitle : relationship.fromTitle}<span>{relationship.type}</span></li>)}</ul></div>}</div></section>;
+}
+
+function TitleAnalytics({ titles }: { titles: { id: string; title: string; kind: DashboardUnit["titleKind"]; watchedCount: number; total: number; seasonCounts: [number, { watched: number; total: number }][] }[] }) {
+  return <section className={styles.titleAnalytics} data-entrance><header><div><p className={styles.kicker}>Progress by title</p><h2>Shows, films, and specials at a glance.</h2></div><span>{titles.length} titles</span></header><div className={styles.analyticsList}>{titles.map((title) => { const percent = title.total ? Math.round((title.watchedCount / title.total) * 100) : 0; return <article key={title.id}><div className={styles.analyticsTitle}><div><h3>{title.title}</h3><p>{title.kind === "series" ? title.seasonCounts.sort(([a], [b]) => a - b).map(([number, season]) => `S${number} ${season.watched}/${season.total}`).join(" · ") : title.kind}</p></div><strong>{title.watchedCount}<span> / {title.total}</span></strong></div><div className={styles.titleTrack} aria-label={`${title.title}: ${percent}% complete`}><i style={{ width: `${percent}%` }} /></div></article>; })}</div></section>;
 }
 
 function AccountMergePanel({ account, localWatchedUnitIds, remoteWatchedUnitIds, hasPendingMerge, syncState, syncError, onMerge }: { account: Account | null; localWatchedUnitIds: Set<string>; remoteWatchedUnitIds: Set<string>; hasPendingMerge: boolean; syncState: "idle" | "saving" | "saved" | "error"; syncError: string | null; onMerge: () => Promise<void> }) {

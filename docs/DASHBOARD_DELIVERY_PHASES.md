@@ -42,14 +42,19 @@ and local-progress states.
 
 ## Phase 3: Tracking Controls And Catalog Navigation
 
+- Split the product into `/dashboard` for analytical progress and `/catalog`
+  for the complete operational tracker.
 - Add the horizontal filter rail for media kind, watched state, series, title,
   and season.
+- Render every watch unit in `/catalog` as a dense flat table; retain watched
+  rows for correction and provide a table/card-grid switch.
 - Add compact continuation rows, recently watched undo, title detail, season
-  grouping, and relationship context.
+  grouping, relationship context, and per-title progress analysis.
 - Keep all calculations based on `watch_units` and the chosen `ordering`.
 
 Acceptance: users can find, mark, undo, and inspect any catalog unit with
-keyboard-accessible controls and accurate scoped totals.
+keyboard-accessible controls and accurate scoped totals, while the dashboard
+shows overall and per-title/season progress without rendering the full catalog.
 
 ## Phase 4: Motion And Media Context
 
