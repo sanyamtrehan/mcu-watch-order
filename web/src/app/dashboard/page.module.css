@@ -2,7 +2,7 @@
 .header { align-items: center; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; padding: 1rem clamp(1.25rem, 4vw, 4rem); }
 .wordmark { font-size: .78rem; font-weight: 800; letter-spacing: .08em; margin: 0; }
 .header button, .watchButton, .watchedButton { border-radius: 4px; cursor: pointer; font: inherit; font-weight: 700; }
-.header button { background: transparent; border: 1px solid var(--line); color: var(--ink); padding: .5rem .75rem; }
+.syncLink { background: transparent; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); font: inherit; font-weight: 700; padding: .5rem .75rem; }
 .content { margin: 0 auto; max-width: 72rem; padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 4rem) 5rem; }
 .intro { align-items: end; display: flex; justify-content: space-between; gap: 2rem; }
 .eyebrow { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .08em; margin: 0 0 .55rem; }
