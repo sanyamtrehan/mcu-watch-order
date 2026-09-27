@@ -1,39 +1,39 @@
-.page {
-  min-height: 100dvh;
-}
-
-.header {
-  display: flex;
-  min-height: 56px;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--line);
-  padding: 0 28px;
-  background: var(--panel);
-}
-
-.header p,
-.eyebrow {
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.header button {
-  border: 0;
-  color: var(--muted);
-  background: transparent;
-  font: inherit;
-  cursor: pointer;
-}
-
-.content {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 72px 28px;
-}
-
-.content h1 {
-  margin-top: 8px;
-  font-size: 32px;
-}
+.page { min-height: 100vh; }
+.header { align-items: center; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; padding: 1rem clamp(1.25rem, 4vw, 4rem); }
+.wordmark { font-size: .78rem; font-weight: 800; letter-spacing: .08em; margin: 0; }
+.header button, .watchButton, .watchedButton { border-radius: 4px; cursor: pointer; font: inherit; font-weight: 700; }
+.header button { background: transparent; border: 1px solid var(--line); color: var(--ink); padding: .5rem .75rem; }
+.content { margin: 0 auto; max-width: 72rem; padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 4rem) 5rem; }
+.intro { align-items: end; display: flex; justify-content: space-between; gap: 2rem; }
+.eyebrow { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .08em; margin: 0 0 .55rem; }
+.intro h1 { font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.05; margin: 0; }
+.account, .metadata, .sectionHeader > p { color: var(--muted); font-size: .9rem; margin: 0; }
+.overview { align-items: end; border-bottom: 1px solid var(--line); display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr) minmax(14rem, 1.2fr); padding: 3.5rem 0 2rem; }
+.metric { font-size: 3.8rem; font-weight: 800; line-height: .9; margin: 0; }
+.metric span, .stats strong span, .unit h2 span { color: var(--muted); font-weight: 500; }
+.metricLabel { color: var(--muted); margin: .7rem 0 0; }
+.progressArea { align-self: center; }
+.progressTrack { background: #deddd7; height: .55rem; overflow: hidden; }
+.progressFill { background: var(--accent); height: 100%; transition: width .2s ease; }
+.progressArea p { color: var(--muted); font-size: .9rem; margin: .6rem 0 0; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); padding: 1.25rem 0 3.5rem; }
+.stats > div { border-left: 1px solid var(--line); padding: 0 1.25rem; }
+.stats > div:first-child { border-left: 0; padding-left: 0; }
+.stats p { color: var(--muted); font-size: .85rem; margin: 0 0 .45rem; }
+.stats strong { font-size: 1.35rem; }
+.next { align-items: center; background: var(--ink); color: #fff; display: flex; justify-content: space-between; gap: 2rem; padding: clamp(1.5rem, 4vw, 3rem); }
+.next .eyebrow { color: #f09b8f; }
+.next h2, .unit h2, .sectionHeader h2 { font-size: 1.25rem; line-height: 1.25; margin: 0; }
+.next .metadata { color: #c8c9ce; margin-top: .65rem; }
+.watchButton { background: var(--accent); border: 1px solid var(--accent); color: white; padding: .65rem .9rem; white-space: nowrap; }
+.watchedButton { background: transparent; border: 1px solid currentColor; color: var(--ink); padding: .55rem .8rem; white-space: nowrap; }
+.next .watchButton { background: #fff; border-color: #fff; color: var(--ink); }
+.queue { padding-top: 4rem; }
+.sectionHeader { align-items: end; display: flex; justify-content: space-between; gap: 2rem; margin-bottom: 1rem; }
+.unitList { list-style: none; margin: 0; padding: 0; }
+.unit { align-items: center; border-top: 1px solid var(--line); display: grid; gap: 1rem; grid-template-columns: 3.25rem minmax(0, 1fr) auto; min-height: 5.5rem; padding: .75rem 0; }
+.position { color: var(--muted); font-size: .85rem; }
+.unitInfo { min-width: 0; }
+.unit h2 { overflow-wrap: anywhere; }
+.unit .metadata { margin-top: .3rem; }
+@media (max-width: 640px) { .header { padding: .85rem 1.25rem; } .intro, .next, .sectionHeader { align-items: start; flex-direction: column; } .intro { display: flex; } .account { overflow-wrap: anywhere; } .overview { grid-template-columns: 1fr; padding-top: 2.5rem; } .metric { font-size: 3.15rem; } .stats { gap: 1rem; } .stats > div { padding: 0 .7rem; } .stats > div:first-child { padding-left: 0; } .stats strong { font-size: 1.1rem; } .next { display: flex; } .unit { grid-template-columns: 2rem minmax(0, 1fr); } .unit form { grid-column: 2; } }
