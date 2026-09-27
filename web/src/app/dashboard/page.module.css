@@ -7,6 +7,7 @@
 .orderSwitcher button[aria-pressed="true"] { background: var(--panel); box-shadow: 0 1px 2px rgb(0 0 0 / .3); color: var(--ink); }
 .orderSwitcher button:disabled { cursor: not-allowed; opacity: .48; }
 .syncLink { align-items: center; border: 1px solid var(--line); border-radius: 5px; color: var(--ink); display: inline-flex; font-size: .8rem; font-weight: 700; gap: .4rem; justify-self: end; min-height: 38px; padding: .5rem .7rem; }
+.accountButton { align-items: center; background: transparent; border: 1px solid var(--line); border-radius: 5px; color: var(--ink); cursor: pointer; display: inline-flex; font-size: .8rem; font-weight: 650; gap: .4rem; max-width: 16rem; min-height: 38px; overflow: hidden; padding: .5rem .7rem; text-overflow: ellipsis; white-space: nowrap; }
 .dashboardRail { margin: 0 auto; max-width: 88rem; padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2.5rem) 5rem; }
 .progressHero { align-items: end; display: grid; gap: 2rem; grid-template-columns: minmax(0, 1.25fr) minmax(16rem, .75fr); padding: 0 0 clamp(3rem, 6vw, 5.5rem); }
 .kicker { color: var(--teal); font-size: .75rem; font-weight: 720; letter-spacing: .02em; margin: 0 0 .75rem; }
@@ -62,6 +63,16 @@
 .metricsTile p { color: var(--muted); font-size: .76rem; margin: 0 0 .35rem; }
 .metricsTile strong { font-size: 1.5rem; }
 .metricsTile strong span { color: var(--muted); font-size: .7em; font-weight: 520; }
+.syncPanel, .mergePanel { align-items: center; border-bottom: 1px solid var(--line); display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr) auto; padding: clamp(3rem, 6vw, 5rem) 0; }
+.syncPanel h2, .mergePanel h2 { font-size: clamp(1.6rem, 3vw, 3rem); line-height: .98; margin: 0; }
+.syncPanel p:last-child, .mergePanel p:last-child { color: var(--muted); line-height: 1.5; margin: .8rem 0 0; max-width: 38rem; }
+.syncPanel > a, .mergeButton { align-items: center; background: var(--accent); border: 1px solid var(--accent); border-radius: 5px; color: white; cursor: pointer; display: inline-flex; font-size: .85rem; font-weight: 700; gap: .45rem; justify-content: center; min-height: 42px; padding: .55rem .85rem; white-space: nowrap; }
+.savedState { align-items: center; color: var(--success); display: inline-flex; font-size: .85rem; font-weight: 700; gap: .4rem; white-space: nowrap; }
+.mergePanel { background: rgb(181 30 47 / .08); border-top: 1px solid rgb(181 30 47 / .35); margin-top: 1px; padding-inline: clamp(1.25rem, 3vw, 3rem); }
+.mergeActions { align-items: end; display: flex; flex-direction: column; gap: .7rem; }
+.mergeButton:disabled { cursor: wait; opacity: .65; }
+.mergeActions span { color: var(--muted); font-size: .75rem; max-width: 16rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.syncError { color: #f1919b !important; }
 .titlePanel { align-items: start; border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); display: grid; gap: 2rem; grid-template-columns: minmax(0, .75fr) minmax(20rem, 1.25fr); padding: clamp(3rem, 6vw, 6rem) 0; }
 .titlePanel > div:first-child h2 { font-size: clamp(2.25rem, 4.5vw, 4.75rem); line-height: .92; margin: 0; }
 .titlePanel > div:first-child > p:last-child { color: var(--muted); margin: 1rem 0 0; }
@@ -87,4 +98,4 @@
 .storyMedia p { font-size: .92rem; line-height: 1.4; margin: .9rem 0 0; max-width: 13rem; }
 .footerAction { align-items: center; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 2rem; padding: clamp(4rem, 9vw, 8rem) 0; }
 .footerAction a { align-items: center; background: var(--accent); border-radius: 5px; color: white; display: inline-flex; font-size: .9rem; font-weight: 700; gap: .5rem; min-height: 46px; padding: .65rem 1rem; }
-@media (max-width: 760px) { .commandNav { grid-template-columns: 1fr auto; min-height: auto; padding: .75rem 1rem; row-gap: .7rem; } .orderSwitcher { grid-column: 1 / -1; grid-row: 2; justify-self: start; } .syncLink span { display: none; } .dashboardRail { padding-inline: 1rem; } .progressHero { grid-template-columns: 1fr; padding-bottom: 2.5rem; } .heroProgress { border-left: 0; border-top: 1px solid var(--line); padding: 1.25rem 0 0; } .nextTile, .progressTile, .filterTile, .queueTile, .metricsTile { grid-column: span 12; grid-row: auto; } .nextTile, .progressTile { min-height: 300px; } .metricsTile { grid-template-columns: 1fr; } .metricsTile > div { border-left: 0; border-top: 1px solid var(--line); min-height: 76px; padding: 1rem 1.25rem; } .metricsTile > div:first-child { border-top: 0; } .recentlyWatched, .orderStory, .titlePanel { grid-template-columns: 1fr; } .orderStory { min-height: 0; } .footerAction { align-items: start; flex-direction: column; } .queueList li { grid-template-columns: 1.8rem minmax(0, 1fr); padding: .65rem 0; } .queueList li button { grid-column: 2; } }
+@media (max-width: 760px) { .commandNav { grid-template-columns: 1fr auto; min-height: auto; padding: .75rem 1rem; row-gap: .7rem; } .orderSwitcher { grid-column: 1 / -1; grid-row: 2; justify-self: start; } .syncLink span, .accountButton span { display: none; } .dashboardRail { padding-inline: 1rem; } .progressHero { grid-template-columns: 1fr; padding-bottom: 2.5rem; } .heroProgress { border-left: 0; border-top: 1px solid var(--line); padding: 1.25rem 0 0; } .nextTile, .progressTile, .filterTile, .queueTile, .metricsTile { grid-column: span 12; grid-row: auto; } .nextTile, .progressTile { min-height: 300px; } .metricsTile { grid-template-columns: 1fr; } .metricsTile > div { border-left: 0; border-top: 1px solid var(--line); min-height: 76px; padding: 1rem 1.25rem; } .metricsTile > div:first-child { border-top: 0; } .recentlyWatched, .orderStory, .titlePanel, .syncPanel, .mergePanel { grid-template-columns: 1fr; } .orderStory { min-height: 0; } .footerAction { align-items: start; flex-direction: column; } .mergeActions { align-items: start; } .queueList li { grid-template-columns: 1.8rem minmax(0, 1fr); padding: .65rem 0; } .queueList li button { grid-column: 2; } }

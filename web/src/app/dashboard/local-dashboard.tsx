@@ -2,20 +2,22 @@
 
 import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useGSAP } from "@gsap/react";
-import { Check, ChevronRight, Cloud, Film, RotateCcw, Tv, X } from "lucide-react";
+import { Check, ChevronRight, Cloud, Film, RotateCcw, Tv, UserRound, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { DashboardUnit, ReleaseOrderCatalog } from "@/lib/catalog/dashboard";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, writeLocalProgress } from "@/lib/progress/local-progress";
+import { createClient as createBrowserClient } from "@/lib/supabase/client";
 import styles from "./page.module.css";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-type Props = { catalog: ReleaseOrderCatalog };
+type Account = { id: string; email: string };
+type Props = { catalog: ReleaseOrderCatalog; account: Account | null; initialRemoteWatchedUnitIds: string[] };
 type KindFilter = "all" | "movie" | "episode" | "special";
 type WatchStateFilter = "all" | "unwatched" | "watched";
 
-export function LocalDashboard({ catalog }: Props) {
+export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }: Props) {
   const { units, relationships } = catalog;
   const shell = useRef<HTMLElement>(null);
   const [kindFilter, setKindFilter] = useState<KindFilter>("all");
@@ -23,9 +25,14 @@ export function LocalDashboard({ catalog }: Props) {
   const [seriesFilter, setSeriesFilter] = useState("all");
   const [titleFilter, setTitleFilter] = useState("all");
   const [seasonFilter, setSeasonFilter] = useState("all");
+  const [remoteWatchedUnitIds, setRemoteWatchedUnitIds] = useState(() => new Set(initialRemoteWatchedUnitIds));
+  const [syncState, setSyncState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [syncError, setSyncError] = useState<string | null>(null);
   const validUnitIds = useMemo(() => new Set(units.map((unit) => unit.id)), [units]);
   const serializedProgress = useSyncExternalStore(subscribeToLocalProgress, getLocalProgressSnapshot, getServerProgressSnapshot);
-  const watchedUnitIds = useMemo(() => new Set(parseLocalProgress(serializedProgress, validUnitIds).watchedUnitIds), [serializedProgress, validUnitIds]);
+  const localWatchedUnitIds = useMemo(() => new Set(parseLocalProgress(serializedProgress, validUnitIds).watchedUnitIds), [serializedProgress, validUnitIds]);
+  const watchedUnitIds = useMemo(() => account ? new Set([...localWatchedUnitIds, ...remoteWatchedUnitIds]) : localWatchedUnitIds, [account, localWatchedUnitIds, remoteWatchedUnitIds]);
+  const hasPendingMerge = Boolean(account && !setsEqual(localWatchedUnitIds, remoteWatchedUnitIds));
 
   useGSAP(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -93,20 +100,39 @@ export function LocalDashboard({ catalog }: Props) {
   const percentage = totals.total ? Math.round((totals.watched / totals.total) * 100) : 0;
 
   function setWatched(unitId: string, watchedValue: boolean) {
-    const persist = () => {
+    const persist = async () => {
       const next = new Set(watchedUnitIds);
       if (watchedValue) next.add(unitId);
       else next.delete(unitId);
+
+      if (account) {
+        setSyncState("saving");
+        setSyncError(null);
+        const supabase = createBrowserClient();
+        const { error } = watchedValue
+          ? await supabase.from("watch_progress").upsert({ user_id: account.id, watch_unit_id: unitId, status: "watched", watched_at: new Date().toISOString() }, { onConflict: "user_id,watch_unit_id" })
+          : await supabase.from("watch_progress").delete().eq("user_id", account.id).eq("watch_unit_id", unitId);
+
+        if (error) {
+          setSyncState("error");
+          setSyncError(error.message);
+          return;
+        }
+
+        setRemoteWatchedUnitIds(new Set(next));
+        setSyncState("saved");
+      }
+
       writeLocalProgress(next);
     };
 
     const row = shell.current?.querySelector(`[data-watch-unit="${unitId}"]`);
     if (watchedValue && row && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      gsap.to(row, { height: 0, opacity: 0, paddingBlock: 0, duration: 0.22, ease: "power2.in", onComplete: persist });
+      gsap.to(row, { height: 0, opacity: 0, paddingBlock: 0, duration: 0.22, ease: "power2.in", onComplete: () => void persist() });
       return;
     }
 
-    persist();
+    void persist();
   }
 
   function resetFilters() {
@@ -119,7 +145,7 @@ export function LocalDashboard({ catalog }: Props) {
 
   return (
     <main ref={shell} className={styles.appShell}>
-      <CommandNav />
+      <CommandNav account={account} />
       <div className={styles.dashboardRail}>
         <section className={styles.progressHero} data-entrance>
           <div>
@@ -183,6 +209,27 @@ export function LocalDashboard({ catalog }: Props) {
           </section>
         </section>
 
+        <AccountMergePanel account={account} localWatchedUnitIds={localWatchedUnitIds} remoteWatchedUnitIds={remoteWatchedUnitIds} hasPendingMerge={hasPendingMerge} syncState={syncState} syncError={syncError} onMerge={async () => {
+          if (!account) return;
+          setSyncState("saving");
+          setSyncError(null);
+          const merged = new Set([...localWatchedUnitIds, ...remoteWatchedUnitIds]);
+          const missingRemoteIds = [...merged].filter((id) => !remoteWatchedUnitIds.has(id));
+          const supabase = createBrowserClient();
+          try {
+            for (const ids of chunk(missingRemoteIds, 100)) {
+              const { error } = await supabase.from("watch_progress").upsert(ids.map((watchUnitId) => ({ user_id: account.id, watch_unit_id: watchUnitId, status: "watched", watched_at: new Date().toISOString() })), { onConflict: "user_id,watch_unit_id" });
+              if (error) throw error;
+            }
+            setRemoteWatchedUnitIds(merged);
+            writeLocalProgress(merged);
+            setSyncState("saved");
+          } catch (error) {
+            setSyncState("error");
+            setSyncError(error instanceof Error ? error.message : "Unable to merge progress.");
+          }
+        }} />
+
         {selectedTitle && <TitleProgressPanel title={selectedTitle} units={selectedTitleUnits} relationships={selectedTitleRelations} watchedUnitIds={watchedUnitIds} />}
 
         {watched.length > 0 && <section className={styles.recentlyWatched} data-entrance><div><p className={styles.kicker}>Recently watched</p><h2>Undo a mark without losing your place.</h2></div><div className={styles.recentList}>{watched.slice(-3).reverse().map((unit) => <div className={styles.recentRow} key={unit.id}><span><Check size={16} /> {unit.title}</span><button type="button" onClick={() => setWatched(unit.id, false)} aria-label={`Undo watched status for ${unit.title}`}><RotateCcw size={15} /> Undo</button></div>)}</div></section>}
@@ -198,8 +245,8 @@ export function LocalDashboard({ catalog }: Props) {
   );
 }
 
-function CommandNav() {
-  return <header className={styles.commandNav}><a className={styles.wordmark} href="/dashboard">MCU <span>Watch Order</span></a><div className={styles.orderSwitcher} aria-label="Watch order"><button type="button" aria-pressed="true">Release</button><button type="button" disabled title="Needs curated positions">Chronological</button></div><a className={styles.syncLink} href="/login"><Cloud size={16} /> <span>Sync</span></a></header>;
+function CommandNav({ account }: { account: Account | null }) {
+  return <header className={styles.commandNav}><a className={styles.wordmark} href="/dashboard">MCU <span>Watch Order</span></a><div className={styles.orderSwitcher} aria-label="Watch order"><button type="button" aria-pressed="true">Release</button><button type="button" disabled title="Needs curated positions">Chronological</button></div>{account ? <form action="/auth/signout" method="post"><button className={styles.accountButton} type="submit" title={`Sign out ${account.email}`}><UserRound size={16} /><span>{account.email}</span></button></form> : <a className={styles.syncLink} href="/login"><Cloud size={16} /> <span>Sync</span></a>}</header>;
 }
 
 function FilterButton({ active, children, onClick }: { active: boolean; children: React.ReactNode; onClick: () => void }) {
@@ -237,7 +284,17 @@ function TitleProgressPanel({ title, units, relationships, watchedUnitIds }: { t
   return <section className={styles.titlePanel} data-entrance><div><p className={styles.kicker}>{title.kind}</p><h2>{title.title}</h2><p>{watched} of {units.length} watch units completed.</p></div><div className={styles.titlePanelDetails}>{seasons.length > 0 && <div><h3>Seasons</h3><ul>{seasons.sort(([, a], [, b]) => a.number - b.number).map(([id, season]) => <li key={id}>Season {season.number}<span>{season.watched} / {season.total}</span></li>)}</ul></div>}{relationships.length > 0 && <div><h3>Connected titles</h3><ul>{relationships.map((relationship) => <li key={`${relationship.fromTitleId}-${relationship.toTitleId}`}>{relationship.fromTitleId === title.id ? relationship.toTitle : relationship.fromTitle}<span>{relationship.type}</span></li>)}</ul></div>}</div></section>;
 }
 
+function AccountMergePanel({ account, localWatchedUnitIds, remoteWatchedUnitIds, hasPendingMerge, syncState, syncError, onMerge }: { account: Account | null; localWatchedUnitIds: Set<string>; remoteWatchedUnitIds: Set<string>; hasPendingMerge: boolean; syncState: "idle" | "saving" | "saved" | "error"; syncError: string | null; onMerge: () => Promise<void> }) {
+  if (!account) return <section className={styles.syncPanel} id="sync" data-entrance><div><p className={styles.kicker}>Optional backup</p><h2>Keep your place beyond this device.</h2><p>Progress stays local until you choose to create or use an account.</p></div><a href="/login"><Cloud size={17} /> Sign in to sync <ChevronRight size={17} /></a></section>;
+
+  if (!hasPendingMerge) return <section className={styles.syncPanel} id="sync" data-entrance><div><p className={styles.kicker}>Account sync</p><h2>Progress is saved to {account.email}.</h2><p>{remoteWatchedUnitIds.size} watched units are stored in your private Supabase account.</p></div><span className={styles.savedState}><Check size={17} /> {syncState === "saving" ? "Saving" : "Saved"}</span></section>;
+
+  return <section className={styles.mergePanel} id="sync" data-entrance><div><p className={styles.kicker}>Merge progress</p><h2>Bring this device into your account.</h2><p>{localWatchedUnitIds.size} local marks and {remoteWatchedUnitIds.size} account marks will be combined. Nothing marked watched is removed.</p>{syncError && <p className={styles.syncError}>{syncError}</p>}</div><div className={styles.mergeActions}><button type="button" className={styles.mergeButton} disabled={syncState === "saving"} onClick={() => void onMerge()}><Cloud size={17} /> {syncState === "saving" ? "Merging" : "Merge progress"}</button><span>Signed in as {account.email}</span></div></section>;
+}
+
 function subscribeToLocalProgress(onStoreChange: () => void) { window.addEventListener("storage", onStoreChange); window.addEventListener(LOCAL_PROGRESS_EVENT, onStoreChange); return () => { window.removeEventListener("storage", onStoreChange); window.removeEventListener(LOCAL_PROGRESS_EVENT, onStoreChange); }; }
 function getLocalProgressSnapshot() { return window.localStorage.getItem(LOCAL_PROGRESS_KEY) ?? ""; }
 function getServerProgressSnapshot() { return ""; }
 function formatDate(value: string) { return new Intl.DateTimeFormat("en", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`)); }
+function setsEqual(left: Set<string>, right: Set<string>) { return left.size === right.size && [...left].every((id) => right.has(id)); }
+function chunk<T>(values: T[], size: number) { return Array.from({ length: Math.ceil(values.length / size) }, (_, index) => values.slice(index * size, index * size + size)); }
