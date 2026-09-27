@@ -2,9 +2,17 @@
   "name": "mcu-watch-order",
   "private": true,
   "scripts": {
-    "supabase": "supabase"
+    "catalog:validate": "node scripts/validate-catalog-seed.js",
+    "catalog:import": "node scripts/import-catalog-seed.js",
+    "supabase": "supabase",
+    "web:build": "npm run build --prefix web",
+    "web:dev": "npm run dev --prefix web"
   },
   "devDependencies": {
     "supabase": "2.118.0"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.4",
+    "pg": "^8.23.0"
   }
 }

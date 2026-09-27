@@ -349,7 +349,7 @@ Complete:
 ## Implementation Guardrails
 
 - Use the Next `web/` app as the future UI surface.
-- Keep the old Angular app visually untouched unless explicitly migrating it.
+- The Next `web/` application is the only user interface surface.
 - Prefer CSS modules until a Tailwind decision is made.
 - If adding dependencies for the new UI, likely additions are `lucide-react`, `gsap`, and `@gsap/react`.
 - Keep server data contracts aligned with `docs/CATALOG_AND_PROGRESS_MODEL.md`.

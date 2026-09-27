@@ -25,9 +25,9 @@ publishable key, never a database password or service-role key.
 - The catalog currently has 61 titles, 489 watch units, 489 release-order
   entries, and 19 direct sequel relationships.
 - The custom `users` and `watch_progress` tables are empty.
-- Authentication currently uses Nest JWTs and must be replaced, not bridged.
-- The current Angular and Nest projects remain in the repository until the new
-  application has feature parity. Nothing is deleted during the migration.
+- Supabase Auth and Row Level Security now own cloud identity and progress.
+- The normalized catalog seed and maintenance scripts are root-owned; the old
+  Angular and Nest applications have been retired.
 
 ## Phase 0: Audit And Baseline
 
@@ -123,12 +123,14 @@ The Supabase project remains the database host. Vercel deploys only Next.js.
 
 ## Phase 5: Retire Legacy Code
 
-Retire the old applications immediately after the Next.js application has
-production parity and the migration checks pass:
+The old Angular and Nest runtime code has been retired. The catalog seed and
+maintenance scripts were retained at the repository root:
 
-1. Remove the Nest custom-auth and legacy catalog endpoints.
-2. Archive or remove the Angular frontend.
-3. Remove TypeORM, Mongoose remnants, and obsolete environment variables.
+1. `data/mcu-release-catalog.json` is the normalized seed snapshot.
+2. `scripts/validate-catalog-seed.js` and `scripts/import-catalog-seed.js`
+   replace the Nest/TypeORM maintenance path.
+3. [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) records the Vercel and
+   two-user RLS checks that require the deployment operator's accounts.
 
 ## Risks And Safeguards
 
