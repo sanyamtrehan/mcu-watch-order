@@ -44,6 +44,7 @@ The current migration creates the initial `watch_progress` table. A follow-up mi
 - Chronological order is manually curated with an explicit ordinal. It is never inferred from release date.
 - Ordering entries point to watch units, so an episode can appear at the correct point between films.
 - Sequel data is a relationship graph, not an ordering. A film can have a sequel and appear in several valid viewing orders.
+- A direct `sequel` edge points from a sequel to its immediate predecessor. `spin-off` and `crossover` edges are separate relationship types and must be curated rather than inferred.
 
 ## Data Pipeline
 

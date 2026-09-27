@@ -7,6 +7,17 @@ legacy frontend data file. It contains 489 release-order entries:
 - 8 specials and one-shots
 - 20 series with 448 episodes
 
+Each title, season, episode, and watchable item has a stable ID. Movies and
+specials have one watch unit; every TV episode has one watch unit. This lets
+future progress rows and ordering entries remain stable when display names or
+metadata are corrected.
+
+`titleRelations` contains curated, direct movie-sequel edges. An edge points
+from the sequel to its immediate predecessor. It deliberately does not imply
+watch order and does not yet include inferred crossovers or spin-offs.
+
+Run `npm run catalog:validate` from `backend/` before importing a seed change.
+
 The source was manually gathered from Wikipedia before this repository was
 converted to a backend-owned catalog. The snapshot includes the Marvel
 Television and Netflix-era series already present in that source.
