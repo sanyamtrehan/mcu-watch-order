@@ -1,415 +1,150 @@
-# MCU Watch Order Design System
-
-## Product Direction
-
-MCU Watch Order is a tracking-first catalog for people who want a clear answer to three questions: what should I watch next, how much have I finished, and where does this title sit in a larger viewing order.
-
-The interface should feel like a monitor inside Avengers headquarters: a dense,
-purposeful sci-fi tracking console with real data visualizations, precision
-numerals, and controlled neon signal colors on a midnight surface. It is not a
-fan wiki, a generic SaaS dashboard, or a media landing page. The dashboard is
-the product.
-
-The first screen should never be a marketing page. It should open directly into
-the analytical dashboard: overall progress, current continuation, progress by
-title/season, order controls, and a link to the full catalog table.
-
-The product has two deliberately different working surfaces:
-
-- `/dashboard` is the Avengers-monitor command screen. It explains progress
-  through real analytical views, including radial completion, season matrices,
-  content-type split, and a compact continuation panel.
-- `/catalog` is the flat operational inventory. It renders every watch unit in
-  a dense table first, keeps watched rows visible and editable, and offers a
-  card-grid view as an alternate inspection mode.
-
-## Design Plan
-
-```text
-seed = len(prompt) % 97 = 64
-random.choice(hero) -> Artistic Asymmetry; random.choice(font) -> Geist
-random.sample(components, 3) -> Gapless telemetry matrix, radial progress instrument, compact continuation queue
-random.sample(motion, 2) -> data-channel draw-in, focused panel transition
-```
-
-AIDA structure for future pages:
-
-- Navigation: compact command bar with order switcher, dashboard/catalog route
-  switch, search/filter controls, and account/sync action.
-- Attention: immediate telemetry band with a radial overall-progress
-  instrument, current continuation, and order state. This is data, never a
-  promotional hero.
-- Interest: gapless telemetry matrix of title/season completion, media split,
-  completion distribution, and continuation queue.
-- Desire: focused title inspection panel that expands a show into seasons and
-  related titles; it is analytical context, not an editorial story section.
-- Action: account merge/sync panel, shown only when it has a real state to
-  communicate.
-
-Hero math:
-
-- Dashboard headings are compact operational labels, not large marketing
-  headlines. Use `clamp(1.5rem, 2.8vw, 2.75rem)` with a wide data rail.
-- Large type is reserved for primary numerical instruments, such as `58%` or
-  `17 / 20`, not sentence-length copy.
-- No stamps, decorative badges, marketing CTAs, or filler copy.
-
-Bento density:
-
-- Desktop grid: 12 columns, dense flow, fixed row rhythm.
-- Required dashboard composition: primary radial instrument `span 4 x 2`,
-  continuation panel `span 4 x 2`, content split `span 4 x 2`; season/title
-  telemetry `span 8 x 3`, current queue `span 4 x 3`; filter and order rail
-  `span 12 x 1`.
-- Occupancy: rows 1-2 are 4 + 4 + 4 = 12 columns; rows 3-5 are 8 + 4 = 12;
-  the control rail is 12. Zero empty cells.
-- CSS modules should use `grid-auto-flow: dense`; if Tailwind is introduced later, use `grid-flow-dense`.
-
-Label and contrast sweep:
-
-- Avoid cheap meta labels like "SECTION 01", "QUESTION 05", "ABOUT US", or decorative label spam.
-- Buttons must have explicit foreground/background pairs. Never rely on inherited color for primary actions.
-
-## Principles
-
-1. Tracking beats decoration. Every screen should make progress, next actions, and filtering obvious.
-2. Media is selective. Use backdrops, poster crops, and tiny inline stills as accents, not as a wall of thumbnails.
-3. Dense, not cramped. The dashboard can show many things at once, but spacing must preserve scanability.
-4. Anonymous first. Local progress, undo, and continuation must feel complete before account sync appears.
-5. Curated chronology is editorial. The UI must explain that chronological order is chosen data, not inferred dates.
-6. Motion clarifies state. Animations should show progress, grouping, queue movement, and panel focus.
-
-## Visual Identity
-
-The product defaults to a midnight tactical interface. Use a blue-black console
-surface, layered panels, restrained grid lines, and distinct cyan, magenta,
-cobalt, and red data channels. A light theme can be evaluated later, but it is
-not the default or a Phase 2 concern.
-
-```css
-:root {
-  --color-ink: #e9f1ff;
-  --color-ink-soft: #c2ccdc;
-  --color-surface: #080b1a;
-  --color-panel: #0f1428;
-  --color-panel-dark: #070916;
-  --color-line: #28314e;
-  --color-muted: #8290ad;
-  --color-muted-dark: #b8c4dc;
-  --color-accent: #b51e2f;
-  --color-accent-strong: #861421;
-  --color-cyan: #24d7ff;
-  --color-magenta: #f42ab9;
-  --color-cobalt: #6077ff;
-  --color-teal: #32bfc0;
-  --color-success: #38d48e;
-  --color-warning: #f0ad45;
-  --color-danger: #b51e2f;
-}
-```
-
-Do not turn this into a purple-gradient interface. Cyan, magenta, cobalt, and
-teal represent separate data channels, not decoration: for example overall
-completion, films, series/episodes, and sync/system state. Red remains an MCU
-action color, not the dominant palette. Backgrounds use subtle grid texture and
-panel contrast, never floating gradient orbs.
-
-Dark-mode contrast rules:
-
-- Primary text on `--color-panel` uses `--color-ink`; supporting text uses
-  `--color-muted` and must remain readable at small metadata sizes.
-- Primary actions are white text on red. Active filter/order states must never
-  use a light foreground on a light background.
-- Hairline borders establish panels and rows; shadows are secondary and kept
-  subtle.
+# MCU Watch Order Design Direction
 
-## Typography
+## Product Character
 
-Primary font: Geist. Use Geist Mono for numerical instruments, tabular values,
-axis labels, and compact status data.
+MCU Watch Order is a personal viewing archive presented as a J.A.R.V.I.S.
+system. It should feel like a high-resolution Avengers workstation: cinematic
+on entry, precise while in use, and always rooted in the viewer's actual
+watching data.
 
-Fallback stack:
+The product is neither a fan wiki nor a generic SaaS dashboard. It uses
+Marvel-scale spectacle to make the transition into a practical tool feel
+special, then gets out of the way so a viewer can mark titles, inspect
+progress, and find what to watch next.
 
-```css
-font-family: Geist, "Geist Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-```
+## Experience Architecture
 
-Type scale:
+### 1. J.A.R.V.I.S. Boot Sequence
 
-- Display: `clamp(2.75rem, 6vw, 6rem)`, line-height `.9`, weight `760`.
-- Page title: `clamp(2rem, 4vw, 4rem)`, line-height `.95`, weight `740`.
-- Section heading: `clamp(1.35rem, 2vw, 2rem)`, line-height `1.05`, weight `720`.
-- Card title: `1rem` to `1.2rem`, line-height `1.2`, weight `700`.
-- Body: `0.95rem`, line-height `1.55`, weight `430`.
-- Metadata: `0.78rem` to `0.85rem`, line-height `1.35`, weight `560`.
+`/dashboard` opens with a full-viewport initialization scene. The scene is a
+live system display, not a disconnected marketing hero:
 
-Letter spacing should stay at `0` for almost all text. Use uppercase sparingly for compact metadata only, never as a repeated section-label pattern.
+- Display `J.A.R.V.I.S. / Watch Order Protocol` and the current archive
+  completion value.
+- Use a central arc-reactor-inspired core made from native interface geometry:
+  concentric rings, orbit markers, technical grids, and emitted cyan light.
+- Show real system state, total resolved units, and the actual next title.
+- Keep navigation present and usable while the scene is visible.
 
-## Layout
+The visual direction can take inspiration from highly choreographed interactive
+sites: one persistent object, deliberate camera-like transformation, and a
+clear transition between chapters. Do not copy another site's assets, copy, or
+visual identity.
 
-Global page shell:
+### 2. Scroll Transition
 
-```css
-.appShell {
-  min-height: 100svh;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  background-color: var(--color-surface);
-  background-image:
-    linear-gradient(rgba(96, 119, 255, .045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(96, 119, 255, .045) 1px, transparent 1px);
-  background-size: 28px 28px;
-  color: var(--color-ink);
-}
-```
+The boot sequence is pinned briefly. As the user scrolls:
 
-Use a `min(100% - 2rem, 88rem)` content rail for dashboards. Detail pages can widen to `92rem` when relationship graphs or season grids need space.
+1. Boot copy fades upward and becomes secondary.
+2. The reactor's orbit rotates and the core compresses toward the archive.
+3. The technical grid recedes.
+4. The analytical dashboard enters below.
 
-Major sections should use `padding-block: clamp(4rem, 9vw, 9rem)` on content pages. The dashboard may be tighter, but no page should feel like stacked default cards.
+Use GSAP `ScrollTrigger` with a scrubbed timeline. Respect
+`prefers-reduced-motion`: skip pinning and transformations while keeping all
+content visible in normal document flow. Motion must clarify the hand-off into
+the tracker, not delay access to it.
 
-## Navigation
+### 3. Archive Dashboard
 
-The nav is a functional toolbar, not a brand billboard.
+After the cinematic entry, the experience becomes a dense analytical command
+surface. It answers:
 
-Desktop:
+- How much of the MCU archive is complete?
+- Is the viewer progressing through films, episodes, and specials differently?
+- Which release eras are covered?
+- Which shows are partway through, and at what season?
+- What is next in release order?
 
-- Left: wordmark plus dashboard/catalog route switch.
-- Center: segmented order switcher and terse system state.
-- Right: search icon button, filter icon button, sync/account button.
+The current dashboard uses a 12-column dense grid:
 
-Mobile:
+- Three compact top metrics: total completion, archive mix, and completed
+  titles.
+- A larger release-sequence coverage visualization with an area trace and
+  vertical comparison bars.
+- An active-title diagnostic list that ranks partially watched stories.
+- A season completion map with explicit `S1 13/13` style values.
+- A continuation queue with a direct mark-watched action and a route to the
+  full catalog.
 
-- Top row: wordmark, search, account.
-- Second row: horizontally scrollable order switcher and filter chips.
+Visualizations must be truthful. Release coverage can use release-order bins;
+personal viewing trends require per-unit `watched_at` history and must not be
+invented from a boolean watched state.
 
-Use lucide icons when implementation adds the icon dependency: `Search`, `SlidersHorizontal`, `UserRound`, `Cloud`, `Check`, `Undo2`, `ListFilter`, `CalendarDays`, `Film`, `Tv`, `ChevronDown`, `ArrowRight`.
+### 4. Catalog
 
-## Dashboard Anatomy
+`/catalog` remains the operational surface. It is a flat, editable inventory
+of all watch units with filters for title, series, season, kind, and watched
+state. Watched rows stay visible by default. A table is the primary mode; a
+card grid is an alternate inspection mode, not a replacement for the table.
 
-The dashboard should contain these analytical surfaces in the first viewport on
-desktop:
+## Visual Language
 
-- A radial overall-progress instrument with watched/total and percentage.
-- A content split instrument for films, episodes, and completed titles.
-- A compact next-unwatched continuation panel with one primary action.
-- A season/title telemetry matrix. Each show receives segmented season status,
-  such as `S1 13/13`, `S2 13/13`, `S3 4/13`; films use a single completion
-  marker rather than a long progress bar.
-- A short continuation queue and an order/filter command rail.
+### Color and Light
 
-The first implementation can be CSS modules. Use these component names consistently:
+The default environment is deep blue-black, with layered indigo panels and
+hairline technical borders. Cyan is emitted system light and the primary data
+channel. Magenta, cobalt, teal, green, and MCU red have distinct roles:
 
-- `DashboardShell`
-- `CommandNav`
-- `OrderSwitcher`
-- `ProgressHero`
-- `DashboardBento`
-- `MetricTile`
-- `FilterRail`
-- `ContinuationQueue`
-- `WatchUnitRow`
-- `TitleProgressPanel`
-- `AccountMergePanel`
+- Cyan: archive status, primary telemetry, and active system focus.
+- Magenta: partial completion and a contrasting analytical channel.
+- Cobalt: episode/media grouping and secondary telemetry.
+- Teal or green: healthy state and successful synchronization.
+- MCU red: decisive actions such as completing the next unit.
 
-## Components
+Neon is a signal, never wall-to-wall decoration. Avoid purple-gradient themes,
+soft floating blobs, and vague "sci-fi" backgrounds. Use grids, radial traces,
+edge lines, controlled glow, and deep contrast instead.
 
-### Buttons
+### Surfaces
 
-Buttons are small, sharp, and icon-led. Use `border-radius: 6px` or less.
-
-Primary:
-
-- Background: `--color-accent`
-- Text: white
-- Hover: `--color-accent-strong`
-- Use for `Mark watched`, `Sync progress`, and `Merge progress`.
-
-Secondary:
-
-- Background: transparent or `rgba(21, 22, 26, .04)`
-- Border: `--color-line`
-- Text: `--color-ink`
-- Use for filters, undo, and order controls.
-
-Watched:
-
-- Background: `--color-success`
-- Text: white
-- Icon: check mark
-- Undo should be adjacent or revealed on hover/focus; do not make watched rows look disabled.
-
-### Filter Rail
-
-Filters should be dense and tactile:
-
-- Segmented controls for order and watched state.
-- Menu buttons for series/title/season.
-- Icon-only reset button with tooltip.
-- Active filters appear as small chips below the rail only when active.
-
-Avoid a full sidebar until the catalog has enough data to justify it.
-
-### Telemetry Instruments
-
-- Use radial rings only for whole-to-total measures: overall completion,
-  films, episodes, and a selected title.
-- Use short segmented blocks for season completion. Each block has a text
-  equivalent and uses data-channel color deliberately.
-- Use sparklines or line charts only when the underlying sequence is useful,
-  such as completion by release era or episodes completed over time.
-- Do not use a wide single-line progress bar as the main visualization for a
-  show or the full catalog. It communicates too little at dashboard scale.
-- Every visual needs visible text values; color is never the only state signal.
-
-### Continuation Queue
-
-Rows should be compact, keyboard-friendly, and resilient to long titles:
-
-- Position number.
-- Title and season/episode metadata.
-- Release date.
-- Media kind icon.
-- Primary action.
-- Optional disclosure for title relationships.
-
-Rows should animate when marked watched: the check appears first, the row compresses slightly, then moves to recently watched.
-
-### Gapless Bento
-
-Use 3 to 5 high-value tiles:
-
-- Progress summary.
-- Next up.
-- Filters.
-- Queue.
-- Scoped totals.
-
-Avoid nested cards. A tile can contain rows or controls, but do not put a card inside another card for decoration.
-
-### Title Detail
-
-Title detail is where imagery can carry more weight:
-
-- Wide but shallow backdrop crop.
-- Title progress.
-- Season accordion for series.
-- Relationship graph for sequel, prequel, spin-off, and crossover.
-- Watch units with per-episode controls.
-
-Images should be masked or cropped, not used as huge posters everywhere.
-
-## Images
-
-This project should use some images, not image overload.
-
-Recommended usage:
-
-- One soft backdrop crop in the dashboard hero.
-- Tiny inline stills or poster slivers in selected queue rows.
-- Backdrop header on title detail.
-- Optional thumbnail in relationship cards.
-
-Avoid:
-
-- Poster grids as the main dashboard.
-- Full-bleed random images behind tables.
-- Image-only navigation.
-- Stock-photo atmosphere that hides the catalog data.
-
-Until a real image pipeline exists, development placeholders may use seeded images:
-
-```text
-https://picsum.photos/seed/mcu-command-center/1920/1080
-https://picsum.photos/seed/cinematic-archive/1200/800
-https://picsum.photos/seed/timeline-console/900/900
-```
-
-Apply `grayscale(.15) contrast(1.1) saturate(.85)` and a dark radial overlay so the media sits behind the interface.
-
-## Motion
-
-Use GSAP when the UI moves beyond simple hover transitions. The motion should
-feel like a monitor receiving a real signal, not a landing-page scroll show.
-
-Required motion patterns:
-
-- Hover physics: clickable rows and instruments brighten their border/data
-  channel briefly; do not move the layout.
-- Watch action: check icon resolves from `.75` to `1`, the affected season
-  segment fills, and radial totals tick forward.
-- Telemetry draw-in: charts and radial arcs animate from empty to their real
-  values on first entry, then update from the prior value.
-- Panel focus: selecting a show sharpens its telemetry panel while surrounding
-  panels soften slightly. No automatic long-form scroll story on the dashboard.
-
-Respect reduced motion:
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-  }
-}
-```
-
-## States
-
-Anonymous:
-
-- Show local progress as fully capable.
-- Account action says `Sync`.
-- Merge prompt appears only after sign-in if local progress exists.
-
-Signed in:
-
-- Show account indicator quietly.
-- Sync state appears as saved, saving, or conflict.
-- Do not force a modal unless a merge decision is required.
-
-Empty catalog:
-
-- Show a precise setup message with import/seed guidance.
-
-Chronological unavailable:
-
-- Keep the option visible but disabled with concise copy: `Needs curated positions`.
-
-Complete:
-
-- Replace next-up with a completion panel and keep recently watched/edit controls available.
-
-## Accessibility
-
-- Every icon-only button needs an accessible label and tooltip.
-- Progress bars need text equivalents.
-- Watch rows must work with keyboard submission.
-- Color can reinforce status but cannot be the only signal.
-- Hit targets should be at least `40px` high on desktop and `44px` on touch screens.
-- Never hide undo behind hover only.
-
-## Implementation Guardrails
-
-- Use the Next `web/` app as the future UI surface.
-- The Next `web/` application is the only user interface surface.
-- Prefer CSS modules until a Tailwind decision is made.
-- If adding dependencies for the new UI, likely additions are `lucide-react`, `gsap`, and `@gsap/react`.
-- Keep server data contracts aligned with `docs/CATALOG_AND_PROGRESS_MODEL.md`.
-- The dashboard should eventually stop redirecting anonymous users to login; anonymous local progress is part of the product model.
-
-## Pre-Implementation Checklist
-
-Before building or redesigning a screen:
-
-- The H1 is 2 to 3 lines, not a narrow wrapped wall.
-- The first screen contains a real tool, not a landing page.
-- Bento grids have no empty cells and use dense flow.
-- Buttons have explicit contrast.
-- Filters are compact and icon-led.
-- The UI shows anonymous progress without shame or friction.
-- Images support recognition, not decoration.
-- Motion explains state changes and respects reduced motion.
-- No meta labels, decorative badges, or generic section numbering appear.
+Panels are dark, angular instruments rather than soft marketing cards:
+
+- `4px` to `6px` corner radii at most.
+- Fine blue hairlines and selectively clipped corners.
+- Subtle interior gradient depth is acceptable when it gives the panel a glass
+  or display quality.
+- No cards nested inside decorative cards.
+- Glow belongs to a core, chart trace, active edge, or actionable signal.
+
+### Typography
+
+Use Geist for interface copy and Geist Mono for percentages, axes, dates,
+positions, system labels, and compact metadata. The boot sequence may use very
+large two-line display type. The analytical dashboard should reserve large type
+for numerical values, not headlines.
+
+Use uppercase only for compact system labels. Avoid repeated labels such as
+`SECTION 01` or decorative technical jargon that conveys no real state.
+
+## Interaction Rules
+
+- The boot core is atmospheric; it is not a required control.
+- Dashboard controls must remain keyboard-accessible and obvious.
+- `Mark watched` updates local progress for anonymous visitors and persists to
+  Supabase for authenticated visitors.
+- The next-up action always refers to the first unwatched release-order unit.
+- Undo remains available through recent marks and the catalog.
+- Sync/account state appears only when it communicates a real condition.
+
+## Responsive Behavior
+
+On small screens, preserve the J.A.R.V.I.S. sequence but prioritize legibility:
+
+- Keep boot type within two lines and move the reactor partially off-canvas
+  rather than shrinking it into an unreadable ornament.
+- Stack dashboard modules into a single column.
+- Keep navigation controls horizontally reachable without forcing text to
+  overlap.
+- Retain textual values for every visualization; color never carries state by
+  itself.
+
+## Implementation Notes
+
+- Keep the interface in CSS modules and GSAP; avoid adding a visual library
+  merely for ornamental charts.
+- CSS/SVG geometry is preferred for the J.A.R.V.I.S. core and data charts.
+- Use real Marvel imagery only once a deliberate image source and attribution
+  approach are defined. Do not fill the experience with unrelated stock media.
+- Any new visualization needs a named data source and a useful decision it
+  supports.
