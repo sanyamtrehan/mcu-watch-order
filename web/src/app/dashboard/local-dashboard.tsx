@@ -5,7 +5,9 @@ import { useGSAP } from "@gsap/react";
 import { Check, Cloud, RotateCcw, UserRound } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SoundToggle } from "@/components/sound-toggle";
 import type { DashboardUnit, ReleaseOrderCatalog } from "@/lib/catalog/dashboard";
+import { playScrollChime } from "@/lib/ui/scroll-chime";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, writeLocalProgress } from "@/lib/progress/local-progress";
 import { createClient as createBrowserClient } from "@/lib/supabase/client";
 import styles from "./page.module.css";
@@ -18,6 +20,7 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
   const { units } = catalog;
   const shell = useRef<HTMLElement>(null);
   const bootSequence = useRef<HTMLElement>(null);
+  const heroChimed = useRef(false);
   const [remoteWatched, setRemoteWatched] = useState(() => new Set(initialRemoteWatchedUnitIds));
   const [syncError, setSyncError] = useState<string | null>(null);
   const [merging, setMerging] = useState(false);
@@ -32,7 +35,7 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
     gsap.utils.toArray<HTMLElement>("[data-archive-stage]").forEach((stage) => {
       gsap.from(stage.querySelectorAll("[data-telemetry]"), { opacity: 0, y: 42, scale: .96, duration: .8, stagger: .1, ease: "power3.out", scrollTrigger: { trigger: stage, start: "top 78%" } });
     });
-    gsap.timeline({ scrollTrigger: { trigger: bootSequence.current, start: "top top", end: "+=110%", scrub: .75, pin: true, anticipatePin: 1 } })
+    gsap.timeline({ scrollTrigger: { trigger: bootSequence.current, start: "top top", end: "+=110%", scrub: .75, pin: true, anticipatePin: 1, onLeave: () => { if (!heroChimed.current) { heroChimed.current = true; playScrollChime(); } } } })
       .to("[data-boot-copy]", { opacity: .16, y: -54, duration: .48 }, 0)
       .to("[data-boot-orbit]", { rotate: 126, scale: 1.18, duration: .7 }, 0)
       .to("[data-boot-core]", { scale: .42, y: 178, duration: .8, ease: "power2.inOut" }, 0)
@@ -113,7 +116,7 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
   </main>;
 }
 
-function CommandNav({ account }: { account: Account | null }) { return <header className={styles.commandNav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard" aria-current="page">Dashboard</a><a href="/catalog">Catalog</a><button type="button" aria-pressed="true">Release</button><button type="button" disabled title="Needs curated positions">Chronological</button></nav>{account ? <form action="/auth/signout" method="post"><button className={styles.accountButton} type="submit"><UserRound size={16} /><span>{account.email}</span></button></form> : <a className={styles.syncLink} href="/login"><Cloud size={16} /> Sync</a>}</header>; }
+function CommandNav({ account }: { account: Account | null }) { return <header className={styles.commandNav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard" aria-current="page">Dashboard</a><a href="/catalog">Catalog</a><button type="button" aria-pressed="true">Release</button><button type="button" disabled title="Needs curated positions">Chronological</button></nav><div className={styles.navActions}><SoundToggle className={styles.soundButton} />{account ? <form action="/auth/signout" method="post"><button className={styles.accountButton} type="submit"><UserRound size={16} /><span>{account.email}</span></button></form> : <a className={styles.syncLink} href="/login"><Cloud size={16} /> Sync</a>}</div></header>; }
 function ReactorCore({ progress }: { progress: number }) { return <div className={styles.reactorAssembly} data-boot-core aria-label={`${progress}% archive completion`}><div className={styles.reactorOrbit} data-boot-orbit><i /><i /><i /></div><div className={styles.reactorHalo} /><div className={styles.reactorCore}><div><strong>{progress}%</strong><span>resolved</span></div></div><span className={styles.reactorCaption}>ARC // {String(progress).padStart(2, "0")}</span></div>; }
 function ReleaseSignal({ bins }: { bins: { total: number; watched: number; index: number; label: string }[] }) { const points = bins.map((bin, index) => `${index * 100 / (bins.length - 1)},${88 - percent(bin.watched, bin.total) * .72}`).join(" "); const area = `0,100 ${points} 100,100`; return <article className={`${styles.releaseSignal} ${styles.panel}`} data-telemetry><header><div><p>Release completion</p><h2>Sequence coverage</h2></div><span>12 release eras</span></header><div className={styles.areaChart}><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Completion by release era"><defs><linearGradient id="coverage-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#24d7ff" stopOpacity=".46" /><stop offset="1" stopColor="#24d7ff" stopOpacity="0" /></linearGradient></defs><path d={`M ${area.replaceAll(" ", " L ")} Z`} fill="url(#coverage-fill)" /><polyline data-signal-line points={points} fill="none" stroke="#24d7ff" strokeWidth="1.4" vectorEffect="non-scaling-stroke" /></svg><div className={styles.chartColumns}>{bins.map((bin) => <i key={bin.index} style={{ height: `${Math.max(4, percent(bin.watched, bin.total))}%` }} />)}</div></div><footer>{bins.map((bin) => <span key={bin.index}>{bin.label}</span>)}</footer></article>; }
 function MetricRing({ className, label, value, detail, color }: { className: string; label: string; value: number; detail: string; color: "cyan" | "magenta" }) { return <article className={`${className} ${styles.panel}`} data-telemetry><header><p>{label}</p><span className={styles.metricReadout}>live</span></header><div className={`${styles.ring} ${styles[color]}`} style={{ "--value": `${value * 3.6}deg` } as React.CSSProperties}><div><strong>{value}%</strong><span>{detail}</span></div></div><footer className={styles.metricFooter}><i /><span>Archive signal stable</span></footer></article>; }

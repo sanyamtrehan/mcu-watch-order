@@ -10,7 +10,9 @@ watching data.
 The product is neither a fan wiki nor a generic SaaS dashboard. It uses
 Marvel-scale spectacle to make the transition into a practical tool feel
 special, then gets out of the way so a viewer can mark titles, inspect
-progress, and find what to watch next.
+progress, and find what to watch next. The interface is soft, orbital, and
+highly dimensional: curved glass instruments and concentric systems, not an
+angular control-room pastiche.
 
 ## Experience Architecture
 
@@ -40,7 +42,9 @@ The boot sequence is pinned briefly. As the user scrolls:
 3. The technical grid recedes.
 4. The analytical dashboard enters below.
 
-Use GSAP `ScrollTrigger` with a scrubbed timeline. Respect
+Use GSAP `ScrollTrigger` with a scrubbed timeline. Dashboard and catalog
+sections must continue the motion language after their heroes through
+depth-based reveals, orbital movement, and focused panel transitions. Respect
 `prefers-reduced-motion`: skip pinning and transformations while keeping all
 content visible in normal document flow. Motion must clarify the hand-off into
 the tracker, not delay access to it.
@@ -98,12 +102,15 @@ edge lines, controlled glow, and deep contrast instead.
 
 ### Surfaces
 
-Panels are dark, angular instruments rather than soft marketing cards:
+Panels are rounded glass instruments arranged around circular and orbital
+geometry, rather than rigid rectangular control-room cards:
 
-- `4px` to `6px` corner radii at most.
-- Fine blue hairlines and selectively clipped corners.
-- Subtle interior gradient depth is acceptable when it gives the panel a glass
-  or display quality.
+- Use generous `20px` to `32px` radii for primary modules and `999px` for
+  compact controls, status chips, and table rows.
+- Use fine blue hairlines, translucent indigo surfaces, and restrained glass
+  blur to establish depth.
+- Prefer concentric rings, radial readouts, circular status counters, and
+  soft arc traces to diagonal cuts and repeated sharp corners.
 - No cards nested inside decorative cards.
 - Glow belongs to a core, chart trace, active edge, or actionable signal.
 
@@ -126,6 +133,9 @@ Use uppercase only for compact system labels. Avoid repeated labels such as
 - The next-up action always refers to the first unwatched release-order unit.
 - Undo remains available through recent marks and the catalog.
 - Sync/account state appears only when it communicates a real condition.
+- The speaker control is opt-in. When enabled, scrolling past a hero may play
+  one quiet, locally synthesized two-tone transition chime. Never autoplay
+  music, fetch third-party audio, or play repeated sounds on every scroll.
 
 ## Responsive Behavior
 

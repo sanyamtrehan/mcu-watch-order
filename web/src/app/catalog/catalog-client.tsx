@@ -5,7 +5,9 @@ import { useGSAP } from "@gsap/react";
 import { Check, LayoutGrid, List, RotateCcw } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SoundToggle } from "@/components/sound-toggle";
 import type { DashboardUnit } from "@/lib/catalog/dashboard";
+import { playScrollChime } from "@/lib/ui/scroll-chime";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, writeLocalProgress } from "@/lib/progress/local-progress";
 import styles from "./page.module.css";
 
@@ -16,6 +18,7 @@ type StatusFilter = "all" | "unwatched" | "watched";
 
 export function CatalogClient({ units }: { units: DashboardUnit[] }) {
   const shell = useRef<HTMLElement>(null);
+  const heroChimed = useRef(false);
   const [viewMode, setViewMode] = useState<ViewMode>("table");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [kindFilter, setKindFilter] = useState("all");
@@ -32,6 +35,7 @@ export function CatalogClient({ units }: { units: DashboardUnit[] }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.from("[data-catalog-hero] > *", { opacity: 0, y: 26, duration: .8, stagger: .12, ease: "power3.out" });
     gsap.from("[data-catalog-workspace]", { opacity: 0, y: 48, duration: .85, ease: "power3.out", scrollTrigger: { trigger: "[data-catalog-workspace]", start: "top 82%" } });
+    ScrollTrigger.create({ trigger: "[data-catalog-hero]", start: "bottom 24%", onLeave: () => { if (!heroChimed.current) { heroChimed.current = true; playScrollChime(); } } });
   }, { scope: shell });
 
   function setWatched(unit: DashboardUnit, watched: boolean) {
@@ -42,7 +46,7 @@ export function CatalogClient({ units }: { units: DashboardUnit[] }) {
   }
 
   return <main ref={shell} className={styles.page}>
-    <header className={styles.nav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard">Dashboard</a><a href="/catalog" aria-current="page">Catalog</a></nav><a className={styles.syncLink} href="/login">Sync</a></header>
+    <header className={styles.nav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard">Dashboard</a><a href="/catalog" aria-current="page">Catalog</a></nav><div className={styles.navActions}><SoundToggle className={styles.soundButton} /><a className={styles.syncLink} href="/login">Sync</a></div></header>
     <section className={styles.catalogHero} data-catalog-hero><div><p>J.A.R.V.I.S. ARCHIVE / FULL INVENTORY</p><h1>Every unit.<br /><span>On record.</span></h1></div><div className={styles.heroCount}><span>Archive integrity</span><strong>{units.length}</strong><small>indexed watch units</small></div><i /></section>
     <section className={styles.content}>
       <div className={styles.heading} data-catalog-workspace><div><p>Release order controls</p><h2>Filter the archive.</h2></div><span>{visibleUnits.length} of {units.length} entries</span></div>
