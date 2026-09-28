@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useGSAP } from "@gsap/react";
 import { Check, Cloud, RotateCcw, UserRound } from "lucide-react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SoundToggle } from "@/components/sound-toggle";
@@ -89,7 +90,7 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
     <CommandNav account={account} />
     <section ref={bootSequence} className={styles.bootSequence} aria-label="J.A.R.V.I.S. initialization sequence">
       <div className={styles.bootGrid} data-boot-grid />
-      <div className={styles.bootCopy} data-boot-copy data-boot-reveal><p>J.A.R.V.I.S. / WATCH ORDER PROTOCOL</p><h1>Marvel<br /><span>intelligence.</span></h1><small>Personal viewing archive, synchronized to release sequence.</small></div>
+      <div className={styles.bootCopy} data-boot-copy data-boot-reveal><p>J.A.R.V.I.S. / WATCH ORDER PROTOCOL</p><h1>Marvel<br /><span>intelligence.</span></h1><div className={styles.marvelMark}><Image src="/images/avengers-promo.webp" alt="Marvel Studios The Avengers" width={320} height={180} priority /></div><small>Personal viewing archive, synchronized to release sequence.</small></div>
       <div className={styles.bootStatus} data-boot-status data-boot-reveal><span>System state</span><strong>ONLINE</strong><i>{watched.length} / {units.length} units resolved</i></div>
       <ReactorCore progress={totalPercent} />
       <div className={styles.bootFooter} data-boot-status><span>Scroll to enter archive</span><span>{upcoming[0] ? `Next: ${upcoming[0].title}` : "Archive complete"}</span></div>
