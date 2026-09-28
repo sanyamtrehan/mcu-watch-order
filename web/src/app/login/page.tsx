@@ -34,9 +34,11 @@ export default function LoginPage() {
 
   return (
     <main className={styles.page}>
+      <section className={styles.accessFrame}>
+        <div className={styles.accessVisual} aria-hidden="true"><p>J.A.R.V.I.S. / SECURE ACCESS</p><h1>Authorized<br /><span>access.</span></h1><i /><small>Archive access requires a verified account channel.</small></div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <p className={styles.eyebrow}>MCU WATCH ORDER</p>
-        <h1>Sign in</h1>
+        <p className={styles.eyebrow}>IDENTITY VERIFICATION</p>
+        <h2>Sign in to sync.</h2>
         <label>
           Email
           <input name="email" type="email" autoComplete="email" required />
@@ -55,6 +57,7 @@ export default function LoginPage() {
           {isSubmitting ? "Signing in" : "Sign in"}
         </button>
       </form>
+      </section>
     </main>
   );
 }
