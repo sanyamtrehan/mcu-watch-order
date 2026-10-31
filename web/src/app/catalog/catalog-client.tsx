@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useGSAP } from "@gsap/react";
-import { Check, LayoutGrid, List, RotateCcw } from "lucide-react";
+import { Check, ChevronDown, LayoutGrid, List, RotateCcw, Search, SlidersHorizontal } from "lucide-react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -20,6 +20,19 @@ type ViewMode = "table" | "cards";
 type StatusFilter = "all" | "unwatched" | "watched";
 type Account = { id: string; email: string };
 type Props = { units: DashboardUnit[]; relationships: TitleRelationship[]; account: Account | null; initialRemoteWatchedUnitIds: string[] };
+type FilterOption = { value: string; label: string };
+
+const STATUS_OPTIONS: FilterOption[] = [
+  { value: "all", label: "All progress" },
+  { value: "unwatched", label: "Unwatched" },
+  { value: "watched", label: "Watched" },
+];
+const TYPE_OPTIONS: FilterOption[] = [
+  { value: "all", label: "All media" },
+  { value: "movie", label: "Films" },
+  { value: "episode", label: "Episodes" },
+  { value: "special", label: "Specials" },
+];
 
 // shortcut: only the Team Thor shorts share a filter group, move grouping into catalog metadata when more collections need it.
 const TEAM_THOR_TITLE_IDS = new Set(["special-team-thor", "special-team-thor-part-2", "special-team-darryl"]);
@@ -51,7 +64,9 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
   const seasons = [...new Map(units.filter((unit) => titleFilterOption(unit, movieGroups).id === titleFilter && unit.seasonId).map((unit) => [unit.seasonId!, unit.seasonNumber!])).entries()].sort(([, a], [, b]) => a - b);
   const visibleUnits = units.filter((unit) => (statusFilter === "all" || (statusFilter === "watched") === watchedIds.has(unit.id)) && (kindFilter === "all" || unit.unitKind === kindFilter) && (titleFilter === "all" || titleFilterOption(unit, movieGroups).id === titleFilter) && (seasonFilter === "all" || unit.seasonId === seasonFilter));
   const allVisibleSelected = visibleUnits.length > 0 && visibleUnits.every((unit) => selectedIds.has(unit.id));
-  const hasActiveFilters = statusFilter !== "all" || kindFilter !== "all" || titleFilter !== "all" || seasonFilter !== "all";
+  const activeFilterCount = [statusFilter !== "all", kindFilter !== "all", titleFilter !== "all", seasonFilter !== "all"].filter(Boolean).length;
+  const titleOptions = [{ value: "all", label: "All titles" }, ...titles.map((title) => ({ value: title.id, label: title.title }))];
+  const seasonOptions = [{ value: "all", label: "All seasons" }, ...seasons.map(([id, number]) => ({ value: id, label: `Season ${number}` }))];
 
   useGSAP(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -132,8 +147,14 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
     <section className={styles.content}>
       <div className={styles.heading} data-catalog-workspace><div><p>Release order controls</p><h2>Filter the archive.</h2></div><span>{visibleUnits.length} of {units.length} entries</span></div>
       <section className={styles.toolbar} aria-label="Catalog controls" data-catalog-workspace>
-        <div className={styles.filterGroup}><label>Status<select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as StatusFilter)}><option value="all">All progress</option><option value="unwatched">Unwatched</option><option value="watched">Watched</option></select></label><label>Type<select value={kindFilter} onChange={(event) => { setKindFilter(event.target.value); setTitleFilter("all"); setSeasonFilter("all"); }}><option value="all">All media</option><option value="movie">Films</option><option value="episode">Episodes</option><option value="special">Specials</option></select></label><label>Title<select value={titleFilter} onChange={(event) => { setTitleFilter(event.target.value); setSeasonFilter("all"); }}><option value="all">All titles</option>{titles.map((title) => <option key={title.id} value={title.id}>{title.title}</option>)}</select></label>{seasons.length > 0 && <label>Season<select value={seasonFilter} onChange={(event) => setSeasonFilter(event.target.value)}><option value="all">All seasons</option>{seasons.map(([id, number]) => <option key={id} value={id}>Season {number}</option>)}</select></label>}</div>
-        <div className={styles.toolbarActions}><button className={styles.resetFilters} type="button" onClick={clearFilters} disabled={!hasActiveFilters}><RotateCcw size={15} /> Clear filters</button><div className={styles.viewSwitch} aria-label="Catalog layout"><button type="button" aria-pressed={viewMode === "table"} onClick={() => setViewMode("table")} title="Table view"><List size={17} /></button><button type="button" aria-pressed={viewMode === "cards"} onClick={() => setViewMode("cards")} title="Card grid view"><LayoutGrid size={17} /></button></div></div>
+        <header className={styles.filterHeader}><div><SlidersHorizontal size={18} /><span>Catalog query</span><strong>Refine release order</strong></div><p><b>{activeFilterCount}</b> {activeFilterCount === 1 ? "filter" : "filters"} active</p></header>
+        <div className={styles.filterGroup}>
+          <FilterMenu label="Status" value={statusFilter} options={STATUS_OPTIONS} onChange={(value) => setStatusFilter(value as StatusFilter)} />
+          <FilterMenu label="Type" value={kindFilter} options={TYPE_OPTIONS} onChange={(value) => { setKindFilter(value); setTitleFilter("all"); setSeasonFilter("all"); }} />
+          <FilterMenu label="Title" value={titleFilter} options={titleOptions} searchable onChange={(value) => { setTitleFilter(value); setSeasonFilter("all"); }} />
+          {seasons.length > 0 && <FilterMenu label="Season" value={seasonFilter} options={seasonOptions} onChange={setSeasonFilter} />}
+        </div>
+        <div className={styles.toolbarActions}><button className={styles.resetFilters} type="button" onClick={clearFilters} disabled={activeFilterCount === 0}><RotateCcw size={15} /> Clear filters</button><div className={styles.viewSwitch} aria-label="Catalog layout"><button type="button" aria-pressed={viewMode === "table"} onClick={() => setViewMode("table")} title="Table view"><List size={17} /></button><button type="button" aria-pressed={viewMode === "cards"} onClick={() => setViewMode("cards")} title="Card grid view"><LayoutGrid size={17} /></button></div></div>
       </section>
       <section className={styles.bulkBar} aria-label="Bulk watch controls" data-catalog-workspace><div><strong>{selectedIds.size} selected</strong><span>Select entries, then update them together.</span></div><div><button className={styles.clearButton} type="button" onClick={toggleVisibleSelection} disabled={visibleUnits.length === 0}>{allVisibleSelected ? "Clear visible" : "Select visible"}</button>{selectedIds.size > 0 && <button className={styles.clearButton} type="button" onClick={() => setSelectedIds(new Set())}>Clear all</button>}<button className={styles.bulkUndoButton} type="button" onClick={() => void updateSelected(false)} disabled={selectedIds.size === 0 || saving}><RotateCcw size={16} /> {saving ? "Saving" : "Mark selected unwatched"}</button><button className={styles.bulkButton} type="button" onClick={() => void updateSelected(true)} disabled={selectedIds.size === 0 || saving}><Check size={16} /> {saving ? "Saving" : "Mark selected watched"}</button></div></section>
       {progressError && <p className={styles.progressError} role="alert">Unable to update progress: {progressError}</p>}
@@ -148,6 +169,32 @@ function CatalogRow({ unit, watched, selected, saving, onSelect, onChange }: { u
 }
 
 function WatchButton({ unit, watched, disabled, onChange }: { unit: DashboardUnit; watched: boolean; disabled: boolean; onChange: (unit: DashboardUnit, watched: boolean) => void }) { return <button className={watched ? styles.undoButton : styles.watchButton} type="button" disabled={disabled} onClick={(event) => { event.stopPropagation(); onChange(unit, !watched); }}>{watched ? <><RotateCcw size={15} /> Undo</> : <><Check size={15} /> Mark watched</>}</button>; }
+
+function FilterMenu({ label, value, options, searchable = false, onChange }: { label: string; value: string; options: FilterOption[]; searchable?: boolean; onChange: (value: string) => void }) {
+  const menu = useRef<HTMLDetailsElement>(null);
+  const [query, setQuery] = useState("");
+  const selected = options.find((option) => option.value === value) ?? options[0];
+  const visibleOptions = query ? options.filter((option) => option.label.toLocaleLowerCase().includes(query.toLocaleLowerCase())) : options;
+
+  useEffect(() => {
+    function closeMenu(event: PointerEvent) {
+      if (menu.current && event.target instanceof Node && !menu.current.contains(event.target)) menu.current.open = false;
+    }
+    document.addEventListener("pointerdown", closeMenu);
+    return () => document.removeEventListener("pointerdown", closeMenu);
+  }, []);
+
+  return <details ref={menu} className={`${styles.filterMenu} ${value !== "all" ? styles.filterMenuActive : ""}`} onToggle={(event) => { if (!event.currentTarget.open) setQuery(""); }}>
+    <summary><span>{label}</span><strong>{selected.label}</strong><ChevronDown size={17} /></summary>
+    <div className={styles.filterPopover}>
+      <div className={styles.consoleHeader} aria-hidden="true"><span>STARK_ARCHIVE // {label.toUpperCase()}_INDEX</span><b><i /> LINK ACTIVE</b></div>
+      {searchable && <label className={styles.filterSearch}><Search size={15} /><span className={styles.searchPrompt} aria-hidden="true">QRY</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ENTER TITLE QUERY..." aria-label="Search title options" /></label>}
+      <div className={styles.filterOptions} role="listbox" aria-label={`${label} options`}>{visibleOptions.length > 0 ? visibleOptions.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === value} onClick={() => { onChange(option.value); menu.current?.removeAttribute("open"); }}><span className={styles.filterOptionText}><code aria-hidden="true">IDX-{String(options.indexOf(option)).padStart(3, "0")}</code><span>{option.label}</span></span>{option.value === value ? <Check size={15} /> : <i />}</button>) : <p>No matching titles</p>}</div>
+      <div className={styles.consoleFooter} aria-hidden="true"><span>{String(visibleOptions.length).padStart(3, "0")} RECORDS</span><span>NODE 04-A</span><span>MEM 7A:4F</span><b>QUERY READY</b></div>
+    </div>
+  </details>;
+}
+
 function unitLabel(unit: DashboardUnit) { return unit.unitKind === "episode" ? `S${unit.seasonNumber} E${unit.episodeNumber}` : unit.unitKind; }
 function formatDate(value: string) { return new Intl.DateTimeFormat("en", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`)); }
 function subscribe(onChange: () => void) { window.addEventListener("storage", onChange); window.addEventListener(LOCAL_PROGRESS_EVENT, onChange); return () => { window.removeEventListener("storage", onChange); window.removeEventListener(LOCAL_PROGRESS_EVENT, onChange); }; }

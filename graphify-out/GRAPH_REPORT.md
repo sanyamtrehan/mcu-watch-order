@@ -1,17 +1,17 @@
 # Graph Report - mcu-watch-order  (2026-10-31)
 
 ## Corpus Check
-- 135 files · ~88,229 words
+- 135 files · ~88,526 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 25 file(s) not represented in the graph (top: (none) 9, .scss 6, .css 4)
 
 ## Summary
-- 1322 nodes · 1783 edges · 121 communities (93 shown, 28 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 26 edges (avg confidence: 0.85)
+- 1327 nodes · 1789 edges · 122 communities (93 shown, 29 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0d404aa9`
+- Built from commit: `6cb49494`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -64,12 +64,12 @@
 - local-dashboard.tsx
 - Agent Skill: Principal UI/UX Architect & Motion Choreographer (Awwwards-Tier)
 - NavBarComponent
-- bcryptjs
+- mcu/mcu.service.ts
 - dashboard.ts
 - SKILL: Industrial Brutalism & Tactical Telemetry UI
 - Next.js And Supabase Migration Plan
 - title-filter-groups.ts
-- dotenv@^16.0.0
+- passport@^0.5.2
 - @typescript-eslint/parser@^5.0.0
 - environment.prod.ts
 - Design System: Taste Standard
@@ -118,12 +118,13 @@
 - web/README.md
 - imagegen-frontend-web/SKILL.md
 - AGENTS.md
-- rxjs@^7.2.0
+- pg@^8.23.0
+- rimraf@^3.0.2
 - eslint@^8.0.1
-- jest@^27.2.5
+- ts-loader@^9.2.3
 - @nestjs/schematics@^8.0.0
-- eslint-plugin-prettier@^4.0.0
-- ts-jest@^27.0.3
+- ts-node@^10.0.0
+- @types/node@^16.0.0
 - @typescript-eslint/eslint-plugin@^5.0.0
 - seed/README.md
 - data/README.md
@@ -132,14 +133,14 @@
 - @angular/compiler@~13.3.0
 - @angular/flex-layout
 - rxjs@~7.5.0
-- tsconfig-paths@^3.10.1
-- @types/passport-jwt@^3.0.6
+- @types/supertest@^2.0.11
+- typescript@^4.3.5
 
 ## God Nodes (most connected - your core abstractions)
 1. `CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE` - 39 edges
 2. `CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION` - 39 edges
-3. `@angular/core` - 22 edges
-4. `CatalogClient()` - 22 edges
+3. `CatalogClient()` - 23 edges
+4. `@angular/core` - 22 edges
 5. `LocalDashboard()` - 22 edges
 6. `CORE DIRECTIVE: AWWWARDS-LEVEL IMAGE ART DIRECTION` - 22 edges
 7. `CookieTokenService` - 20 edges
@@ -162,27 +163,27 @@
 ## Import Cycles
 - None detected.
 
-## Communities (121 total, 28 thin omitted)
+## Communities (122 total, 29 thin omitted)
 
 ### Community 0 - "catalog-client.tsx"
-Cohesion: 0.15
-Nodes (16): Account, CatalogClient(), saveWatched(), updateSelected(), CatalogRow(), formatDate(), Props, serverSnapshot() (+8 more)
+Cohesion: 0.12
+Nodes (20): Account, CatalogClient(), saveWatched(), updateSelected(), CatalogRow(), FilterMenu(), FilterOption, formatDate() (+12 more)
 
 ### Community 1 - "frontend/package.json"
 Cohesion: 0.10
 Nodes (28): devDependencies, @angular/cli@~13.3.0, @angular/compiler-cli@~13.3.0, @angular-devkit/build-angular@~13.3.0, jasmine-core@~4.0.0, karma@~6.3.0, karma-chrome-launcher@~3.1.0, karma-coverage@~2.1.0 (+20 more)
 
 ### Community 2 - "mcu.controller.ts"
-Cohesion: 0.10
-Nodes (5): FilterMcuDto, SecretKeyDto, McuController, McuService, @nestjs/passport
+Cohesion: 0.11
+Nodes (4): @nestjs/testing@^8.0.0, McuController, McuService, @nestjs/testing
 
 ### Community 3 - "jwt.strategy.ts"
-Cohesion: 0.19
-Nodes (3): JwtStrategy, JwtPayload, ENVIRONMENT
+Cohesion: 0.24
+Nodes (3): JwtStrategy, JwtPayload, @nestjs/passport
 
 ### Community 4 - "dependencies"
 Cohesion: 0.08
-Nodes (25): dependencies, @nestjs/common@^8.0.0, @nestjs/core@^8.0.0, @nestjs/jwt@^8.0.0, @nestjs/passport@^8.2.1, @nestjs/platform-express@^8.0.0, @nestjs/swagger@^5.2.1, @nestjs/typeorm@^8.1.4 (+17 more)
+Nodes (25): dependencies, bcryptjs@^2.4.3, dotenv@^16.0.0, @nestjs/common@^8.0.0, @nestjs/core@^8.0.0, @nestjs/jwt@^8.0.0, @nestjs/passport@^8.2.1, @nestjs/platform-express@^8.0.0 (+17 more)
 
 ### Community 5 - "app/app.module.ts"
 Cohesion: 0.19
@@ -201,8 +202,8 @@ Cohesion: 0.06
 Nodes (37): eslint-config-next, geist, gsap, @gsap/react, react-dom, @supabase/supabase-js, @types/react, @types/react-dom (+29 more)
 
 ### Community 10 - "devDependencies"
-Cohesion: 0.10
-Nodes (20): devDependencies, eslint-config-prettier@^8.3.0, @nestjs/cli@^8.0.0, @nestjs/testing@^8.0.0, supertest@^6.1.3, ts-loader@^9.2.3, ts-node@^10.0.0, @types/jest@27.4.1 (+12 more)
+Cohesion: 0.11
+Nodes (19): devDependencies, eslint-config-prettier@^8.3.0, eslint-plugin-prettier@^4.0.0, jest@^27.2.5, @nestjs/cli@^8.0.0, prettier@^2.3.2, ts-jest@^27.0.3, @types/express@^4.17.13 (+11 more)
 
 ### Community 11 - "scripts"
 Cohesion: 0.11
@@ -224,21 +225,17 @@ Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModu
 Cohesion: 0.14
 Nodes (16): dependencies, dotenv@^18.0.4, pg@^8.23.0, devDependencies, supabase@2.118.0, dotenv, pg, name (+8 more)
 
-### Community 16 - "app.controller.ts"
-Cohesion: 0.16
-Nodes (6): AppController, AppModule, AppService, McuModule, @nestjs/common, @nestjs/testing
-
 ### Community 17 - "next"
 Cohesion: 0.17
 Nodes (11): next, @supabase/ssr, nextConfig, POST(), LoginPage(), handleSubmit(), createClient(), getSupabaseConfig() (+3 more)
 
 ### Community 18 - "typeorm"
-Cohesion: 0.13
-Nodes (7): InitialPostgresSchema1760000000000, NormalizedCatalog1760000001000, Exceptions, Data, Mcu, @nestjs/typeorm, typeorm
+Cohesion: 0.09
+Nodes (5): User, InitialPostgresSchema1760000000000, NormalizedCatalog1760000001000, Mcu, typeorm
 
 ### Community 19 - "backend/package.json"
 Cohesion: 0.15
-Nodes (12): author, description, prettier@^2.3.2, @types/express@^4.17.13, engines, node, license, name (+4 more)
+Nodes (12): author, description, supertest@^6.1.3, tsconfig-paths@^3.10.1, engines, node, license, name (+4 more)
 
 ### Community 20 - "import-catalog-seed.ts"
 Cohesion: 0.17
@@ -265,8 +262,8 @@ Cohesion: 0.18
 Nodes (11): jest, collectCoverageFrom, coverageDirectory, moduleFileExtensions, moduleNameMapper, rootDir, testEnvironment, testRegex (+3 more)
 
 ### Community 26 - "auth.module.ts"
-Cohesion: 0.13
-Nodes (4): User, AuthModule, PasswordService, @nestjs/jwt
+Cohesion: 0.19
+Nodes (7): AppModule, AuthModule, ENVIRONMENT, PasswordService, McuModule, @nestjs/common, @nestjs/typeorm
 
 ### Community 27 - "backend/scripts/validate-catalog-seed.js"
 Cohesion: 0.20
@@ -289,8 +286,8 @@ Cohesion: 0.22
 Nodes (6): bulkUpsert(), catalog, { Client }, fs, importCatalog(), path
 
 ### Community 32 - "auth/auth.service.ts"
-Cohesion: 0.17
-Nodes (5): AuthController, AuthService, CreateUserDto, LoginDto, @nestjs/swagger
+Cohesion: 0.16
+Nodes (5): AuthController, AuthService, CreateUserDto, LoginDto, @nestjs/jwt
 
 ### Community 33 - "production"
 Cohesion: 0.22
@@ -344,8 +341,12 @@ Nodes (26): Account, AccountPanel(), CommandNav(), formatDate(), label(), LocalD
 Cohesion: 0.11
 Nodes (17): 1. Meta Information & Core Directive, 2. THE "ABSOLUTE ZERO" DIRECTIVE (STRICT ANTI-PATTERNS), 3. THE CREATIVE VARIANCE ENGINE, 4. HAPTIC MICRO-AESTHETICS (COMPONENT MASTERY), 5. MOTION CHOREOGRAPHY (FLUID DYNAMICS), 6. PERFORMANCE GUARDRAILS, 7. EXECUTION PROTOCOL, 8. PRE-OUTPUT CHECKLIST (+9 more)
 
+### Community 48 - "mcu/mcu.service.ts"
+Cohesion: 0.26
+Nodes (5): Exceptions, Data, FilterMcuDto, SecretKeyDto, @nestjs/swagger
+
 ### Community 49 - "dashboard.ts"
-Cohesion: 0.19
+Cohesion: 0.18
 Nodes (14): CatalogPage(), dynamic, setWatchProgress(), DashboardPage(), dynamic, DashboardUnit, EpisodeRow, getReleaseOrderCatalog() (+6 more)
 
 ### Community 50 - "SKILL: Industrial Brutalism & Tactical Telemetry UI"
@@ -538,23 +539,23 @@ Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ## Knowledge Gaps
 - **1 isolated node(s):** `./tsconfig.json`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 775 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 779 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **29 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `typeorm` connect `typeorm` to `auth/auth.service.ts`, `backend/package.json`, `dependencies`, `import-catalog-seed.ts`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Why does `typeorm` connect `typeorm` to `auth/auth.service.ts`, `dependencies`, `mcu/mcu.service.ts`, `backend/package.json`, `import-catalog-seed.ts`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `CatalogClient()` (e.g. with `serverSnapshot()` and `snapshot()`) actually correct?**
   _`CatalogClient()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `./tsconfig.json` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `catalog-client.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.11692307692307692 - nodes in this community are weakly interconnected._
+- **Why does `@nestjs/common` connect `auth.module.ts` to `auth/auth.service.ts`, `jwt.strategy.ts`, `dependencies`, `app.controller.ts`, `mcu/mcu.service.ts`, `backend/package.json`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09852216748768473 - nodes in this community are weakly interconnected._
-- **Why does `CommandNav()` connect `local-dashboard.tsx` to `sound-toggle.tsx`, `Dashboard Delivery Phases`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Should `mcu.controller.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.10344827586206896 - nodes in this community are weakly interconnected._
-- **Why does `Phase 2: Command Dashboard System` connect `Dashboard Delivery Phases` to `local-dashboard.tsx`?**
+- **Why does `User` connect `typeorm` to `auth/auth.service.ts`, `auth.module.ts`, `jwt.strategy.ts`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
