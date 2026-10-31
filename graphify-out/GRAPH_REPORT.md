@@ -1,17 +1,17 @@
 # Graph Report - mcu-watch-order  (2026-10-31)
 
 ## Corpus Check
-- 137 files · ~89,146 words
+- 137 files · ~89,288 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 25 file(s) not represented in the graph (top: (none) 9, .scss 6, .css 4)
 
 ## Summary
-- 1333 nodes · 1802 edges · 118 communities (94 shown, 24 thin omitted)
+- 1333 nodes · 1803 edges · 118 communities (94 shown, 24 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d044c999`
+- Built from commit: `62d01938`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -135,10 +135,10 @@
 ## God Nodes (most connected - your core abstractions)
 1. `CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE` - 39 edges
 2. `CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION` - 39 edges
-3. `CatalogClient()` - 23 edges
-4. `@angular/core` - 22 edges
-5. `LocalDashboard()` - 22 edges
-6. `CORE DIRECTIVE: AWWWARDS-LEVEL IMAGE ART DIRECTION` - 22 edges
+3. `@angular/core` - 22 edges
+4. `LocalDashboard()` - 22 edges
+5. `CORE DIRECTIVE: AWWWARDS-LEVEL IMAGE ART DIRECTION` - 22 edges
+6. `CatalogClient()` - 21 edges
 7. `CookieTokenService` - 20 edges
 8. `scripts` - 19 edges
 9. `compilerOptions` - 18 edges
@@ -163,7 +163,7 @@
 
 ### Community 0 - "catalog-client.tsx"
 Cohesion: 0.11
-Nodes (22): Account, CatalogClient(), saveWatched(), updateSelected(), CatalogRow(), FilterMenu(), FilterOption, formatDate() (+14 more)
+Nodes (22): Account, CatalogCard(), CatalogClient(), saveWatched(), updateSelected(), CatalogRow(), FilterMenu(), FilterOption (+14 more)
 
 ### Community 1 - "frontend/package.json"
 Cohesion: 0.10
@@ -547,12 +547,12 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `typeorm` connect `typeorm` to `auth/auth.service.ts`, `backend/package.json`, `dependencies`, `import-catalog-seed.ts`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Are the 3 inferred relationships involving `CatalogClient()` (e.g. with `serverSnapshot()` and `snapshot()`) actually correct?**
-  _`CatalogClient()` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 3 inferred relationships involving `LocalDashboard()` (e.g. with `serverSnapshot()` and `snapshot()`) actually correct?**
+  _`LocalDashboard()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `./tsconfig.json` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `catalog-client.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.10582010582010581 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10846560846560846 - nodes in this community are weakly interconnected._
 - **Why does `@nestjs/common` connect `app.controller.ts` to `auth/auth.service.ts`, `mcu.controller.ts`, `jwt.strategy.ts`, `dependencies`, `typeorm`, `backend/package.json`, `auth.module.ts`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**

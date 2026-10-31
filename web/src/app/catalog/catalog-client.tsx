@@ -166,9 +166,24 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
       {viewMode === "table" ? <div className={styles.tableWrap} data-catalog-workspace>
         <div className={styles.tableConsoleHeader} aria-hidden="true"><span>STARK_ARCHIVE // RELEASE_ORDER_MATRIX</span><div><b><i /> LIVE INDEX</b><span>{String(visibleUnits.length).padStart(3, "0")} RECORDS</span><span>SEQ / ASC</span></div></div>
         <table><thead><tr><th aria-label="Select units">Select</th><th>Archive ref</th><th>Record</th><th>Class</th><th>Released</th><th>Progress</th><th>Command</th></tr></thead><tbody>{visibleUnits.map((unit) => <CatalogRow key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</tbody></table>
-      </div> : <div className={styles.cardGrid} data-catalog-workspace>{visibleUnits.map((unit) => <article key={unit.id} className={watchedIds.has(unit.id) ? styles.watchedCard : styles.card}><label className={styles.cardSelector}><input type="checkbox" checked={selectedIds.has(unit.id)} onChange={() => toggleSelection(unit.id)} /><span>Select</span></label><p>#{unit.position}</p><h2>{unit.title}</h2><span>{unitLabel(unit)} · {formatDate(unit.releaseDate)}</span><WatchButton unit={unit} watched={watchedIds.has(unit.id)} disabled={saving} onChange={(item, watched) => void saveWatched([item.id], watched)} /></article>)}</div>}
+      </div> : <div className={styles.cardGrid} data-catalog-workspace>{visibleUnits.map((unit) => <CatalogCard key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</div>}
     </section>
   </main>;
+}
+
+function CatalogCard({ unit, collection, watched, selected, saving, onSelect, onChange }: { unit: DashboardUnit; collection: string; watched: boolean; selected: boolean; saving: boolean; onSelect: (unitId: string) => void; onChange: (unit: DashboardUnit, watched: boolean) => void }) {
+  const meta = UNIT_META[unit.unitKind];
+  const archiveRef = String(unit.position).padStart(3, "0");
+  const detail = unit.unitKind === "episode" ? `S${String(unit.seasonNumber).padStart(2, "0")} / E${String(unit.episodeNumber).padStart(2, "0")}` : collection;
+  const className = [watched ? styles.watchedCard : styles.card, selected ? styles.selectedCard : ""].filter(Boolean).join(" ");
+
+  return <article className={className} tabIndex={0} data-selected={selected} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
+    <div className={styles.cardTerminal} aria-hidden="true"><span>{`STARK_DB // ${meta.code}_NODE_${archiveRef}`}</span><b><i /> {watched ? "LOGGED" : "LINK ACTIVE"}</b></div>
+    <header className={styles.cardHeader}><div className={styles.cardIndex}><span>Archive ref</span><strong>{archiveRef}</strong></div><label className={styles.cardSelector} onClick={(event) => event.stopPropagation()}><input type="checkbox" checked={selected} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /><span>{selected ? "Selected" : "Select"}</span></label></header>
+    <div className={styles.cardRecord}><p>{`${meta.code} // ${meta.label}`}</p><h2>{unit.title}</h2><code>{unit.id}</code></div>
+    <dl className={styles.cardTelemetry}><div><dt>Released</dt><dd><time dateTime={unit.releaseDate}>{formatFullDate(unit.releaseDate)}</time></dd></div><div><dt>{unit.unitKind === "episode" ? "Episode" : "Collection"}</dt><dd>{detail}</dd></div></dl>
+    <footer className={styles.cardCommand}><span className={watched ? styles.statusWatched : styles.statusUnwatched}><i /> {watched ? "Log complete" : "Awaiting input"}</span><WatchButton unit={unit} watched={watched} disabled={saving} onChange={onChange} /></footer>
+  </article>;
 }
 
 function CatalogRow({ unit, collection, watched, selected, saving, onSelect, onChange }: { unit: DashboardUnit; collection: string; watched: boolean; selected: boolean; saving: boolean; onSelect: (unitId: string) => void; onChange: (unit: DashboardUnit, watched: boolean) => void }) {
@@ -213,7 +228,6 @@ function FilterMenu({ label, value, options, searchable = false, onChange }: { l
 }
 
 function unitLabel(unit: DashboardUnit) { return unit.unitKind === "episode" ? `S${unit.seasonNumber} E${unit.episodeNumber}` : unit.unitKind; }
-function formatDate(value: string) { return new Intl.DateTimeFormat("en", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`)); }
 function formatFullDate(value: string) { return new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`)); }
 function subscribe(onChange: () => void) { window.addEventListener("storage", onChange); window.addEventListener(LOCAL_PROGRESS_EVENT, onChange); return () => { window.removeEventListener("storage", onChange); window.removeEventListener(LOCAL_PROGRESS_EVENT, onChange); }; }
 function snapshot() { return window.localStorage.getItem(LOCAL_PROGRESS_KEY) ?? ""; }
