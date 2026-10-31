@@ -504,9 +504,9 @@
     "semantic_hash": "154177f65fdb13f40bd06e8a890eacc6"
   },
   "web/package.json": {
-    "mtime": 1793458159.5551164,
-    "seen": 1793458190.5823271,
-    "ast_hash": "1ab0e5d0c9a3ef62347f808d264b2bd5",
+    "mtime": 1793468489.267593,
+    "seen": 1793468772.3756459,
+    "ast_hash": "b2e94e2353bb1208f871d0774f385be8",
     "semantic_hash": ""
   },
   "web/src/app/auth/signout/route.ts": {
@@ -516,9 +516,9 @@
     "semantic_hash": "fe284d600257aa57e1cf0134866ae88f"
   },
   "web/src/app/catalog/catalog-client.tsx": {
-    "mtime": 1793460283.9006362,
-    "seen": 1793460383.4160378,
-    "ast_hash": "5506006eb994a96116f0598a391b3056",
+    "mtime": 1793460862.628649,
+    "seen": 1793461012.1571782,
+    "ast_hash": "a60ed67b09887b20d52359cc0e23badb",
     "semantic_hash": ""
   },
   "web/src/app/catalog/page.tsx": {
@@ -534,9 +534,9 @@
     "semantic_hash": "afad2a592c00eea480a9bb14a87f603c"
   },
   "web/src/app/dashboard/local-dashboard.tsx": {
-    "mtime": 1793449077.394161,
-    "seen": 1793449117.14082,
-    "ast_hash": "2473507445374ddb68071ae1296bf20f",
+    "mtime": 1793467870.8331373,
+    "seen": 1793467895.9474409,
+    "ast_hash": "531b3ae2b19b2ab94edb1b3b649d5ac7",
     "semantic_hash": ""
   },
   "web/src/app/dashboard/page.tsx": {
@@ -552,9 +552,9 @@
     "semantic_hash": "6ffffc356fd9e62acb3414546407cdce"
   },
   "web/src/app/login/page.tsx": {
-    "mtime": 1793449134.4427974,
-    "seen": 1793449145.371444,
-    "ast_hash": "41f1d949730e012d074b74f95998d2a9",
+    "mtime": 1793468672.9132984,
+    "seen": 1793468772.375826,
+    "ast_hash": "a7424d1c74baf028929dde9384b32f88",
     "semantic_hash": ""
   },
   "web/src/app/page.tsx": {
@@ -921,6 +921,18 @@
     "mtime": 1793458601.2436364,
     "seen": 1793458613.534814,
     "ast_hash": "86bcb21263f594d66f00c2f5c844efbc",
+    "semantic_hash": ""
+  },
+  "web/src/lib/auth/password-reset.test.mjs": {
+    "mtime": 1793468489.2481952,
+    "seen": 1793468772.37587,
+    "ast_hash": "613ac10d195d1d5de8dcd2789a13794b",
+    "semantic_hash": ""
+  },
+  "web/src/lib/auth/password-reset.ts": {
+    "mtime": 1793468489.2312644,
+    "seen": 1793468772.375871,
+    "ast_hash": "0bb4aecb57171f8b078d2513bb4fba22",
     "semantic_hash": ""
   },
   "backend/package-lock.json": {

@@ -33,6 +33,11 @@ const TYPE_OPTIONS: FilterOption[] = [
   { value: "episode", label: "Episodes" },
   { value: "special", label: "Specials" },
 ];
+const UNIT_META = {
+  movie: { code: "MOV", label: "Feature film" },
+  special: { code: "SPC", label: "Special presentation" },
+  episode: { code: "EPS", label: "Series episode" },
+} as const;
 
 // shortcut: only the Team Thor shorts share a filter group, move grouping into catalog metadata when more collections need it.
 const TEAM_THOR_TITLE_IDS = new Set(["special-team-thor", "special-team-thor-part-2", "special-team-darryl"]);
@@ -158,14 +163,26 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
       </section>
       <section className={styles.bulkBar} aria-label="Bulk watch controls" data-catalog-workspace><div><strong>{selectedIds.size} selected</strong><span>Select entries, then update them together.</span></div><div><button className={styles.clearButton} type="button" onClick={toggleVisibleSelection} disabled={visibleUnits.length === 0}>{allVisibleSelected ? "Clear visible" : "Select visible"}</button>{selectedIds.size > 0 && <button className={styles.clearButton} type="button" onClick={() => setSelectedIds(new Set())}>Clear all</button>}<button className={styles.bulkUndoButton} type="button" onClick={() => void updateSelected(false)} disabled={selectedIds.size === 0 || saving}><RotateCcw size={16} /> {saving ? "Saving" : "Mark selected unwatched"}</button><button className={styles.bulkButton} type="button" onClick={() => void updateSelected(true)} disabled={selectedIds.size === 0 || saving}><Check size={16} /> {saving ? "Saving" : "Mark selected watched"}</button></div></section>
       {progressError && <p className={styles.progressError} role="alert">Unable to update progress: {progressError}</p>}
-      {viewMode === "table" ? <div className={styles.tableWrap} data-catalog-workspace><table><thead><tr><th>Select</th><th>Order</th><th>Title</th><th>Type</th><th>Release</th><th>Status</th><th aria-label="Watch action" /></tr></thead><tbody>{visibleUnits.map((unit) => <CatalogRow key={unit.id} unit={unit} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</tbody></table></div> : <div className={styles.cardGrid} data-catalog-workspace>{visibleUnits.map((unit) => <article key={unit.id} className={watchedIds.has(unit.id) ? styles.watchedCard : styles.card}><label className={styles.cardSelector}><input type="checkbox" checked={selectedIds.has(unit.id)} onChange={() => toggleSelection(unit.id)} /><span>Select</span></label><p>#{unit.position}</p><h2>{unit.title}</h2><span>{unitLabel(unit)} · {formatDate(unit.releaseDate)}</span><WatchButton unit={unit} watched={watchedIds.has(unit.id)} disabled={saving} onChange={(item, watched) => void saveWatched([item.id], watched)} /></article>)}</div>}
+      {viewMode === "table" ? <div className={styles.tableWrap} data-catalog-workspace>
+        <div className={styles.tableConsoleHeader} aria-hidden="true"><span>STARK_ARCHIVE // RELEASE_ORDER_MATRIX</span><div><b><i /> LIVE INDEX</b><span>{String(visibleUnits.length).padStart(3, "0")} RECORDS</span><span>SEQ / ASC</span></div></div>
+        <table><thead><tr><th aria-label="Select units">Select</th><th>Archive ref</th><th>Record</th><th>Class</th><th>Released</th><th>Progress</th><th>Command</th></tr></thead><tbody>{visibleUnits.map((unit) => <CatalogRow key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</tbody></table>
+      </div> : <div className={styles.cardGrid} data-catalog-workspace>{visibleUnits.map((unit) => <article key={unit.id} className={watchedIds.has(unit.id) ? styles.watchedCard : styles.card}><label className={styles.cardSelector}><input type="checkbox" checked={selectedIds.has(unit.id)} onChange={() => toggleSelection(unit.id)} /><span>Select</span></label><p>#{unit.position}</p><h2>{unit.title}</h2><span>{unitLabel(unit)} · {formatDate(unit.releaseDate)}</span><WatchButton unit={unit} watched={watchedIds.has(unit.id)} disabled={saving} onChange={(item, watched) => void saveWatched([item.id], watched)} /></article>)}</div>}
     </section>
   </main>;
 }
 
-function CatalogRow({ unit, watched, selected, saving, onSelect, onChange }: { unit: DashboardUnit; watched: boolean; selected: boolean; saving: boolean; onSelect: (unitId: string) => void; onChange: (unit: DashboardUnit, watched: boolean) => void }) {
+function CatalogRow({ unit, collection, watched, selected, saving, onSelect, onChange }: { unit: DashboardUnit; collection: string; watched: boolean; selected: boolean; saving: boolean; onSelect: (unitId: string) => void; onChange: (unit: DashboardUnit, watched: boolean) => void }) {
   const className = [watched ? styles.watchedRow : "", selected ? styles.selectedRow : ""].filter(Boolean).join(" ");
-  return <tr className={className || undefined} tabIndex={0} aria-selected={selected} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}><td className={styles.selectCell}><input type="checkbox" checked={selected} onClick={(event) => event.stopPropagation()} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /></td><td>{String(unit.position).padStart(3, "0")}</td><td><strong>{unit.title}</strong>{unit.unitKind === "episode" && <span>Season {unit.seasonNumber}, episode {unit.episodeNumber}</span>}</td><td>{unit.unitKind}</td><td>{formatDate(unit.releaseDate)}</td><td><span className={watched ? styles.statusWatched : styles.statusUnwatched}>{watched ? "Watched" : "Unwatched"}</span></td><td><WatchButton unit={unit} watched={watched} disabled={saving} onChange={onChange} /></td></tr>;
+  const meta = UNIT_META[unit.unitKind];
+  return <tr className={className || undefined} tabIndex={0} aria-selected={selected} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
+    <td className={styles.selectCell}><input type="checkbox" checked={selected} onClick={(event) => event.stopPropagation()} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /></td>
+    <td className={styles.recordCell}><strong>{String(unit.position).padStart(3, "0")}</strong><span>ARC/{meta.code}-{String(unit.position).padStart(3, "0")}</span></td>
+    <td className={styles.titleCell}><strong>{unit.title}</strong><div>{unit.unitKind === "episode" ? <span>S{String(unit.seasonNumber).padStart(2, "0")} / E{String(unit.episodeNumber).padStart(2, "0")}</span> : <span>{unit.titleKind} title</span>}{collection !== unit.title && <span>{collection} collection</span>}<code>{unit.id}</code></div></td>
+    <td className={styles.classCell}><strong>{meta.label}</strong><span>{unit.titleKind} entity</span></td>
+    <td className={styles.releaseCell}><time dateTime={unit.releaseDate}>{formatFullDate(unit.releaseDate)}</time><span>UTC / public release</span></td>
+    <td className={styles.progressCell}><span className={watched ? styles.statusWatched : styles.statusUnwatched}><i /> {watched ? "Viewed" : "Pending"}</span><small>{watched ? "Log complete" : "Awaiting input"}</small></td>
+    <td className={styles.actionCell}><WatchButton unit={unit} watched={watched} disabled={saving} onChange={onChange} /></td>
+  </tr>;
 }
 
 function WatchButton({ unit, watched, disabled, onChange }: { unit: DashboardUnit; watched: boolean; disabled: boolean; onChange: (unit: DashboardUnit, watched: boolean) => void }) { return <button className={watched ? styles.undoButton : styles.watchButton} type="button" disabled={disabled} onClick={(event) => { event.stopPropagation(); onChange(unit, !watched); }}>{watched ? <><RotateCcw size={15} /> Undo</> : <><Check size={15} /> Mark watched</>}</button>; }
@@ -197,6 +214,7 @@ function FilterMenu({ label, value, options, searchable = false, onChange }: { l
 
 function unitLabel(unit: DashboardUnit) { return unit.unitKind === "episode" ? `S${unit.seasonNumber} E${unit.episodeNumber}` : unit.unitKind; }
 function formatDate(value: string) { return new Intl.DateTimeFormat("en", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`)); }
+function formatFullDate(value: string) { return new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`)); }
 function subscribe(onChange: () => void) { window.addEventListener("storage", onChange); window.addEventListener(LOCAL_PROGRESS_EVENT, onChange); return () => { window.removeEventListener("storage", onChange); window.removeEventListener(LOCAL_PROGRESS_EVENT, onChange); }; }
 function snapshot() { return window.localStorage.getItem(LOCAL_PROGRESS_KEY) ?? ""; }
 function serverSnapshot() { return ""; }
