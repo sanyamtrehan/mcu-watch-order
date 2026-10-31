@@ -78,7 +78,7 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
     const next = new Set(watchedIds);
     if (value) next.add(unit.id);
     else next.delete(unit.id);
-    if (account) { const supabase = createBrowserClient(); const { error } = value ? await supabase.from("watch_progress").upsert({ user_id: account.id, watch_unit_id: unit.id, status: "watched", watched_at: new Date().toISOString() }, { onConflict: "user_id,watch_unit_id" }) : await supabase.from("watch_progress").delete().eq("user_id", account.id).eq("watch_unit_id", unit.id); if (error) { setSyncError(error.message); return; } setRemoteWatched(next); }
+    if (account) { setSyncError(null); const supabase = createBrowserClient(); const { error } = value ? await supabase.from("watch_progress").upsert({ user_id: account.id, watch_unit_id: unit.id, status: "watched", watched_at: new Date().toISOString() }, { onConflict: "user_id,watch_unit_id" }) : await supabase.from("watch_progress").delete().eq("user_id", account.id).eq("watch_unit_id", unit.id); if (error) { setSyncError(error.message); return; } setRemoteWatched((current) => { const updated = new Set(current); if (value) updated.add(unit.id); else updated.delete(unit.id); return updated; }); }
     writeLocalProgress(next);
   }
   async function mergeProgress() {
