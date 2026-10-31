@@ -504,9 +504,9 @@
     "semantic_hash": "154177f65fdb13f40bd06e8a890eacc6"
   },
   "web/package.json": {
-    "mtime": 1793468489.267593,
-    "seen": 1793468772.3756459,
-    "ast_hash": "b2e94e2353bb1208f871d0774f385be8",
+    "mtime": 1793476695.3701189,
+    "seen": 1793476982.356132,
+    "ast_hash": "445a1e711154796ca14966a454bf3b39",
     "semantic_hash": ""
   },
   "web/src/app/auth/signout/route.ts": {
@@ -516,9 +516,9 @@
     "semantic_hash": "fe284d600257aa57e1cf0134866ae88f"
   },
   "web/src/app/catalog/catalog-client.tsx": {
-    "mtime": 1793470100.270279,
-    "seen": 1793470206.085997,
-    "ast_hash": "ee0e0ca8c272b57a569fa990e518ccb8",
+    "mtime": 1793476695.449382,
+    "seen": 1793476982.356159,
+    "ast_hash": "be3b6b179c90fabcc00c221172b864bc",
     "semantic_hash": ""
   },
   "web/src/app/catalog/page.tsx": {
@@ -939,6 +939,36 @@
     "mtime": 1793475258.4127886,
     "seen": 1793475259.9583669,
     "ast_hash": "01864ea8742880cc9fc648f51a949e68",
+    "semantic_hash": ""
+  },
+  "web/src/lib/catalog/catalog-artwork.test.mjs": {
+    "mtime": 1793476695.4121628,
+    "seen": 1793476982.356375,
+    "ast_hash": "116554a7bfb1cfd35457533cd4f6644d",
+    "semantic_hash": ""
+  },
+  "web/src/lib/catalog/catalog-artwork.ts": {
+    "mtime": 1793476695.394059,
+    "seen": 1793476982.3563771,
+    "ast_hash": "4b8c1b0523287e2ce79cdc4824d35c2f",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/README.md": {
+    "mtime": 1793476695.431077,
+    "seen": 1793476982.357255,
+    "ast_hash": "a417091797faca7008df388eae7eb5cb",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/avengers-core-dark.jpg": {
+    "mtime": 1793476559.9009438,
+    "seen": 1793476982.357437,
+    "ast_hash": "e1a6d8b10f1415a1abc78c978abe857f",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/captain-america-dark.jpg": {
+    "mtime": 1793476548.6007342,
+    "seen": 1793476982.357437,
+    "ast_hash": "e529834e19e678ff44d3299fbee47bb6",
     "semantic_hash": ""
   },
   "backend/package-lock.json": {

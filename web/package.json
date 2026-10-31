@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test --experimental-strip-types src/lib/catalog/title-filter-groups.test.mjs src/lib/auth/password-reset.test.mjs"
+    "test": "node --test --experimental-strip-types src/lib/catalog/title-filter-groups.test.mjs src/lib/catalog/catalog-artwork.test.mjs src/lib/auth/password-reset.test.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

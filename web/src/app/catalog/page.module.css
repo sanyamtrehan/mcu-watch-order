@@ -82,3 +82,17 @@
 .cardCommand > span i { background: currentColor; border-radius: 50%; box-shadow: 0 0 7px currentColor; flex: 0 0 auto; height: .32rem; width: .32rem; }
 .cardCommand .watchButton, .cardCommand .undoButton { flex: 0 0 auto; font-size: .62rem; margin-top: 0; padding: .42rem .68rem; }
 @media (max-width: 480px) { .card, .watchedCard { min-height: 18rem; }.cardTerminal { padding-inline: .65rem; }.cardHeader, .cardRecord, .cardCommand { padding-left: .75rem; padding-right: .75rem; }.cardTelemetry { margin-inline: .65rem; } }
+
+/* Franchise artwork remains atmospheric: records stay readable before the image is noticed. */
+.artIronMan { --record-art: url("/images/iron-man-avengers.jpg"); --record-position: 88% center; }
+.artCaptainAmerica { --record-art: url("/images/catalog/captain-america-dark.jpg"); --record-position: 78% center; }
+.artAvengers { --record-art: url("/images/catalog/avengers-core-dark.jpg"); --record-position: center 30%; }
+.card > .cardArtwork, .watchedCard > .cardArtwork { background-image: var(--record-art); background-position: var(--record-position); background-repeat: no-repeat; background-size: auto 116%; inset: 0; mask-image: linear-gradient(112deg, transparent 8%, rgb(0 0 0 / .18) 38%, #000 76%); mix-blend-mode: screen; opacity: .28; pointer-events: none; position: absolute; transition: opacity .3s ease, transform .45s ease; z-index: 0; }
+.artAvengers .cardArtwork { background-size: auto 94%; opacity: .24; }
+.card:hover .cardArtwork, .watchedCard:hover .cardArtwork { opacity: .38; transform: scale(1.025); }
+.cardTerminal, .cardHeader, .cardRecord, .cardTelemetry, .cardCommand { z-index: 1; }
+.artworkRow { background-color: rgb(3 12 27); background-image: linear-gradient(90deg, rgb(3 12 27 / .99) 0%, rgb(3 12 27 / .92) 38%, rgb(3 12 27 / .48) 74%, rgb(3 12 27 / .12) 100%), var(--record-art); background-position: center, var(--record-position); background-repeat: no-repeat; background-size: 100% 100%, 48rem auto; background-blend-mode: normal, screen; }
+.tableWrap .artworkRow td { background: rgb(5 14 31 / .68); }
+.tableWrap .artworkRow:hover td { background: rgb(9 27 48 / .6); }
+.tableWrap .artworkRow.watchedRow td { background: rgb(5 34 42 / .68); }
+.tableWrap .artworkRow.selectedRow td { background: rgb(11 46 62 / .76); }
