@@ -935,6 +935,12 @@
     "ast_hash": "0bb4aecb57171f8b078d2513bb4fba22",
     "semantic_hash": ""
   },
+  "web/src/app/icon.png": {
+    "mtime": 1793475258.4127886,
+    "seen": 1793475259.9583669,
+    "ast_hash": "01864ea8742880cc9fc648f51a949e68",
+    "semantic_hash": ""
+  },
   "backend/package-lock.json": {
     "mtime": 1790344786.9991808,
     "seen": 1793445600.616798,
