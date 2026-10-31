@@ -516,9 +516,9 @@
     "semantic_hash": "fe284d600257aa57e1cf0134866ae88f"
   },
   "web/src/app/catalog/catalog-client.tsx": {
-    "mtime": 1793458170.8467264,
-    "seen": 1793458190.58236,
-    "ast_hash": "a1768442fccf6d4a2d0da1632553b2a7",
+    "mtime": 1793458841.1256073,
+    "seen": 1793458852.809547,
+    "ast_hash": "1a5c9657f636a78350145154c9984d57",
     "semantic_hash": ""
   },
   "web/src/app/catalog/page.tsx": {

@@ -1,17 +1,17 @@
 # Graph Report - mcu-watch-order  (2026-10-31)
 
 ## Corpus Check
-- 135 files · ~88,194 words
+- 135 files · ~88,229 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 25 file(s) not represented in the graph (top: (none) 9, .scss 6, .css 4)
 
 ## Summary
-- 1321 nodes · 1782 edges · 122 communities (94 shown, 28 thin omitted)
+- 1322 nodes · 1783 edges · 121 communities (93 shown, 28 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 26 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `562126cd`
+- Built from commit: `0d404aa9`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -68,7 +68,7 @@
 - dashboard.ts
 - SKILL: Industrial Brutalism & Tactical Telemetry UI
 - Next.js And Supabase Migration Plan
-- layout.tsx
+- title-filter-groups.ts
 - dotenv@^16.0.0
 - @typescript-eslint/parser@^5.0.0
 - environment.prod.ts
@@ -118,7 +118,6 @@
 - web/README.md
 - imagegen-frontend-web/SKILL.md
 - AGENTS.md
-- scripts
 - rxjs@^7.2.0
 - eslint@^8.0.1
 - jest@^27.2.5
@@ -140,9 +139,9 @@
 1. `CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE` - 39 edges
 2. `CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION` - 39 edges
 3. `@angular/core` - 22 edges
-4. `LocalDashboard()` - 22 edges
-5. `CORE DIRECTIVE: AWWWARDS-LEVEL IMAGE ART DIRECTION` - 22 edges
-6. `CatalogClient()` - 21 edges
+4. `CatalogClient()` - 22 edges
+5. `LocalDashboard()` - 22 edges
+6. `CORE DIRECTIVE: AWWWARDS-LEVEL IMAGE ART DIRECTION` - 22 edges
 7. `CookieTokenService` - 20 edges
 8. `scripts` - 19 edges
 9. `compilerOptions` - 18 edges
@@ -155,19 +154,19 @@
   web/src/app/auth/signout/route.ts → web/src/lib/supabase/config.ts
 - `CatalogClient()` --calls--> `SoundToggle()`  [EXTRACTED]
   web/src/app/catalog/catalog-client.tsx → web/src/components/sound-toggle.tsx
+- `CatalogClient()` --calls--> `buildMovieTitleFilterGroups()`  [EXTRACTED]
+  web/src/app/catalog/catalog-client.tsx → web/src/lib/catalog/title-filter-groups.ts
 - `CatalogClient()` --calls--> `parseLocalProgress()`  [EXTRACTED]
-  web/src/app/catalog/catalog-client.tsx → web/src/lib/progress/local-progress.ts
-- `CatalogClient()` --calls--> `writeLocalProgress()`  [EXTRACTED]
   web/src/app/catalog/catalog-client.tsx → web/src/lib/progress/local-progress.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (122 total, 28 thin omitted)
+## Communities (121 total, 28 thin omitted)
 
 ### Community 0 - "catalog-client.tsx"
-Cohesion: 0.11
-Nodes (21): Account, CatalogClient(), saveWatched(), updateSelected(), CatalogRow(), formatDate(), Props, serverSnapshot() (+13 more)
+Cohesion: 0.15
+Nodes (16): Account, CatalogClient(), saveWatched(), updateSelected(), CatalogRow(), formatDate(), Props, serverSnapshot() (+8 more)
 
 ### Community 1 - "frontend/package.json"
 Cohesion: 0.10
@@ -198,8 +197,8 @@ Cohesion: 0.20
 Nodes (4): MainComponent, Mcu, McuFilter, McuService
 
 ### Community 9 - "web/package.json"
-Cohesion: 0.08
-Nodes (31): eslint-config-next, gsap, @gsap/react, lucide-react, react, react-dom, @supabase/supabase-js, @types/react (+23 more)
+Cohesion: 0.06
+Nodes (37): eslint-config-next, geist, gsap, @gsap/react, react-dom, @supabase/supabase-js, @types/react, @types/react-dom (+29 more)
 
 ### Community 10 - "devDependencies"
 Cohesion: 0.10
@@ -230,8 +229,8 @@ Cohesion: 0.16
 Nodes (6): AppController, AppModule, AppService, McuModule, @nestjs/common, @nestjs/testing
 
 ### Community 17 - "next"
-Cohesion: 0.16
-Nodes (12): next, @supabase/ssr, nextConfig, @supabase/ssr@^0.12.7, POST(), LoginPage(), handleSubmit(), createClient() (+4 more)
+Cohesion: 0.17
+Nodes (11): next, @supabase/ssr, nextConfig, POST(), LoginPage(), handleSubmit(), createClient(), getSupabaseConfig() (+3 more)
 
 ### Community 18 - "typeorm"
 Cohesion: 0.13
@@ -357,9 +356,9 @@ Nodes (16): 1. Skill Meta, 2.1 Swiss Industrial Print, 2.2 Tactical Telemetry & 
 Cohesion: 0.12
 Nodes (14): Current State, Decision, Next.js And Supabase Migration Plan, Phase 0: Audit And Baseline, Phase 1: Move Database Ownership To Supabase, Phase 2: Catalog Queries And Database Functions, Phase 3: Build The Next.js Application, Phase 4: Testing And Deployment (+6 more)
 
-### Community 52 - "layout.tsx"
-Cohesion: 0.33
-Nodes (3): geist, geist@^1.7.2, metadata
+### Community 52 - "title-filter-groups.ts"
+Cohesion: 0.28
+Nodes (5): buildMovieTitleFilterGroups(), CatalogRelationship, CatalogTitle, genericCollectionTitle(), TitleFilterGroup
 
 ### Community 56 - "Design System: Taste Standard"
 Cohesion: 0.13
@@ -378,8 +377,8 @@ Cohesion: 0.17
 Nodes (12): 4.10 Quotes & Testimonials, 4.11 Page Theme Lock (Light / Dark Mode Consistency), 4.1 Typography, 4.2 Color Calibration, 4.3 Layout Diversification, 4.4 Materiality, Shadows, Cards, 4.5 Interactive UI States, 4.6 Data & Form Patterns (+4 more)
 
 ### Community 62 - "sound-toggle.tsx"
-Cohesion: 0.54
-Nodes (6): SoundToggle(), toggle(), getAudioContext(), playScrollChime(), setSoundEnabled(), soundEnabled()
+Cohesion: 0.29
+Nodes (10): lucide-react, react, lucide-react@^1.48.0, react@19.2.8, SoundToggle(), toggle(), getAudioContext(), playScrollChime() (+2 more)
 
 ### Community 63 - "10. REFERENCE VOCABULARY (Pattern Names the Agent Should Know)"
 Cohesion: 0.20
@@ -537,29 +536,25 @@ Nodes (3): Asset Sources, Avengers Archive Mark, Iron Man Archive Signal
 Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
-### Community 104 - "scripts"
-Cohesion: 0.33
-Nodes (6): scripts, build, dev, lint, start, test
-
 ## Knowledge Gaps
 - **1 isolated node(s):** `./tsconfig.json`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 774 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 775 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `typeorm` connect `typeorm` to `auth/auth.service.ts`, `backend/package.json`, `dependencies`, `import-catalog-seed.ts`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
-- **Are the 3 inferred relationships involving `LocalDashboard()` (e.g. with `serverSnapshot()` and `snapshot()`) actually correct?**
-  _`LocalDashboard()` has 3 INFERRED edges - model-reasoned connections that need verification._
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Are the 3 inferred relationships involving `CatalogClient()` (e.g. with `serverSnapshot()` and `snapshot()`) actually correct?**
+  _`CatalogClient()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `./tsconfig.json` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `catalog-client.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.11083743842364532 - nodes in this community are weakly interconnected._
-- **Why does `@nestjs/common` connect `app.controller.ts` to `auth/auth.service.ts`, `mcu.controller.ts`, `jwt.strategy.ts`, `dependencies`, `typeorm`, `backend/package.json`, `auth.module.ts`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09852216748768473 - nodes in this community are weakly interconnected._
+- **Why does `CommandNav()` connect `local-dashboard.tsx` to `sound-toggle.tsx`, `Dashboard Delivery Phases`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Should `mcu.controller.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.10344827586206896 - nodes in this community are weakly interconnected._
+- **Why does `Phase 2: Command Dashboard System` connect `Dashboard Delivery Phases` to `local-dashboard.tsx`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
