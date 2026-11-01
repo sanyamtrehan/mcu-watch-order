@@ -9,6 +9,7 @@ const titles = [
 const episodes = catalog.series.flatMap((series) =>
   series.seasons.flatMap((season) => season.episodes),
 );
+const seasons = catalog.series.flatMap((series) => series.seasons);
 const watchUnits = [...catalog.movies, ...catalog.specials, ...episodes];
 
 function assertUnique(values, label) {
@@ -38,8 +39,30 @@ function validateSequelGraph(relations) {
 }
 
 assertUnique(titles.map(({ id }) => id), 'Title IDs');
+assertUnique(seasons.map(({ id }) => id), 'Season IDs');
 assertUnique(watchUnits.map(({ watchUnitId }) => watchUnitId), 'Watch-unit IDs');
 assertUnique(episodes.map(({ id }) => id), 'Episode IDs');
+
+for (const item of watchUnits) {
+  const parsedDate = new Date(`${item.releaseDate}T00:00:00.000Z`);
+  if (
+    !/^\d{4}-\d{2}-\d{2}$/.test(item.releaseDate)
+    || Number.isNaN(parsedDate.valueOf())
+    || parsedDate.toISOString().slice(0, 10) !== item.releaseDate
+  ) {
+    throw new Error(`Invalid release date for ${item.id}: ${item.releaseDate}`);
+  }
+}
+
+for (const series of catalog.series) {
+  assertUnique(series.seasons.map(({ number }) => number), `${series.id} season numbers`);
+  for (const season of series.seasons) {
+    assertUnique(
+      season.episodes.map(({ number }) => number),
+      `${season.id} episode numbers`,
+    );
+  }
+}
 
 const titleIds = new Set(titles.map(({ id }) => id));
 const relationKeys = catalog.titleRelations.map(

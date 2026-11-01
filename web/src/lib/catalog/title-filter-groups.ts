@@ -8,12 +8,12 @@ function genericCollectionTitle(title: string) {
 
 export function buildMovieTitleFilterGroups(titles: CatalogTitle[], relationships: CatalogRelationship[]) {
   const movieTitles = new Map(titles.filter((title) => title.kind === "movie").map((title) => [title.id, title.title]));
-  const sequelIds = new Set<string>();
+  const derivedTitleIds = new Set<string>();
   const connections = new Map<string, Set<string>>();
 
   for (const relationship of relationships) {
-    if (relationship.type !== "sequel" || !movieTitles.has(relationship.fromTitleId) || !movieTitles.has(relationship.toTitleId)) continue;
-    sequelIds.add(relationship.fromTitleId);
+    if (!movieTitles.has(relationship.fromTitleId) || !movieTitles.has(relationship.toTitleId)) continue;
+    if (relationship.type === "sequel" || relationship.type === "spin-off") derivedTitleIds.add(relationship.fromTitleId);
     for (const [titleId, relatedId] of [[relationship.fromTitleId, relationship.toTitleId], [relationship.toTitleId, relationship.fromTitleId]]) {
       const related = connections.get(titleId) ?? new Set<string>();
       related.add(relatedId);
@@ -38,7 +38,14 @@ export function buildMovieTitleFilterGroups(titles: CatalogTitle[], relationship
       }
     }
 
-    const rootId = component.find((id) => !sequelIds.has(id)) ?? component[0];
+    const roots = component.filter((id) => !derivedTitleIds.has(id));
+    const rootId = (roots.length > 0 ? roots : component).sort((left, right) => {
+      const leftTitle = genericCollectionTitle(movieTitles.get(left)!);
+      const rightTitle = genericCollectionTitle(movieTitles.get(right)!);
+      return leftTitle.length - rightTitle.length
+        || movieTitles.get(left)!.length - movieTitles.get(right)!.length
+        || left.localeCompare(right);
+    })[0];
     const group = { id: `collection-${rootId}`, title: genericCollectionTitle(movieTitles.get(rootId)!) };
     for (const id of component) groups.set(id, group);
   }

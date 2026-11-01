@@ -38,3 +38,27 @@ test("uses a generic franchise label instead of the first movie subtitle", () =>
   assert.equal(groups.get("spider-man-1").title, "Spider-Man");
   assert.equal(groups.get("avengers-1").title, "Avengers");
 });
+
+test("groups multiverse crossovers and spin-offs into one filter collection", () => {
+  const groups = buildMovieTitleFilterGroups([
+    { id: "mcu-spider-man", title: "Spider-Man: Homecoming", kind: "movie" },
+    { id: "raimi-spider-man", title: "Spider-Man", kind: "movie" },
+    { id: "amazing-spider-man", title: "The Amazing Spider-Man", kind: "movie" },
+    { id: "x-men", title: "X-Men", kind: "movie" },
+    { id: "x-men-first-class", title: "X-Men: First Class", kind: "movie" },
+    { id: "daredevil", title: "Daredevil (2003)", kind: "movie" },
+    { id: "elektra", title: "Elektra", kind: "movie" },
+  ], [
+    { fromTitleId: "mcu-spider-man", toTitleId: "raimi-spider-man", type: "crossover" },
+    { fromTitleId: "mcu-spider-man", toTitleId: "amazing-spider-man", type: "crossover" },
+    { fromTitleId: "x-men-first-class", toTitleId: "x-men", type: "spin-off" },
+    { fromTitleId: "elektra", toTitleId: "daredevil", type: "spin-off" },
+  ]);
+
+  assert.equal(groups.get("raimi-spider-man"), groups.get("mcu-spider-man"));
+  assert.equal(groups.get("amazing-spider-man"), groups.get("mcu-spider-man"));
+  assert.equal(groups.get("mcu-spider-man").title, "Spider-Man");
+  assert.equal(groups.get("x-men-first-class"), groups.get("x-men"));
+  assert.equal(groups.get("elektra"), groups.get("daredevil"));
+  assert.equal(groups.get("elektra").title, "Daredevil (2003)");
+});

@@ -41,7 +41,7 @@ interface CatalogSeed {
 
 const seedPath = path.join(
   __dirname,
-  '../src/catalog/seed/mcu-release-catalog.json',
+  '../../data/mcu-release-catalog.json',
 );
 const catalog: CatalogSeed = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
 
@@ -145,7 +145,18 @@ async function importCatalog() {
     );
 
     const releaseUnits = await queryRunner.query(
-      `SELECT id FROM watch_units ORDER BY release_date ASC, id ASC`,
+      `SELECT watch_units.id
+       FROM watch_units
+       LEFT JOIN catalog_episodes ON catalog_episodes.id = watch_units.episode_id
+       LEFT JOIN catalog_seasons ON catalog_seasons.id = catalog_episodes.season_id
+       ORDER BY watch_units.release_date ASC,
+                watch_units.title_id ASC,
+                catalog_seasons.season_number ASC NULLS FIRST,
+                CASE
+                  WHEN catalog_episodes.episode_number ~ '^[0-9]+$'
+                    THEN catalog_episodes.episode_number::integer
+                END ASC NULLS FIRST,
+                watch_units.id ASC`,
     );
     await queryRunner.query(`DELETE FROM ordering_entries WHERE ordering_id = 'release'`);
     await bulkUpsert(

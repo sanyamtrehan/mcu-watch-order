@@ -1,17 +1,17 @@
 # Graph Report - mcu-watch-order  (2026-11-02)
 
 ## Corpus Check
-- 140 files · ~89,764 words
+- 139 files · ~86,653 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 25 file(s) not represented in the graph (top: (none) 9, .scss 6, .css 4)
 
 ## Summary
-- 1340 nodes · 1816 edges · 120 communities (93 shown, 27 thin omitted)
+- 1332 nodes · 1808 edges · 120 communities (92 shown, 28 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `00ace820`
+- Built from commit: `8a718706`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -43,7 +43,6 @@
 - brandkit/SKILL.md
 - jest
 - mcu/mcu.service.ts
-- backend/scripts/validate-catalog-seed.js
 - CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE
 - scripts/validate-catalog-seed.js
 - frontend
@@ -161,7 +160,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (120 total, 27 thin omitted)
+## Communities (120 total, 28 thin omitted)
 
 ### Community 0 - "catalog-client.tsx"
 Cohesion: 0.10
@@ -184,24 +183,24 @@ Cohesion: 0.08
 Nodes (25): dependencies, @nestjs/common@^8.0.0, @nestjs/core@^8.0.0, @nestjs/jwt@^8.0.0, @nestjs/passport@^8.2.1, @nestjs/platform-express@^8.0.0, @nestjs/swagger@^5.2.1, @nestjs/typeorm@^8.1.4 (+17 more)
 
 ### Community 5 - "app/app.module.ts"
-Cohesion: 0.19
-Nodes (8): @angular/forms@~13.3.0, AppComponent, AppRoutingModule, routes, AuthGuard, @angular/core, @angular/forms, @angular/router
+Cohesion: 0.21
+Nodes (7): AppComponent, AppRoutingModule, routes, AuthGuard, @angular/core, @angular/forms, @angular/router
 
 ### Community 6 - "CookieTokenService"
 Cohesion: 0.12
 Nodes (3): TokenInterceptor, NavBarComponent, CookieTokenService
 
 ### Community 7 - "dependencies"
-Cohesion: 0.10
-Nodes (21): dependencies, @angular/animations@~13.3.0, @angular/compiler@~13.3.0, @angular/core@~13.3.0, @angular/flex-layout@^13.0.0-beta.38, @angular/platform-browser@~13.3.0, @angular/router@~13.3.0, ngx-cookie-service@^13.1.2 (+13 more)
+Cohesion: 0.09
+Nodes (22): dependencies, @angular/animations@~13.3.0, @angular/compiler@~13.3.0, @angular/core@~13.3.0, @angular/flex-layout@^13.0.0-beta.38, @angular/forms@~13.3.0, @angular/platform-browser@~13.3.0, @angular/router@~13.3.0 (+14 more)
 
 ### Community 8 - "MainComponent"
 Cohesion: 0.20
 Nodes (4): MainComponent, Mcu, McuFilter, McuService
 
 ### Community 9 - "web/package.json"
-Cohesion: 0.06
-Nodes (39): eslint-config-next, geist, gsap, @gsap/react, react, react-dom, @supabase/supabase-js, @types/react (+31 more)
+Cohesion: 0.05
+Nodes (41): eslint-config-next, geist, gsap, @gsap/react, lucide-react, react, react-dom, @supabase/supabase-js (+33 more)
 
 ### Community 10 - "devDependencies"
 Cohesion: 0.10
@@ -267,24 +266,20 @@ Nodes (11): jest, collectCoverageFrom, coverageDirectory, moduleFileExtensions, 
 Cohesion: 0.16
 Nodes (10): AppModule, AuthModule, ENVIRONMENT, Exceptions, Data, PasswordService, McuModule, @nestjs/common (+2 more)
 
-### Community 27 - "backend/scripts/validate-catalog-seed.js"
-Cohesion: 0.20
-Nodes (6): episodes, relationKeys, relationTypes, titleIds, titles, watchUnits
-
 ### Community 28 - "CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE"
 Cohesion: 0.06
 Nodes (34): 10. IMAGE-FIRST CODEX WEBSITE WORKFLOW, 11. WHEN TO TRIGGER IMAGE GENERATION FIRST, 13. WEBSITE REFERENCE RULE, 15. RESPONSIVE FIRST-VIEW RULE, 16. ANTI-NESTED-BOX RULE, 17. REDUCE MICRO-UI CLUTTER RULE, 18. SECTION IMAGE GENERATION RULE, 19. WEBSITE IMAGE SYSTEM RULE (+26 more)
 
 ### Community 29 - "scripts/validate-catalog-seed.js"
-Cohesion: 0.20
-Nodes (6): episodes, relationKeys, relationTypes, titleIds, titles, watchUnits
+Cohesion: 0.18
+Nodes (7): episodes, relationKeys, relationTypes, seasons, titleIds, titles, watchUnits
 
 ### Community 30 - "frontend"
 Cohesion: 0.20
 Nodes (10): prefix, projectType, root, schematics, sourceRoot, frontend, strict, style (+2 more)
 
 ### Community 31 - "import-catalog-seed.js"
-Cohesion: 0.25
+Cohesion: 0.22
 Nodes (6): bulkUpsert(), catalog, { Client }, fs, importCatalog(), path
 
 ### Community 32 - "auth/auth.service.ts"
@@ -352,7 +347,7 @@ Cohesion: 0.12
 Nodes (14): Current State, Decision, Next.js And Supabase Migration Plan, Phase 0: Audit And Baseline, Phase 1: Move Database Ownership To Supabase, Phase 2: Catalog Queries And Database Functions, Phase 3: Build The Next.js Application, Phase 4: Testing And Deployment (+6 more)
 
 ### Community 52 - "title-filter-groups.ts"
-Cohesion: 0.24
+Cohesion: 0.27
 Nodes (5): buildMovieTitleFilterGroups(), CatalogRelationship, CatalogTitle, genericCollectionTitle(), TitleFilterGroup
 
 ### Community 56 - "Design System: Taste Standard"
@@ -532,28 +527,28 @@ Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ### Community 117 - "createClient"
-Cohesion: 0.29
-Nodes (7): lucide-react, lucide-react@^1.48.0, LoginPage(), handleSubmit(), Mode, validatePasswordReset(), createClient()
+Cohesion: 0.39
+Nodes (5): LoginPage(), handleSubmit(), Mode, validatePasswordReset(), createClient()
 
 ## Knowledge Gaps
 - **1 isolated node(s):** `./tsconfig.json`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 782 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **27 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 775 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `typeorm` connect `typeorm` to `auth/auth.service.ts`, `dependencies`, `backend/package.json`, `import-catalog-seed.ts`, `NormalizedCatalog1760000001000`, `mcu/mcu.service.ts`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `LocalDashboard()` (e.g. with `serverSnapshot()` and `snapshot()`) actually correct?**
   _`LocalDashboard()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `./tsconfig.json` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `catalog-client.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.0967741935483871 - nodes in this community are weakly interconnected._
-- **Why does `@nestjs/common` connect `mcu/mcu.service.ts` to `auth/auth.service.ts`, `mcu.controller.ts`, `User`, `dependencies`, `app.controller.ts`, `backend/package.json`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `next` connect `next` to `catalog-client.tsx`, `web/package.json`, `local-dashboard.tsx`, `dashboard.ts`, `createClient`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09852216748768473 - nodes in this community are weakly interconnected._
-- **Should `mcu.controller.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.0907258064516129 - nodes in this community are weakly interconnected._
+- **Why does `@angular/core` connect `app/app.module.ts` to `frontend/package.json`, `TempComponent`, `angular-material.module.ts`, `dependencies`, `MainComponent`, `SignInComponent`, `frontend/src/main.ts`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._

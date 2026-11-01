@@ -12,7 +12,7 @@ test("maps franchise sequels to shared catalog artwork", () => {
 });
 
 test("covers every title in the release catalog", () => {
-  const catalog = JSON.parse(readFileSync(new URL("../../../../backend/src/catalog/seed/mcu-release-catalog.json", import.meta.url)));
+  const catalog = JSON.parse(readFileSync(new URL("../../../../data/mcu-release-catalog.json", import.meta.url)));
   const titles = [...catalog.movies, ...catalog.specials, ...catalog.series].map((entry) => entry.title);
   assert.deepEqual(titles.filter((title) => !catalogArtworkForTitle(title)), []);
 });

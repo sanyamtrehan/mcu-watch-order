@@ -1,11 +1,109 @@
 {
   "schemaVersion": 1,
   "source": {
-    "name": "Legacy Wikipedia-derived MCU catalog",
-    "sourceType": "manual-wikipedia-research",
-    "notes": "Normalized from the previous frontend temporary data. Stable IDs and direct movie-sequel relations were added during backend catalog preparation. Source URLs and revisions will be added during catalog enrichment."
+    "name": "Wikipedia and Marvel Cinematic Universe Wiki release catalog",
+    "sourceType": "manual-cross-reference",
+    "lastReviewed": "2026-11-02",
+    "urls": [
+      "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe:_Phase_Four",
+      "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe:_Phase_Five",
+      "https://marvelcinematicuniverse.fandom.com/wiki/Release_Order/Viewing_Timeline",
+      "https://en.wikipedia.org/wiki/Spider-Man_in_film",
+      "https://en.wikipedia.org/wiki/Sony%27s_Spider-Man_Universe",
+      "https://en.wikipedia.org/wiki/X-Men_(film_series)",
+      "https://marvelcinematicuniverse.fandom.com/wiki/Multiverse",
+      "https://en.wikipedia.org/wiki/Fantastic_Four_in_film",
+      "https://en.wikipedia.org/wiki/Blade_(franchise)",
+      "https://en.wikipedia.org/wiki/Daredevil_(film)",
+      "https://en.wikipedia.org/wiki/Elektra_(2005_film)",
+      "https://marvelcinematicuniverse.fandom.com/wiki/Deadpool_%26_Wolverine",
+      "https://en.wikipedia.org/wiki/Spider-Noir"
+    ],
+    "notes": "Release dates are cross-checked against Wikipedia and the Marvel Cinematic Universe Wiki. The release catalog includes MCU titles through Phase Five, The Fantastic Four: First Steps, and the live-action Marvel realities connected through the MCU multiverse: Raimi Spider-Man, Amazing Spider-Man, Sony Spider-Man Universe including the live-action Spider-Noir series, Fox X-Men, Fantastic Four, Blade, and Daredevil/Elektra. Existing stable IDs are preserved so catalog refreshes do not detach watch progress.",
+    "completeMcuPhase": 5,
+    "additionalMcuTitles": [
+      "The Fantastic Four: First Steps"
+    ]
   },
   "movies": [
+    {
+      "title": "Blade",
+      "releaseDate": "1998-08-21",
+      "id": "movie-blade",
+      "watchUnitId": "watch-movie-blade"
+    },
+    {
+      "title": "X-Men",
+      "releaseDate": "2000-07-14",
+      "id": "movie-x-men",
+      "watchUnitId": "watch-movie-x-men"
+    },
+    {
+      "title": "Blade II",
+      "releaseDate": "2002-03-22",
+      "id": "movie-blade-ii",
+      "watchUnitId": "watch-movie-blade-ii"
+    },
+    {
+      "title": "Spider-Man",
+      "releaseDate": "2002-05-03",
+      "id": "movie-spider-man-2002",
+      "watchUnitId": "watch-movie-spider-man-2002"
+    },
+    {
+      "title": "Daredevil (2003)",
+      "releaseDate": "2003-02-14",
+      "id": "movie-daredevil-2003",
+      "watchUnitId": "watch-movie-daredevil-2003"
+    },
+    {
+      "title": "X2",
+      "releaseDate": "2003-05-02",
+      "id": "movie-x2",
+      "watchUnitId": "watch-movie-x2"
+    },
+    {
+      "title": "Spider-Man 2",
+      "releaseDate": "2004-06-30",
+      "id": "movie-spider-man-2",
+      "watchUnitId": "watch-movie-spider-man-2"
+    },
+    {
+      "title": "Blade: Trinity",
+      "releaseDate": "2004-12-08",
+      "id": "movie-blade-trinity",
+      "watchUnitId": "watch-movie-blade-trinity"
+    },
+    {
+      "title": "Elektra",
+      "releaseDate": "2005-01-14",
+      "id": "movie-elektra",
+      "watchUnitId": "watch-movie-elektra"
+    },
+    {
+      "title": "Fantastic Four",
+      "releaseDate": "2005-07-08",
+      "id": "movie-fantastic-four-2005",
+      "watchUnitId": "watch-movie-fantastic-four-2005"
+    },
+    {
+      "title": "X-Men: The Last Stand",
+      "releaseDate": "2006-05-26",
+      "id": "movie-x-men-the-last-stand",
+      "watchUnitId": "watch-movie-x-men-the-last-stand"
+    },
+    {
+      "title": "Spider-Man 3",
+      "releaseDate": "2007-05-04",
+      "id": "movie-spider-man-3",
+      "watchUnitId": "watch-movie-spider-man-3"
+    },
+    {
+      "title": "Fantastic Four: Rise of the Silver Surfer",
+      "releaseDate": "2007-06-15",
+      "id": "movie-fantastic-four-rise-of-the-silver-surfer",
+      "watchUnitId": "watch-movie-fantastic-four-rise-of-the-silver-surfer"
+    },
     {
       "title": "Iron Man",
       "releaseDate": "2008-05-02",
@@ -17,6 +115,12 @@
       "releaseDate": "2008-06-13",
       "id": "movie-the-incredible-hulk",
       "watchUnitId": "watch-movie-the-incredible-hulk"
+    },
+    {
+      "title": "X-Men Origins: Wolverine",
+      "releaseDate": "2009-05-01",
+      "id": "movie-x-men-origins-wolverine",
+      "watchUnitId": "watch-movie-x-men-origins-wolverine"
     },
     {
       "title": "Iron Man 2",
@@ -31,6 +135,12 @@
       "watchUnitId": "watch-movie-thor"
     },
     {
+      "title": "X-Men: First Class",
+      "releaseDate": "2011-06-03",
+      "id": "movie-x-men-first-class",
+      "watchUnitId": "watch-movie-x-men-first-class"
+    },
+    {
       "title": "Captain America: The First Avenger",
       "releaseDate": "2011-07-22",
       "id": "movie-captain-america-the-first-avenger",
@@ -43,10 +153,22 @@
       "watchUnitId": "watch-movie-marvel-s-the-avengers"
     },
     {
+      "title": "The Amazing Spider-Man",
+      "releaseDate": "2012-07-03",
+      "id": "movie-the-amazing-spider-man",
+      "watchUnitId": "watch-movie-the-amazing-spider-man"
+    },
+    {
       "title": "Iron Man 3",
       "releaseDate": "2013-05-03",
       "id": "movie-iron-man-3",
       "watchUnitId": "watch-movie-iron-man-3"
+    },
+    {
+      "title": "The Wolverine",
+      "releaseDate": "2013-07-26",
+      "id": "movie-the-wolverine",
+      "watchUnitId": "watch-movie-the-wolverine"
     },
     {
       "title": "Thor: The Dark World",
@@ -59,6 +181,18 @@
       "releaseDate": "2014-04-04",
       "id": "movie-captain-america-the-winter-soldier",
       "watchUnitId": "watch-movie-captain-america-the-winter-soldier"
+    },
+    {
+      "title": "The Amazing Spider-Man 2",
+      "releaseDate": "2014-05-02",
+      "id": "movie-the-amazing-spider-man-2",
+      "watchUnitId": "watch-movie-the-amazing-spider-man-2"
+    },
+    {
+      "title": "X-Men: Days of Future Past",
+      "releaseDate": "2014-05-23",
+      "id": "movie-x-men-days-of-future-past",
+      "watchUnitId": "watch-movie-x-men-days-of-future-past"
     },
     {
       "title": "Guardians of the Galaxy",
@@ -79,16 +213,40 @@
       "watchUnitId": "watch-movie-ant-man"
     },
     {
+      "title": "Fantastic Four (2015)",
+      "releaseDate": "2015-08-07",
+      "id": "movie-fantastic-four-2015",
+      "watchUnitId": "watch-movie-fantastic-four-2015"
+    },
+    {
+      "title": "Deadpool",
+      "releaseDate": "2016-02-12",
+      "id": "movie-deadpool",
+      "watchUnitId": "watch-movie-deadpool"
+    },
+    {
       "title": "Captain America: Civil War",
       "releaseDate": "2016-05-06",
       "id": "movie-captain-america-civil-war",
       "watchUnitId": "watch-movie-captain-america-civil-war"
     },
     {
+      "title": "X-Men: Apocalypse",
+      "releaseDate": "2016-05-27",
+      "id": "movie-x-men-apocalypse",
+      "watchUnitId": "watch-movie-x-men-apocalypse"
+    },
+    {
       "title": "Doctor Strange",
       "releaseDate": "2016-11-04",
       "id": "movie-doctor-strange",
       "watchUnitId": "watch-movie-doctor-strange"
+    },
+    {
+      "title": "Logan",
+      "releaseDate": "2017-03-03",
+      "id": "movie-logan",
+      "watchUnitId": "watch-movie-logan"
     },
     {
       "title": "Guardians of the Galaxy Vol. 2",
@@ -121,10 +279,22 @@
       "watchUnitId": "watch-movie-avengers-infinity-war"
     },
     {
+      "title": "Deadpool 2",
+      "releaseDate": "2018-05-18",
+      "id": "movie-deadpool-2",
+      "watchUnitId": "watch-movie-deadpool-2"
+    },
+    {
       "title": "Ant-Man and the Wasp",
       "releaseDate": "2018-07-06",
       "id": "movie-ant-man-and-the-wasp",
       "watchUnitId": "watch-movie-ant-man-and-the-wasp"
+    },
+    {
+      "title": "Venom",
+      "releaseDate": "2018-10-05",
+      "id": "movie-venom",
+      "watchUnitId": "watch-movie-venom"
     },
     {
       "title": "Captain Marvel",
@@ -139,10 +309,22 @@
       "watchUnitId": "watch-movie-avengers-endgame"
     },
     {
+      "title": "Dark Phoenix",
+      "releaseDate": "2019-06-07",
+      "id": "movie-dark-phoenix",
+      "watchUnitId": "watch-movie-dark-phoenix"
+    },
+    {
       "title": "Spider-Man: Far From Home",
       "releaseDate": "2019-07-02",
       "id": "movie-spider-man-far-from-home",
       "watchUnitId": "watch-movie-spider-man-far-from-home"
+    },
+    {
+      "title": "The New Mutants",
+      "releaseDate": "2020-08-28",
+      "id": "movie-the-new-mutants",
+      "watchUnitId": "watch-movie-the-new-mutants"
     },
     {
       "title": "Black Widow",
@@ -157,6 +339,12 @@
       "watchUnitId": "watch-movie-shang-chi-and-the-legend-of-the-ten-rings"
     },
     {
+      "title": "Venom: Let There Be Carnage",
+      "releaseDate": "2021-10-01",
+      "id": "movie-venom-let-there-be-carnage",
+      "watchUnitId": "watch-movie-venom-let-there-be-carnage"
+    },
+    {
       "title": "Eternals",
       "releaseDate": "2021-11-05",
       "id": "movie-eternals",
@@ -167,6 +355,12 @@
       "releaseDate": "2021-12-17",
       "id": "movie-spider-man-no-way-home",
       "watchUnitId": "watch-movie-spider-man-no-way-home"
+    },
+    {
+      "title": "Morbius",
+      "releaseDate": "2022-04-01",
+      "id": "movie-morbius",
+      "watchUnitId": "watch-movie-morbius"
     },
     {
       "title": "Doctor Strange in the Multiverse of Madness",
@@ -187,10 +381,10 @@
       "watchUnitId": "watch-movie-black-panther-wakanda-forever"
     },
     {
-      "title": "The Marvels",
+      "title": "Ant-Man and the Wasp: Quantumania",
       "releaseDate": "2023-02-17",
-      "id": "movie-the-marvels",
-      "watchUnitId": "watch-movie-the-marvels"
+      "id": "movie-ant-man-and-the-wasp-quantumania",
+      "watchUnitId": "watch-movie-ant-man-and-the-wasp-quantumania"
     },
     {
       "title": "Guardians of the Galaxy Vol. 3",
@@ -199,10 +393,52 @@
       "watchUnitId": "watch-movie-guardians-of-the-galaxy-vol-3"
     },
     {
-      "title": "Ant-Man and the Wasp: Quantumania",
-      "releaseDate": "2023-07-28",
-      "id": "movie-ant-man-and-the-wasp-quantumania",
-      "watchUnitId": "watch-movie-ant-man-and-the-wasp-quantumania"
+      "title": "The Marvels",
+      "releaseDate": "2023-11-10",
+      "id": "movie-the-marvels",
+      "watchUnitId": "watch-movie-the-marvels"
+    },
+    {
+      "title": "Madame Web",
+      "releaseDate": "2024-02-14",
+      "id": "movie-madame-web",
+      "watchUnitId": "watch-movie-madame-web"
+    },
+    {
+      "title": "Deadpool & Wolverine",
+      "releaseDate": "2024-07-26",
+      "id": "movie-deadpool-and-wolverine",
+      "watchUnitId": "watch-movie-deadpool-and-wolverine"
+    },
+    {
+      "title": "Venom: The Last Dance",
+      "releaseDate": "2024-10-25",
+      "id": "movie-venom-the-last-dance",
+      "watchUnitId": "watch-movie-venom-the-last-dance"
+    },
+    {
+      "title": "Kraven the Hunter",
+      "releaseDate": "2024-12-13",
+      "id": "movie-kraven-the-hunter",
+      "watchUnitId": "watch-movie-kraven-the-hunter"
+    },
+    {
+      "title": "Captain America: Brave New World",
+      "releaseDate": "2025-02-14",
+      "id": "movie-captain-america-brave-new-world",
+      "watchUnitId": "watch-movie-captain-america-brave-new-world"
+    },
+    {
+      "title": "Thunderbolts*",
+      "releaseDate": "2025-05-02",
+      "id": "movie-thunderbolts",
+      "watchUnitId": "watch-movie-thunderbolts"
+    },
+    {
+      "title": "The Fantastic Four: First Steps",
+      "releaseDate": "2025-07-25",
+      "id": "movie-the-fantastic-four-first-steps",
+      "watchUnitId": "watch-movie-the-fantastic-four-first-steps"
     }
   ],
   "specials": [
@@ -253,6 +489,18 @@
       "releaseDate": "2018-02-20",
       "id": "special-team-darryl",
       "watchUnitId": "watch-special-team-darryl"
+    },
+    {
+      "title": "Werewolf by Night",
+      "releaseDate": "2022-10-07",
+      "id": "special-werewolf-by-night",
+      "watchUnitId": "watch-special-werewolf-by-night"
+    },
+    {
+      "title": "The Guardians of the Galaxy Holiday Special",
+      "releaseDate": "2022-11-25",
+      "id": "special-the-guardians-of-the-galaxy-holiday-special",
+      "watchUnitId": "watch-special-the-guardians-of-the-galaxy-holiday-special"
     }
   ],
   "series": [
@@ -2142,6 +2390,48 @@
             }
           ],
           "id": "series-loki-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2023-10-05",
+              "id": "series-loki-season-2-episode-1",
+              "watchUnitId": "watch-series-loki-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2023-10-12",
+              "id": "series-loki-season-2-episode-2",
+              "watchUnitId": "watch-series-loki-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2023-10-19",
+              "id": "series-loki-season-2-episode-3",
+              "watchUnitId": "watch-series-loki-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2023-10-26",
+              "id": "series-loki-season-2-episode-4",
+              "watchUnitId": "watch-series-loki-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2023-11-02",
+              "id": "series-loki-season-2-episode-5",
+              "watchUnitId": "watch-series-loki-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2023-11-09",
+              "id": "series-loki-season-2-episode-6",
+              "watchUnitId": "watch-series-loki-season-2-episode-6"
+            }
+          ],
+          "id": "series-loki-season-2"
         }
       ],
       "id": "series-loki"
@@ -2373,6 +2663,96 @@
               "releaseDate": "2022-02-16",
               "id": "series-marvel-studios-assembled-season-1-episode-8",
               "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2022-05-25",
+              "id": "series-marvel-studios-assembled-season-1-episode-9",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2022-07-08",
+              "id": "series-marvel-studios-assembled-season-1-episode-10",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2022-08-03",
+              "id": "series-marvel-studios-assembled-season-1-episode-11",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2022-09-08",
+              "id": "series-marvel-studios-assembled-season-1-episode-12",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-12"
+            },
+            {
+              "number": "13",
+              "releaseDate": "2022-11-03",
+              "id": "series-marvel-studios-assembled-season-1-episode-13",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-13"
+            },
+            {
+              "number": "14",
+              "releaseDate": "2023-02-08",
+              "id": "series-marvel-studios-assembled-season-1-episode-14",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-14"
+            },
+            {
+              "number": "15",
+              "releaseDate": "2023-07-19",
+              "id": "series-marvel-studios-assembled-season-1-episode-15",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-15"
+            },
+            {
+              "number": "16",
+              "releaseDate": "2023-09-13",
+              "id": "series-marvel-studios-assembled-season-1-episode-16",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-16"
+            },
+            {
+              "number": "17",
+              "releaseDate": "2023-09-20",
+              "id": "series-marvel-studios-assembled-season-1-episode-17",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-17"
+            },
+            {
+              "number": "18",
+              "releaseDate": "2023-11-22",
+              "id": "series-marvel-studios-assembled-season-1-episode-18",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-18"
+            },
+            {
+              "number": "19",
+              "releaseDate": "2024-01-31",
+              "id": "series-marvel-studios-assembled-season-1-episode-19",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-19"
+            },
+            {
+              "number": "20",
+              "releaseDate": "2024-02-07",
+              "id": "series-marvel-studios-assembled-season-1-episode-20",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-20"
+            },
+            {
+              "number": "21",
+              "releaseDate": "2024-05-22",
+              "id": "series-marvel-studios-assembled-season-1-episode-21",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-21"
+            },
+            {
+              "number": "22",
+              "releaseDate": "2024-11-12",
+              "id": "series-marvel-studios-assembled-season-1-episode-22",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-22"
+            },
+            {
+              "number": "23",
+              "releaseDate": "2024-11-13",
+              "id": "series-marvel-studios-assembled-season-1-episode-23",
+              "watchUnitId": "watch-series-marvel-studios-assembled-season-1-episode-23"
             }
           ],
           "id": "series-marvel-studios-assembled-season-1"
@@ -2469,9 +2849,213 @@
               "releaseDate": "2021-11-12",
               "id": "series-marvel-studios-legends-season-1-episode-14",
               "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-14"
+            },
+            {
+              "number": "15",
+              "releaseDate": "2022-04-29",
+              "id": "series-marvel-studios-legends-season-1-episode-15",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-15"
+            },
+            {
+              "number": "16",
+              "releaseDate": "2022-04-29",
+              "id": "series-marvel-studios-legends-season-1-episode-16",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-16"
+            },
+            {
+              "number": "17",
+              "releaseDate": "2022-04-29",
+              "id": "series-marvel-studios-legends-season-1-episode-17",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-17"
+            },
+            {
+              "number": "18",
+              "releaseDate": "2022-07-01",
+              "id": "series-marvel-studios-legends-season-1-episode-18",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-18"
+            },
+            {
+              "number": "19",
+              "releaseDate": "2022-07-01",
+              "id": "series-marvel-studios-legends-season-1-episode-19",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-19"
+            },
+            {
+              "number": "20",
+              "releaseDate": "2022-07-01",
+              "id": "series-marvel-studios-legends-season-1-episode-20",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-20"
+            },
+            {
+              "number": "21",
+              "releaseDate": "2022-08-10",
+              "id": "series-marvel-studios-legends-season-1-episode-21",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-21"
+            },
+            {
+              "number": "22",
+              "releaseDate": "2022-11-04",
+              "id": "series-marvel-studios-legends-season-1-episode-22",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-22"
+            },
+            {
+              "number": "23",
+              "releaseDate": "2022-11-04",
+              "id": "series-marvel-studios-legends-season-1-episode-23",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-23"
+            },
+            {
+              "number": "24",
+              "releaseDate": "2022-11-04",
+              "id": "series-marvel-studios-legends-season-1-episode-24",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-24"
+            },
+            {
+              "number": "25",
+              "releaseDate": "2022-11-23",
+              "id": "series-marvel-studios-legends-season-1-episode-25",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-25"
+            },
+            {
+              "number": "26",
+              "releaseDate": "2022-11-23",
+              "id": "series-marvel-studios-legends-season-1-episode-26",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-1-episode-26"
             }
           ],
           "id": "series-marvel-studios-legends-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2023-02-10",
+              "id": "series-marvel-studios-legends-season-2-episode-1",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2023-02-10",
+              "id": "series-marvel-studios-legends-season-2-episode-2",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2023-02-10",
+              "id": "series-marvel-studios-legends-season-2-episode-3",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2023-04-28",
+              "id": "series-marvel-studios-legends-season-2-episode-4",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2023-04-28",
+              "id": "series-marvel-studios-legends-season-2-episode-5",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2023-04-28",
+              "id": "series-marvel-studios-legends-season-2-episode-6",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2023-04-28",
+              "id": "series-marvel-studios-legends-season-2-episode-7",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2023-04-28",
+              "id": "series-marvel-studios-legends-season-2-episode-8",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2023-04-28",
+              "id": "series-marvel-studios-legends-season-2-episode-9",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2023-06-14",
+              "id": "series-marvel-studios-legends-season-2-episode-10",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2023-06-14",
+              "id": "series-marvel-studios-legends-season-2-episode-11",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2023-06-14",
+              "id": "series-marvel-studios-legends-season-2-episode-12",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-12"
+            },
+            {
+              "number": "13",
+              "releaseDate": "2023-06-14",
+              "id": "series-marvel-studios-legends-season-2-episode-13",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-13"
+            },
+            {
+              "number": "14",
+              "releaseDate": "2023-06-14",
+              "id": "series-marvel-studios-legends-season-2-episode-14",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-14"
+            },
+            {
+              "number": "15",
+              "releaseDate": "2023-09-29",
+              "id": "series-marvel-studios-legends-season-2-episode-15",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-15"
+            },
+            {
+              "number": "16",
+              "releaseDate": "2023-09-29",
+              "id": "series-marvel-studios-legends-season-2-episode-16",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-16"
+            },
+            {
+              "number": "17",
+              "releaseDate": "2023-11-03",
+              "id": "series-marvel-studios-legends-season-2-episode-17",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-17"
+            },
+            {
+              "number": "18",
+              "releaseDate": "2023-11-03",
+              "id": "series-marvel-studios-legends-season-2-episode-18",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-18"
+            },
+            {
+              "number": "19",
+              "releaseDate": "2023-11-03",
+              "id": "series-marvel-studios-legends-season-2-episode-19",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-19"
+            },
+            {
+              "number": "20",
+              "releaseDate": "2023-12-15",
+              "id": "series-marvel-studios-legends-season-2-episode-20",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-20"
+            },
+            {
+              "number": "21",
+              "releaseDate": "2025-06-13",
+              "id": "series-marvel-studios-legends-season-2-episode-21",
+              "watchUnitId": "watch-series-marvel-studios-legends-season-2-episode-21"
+            }
+          ],
+          "id": "series-marvel-studios-legends-season-2"
         }
       ],
       "id": "series-marvel-studios-legends"
@@ -3282,9 +3866,717 @@
             }
           ],
           "id": "series-what-if-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2023-12-22",
+              "id": "series-what-if-season-2-episode-1",
+              "watchUnitId": "watch-series-what-if-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2023-12-23",
+              "id": "series-what-if-season-2-episode-2",
+              "watchUnitId": "watch-series-what-if-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2023-12-24",
+              "id": "series-what-if-season-2-episode-3",
+              "watchUnitId": "watch-series-what-if-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2023-12-25",
+              "id": "series-what-if-season-2-episode-4",
+              "watchUnitId": "watch-series-what-if-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2023-12-26",
+              "id": "series-what-if-season-2-episode-5",
+              "watchUnitId": "watch-series-what-if-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2023-12-27",
+              "id": "series-what-if-season-2-episode-6",
+              "watchUnitId": "watch-series-what-if-season-2-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2023-12-28",
+              "id": "series-what-if-season-2-episode-7",
+              "watchUnitId": "watch-series-what-if-season-2-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2023-12-29",
+              "id": "series-what-if-season-2-episode-8",
+              "watchUnitId": "watch-series-what-if-season-2-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2023-12-30",
+              "id": "series-what-if-season-2-episode-9",
+              "watchUnitId": "watch-series-what-if-season-2-episode-9"
+            }
+          ],
+          "id": "series-what-if-season-2"
+        },
+        {
+          "number": 3,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2024-12-22",
+              "id": "series-what-if-season-3-episode-1",
+              "watchUnitId": "watch-series-what-if-season-3-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2024-12-23",
+              "id": "series-what-if-season-3-episode-2",
+              "watchUnitId": "watch-series-what-if-season-3-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2024-12-24",
+              "id": "series-what-if-season-3-episode-3",
+              "watchUnitId": "watch-series-what-if-season-3-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2024-12-25",
+              "id": "series-what-if-season-3-episode-4",
+              "watchUnitId": "watch-series-what-if-season-3-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2024-12-26",
+              "id": "series-what-if-season-3-episode-5",
+              "watchUnitId": "watch-series-what-if-season-3-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2024-12-27",
+              "id": "series-what-if-season-3-episode-6",
+              "watchUnitId": "watch-series-what-if-season-3-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2024-12-28",
+              "id": "series-what-if-season-3-episode-7",
+              "watchUnitId": "watch-series-what-if-season-3-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2024-12-29",
+              "id": "series-what-if-season-3-episode-8",
+              "watchUnitId": "watch-series-what-if-season-3-episode-8"
+            }
+          ],
+          "id": "series-what-if-season-3"
         }
       ],
       "id": "series-what-if"
+    },
+    {
+      "title": "Ms. Marvel",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2022-06-08",
+              "id": "series-ms-marvel-season-1-episode-1",
+              "watchUnitId": "watch-series-ms-marvel-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2022-06-15",
+              "id": "series-ms-marvel-season-1-episode-2",
+              "watchUnitId": "watch-series-ms-marvel-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2022-06-22",
+              "id": "series-ms-marvel-season-1-episode-3",
+              "watchUnitId": "watch-series-ms-marvel-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2022-06-29",
+              "id": "series-ms-marvel-season-1-episode-4",
+              "watchUnitId": "watch-series-ms-marvel-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2022-07-06",
+              "id": "series-ms-marvel-season-1-episode-5",
+              "watchUnitId": "watch-series-ms-marvel-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2022-07-13",
+              "id": "series-ms-marvel-season-1-episode-6",
+              "watchUnitId": "watch-series-ms-marvel-season-1-episode-6"
+            }
+          ],
+          "id": "series-ms-marvel-season-1"
+        }
+      ],
+      "id": "series-ms-marvel"
+    },
+    {
+      "title": "She-Hulk: Attorney at Law",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2022-08-18",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-1",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2022-08-25",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-2",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2022-09-01",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-3",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2022-09-08",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-4",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2022-09-15",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-5",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2022-09-22",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-6",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2022-09-29",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-7",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2022-10-06",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-8",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2022-10-13",
+              "id": "series-she-hulk-attorney-at-law-season-1-episode-9",
+              "watchUnitId": "watch-series-she-hulk-attorney-at-law-season-1-episode-9"
+            }
+          ],
+          "id": "series-she-hulk-attorney-at-law-season-1"
+        }
+      ],
+      "id": "series-she-hulk-attorney-at-law"
+    },
+    {
+      "title": "I Am Groot",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2022-08-10",
+              "id": "series-i-am-groot-season-1-episode-1",
+              "watchUnitId": "watch-series-i-am-groot-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2022-08-10",
+              "id": "series-i-am-groot-season-1-episode-2",
+              "watchUnitId": "watch-series-i-am-groot-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2022-08-10",
+              "id": "series-i-am-groot-season-1-episode-3",
+              "watchUnitId": "watch-series-i-am-groot-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2022-08-10",
+              "id": "series-i-am-groot-season-1-episode-4",
+              "watchUnitId": "watch-series-i-am-groot-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2022-08-10",
+              "id": "series-i-am-groot-season-1-episode-5",
+              "watchUnitId": "watch-series-i-am-groot-season-1-episode-5"
+            }
+          ],
+          "id": "series-i-am-groot-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2023-09-06",
+              "id": "series-i-am-groot-season-2-episode-1",
+              "watchUnitId": "watch-series-i-am-groot-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2023-09-06",
+              "id": "series-i-am-groot-season-2-episode-2",
+              "watchUnitId": "watch-series-i-am-groot-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2023-09-06",
+              "id": "series-i-am-groot-season-2-episode-3",
+              "watchUnitId": "watch-series-i-am-groot-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2023-09-06",
+              "id": "series-i-am-groot-season-2-episode-4",
+              "watchUnitId": "watch-series-i-am-groot-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2023-09-06",
+              "id": "series-i-am-groot-season-2-episode-5",
+              "watchUnitId": "watch-series-i-am-groot-season-2-episode-5"
+            }
+          ],
+          "id": "series-i-am-groot-season-2"
+        }
+      ],
+      "id": "series-i-am-groot"
+    },
+    {
+      "title": "Secret Invasion",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2023-06-21",
+              "id": "series-secret-invasion-season-1-episode-1",
+              "watchUnitId": "watch-series-secret-invasion-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2023-06-28",
+              "id": "series-secret-invasion-season-1-episode-2",
+              "watchUnitId": "watch-series-secret-invasion-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2023-07-05",
+              "id": "series-secret-invasion-season-1-episode-3",
+              "watchUnitId": "watch-series-secret-invasion-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2023-07-12",
+              "id": "series-secret-invasion-season-1-episode-4",
+              "watchUnitId": "watch-series-secret-invasion-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2023-07-19",
+              "id": "series-secret-invasion-season-1-episode-5",
+              "watchUnitId": "watch-series-secret-invasion-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2023-07-26",
+              "id": "series-secret-invasion-season-1-episode-6",
+              "watchUnitId": "watch-series-secret-invasion-season-1-episode-6"
+            }
+          ],
+          "id": "series-secret-invasion-season-1"
+        }
+      ],
+      "id": "series-secret-invasion"
+    },
+    {
+      "title": "Echo",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2024-01-09",
+              "id": "series-echo-season-1-episode-1",
+              "watchUnitId": "watch-series-echo-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2024-01-09",
+              "id": "series-echo-season-1-episode-2",
+              "watchUnitId": "watch-series-echo-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2024-01-09",
+              "id": "series-echo-season-1-episode-3",
+              "watchUnitId": "watch-series-echo-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2024-01-09",
+              "id": "series-echo-season-1-episode-4",
+              "watchUnitId": "watch-series-echo-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2024-01-09",
+              "id": "series-echo-season-1-episode-5",
+              "watchUnitId": "watch-series-echo-season-1-episode-5"
+            }
+          ],
+          "id": "series-echo-season-1"
+        }
+      ],
+      "id": "series-echo"
+    },
+    {
+      "title": "Agatha All Along",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2024-09-18",
+              "id": "series-agatha-all-along-season-1-episode-1",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2024-09-18",
+              "id": "series-agatha-all-along-season-1-episode-2",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2024-09-25",
+              "id": "series-agatha-all-along-season-1-episode-3",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2024-10-02",
+              "id": "series-agatha-all-along-season-1-episode-4",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2024-10-09",
+              "id": "series-agatha-all-along-season-1-episode-5",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2024-10-16",
+              "id": "series-agatha-all-along-season-1-episode-6",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2024-10-23",
+              "id": "series-agatha-all-along-season-1-episode-7",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2024-10-30",
+              "id": "series-agatha-all-along-season-1-episode-8",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2024-10-30",
+              "id": "series-agatha-all-along-season-1-episode-9",
+              "watchUnitId": "watch-series-agatha-all-along-season-1-episode-9"
+            }
+          ],
+          "id": "series-agatha-all-along-season-1"
+        }
+      ],
+      "id": "series-agatha-all-along"
+    },
+    {
+      "title": "Your Friendly Neighborhood Spider-Man",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2025-01-29",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-1",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2025-01-29",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-2",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2025-02-05",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-3",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2025-02-05",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-4",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2025-02-05",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-5",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2025-02-12",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-6",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2025-02-12",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-7",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2025-02-12",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-8",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2025-02-19",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-9",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2025-02-19",
+              "id": "series-your-friendly-neighborhood-spider-man-season-1-episode-10",
+              "watchUnitId": "watch-series-your-friendly-neighborhood-spider-man-season-1-episode-10"
+            }
+          ],
+          "id": "series-your-friendly-neighborhood-spider-man-season-1"
+        }
+      ],
+      "id": "series-your-friendly-neighborhood-spider-man"
+    },
+    {
+      "title": "Daredevil: Born Again",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2025-03-04",
+              "id": "series-daredevil-born-again-season-1-episode-1",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2025-03-04",
+              "id": "series-daredevil-born-again-season-1-episode-2",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2025-03-11",
+              "id": "series-daredevil-born-again-season-1-episode-3",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2025-03-18",
+              "id": "series-daredevil-born-again-season-1-episode-4",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2025-03-25",
+              "id": "series-daredevil-born-again-season-1-episode-5",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2025-03-25",
+              "id": "series-daredevil-born-again-season-1-episode-6",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2025-04-01",
+              "id": "series-daredevil-born-again-season-1-episode-7",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2025-04-08",
+              "id": "series-daredevil-born-again-season-1-episode-8",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2025-04-15",
+              "id": "series-daredevil-born-again-season-1-episode-9",
+              "watchUnitId": "watch-series-daredevil-born-again-season-1-episode-9"
+            }
+          ],
+          "id": "series-daredevil-born-again-season-1"
+        }
+      ],
+      "id": "series-daredevil-born-again"
+    },
+    {
+      "title": "Ironheart",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2025-06-24",
+              "id": "series-ironheart-season-1-episode-1",
+              "watchUnitId": "watch-series-ironheart-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2025-06-24",
+              "id": "series-ironheart-season-1-episode-2",
+              "watchUnitId": "watch-series-ironheart-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2025-06-24",
+              "id": "series-ironheart-season-1-episode-3",
+              "watchUnitId": "watch-series-ironheart-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2025-07-01",
+              "id": "series-ironheart-season-1-episode-4",
+              "watchUnitId": "watch-series-ironheart-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2025-07-01",
+              "id": "series-ironheart-season-1-episode-5",
+              "watchUnitId": "watch-series-ironheart-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2025-07-01",
+              "id": "series-ironheart-season-1-episode-6",
+              "watchUnitId": "watch-series-ironheart-season-1-episode-6"
+            }
+          ],
+          "id": "series-ironheart-season-1"
+        }
+      ],
+      "id": "series-ironheart"
+    },
+    {
+      "title": "Spider-Noir",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2026-05-25",
+              "id": "series-spider-noir-season-1-episode-1",
+              "watchUnitId": "watch-series-spider-noir-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2026-05-25",
+              "id": "series-spider-noir-season-1-episode-2",
+              "watchUnitId": "watch-series-spider-noir-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2026-05-25",
+              "id": "series-spider-noir-season-1-episode-3",
+              "watchUnitId": "watch-series-spider-noir-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2026-05-25",
+              "id": "series-spider-noir-season-1-episode-4",
+              "watchUnitId": "watch-series-spider-noir-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2026-05-25",
+              "id": "series-spider-noir-season-1-episode-5",
+              "watchUnitId": "watch-series-spider-noir-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2026-05-25",
+              "id": "series-spider-noir-season-1-episode-6",
+              "watchUnitId": "watch-series-spider-noir-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2026-05-25",
+              "id": "series-spider-noir-season-1-episode-7",
+              "watchUnitId": "watch-series-spider-noir-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2026-05-25",
+              "id": "series-spider-noir-season-1-episode-8",
+              "watchUnitId": "watch-series-spider-noir-season-1-episode-8"
+            }
+          ],
+          "id": "series-spider-noir-season-1"
+        }
+      ],
+      "id": "series-spider-noir"
     }
   ],
   "titleRelations": [
@@ -3382,6 +4674,141 @@
       "fromTitleId": "movie-the-marvels",
       "toTitleId": "movie-captain-marvel",
       "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-captain-america-brave-new-world",
+      "toTitleId": "movie-captain-america-civil-war",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-spider-man-2",
+      "toTitleId": "movie-spider-man-2002",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-spider-man-3",
+      "toTitleId": "movie-spider-man-2",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-the-amazing-spider-man-2",
+      "toTitleId": "movie-the-amazing-spider-man",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-venom-let-there-be-carnage",
+      "toTitleId": "movie-venom",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-venom-the-last-dance",
+      "toTitleId": "movie-venom-let-there-be-carnage",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-x2",
+      "toTitleId": "movie-x-men",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-x-men-the-last-stand",
+      "toTitleId": "movie-x2",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-x-men-days-of-future-past",
+      "toTitleId": "movie-x-men-first-class",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-x-men-apocalypse",
+      "toTitleId": "movie-x-men-days-of-future-past",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-dark-phoenix",
+      "toTitleId": "movie-x-men-apocalypse",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-the-wolverine",
+      "toTitleId": "movie-x-men-the-last-stand",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-logan",
+      "toTitleId": "movie-the-wolverine",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-deadpool-2",
+      "toTitleId": "movie-deadpool",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-deadpool-and-wolverine",
+      "toTitleId": "movie-deadpool-2",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-x-men-first-class",
+      "toTitleId": "movie-x-men",
+      "type": "spin-off"
+    },
+    {
+      "fromTitleId": "movie-x-men-origins-wolverine",
+      "toTitleId": "movie-x-men",
+      "type": "spin-off"
+    },
+    {
+      "fromTitleId": "movie-the-new-mutants",
+      "toTitleId": "movie-x-men-apocalypse",
+      "type": "spin-off"
+    },
+    {
+      "fromTitleId": "movie-spider-man-no-way-home",
+      "toTitleId": "movie-spider-man-3",
+      "type": "crossover"
+    },
+    {
+      "fromTitleId": "movie-spider-man-no-way-home",
+      "toTitleId": "movie-the-amazing-spider-man-2",
+      "type": "crossover"
+    },
+    {
+      "fromTitleId": "movie-blade-ii",
+      "toTitleId": "movie-blade",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-blade-trinity",
+      "toTitleId": "movie-blade-ii",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-elektra",
+      "toTitleId": "movie-daredevil-2003",
+      "type": "spin-off"
+    },
+    {
+      "fromTitleId": "movie-fantastic-four-rise-of-the-silver-surfer",
+      "toTitleId": "movie-fantastic-four-2005",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-fantastic-four-2015",
+      "toTitleId": "movie-fantastic-four-2005",
+      "type": "crossover"
+    },
+    {
+      "fromTitleId": "movie-the-fantastic-four-first-steps",
+      "toTitleId": "movie-fantastic-four-2005",
+      "type": "crossover"
+    },
+    {
+      "fromTitleId": "series-spider-noir",
+      "toTitleId": "movie-venom",
+      "type": "spin-off"
     }
   ],
   "orderingDefinitions": [
