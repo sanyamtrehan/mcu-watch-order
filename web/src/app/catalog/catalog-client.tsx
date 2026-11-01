@@ -165,7 +165,7 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
       {progressError && <p className={styles.progressError} role="alert">Unable to update progress: {progressError}</p>}
       {viewMode === "table" ? <div className={styles.tableWrap} data-catalog-workspace>
         <div className={styles.tableConsoleHeader} aria-hidden="true"><span>STARK_ARCHIVE // RELEASE_ORDER_MATRIX</span><div><b><i /> LIVE INDEX</b><span>{String(visibleUnits.length).padStart(3, "0")} RECORDS</span><span>SEQ / ASC</span></div></div>
-        <table><thead><tr><th aria-label="Select units">Select</th><th>Archive ref</th><th>Record</th><th>Class</th><th>Released</th><th>Progress</th><th>Command</th></tr></thead><tbody>{visibleUnits.map((unit) => <CatalogRow key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</tbody></table>
+        <table><thead><tr><th aria-label="Select units">Select</th><th>Archive ref</th><th>Title / episode</th><th>Class</th><th>Released</th><th>Progress</th><th>Command</th></tr></thead><tbody>{visibleUnits.map((unit) => <CatalogRow key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</tbody></table>
       </div> : <div className={styles.cardGrid} data-catalog-workspace>{visibleUnits.map((unit) => <CatalogCard key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</div>}
     </section>
   </main>;
@@ -174,7 +174,9 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
 function CatalogCard({ unit, collection, watched, selected, saving, onSelect, onChange }: { unit: DashboardUnit; collection: string; watched: boolean; selected: boolean; saving: boolean; onSelect: (unitId: string) => void; onChange: (unit: DashboardUnit, watched: boolean) => void }) {
   const meta = UNIT_META[unit.unitKind];
   const archiveRef = String(unit.position).padStart(3, "0");
-  const detail = unit.unitKind === "episode" ? `S${String(unit.seasonNumber).padStart(2, "0")} / E${String(unit.episodeNumber).padStart(2, "0")}` : collection;
+  const isEpisode = unit.unitKind === "episode";
+  const season = String(unit.seasonNumber).padStart(2, "0");
+  const episode = String(unit.episodeNumber).padStart(2, "0");
   const artwork = catalogArtworkForTitle(unit.title);
   const className = [watched ? styles.watchedCard : styles.card, selected ? styles.selectedCard : ""].filter(Boolean).join(" ");
 
@@ -182,8 +184,8 @@ function CatalogCard({ unit, collection, watched, selected, saving, onSelect, on
     {artwork && <span className={styles.cardArtwork} aria-hidden="true" />}
     <div className={styles.cardTerminal} aria-hidden="true"><span>{`STARK_DB // ${meta.code}_NODE_${archiveRef}`}</span><b><i /> {watched ? "LOGGED" : "LINK ACTIVE"}</b></div>
     <header className={styles.cardHeader}><div className={styles.cardIndex}><span>Archive ref</span><strong>{archiveRef}</strong></div><label className={styles.cardSelector} onClick={(event) => event.stopPropagation()}><input type="checkbox" checked={selected} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /><span>{selected ? "Selected" : "Select"}</span></label></header>
-    <div className={styles.cardRecord}><p>{`${meta.code} // ${meta.label}`}</p><h2>{unit.title}</h2><code>{unit.id}</code></div>
-    <dl className={styles.cardTelemetry}><div><dt>Released</dt><dd><time dateTime={unit.releaseDate}>{formatFullDate(unit.releaseDate)}</time></dd></div><div><dt>{unit.unitKind === "episode" ? "Episode" : "Collection"}</dt><dd>{detail}</dd></div></dl>
+    <div className={styles.cardRecord}><p>{isEpisode ? "Series title" : meta.label}</p><h2>{unit.title}</h2>{isEpisode ? <div className={styles.episodeRoute} aria-label={`Season ${unit.seasonNumber}, episode ${unit.episodeNumber}`}><span><small>Season</small><strong>S{season}</strong></span><i aria-hidden="true">{"//"}</i><span><small>Episode</small><strong>E{episode}</strong></span></div> : <div className={styles.collectionRoute}><small>Collection</small><strong>{collection}</strong></div>}</div>
+    <dl className={styles.cardTelemetry}><div><dt>Released</dt><dd><time dateTime={unit.releaseDate}>{formatFullDate(unit.releaseDate)}</time></dd></div><div><dt>Watch order</dt><dd>#{archiveRef}</dd></div></dl>
     <footer className={styles.cardCommand}><span className={watched ? styles.statusWatched : styles.statusUnwatched}><i /> {watched ? "Log complete" : "Awaiting input"}</span><WatchButton unit={unit} watched={watched} disabled={saving} onChange={onChange} /></footer>
   </article>;
 }
@@ -192,10 +194,13 @@ function CatalogRow({ unit, collection, watched, selected, saving, onSelect, onC
   const artwork = catalogArtworkForTitle(unit.title);
   const className = [watched ? styles.watchedRow : "", selected ? styles.selectedRow : "", artwork ? styles.artworkRow : ""].filter(Boolean).join(" ");
   const meta = UNIT_META[unit.unitKind];
+  const isEpisode = unit.unitKind === "episode";
+  const season = String(unit.seasonNumber).padStart(2, "0");
+  const episode = String(unit.episodeNumber).padStart(2, "0");
   return <tr className={className || undefined} tabIndex={0} aria-selected={selected} data-artwork={artwork ?? undefined} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
     <td className={styles.selectCell}><input type="checkbox" checked={selected} onClick={(event) => event.stopPropagation()} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /></td>
     <td className={styles.recordCell}><strong>{String(unit.position).padStart(3, "0")}</strong><span>ARC/{meta.code}-{String(unit.position).padStart(3, "0")}</span></td>
-    <td className={styles.titleCell}><strong>{unit.title}</strong><div>{unit.unitKind === "episode" ? <span>S{String(unit.seasonNumber).padStart(2, "0")} / E{String(unit.episodeNumber).padStart(2, "0")}</span> : <span>{unit.titleKind} title</span>}{collection !== unit.title && <span>{collection} collection</span>}<code>{unit.id}</code></div></td>
+    <td className={styles.titleCell}><strong>{unit.title}</strong>{isEpisode ? <div className={styles.episodeInline} aria-label={`Season ${unit.seasonNumber}, episode ${unit.episodeNumber}`}><span><small>Season</small><b>S{season}</b></span><i aria-hidden="true" /><span><small>Episode</small><b>E{episode}</b></span></div> : <div className={styles.rowMeta}><span>{unit.titleKind} title</span>{collection !== unit.title && <span>{collection} collection</span>}</div>}</td>
     <td className={styles.classCell}><strong>{meta.label}</strong><span>{unit.titleKind} entity</span></td>
     <td className={styles.releaseCell}><time dateTime={unit.releaseDate}>{formatFullDate(unit.releaseDate)}</time><span>UTC / public release</span></td>
     <td className={styles.progressCell}><span className={watched ? styles.statusWatched : styles.statusUnwatched}><i /> {watched ? "Viewed" : "Pending"}</span><small>{watched ? "Log complete" : "Awaiting input"}</small></td>
