@@ -230,9 +230,9 @@
     "semantic_hash": "bca7bfe87c64c692d467acbb9df6e926"
   },
   "data/mcu-release-catalog.json": {
-    "mtime": 1793568922.5605211,
-    "seen": 1793568945.1117198,
-    "ast_hash": "dc68d747ab35cfa4582c02eafa873839",
+    "mtime": 1793569131.1032193,
+    "seen": 1793569156.301566,
+    "ast_hash": "51a8ac3c965cab59ac56995198fdb602",
     "semantic_hash": ""
   },
   "frontend/.vscode/extensions.json": {
@@ -724,9 +724,9 @@
     "semantic_hash": ""
   },
   "backend/src/catalog/seed/README.md": {
-    "mtime": 1793568918.6175816,
-    "seen": 1793568945.1133509,
-    "ast_hash": "164b9f00b5fd0c130faea8a9cd9d032f",
+    "mtime": 1793569107.6454206,
+    "seen": 1793569156.30322,
+    "ast_hash": "b13ce2d60a306221132b01d1bd1d642a",
     "semantic_hash": ""
   },
   "data/README.md": {
@@ -940,9 +940,9 @@
     "semantic_hash": ""
   },
   "web/src/lib/catalog/catalog-artwork.ts": {
-    "mtime": 1793568918.5979009,
-    "seen": 1793568945.112787,
-    "ast_hash": "a5d794d8556eb35917cc2a903cc4312e",
+    "mtime": 1793569107.6215267,
+    "seen": 1793569156.30266,
+    "ast_hash": "b31ba8249ec95706430e95c214031fba",
     "semantic_hash": ""
   },
   "web/public/images/catalog/README.md": {

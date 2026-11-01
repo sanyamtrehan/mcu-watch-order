@@ -17,9 +17,12 @@
       "https://en.wikipedia.org/wiki/Daredevil_(film)",
       "https://en.wikipedia.org/wiki/Elektra_(2005_film)",
       "https://marvelcinematicuniverse.fandom.com/wiki/Deadpool_%26_Wolverine",
-      "https://en.wikipedia.org/wiki/Spider-Noir"
+      "https://en.wikipedia.org/wiki/Spider-Noir",
+      "https://en.wikipedia.org/wiki/Spider-Man:_Into_the_Spider-Verse",
+      "https://en.wikipedia.org/wiki/Spider-Man:_Across_the_Spider-Verse",
+      "https://en.wikipedia.org/wiki/The_Spider_Within:_A_Spider-Verse_Story"
     ],
-    "notes": "Release dates are cross-checked against Wikipedia and the Marvel Cinematic Universe Wiki. The release catalog includes MCU titles through Phase Five, The Fantastic Four: First Steps, and the live-action Marvel realities connected through the MCU multiverse: Raimi Spider-Man, Amazing Spider-Man, Sony Spider-Man Universe including the live-action Spider-Noir series, Fox X-Men, Fantastic Four, Blade, and Daredevil/Elektra. Existing stable IDs are preserved so catalog refreshes do not detach watch progress.",
+    "notes": "Release dates are cross-checked against Wikipedia and the Marvel Cinematic Universe Wiki. The release catalog includes MCU titles through Phase Five, The Fantastic Four: First Steps, and the live-action Marvel realities connected through the MCU multiverse: Raimi Spider-Man, Amazing Spider-Man, Sony Spider-Man Universe including the live-action Spider-Noir series and released animated Spider-Verse films and shorts, Fox X-Men, Fantastic Four, Blade, and Daredevil/Elektra. Existing stable IDs are preserved so catalog refreshes do not detach watch progress.",
     "completeMcuPhase": 5,
     "additionalMcuTitles": [
       "The Fantastic Four: First Steps"
@@ -297,6 +300,12 @@
       "watchUnitId": "watch-movie-venom"
     },
     {
+      "title": "Spider-Man: Into the Spider-Verse",
+      "releaseDate": "2018-12-14",
+      "id": "movie-spider-man-into-the-spider-verse",
+      "watchUnitId": "watch-movie-spider-man-into-the-spider-verse"
+    },
+    {
       "title": "Captain Marvel",
       "releaseDate": "2019-03-08",
       "id": "movie-captain-marvel",
@@ -391,6 +400,12 @@
       "releaseDate": "2023-05-05",
       "id": "movie-guardians-of-the-galaxy-vol-3",
       "watchUnitId": "watch-movie-guardians-of-the-galaxy-vol-3"
+    },
+    {
+      "title": "Spider-Man: Across the Spider-Verse",
+      "releaseDate": "2023-06-02",
+      "id": "movie-spider-man-across-the-spider-verse",
+      "watchUnitId": "watch-movie-spider-man-across-the-spider-verse"
     },
     {
       "title": "The Marvels",
@@ -491,6 +506,12 @@
       "watchUnitId": "watch-special-team-darryl"
     },
     {
+      "title": "Spider-Ham: Caught in a Ham",
+      "releaseDate": "2019-02-26",
+      "id": "special-spider-ham-caught-in-a-ham",
+      "watchUnitId": "watch-special-spider-ham-caught-in-a-ham"
+    },
+    {
       "title": "Werewolf by Night",
       "releaseDate": "2022-10-07",
       "id": "special-werewolf-by-night",
@@ -501,6 +522,12 @@
       "releaseDate": "2022-11-25",
       "id": "special-the-guardians-of-the-galaxy-holiday-special",
       "watchUnitId": "watch-special-the-guardians-of-the-galaxy-holiday-special"
+    },
+    {
+      "title": "The Spider Within: A Spider-Verse Story",
+      "releaseDate": "2024-03-27",
+      "id": "special-the-spider-within-a-spider-verse-story",
+      "watchUnitId": "watch-special-the-spider-within-a-spider-verse-story"
     }
   ],
   "series": [
@@ -4806,9 +4833,29 @@
       "type": "crossover"
     },
     {
-      "fromTitleId": "series-spider-noir",
-      "toTitleId": "movie-venom",
+      "fromTitleId": "movie-spider-man-across-the-spider-verse",
+      "toTitleId": "movie-spider-man-into-the-spider-verse",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "special-spider-ham-caught-in-a-ham",
+      "toTitleId": "movie-spider-man-into-the-spider-verse",
       "type": "spin-off"
+    },
+    {
+      "fromTitleId": "special-the-spider-within-a-spider-verse-story",
+      "toTitleId": "movie-spider-man-across-the-spider-verse",
+      "type": "spin-off"
+    },
+    {
+      "fromTitleId": "series-spider-noir",
+      "toTitleId": "movie-spider-man-into-the-spider-verse",
+      "type": "spin-off"
+    },
+    {
+      "fromTitleId": "movie-spider-man-across-the-spider-verse",
+      "toTitleId": "movie-spider-man-no-way-home",
+      "type": "crossover"
     }
   ],
   "orderingDefinitions": [
