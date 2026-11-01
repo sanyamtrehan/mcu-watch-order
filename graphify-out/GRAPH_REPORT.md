@@ -1,7 +1,7 @@
-# Graph Report - mcu-watch-order  (2026-11-01)
+# Graph Report - mcu-watch-order  (2026-11-02)
 
 ## Corpus Check
-- 140 files · ~89,452 words
+- 140 files · ~89,733 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 25 file(s) not represented in the graph (top: (none) 9, .scss 6, .css 4)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `01a37b55`
+- Built from commit: `b68a9702`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -83,7 +83,7 @@
 - 22. STYLE VARIATION ENGINE
 - Protocol: Premium Utilitarian Minimalism UI Architect
 - Catalog And Progress Model
-- app/app.module.ts
+- angular-material.module.ts
 - 11. COMPONENT EXECUTION GUIDELINES
 - 18. EXTRA CREATIVITY & IMPLEMENTATION EDGE
 - 9. AI TELLS (Forbidden Patterns)
@@ -165,7 +165,7 @@
 
 ### Community 0 - "catalog-client.tsx"
 Cohesion: 0.10
-Nodes (25): Account, ARTWORK_CLASSES, CatalogCard(), CatalogClient(), saveWatched(), updateSelected(), CatalogRow(), FilterMenu() (+17 more)
+Nodes (25): Account, CatalogCard(), CatalogClient(), saveWatched(), updateSelected(), CatalogRow(), FilterMenu(), FilterOption (+17 more)
 
 ### Community 1 - "frontend/package.json"
 Cohesion: 0.10
@@ -184,16 +184,16 @@ Cohesion: 0.08
 Nodes (25): dependencies, @nestjs/common@^8.0.0, @nestjs/core@^8.0.0, @nestjs/jwt@^8.0.0, @nestjs/passport@^8.2.1, @nestjs/platform-express@^8.0.0, @nestjs/swagger@^5.2.1, @nestjs/typeorm@^8.1.4 (+17 more)
 
 ### Community 5 - "app/app.module.ts"
-Cohesion: 0.20
-Nodes (5): AppComponent, routes, SignInComponent, @angular/core, @angular/router
+Cohesion: 0.19
+Nodes (8): @angular/forms@~13.3.0, AppComponent, AppRoutingModule, routes, AuthGuard, @angular/core, @angular/forms, @angular/router
 
 ### Community 6 - "CookieTokenService"
-Cohesion: 0.11
-Nodes (4): AuthGuard, TokenInterceptor, NavBarComponent, CookieTokenService
+Cohesion: 0.12
+Nodes (3): TokenInterceptor, NavBarComponent, CookieTokenService
 
 ### Community 7 - "dependencies"
-Cohesion: 0.08
-Nodes (25): dependencies, @angular/animations@~13.3.0, @angular/cdk@^13.3.1, @angular/common@~13.3.0, @angular/compiler@~13.3.0, @angular/core@~13.3.0, @angular/forms@~13.3.0, @angular/material@^13.3.1 (+17 more)
+Cohesion: 0.10
+Nodes (21): dependencies, @angular/animations@~13.3.0, @angular/compiler@~13.3.0, @angular/core@~13.3.0, @angular/flex-layout@^13.0.0-beta.38, @angular/platform-browser@~13.3.0, @angular/router@~13.3.0, ngx-cookie-service@^13.1.2 (+13 more)
 
 ### Community 8 - "MainComponent"
 Cohesion: 0.20
@@ -201,7 +201,7 @@ Nodes (4): MainComponent, Mcu, McuFilter, McuService
 
 ### Community 9 - "web/package.json"
 Cohesion: 0.06
-Nodes (37): eslint-config-next, geist, gsap, @gsap/react, react-dom, @supabase/supabase-js, @types/react, @types/react-dom (+29 more)
+Nodes (39): eslint-config-next, geist, gsap, @gsap/react, react, react-dom, @supabase/supabase-js, @types/react (+31 more)
 
 ### Community 10 - "devDependencies"
 Cohesion: 0.10
@@ -216,8 +216,8 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowSyntheticDefaultImports, baseUrl, declaration, emitDecoratorMetadata, experimentalDecorators, forceConsistentCasingInFileNames, incremental (+10 more)
 
 ### Community 13 - "SignInComponent"
-Cohesion: 0.20
-Nodes (3): Login, Register, AuthService
+Cohesion: 0.16
+Nodes (4): Login, Register, AuthService, SignInComponent
 
 ### Community 14 - "compilerOptions"
 Cohesion: 0.11
@@ -252,8 +252,8 @@ Cohesion: 0.26
 Nodes (12): options, assets, index, inlineStyleLanguage, karmaConfig, main, outputPath, polyfills (+4 more)
 
 ### Community 23 - "frontend/src/main.ts"
-Cohesion: 0.29
-Nodes (4): @angular/platform-browser-dynamic@~13.3.0, zone.js@~0.11.4, @angular/platform-browser-dynamic, zone.js
+Cohesion: 0.18
+Nodes (6): @angular/platform-browser-dynamic@~13.3.0, zone.js@~0.11.4, AppModule, environment, @angular/platform-browser-dynamic, zone.js
 
 ### Community 24 - "brandkit/SKILL.md"
 Cohesion: 0.05
@@ -284,7 +284,7 @@ Cohesion: 0.20
 Nodes (10): prefix, projectType, root, schematics, sourceRoot, frontend, strict, style (+2 more)
 
 ### Community 31 - "import-catalog-seed.js"
-Cohesion: 0.22
+Cohesion: 0.25
 Nodes (6): bulkUpsert(), catalog, { Client }, fs, importCatalog(), path
 
 ### Community 32 - "auth/auth.service.ts"
@@ -352,7 +352,7 @@ Cohesion: 0.12
 Nodes (14): Current State, Decision, Next.js And Supabase Migration Plan, Phase 0: Audit And Baseline, Phase 1: Move Database Ownership To Supabase, Phase 2: Catalog Queries And Database Functions, Phase 3: Build The Next.js Application, Phase 4: Testing And Deployment (+6 more)
 
 ### Community 52 - "title-filter-groups.ts"
-Cohesion: 0.27
+Cohesion: 0.24
 Nodes (5): buildMovieTitleFilterGroups(), CatalogRelationship, CatalogTitle, genericCollectionTitle(), TitleFilterGroup
 
 ### Community 56 - "Design System: Taste Standard"
@@ -372,8 +372,8 @@ Cohesion: 0.17
 Nodes (12): 4.10 Quotes & Testimonials, 4.11 Page Theme Lock (Light / Dark Mode Consistency), 4.1 Typography, 4.2 Color Calibration, 4.3 Layout Diversification, 4.4 Materiality, Shadows, Cards, 4.5 Interactive UI States, 4.6 Data & Form Patterns (+4 more)
 
 ### Community 62 - "sound-toggle.tsx"
-Cohesion: 0.38
-Nodes (8): lucide-react, lucide-react@^1.48.0, SoundToggle(), toggle(), getAudioContext(), playScrollChime(), setSoundEnabled(), soundEnabled()
+Cohesion: 0.54
+Nodes (6): SoundToggle(), toggle(), getAudioContext(), playScrollChime(), setSoundEnabled(), soundEnabled()
 
 ### Community 63 - "10. REFERENCE VOCABULARY (Pattern Names the Agent Should Know)"
 Cohesion: 0.20
@@ -399,9 +399,9 @@ Nodes (9): 1. Protocol Overview, 2. Absolute Negative Constraints (Banned Elemen
 Cohesion: 0.20
 Nodes (9): Anonymous-First Tracking, Canonical Catalog, Catalog And Progress Model, Dashboard Contract, Data Pipeline, Delivery Order, Goal, Ordering Rules (+1 more)
 
-### Community 69 - "app/app.module.ts"
-Cohesion: 0.17
-Nodes (9): @angular/flex-layout@^13.0.0-beta.38, AngularMaterialModule, materialModules, AppModule, AppRoutingModule, environment, @angular/common, @angular/flex-layout (+1 more)
+### Community 69 - "angular-material.module.ts"
+Cohesion: 0.20
+Nodes (8): @angular/cdk@^13.3.1, @angular/common@~13.3.0, @angular/material@^13.3.1, AngularMaterialModule, materialModules, @angular/cdk, @angular/common, @angular/material
 
 ### Community 70 - "11. COMPONENT EXECUTION GUIDELINES"
 Cohesion: 0.22
@@ -533,7 +533,7 @@ Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ### Community 117 - "createClient"
 Cohesion: 0.29
-Nodes (7): react, react@19.2.8, LoginPage(), handleSubmit(), Mode, validatePasswordReset(), createClient()
+Nodes (7): lucide-react, lucide-react@^1.48.0, LoginPage(), handleSubmit(), Mode, validatePasswordReset(), createClient()
 
 ## Knowledge Gaps
 - **1 isolated node(s):** `./tsconfig.json`
@@ -550,10 +550,10 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `./tsconfig.json` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `catalog-client.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.09879032258064516 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0967741935483871 - nodes in this community are weakly interconnected._
 - **Why does `@nestjs/common` connect `mcu/mcu.service.ts` to `auth/auth.service.ts`, `mcu.controller.ts`, `User`, `dependencies`, `app.controller.ts`, `backend/package.json`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09852216748768473 - nodes in this community are weakly interconnected._
-- **Why does `User` connect `User` to `auth/auth.service.ts`, `typeorm`, `mcu/mcu.service.ts`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Should `mcu.controller.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.0907258064516129 - nodes in this community are weakly interconnected._

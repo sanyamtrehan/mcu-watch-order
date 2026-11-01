@@ -84,14 +84,46 @@
 @media (max-width: 480px) { .card, .watchedCard { min-height: 18rem; }.cardTerminal { padding-inline: .65rem; }.cardHeader, .cardRecord, .cardCommand { padding-left: .75rem; padding-right: .75rem; }.cardTelemetry { margin-inline: .65rem; } }
 
 /* Franchise artwork remains atmospheric: records stay readable before the image is noticed. */
-.artIronMan { --record-art: url("/images/iron-man-avengers.jpg"); --record-position: 88% center; }
-.artCaptainAmerica { --record-art: url("/images/catalog/captain-america-dark.jpg"); --record-position: 78% center; }
-.artAvengers { --record-art: url("/images/catalog/avengers-core-dark.jpg"); --record-position: center 30%; }
-.card > .cardArtwork, .watchedCard > .cardArtwork { background-image: var(--record-art); background-position: var(--record-position); background-repeat: no-repeat; background-size: auto 116%; inset: 0; mask-image: linear-gradient(112deg, transparent 8%, rgb(0 0 0 / .18) 38%, #000 76%); mix-blend-mode: screen; opacity: .28; pointer-events: none; position: absolute; transition: opacity .3s ease, transform .45s ease; z-index: 0; }
-.artAvengers .cardArtwork { background-size: auto 94%; opacity: .24; }
+.page [data-artwork] { --record-opacity: .27; --record-position: 80% center; --record-size: auto 122%; --row-art-size: auto 18rem; }
+.page [data-artwork="iron-man"] { --record-art: url("/images/iron-man-avengers.jpg"); --record-position: 88% center; --record-size: auto 116%; --row-art-size: 48rem auto; }
+.page [data-artwork="captain-america"] { --record-art: url("/images/catalog/captain-america-dark.jpg"); --record-position: 78% center; --record-size: auto 116%; --row-art-size: 48rem auto; }
+.page [data-artwork="avengers"] { --record-art: url("/images/catalog/avengers-core-dark.jpg"); --record-opacity: .24; --record-position: center 30%; --record-size: auto 94%; --row-art-size: 48rem auto; }
+.page [data-artwork="hulk"] { --record-art: url("/images/catalog/hulk.jpg"); }
+.page [data-artwork="thor"] { --record-art: url("/images/catalog/thor.jpg"); }
+.page [data-artwork="ant-man"] { --record-art: url("/images/catalog/ant-man.jpg"); }
+.page [data-artwork="guardians"] { --record-art: url("/images/catalog/guardians.jpg"); }
+.page [data-artwork="black-panther"] { --record-art: url("/images/catalog/black-panther.jpg"); }
+.page [data-artwork="black-widow"] { --record-art: url("/images/catalog/black-widow.jpg"); }
+.page [data-artwork="captain-marvel"] { --record-art: url("/images/catalog/captain-marvel.jpg"); }
+.page [data-artwork="doctor-strange"] { --record-art: url("/images/catalog/doctor-strange.jpg"); }
+.page [data-artwork="eternals"] { --record-art: url("/images/catalog/eternals.jpeg"); }
+.page [data-artwork="shang-chi"] { --record-art: url("/images/catalog/shang-chi.jpeg"); }
+.page [data-artwork="spider-man"] { --record-art: url("/images/catalog/spider-man.jpg"); }
+.page [data-artwork="agent-carter"] { --record-art: url("/images/catalog/agent-carter.png"); }
+.page [data-artwork="agents-shield"] { --record-art: url("/images/catalog/agents-shield.jpg"); }
+.page [data-artwork="cloak-dagger"] { --record-art: url("/images/catalog/cloak-dagger.jpg"); }
+.page [data-artwork="daredevil"] { --record-art: url("/images/catalog/daredevil.jpg"); }
+.page [data-artwork="hawkeye"] { --record-art: url("/images/catalog/hawkeye.png"); }
+.page [data-artwork="helstrom"] { --record-art: url("/images/catalog/helstrom.jpeg"); }
+.page [data-artwork="inhumans"] { --record-art: url("/images/catalog/inhumans.jpg"); }
+.page [data-artwork="iron-fist"] { --record-art: url("/images/catalog/iron-fist.png"); }
+.page [data-artwork="jessica-jones"] { --record-art: url("/images/catalog/jessica-jones.jpg"); }
+.page [data-artwork="loki"] { --record-art: url("/images/catalog/loki.png"); }
+.page [data-artwork="luke-cage"] { --record-art: url("/images/catalog/luke-cage.png"); }
+.page [data-artwork="assembled"] { --record-art: url("/images/catalog/assembled.jpg"); }
+.page [data-artwork="legends"] { --record-art: url("/images/catalog/legends.jpg"); }
+.page [data-artwork="moon-knight"] { --record-art: url("/images/catalog/moon-knight.jpg"); }
+.page [data-artwork="runaways"] { --record-art: url("/images/catalog/runaways.jpg"); }
+.page [data-artwork="defenders"] { --record-art: url("/images/catalog/defenders.jpg"); }
+.page [data-artwork="falcon-winter-soldier"] { --record-art: url("/images/catalog/falcon-winter-soldier.png"); }
+.page [data-artwork="punisher"] { --record-art: url("/images/catalog/punisher.jpg"); }
+.page [data-artwork="wanda-vision"] { --record-art: url("/images/catalog/wanda-vision.png"); }
+.page [data-artwork="what-if"] { --record-art: url("/images/catalog/what-if.png"); }
+.page :is([data-artwork="agent-carter"], [data-artwork="agents-shield"], [data-artwork="assembled"], [data-artwork="cloak-dagger"], [data-artwork="daredevil"], [data-artwork="defenders"], [data-artwork="falcon-winter-soldier"], [data-artwork="hawkeye"], [data-artwork="helstrom"], [data-artwork="inhumans"], [data-artwork="iron-fist"], [data-artwork="jessica-jones"], [data-artwork="legends"], [data-artwork="loki"], [data-artwork="luke-cage"], [data-artwork="moon-knight"], [data-artwork="punisher"], [data-artwork="runaways"], [data-artwork="wanda-vision"], [data-artwork="what-if"]) { --record-opacity: .2; --record-position: center; --record-size: 80% auto; --row-art-size: 24rem auto; }
+.card > .cardArtwork, .watchedCard > .cardArtwork { background-image: var(--record-art); background-position: var(--record-position); background-repeat: no-repeat; background-size: var(--record-size); inset: 0; mask-image: linear-gradient(112deg, transparent 8%, rgb(0 0 0 / .18) 38%, #000 76%); mix-blend-mode: screen; opacity: var(--record-opacity); pointer-events: none; position: absolute; transition: opacity .3s ease, transform .45s ease; z-index: 0; }
 .card:hover .cardArtwork, .watchedCard:hover .cardArtwork { opacity: .38; transform: scale(1.025); }
 .cardTerminal, .cardHeader, .cardRecord, .cardTelemetry, .cardCommand { z-index: 1; }
-.artworkRow { background-color: rgb(3 12 27); background-image: linear-gradient(90deg, rgb(3 12 27 / .99) 0%, rgb(3 12 27 / .92) 38%, rgb(3 12 27 / .48) 74%, rgb(3 12 27 / .12) 100%), var(--record-art); background-position: center, var(--record-position); background-repeat: no-repeat; background-size: 100% 100%, 48rem auto; background-blend-mode: normal, screen; }
+.artworkRow { background-color: rgb(3 12 27); background-image: linear-gradient(90deg, rgb(3 12 27 / .99) 0%, rgb(3 12 27 / .92) 38%, rgb(3 12 27 / .48) 74%, rgb(3 12 27 / .12) 100%), var(--record-art); background-position: center, var(--record-position); background-repeat: no-repeat; background-size: 100% 100%, var(--row-art-size); background-blend-mode: normal, screen; }
 .tableWrap .artworkRow td { background: rgb(5 14 31 / .68); }
 .tableWrap .artworkRow:hover td { background: rgb(9 27 48 / .6); }
 .tableWrap .artworkRow.watchedRow td { background: rgb(5 34 42 / .68); }

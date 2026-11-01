@@ -8,7 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SoundToggle } from "@/components/sound-toggle";
 import type { DashboardUnit, TitleRelationship } from "@/lib/catalog/dashboard";
-import { catalogArtworkForTitle, type CatalogArtwork } from "@/lib/catalog/catalog-artwork";
+import { catalogArtworkForTitle } from "@/lib/catalog/catalog-artwork";
 import { buildMovieTitleFilterGroups, type TitleFilterGroup } from "@/lib/catalog/title-filter-groups";
 import { playScrollChime } from "@/lib/ui/scroll-chime";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, writeLocalProgress } from "@/lib/progress/local-progress";
@@ -39,12 +39,6 @@ const UNIT_META = {
   special: { code: "SPC", label: "Special presentation" },
   episode: { code: "EPS", label: "Series episode" },
 } as const;
-const ARTWORK_CLASSES: Record<CatalogArtwork, string> = {
-  "iron-man": styles.artIronMan,
-  "captain-america": styles.artCaptainAmerica,
-  avengers: styles.artAvengers,
-};
-
 // shortcut: only the Team Thor shorts share a filter group, move grouping into catalog metadata when more collections need it.
 const TEAM_THOR_TITLE_IDS = new Set(["special-team-thor", "special-team-thor-part-2", "special-team-darryl"]);
 
@@ -182,9 +176,9 @@ function CatalogCard({ unit, collection, watched, selected, saving, onSelect, on
   const archiveRef = String(unit.position).padStart(3, "0");
   const detail = unit.unitKind === "episode" ? `S${String(unit.seasonNumber).padStart(2, "0")} / E${String(unit.episodeNumber).padStart(2, "0")}` : collection;
   const artwork = catalogArtworkForTitle(unit.title);
-  const className = [watched ? styles.watchedCard : styles.card, selected ? styles.selectedCard : "", artwork ? ARTWORK_CLASSES[artwork] : ""].filter(Boolean).join(" ");
+  const className = [watched ? styles.watchedCard : styles.card, selected ? styles.selectedCard : ""].filter(Boolean).join(" ");
 
-  return <article className={className} tabIndex={0} data-selected={selected} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
+  return <article className={className} tabIndex={0} data-selected={selected} data-artwork={artwork ?? undefined} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
     {artwork && <span className={styles.cardArtwork} aria-hidden="true" />}
     <div className={styles.cardTerminal} aria-hidden="true"><span>{`STARK_DB // ${meta.code}_NODE_${archiveRef}`}</span><b><i /> {watched ? "LOGGED" : "LINK ACTIVE"}</b></div>
     <header className={styles.cardHeader}><div className={styles.cardIndex}><span>Archive ref</span><strong>{archiveRef}</strong></div><label className={styles.cardSelector} onClick={(event) => event.stopPropagation()}><input type="checkbox" checked={selected} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /><span>{selected ? "Selected" : "Select"}</span></label></header>
@@ -196,9 +190,9 @@ function CatalogCard({ unit, collection, watched, selected, saving, onSelect, on
 
 function CatalogRow({ unit, collection, watched, selected, saving, onSelect, onChange }: { unit: DashboardUnit; collection: string; watched: boolean; selected: boolean; saving: boolean; onSelect: (unitId: string) => void; onChange: (unit: DashboardUnit, watched: boolean) => void }) {
   const artwork = catalogArtworkForTitle(unit.title);
-  const className = [watched ? styles.watchedRow : "", selected ? styles.selectedRow : "", artwork ? `${styles.artworkRow} ${ARTWORK_CLASSES[artwork]}` : ""].filter(Boolean).join(" ");
+  const className = [watched ? styles.watchedRow : "", selected ? styles.selectedRow : "", artwork ? styles.artworkRow : ""].filter(Boolean).join(" ");
   const meta = UNIT_META[unit.unitKind];
-  return <tr className={className || undefined} tabIndex={0} aria-selected={selected} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
+  return <tr className={className || undefined} tabIndex={0} aria-selected={selected} data-artwork={artwork ?? undefined} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
     <td className={styles.selectCell}><input type="checkbox" checked={selected} onClick={(event) => event.stopPropagation()} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /></td>
     <td className={styles.recordCell}><strong>{String(unit.position).padStart(3, "0")}</strong><span>ARC/{meta.code}-{String(unit.position).padStart(3, "0")}</span></td>
     <td className={styles.titleCell}><strong>{unit.title}</strong><div>{unit.unitKind === "episode" ? <span>S{String(unit.seasonNumber).padStart(2, "0")} / E{String(unit.episodeNumber).padStart(2, "0")}</span> : <span>{unit.titleKind} title</span>}{collection !== unit.title && <span>{collection} collection</span>}<code>{unit.id}</code></div></td>

@@ -516,9 +516,9 @@
     "semantic_hash": "fe284d600257aa57e1cf0134866ae88f"
   },
   "web/src/app/catalog/catalog-client.tsx": {
-    "mtime": 1793476695.449382,
-    "seen": 1793476982.356159,
-    "ast_hash": "be3b6b179c90fabcc00c221172b864bc",
+    "mtime": 1793558187.932369,
+    "seen": 1793558355.954228,
+    "ast_hash": "4f4cdc3b0a22de115e209a4b837697af",
     "semantic_hash": ""
   },
   "web/src/app/catalog/page.tsx": {
@@ -942,21 +942,21 @@
     "semantic_hash": ""
   },
   "web/src/lib/catalog/catalog-artwork.test.mjs": {
-    "mtime": 1793476695.4121628,
-    "seen": 1793476982.356375,
-    "ast_hash": "116554a7bfb1cfd35457533cd4f6644d",
+    "mtime": 1793558187.9107854,
+    "seen": 1793558355.954457,
+    "ast_hash": "c54c32096948ab13e1e733c4b799b52c",
     "semantic_hash": ""
   },
   "web/src/lib/catalog/catalog-artwork.ts": {
-    "mtime": 1793476695.394059,
-    "seen": 1793476982.3563771,
-    "ast_hash": "4b8c1b0523287e2ce79cdc4824d35c2f",
+    "mtime": 1793558187.8872683,
+    "seen": 1793558355.954459,
+    "ast_hash": "0ce771faba90071f9301247a5db0720e",
     "semantic_hash": ""
   },
   "web/public/images/catalog/README.md": {
-    "mtime": 1793476695.431077,
-    "seen": 1793476982.357255,
-    "ast_hash": "a417091797faca7008df388eae7eb5cb",
+    "mtime": 1793558188.0635338,
+    "seen": 1793558355.95536,
+    "ast_hash": "15bf927e70f2cc15a7a197ec550a32d4",
     "semantic_hash": ""
   },
   "web/public/images/catalog/avengers-core-dark.jpg": {
@@ -969,6 +969,192 @@
     "mtime": 1793476548.6007342,
     "seen": 1793476982.357437,
     "ast_hash": "e529834e19e678ff44d3299fbee47bb6",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/agent-carter.png": {
+    "mtime": 1793477361.860811,
+    "seen": 1793558355.955605,
+    "ast_hash": "f7c623c68839505529cd81f6a897321e",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/agents-shield.jpg": {
+    "mtime": 1793477361.868356,
+    "seen": 1793558355.955607,
+    "ast_hash": "2cd544c96d16ec26290d7beb3ca50b2a",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/ant-man.jpg": {
+    "mtime": 1793477306.4458268,
+    "seen": 1793558355.955607,
+    "ast_hash": "221e3a3a6fb0e04066e9e52a236dffbb",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/assembled.jpg": {
+    "mtime": 1793477361.861062,
+    "seen": 1793558355.9556081,
+    "ast_hash": "a17f8e9324ce57e7c65f3da12c79f4e5",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/black-panther.jpg": {
+    "mtime": 1793477306.6813717,
+    "seen": 1793558355.9556348,
+    "ast_hash": "66edbf600cafd20d03a7e2030417b62c",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/black-widow.jpg": {
+    "mtime": 1793477306.6854537,
+    "seen": 1793558355.955636,
+    "ast_hash": "18f55800c90ff4a3de65441bc9ae4dca",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/captain-marvel.jpg": {
+    "mtime": 1793477306.668607,
+    "seen": 1793558355.955662,
+    "ast_hash": "bf4d0fe5423a21f48a19338d7de6c459",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/cloak-dagger.jpg": {
+    "mtime": 1793477361.8827837,
+    "seen": 1793558355.9556632,
+    "ast_hash": "4bcd89628ee794db21f04448649a1021",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/daredevil.jpg": {
+    "mtime": 1793477361.9724064,
+    "seen": 1793558355.9556632,
+    "ast_hash": "9f197a6b50d7a3a99cc0e551a591479e",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/defenders.jpg": {
+    "mtime": 1793477362.0001574,
+    "seen": 1793558355.955664,
+    "ast_hash": "75d9f40ed41af8caba417c9ce8ecb636",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/doctor-strange.jpg": {
+    "mtime": 1793477306.5772038,
+    "seen": 1793558355.9556649,
+    "ast_hash": "7dd1d00c390117bf2948897fda6b53b5",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/eternals.jpeg": {
+    "mtime": 1793477306.6964798,
+    "seen": 1793558355.955668,
+    "ast_hash": "4f1c7f4523ed8386c3e13896f16f1cf6",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/falcon-winter-soldier.png": {
+    "mtime": 1793477362.0378423,
+    "seen": 1793558355.955669,
+    "ast_hash": "ea54eed6265f292ccd13644e11bece20",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/guardians.jpg": {
+    "mtime": 1793477306.5638864,
+    "seen": 1793558355.955669,
+    "ast_hash": "cb02a1a3edd3db11c31add7490658199",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/hawkeye.png": {
+    "mtime": 1793477362.0824337,
+    "seen": 1793558355.95567,
+    "ast_hash": "0aedc5a9492b32d6656c17d5bcf9370f",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/helstrom.jpeg": {
+    "mtime": 1793477362.1029866,
+    "seen": 1793558355.955671,
+    "ast_hash": "f907020ee8a1d644cb493bfd71f51835",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/hulk.jpg": {
+    "mtime": 1793477306.436155,
+    "seen": 1793558355.955671,
+    "ast_hash": "7d6fed2287d8e00e2d7b366acba2b1a7",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/inhumans.jpg": {
+    "mtime": 1793477362.1393664,
+    "seen": 1793558355.955672,
+    "ast_hash": "0d83548cfec31eff92252cf6effbd812",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/iron-fist.png": {
+    "mtime": 1793477362.2844913,
+    "seen": 1793558355.955673,
+    "ast_hash": "da60b8014ac23fe1dbe3862a3ef9a602",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/jessica-jones.jpg": {
+    "mtime": 1793558122.1319587,
+    "seen": 1793558355.955673,
+    "ast_hash": "7425f5516ddb50d712f1aec5c7785b21",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/legends.jpg": {
+    "mtime": 1793558122.4711528,
+    "seen": 1793558355.9556742,
+    "ast_hash": "148e526531f5e4c163263de7bbab6019",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/loki.png": {
+    "mtime": 1793558123.0112174,
+    "seen": 1793558355.955675,
+    "ast_hash": "7b5fca355f090b278e2a953c13eae494",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/luke-cage.png": {
+    "mtime": 1793558123.6212761,
+    "seen": 1793558355.955675,
+    "ast_hash": "fde7cfb440b1822bdea4e7ddc8d200eb",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/moon-knight.jpg": {
+    "mtime": 1793558124.113212,
+    "seen": 1793558355.9556758,
+    "ast_hash": "d66f52ff9ba28ad00d9186e9024c4fab",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/punisher.jpg": {
+    "mtime": 1793558124.6201031,
+    "seen": 1793558355.955677,
+    "ast_hash": "d1a0bd002942ef4e25e6244afbddc00f",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/runaways.jpg": {
+    "mtime": 1793558125.0618927,
+    "seen": 1793558355.955677,
+    "ast_hash": "38f24bfe0dbb305fe83e62ee563a1f43",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/shang-chi.jpeg": {
+    "mtime": 1793477306.701856,
+    "seen": 1793558355.955678,
+    "ast_hash": "bc660859413d19e519698e8c4a4024f9",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/spider-man.jpg": {
+    "mtime": 1793558125.5412455,
+    "seen": 1793558355.955679,
+    "ast_hash": "d6c6b09366b7d4553ae83ec54555419e",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/thor.jpg": {
+    "mtime": 1793477306.4752128,
+    "seen": 1793558355.95568,
+    "ast_hash": "ccc0d33dd829bae0859e71386417a2ca",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/wanda-vision.png": {
+    "mtime": 1793558126.001791,
+    "seen": 1793558355.95568,
+    "ast_hash": "3f679f8adaac6b44b184fd61a7606078",
+    "semantic_hash": ""
+  },
+  "web/public/images/catalog/what-if.png": {
+    "mtime": 1793558126.481573,
+    "seen": 1793558355.955681,
+    "ast_hash": "19175cd7dfcd1556bfe69456f75e6c17",
     "semantic_hash": ""
   },
   "backend/package-lock.json": {
