@@ -496,9 +496,9 @@
     "semantic_hash": "154177f65fdb13f40bd06e8a890eacc6"
   },
   "web/package.json": {
-    "mtime": 1793476695.3701189,
-    "seen": 1793476982.356132,
-    "ast_hash": "445a1e711154796ca14966a454bf3b39",
+    "mtime": 1793612407.082967,
+    "seen": 1793612445.651009,
+    "ast_hash": "551eceae90a2ad4202a6dc646d224581",
     "semantic_hash": ""
   },
   "web/src/app/auth/signout/route.ts": {
@@ -508,9 +508,9 @@
     "semantic_hash": "fe284d600257aa57e1cf0134866ae88f"
   },
   "web/src/app/catalog/catalog-client.tsx": {
-    "mtime": 1793563530.0776396,
-    "seen": 1793563607.141151,
-    "ast_hash": "a6c135ea0eb68d5bc9c77e45bf2b5ea7",
+    "mtime": 1793613272.1905725,
+    "seen": 1793613306.541226,
+    "ast_hash": "ccb7c28f54be88e6f60fce65bece03da",
     "semantic_hash": ""
   },
   "web/src/app/catalog/page.tsx": {
@@ -1147,6 +1147,18 @@
     "mtime": 1793558126.481573,
     "seen": 1793558355.955681,
     "ast_hash": "19175cd7dfcd1556bfe69456f75e6c17",
+    "semantic_hash": ""
+  },
+  "web/src/lib/catalog/season-filter-options.test.mjs": {
+    "mtime": 1793612407.029276,
+    "seen": 1793612445.6513019,
+    "ast_hash": "f979c557b5a4ba3f02eddb73c2a301dd",
+    "semantic_hash": ""
+  },
+  "web/src/lib/catalog/season-filter-options.ts": {
+    "mtime": 1793612407.0070212,
+    "seen": 1793612445.651304,
+    "ast_hash": "074bdf843951352e242a197ae3143028",
     "semantic_hash": ""
   },
   "backend/package-lock.json": {

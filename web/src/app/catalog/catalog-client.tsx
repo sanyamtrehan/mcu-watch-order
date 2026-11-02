@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SoundToggle } from "@/components/sound-toggle";
 import type { DashboardUnit, TitleRelationship } from "@/lib/catalog/dashboard";
 import { catalogArtworkForTitle } from "@/lib/catalog/catalog-artwork";
+import { buildSeasonFilterOptions } from "@/lib/catalog/season-filter-options";
 import { buildMovieTitleFilterGroups, type TitleFilterGroup } from "@/lib/catalog/title-filter-groups";
 import { playScrollChime } from "@/lib/ui/scroll-chime";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, writeLocalProgress } from "@/lib/progress/local-progress";
@@ -21,7 +22,7 @@ type ViewMode = "table" | "cards";
 type StatusFilter = "all" | "unwatched" | "watched";
 type Account = { id: string; email: string };
 type Props = { units: DashboardUnit[]; relationships: TitleRelationship[]; account: Account | null; initialRemoteWatchedUnitIds: string[] };
-type FilterOption = { value: string; label: string };
+type FilterOption = { value: string; label: string; meta?: string };
 
 const STATUS_OPTIONS: FilterOption[] = [
   { value: "all", label: "All progress" },
@@ -43,9 +44,10 @@ const UNIT_META = {
 const TEAM_THOR_TITLE_IDS = new Set(["special-team-thor", "special-team-thor-part-2", "special-team-darryl"]);
 
 function titleFilterOption(unit: DashboardUnit, movieGroups: Map<string, TitleFilterGroup>) {
-  return TEAM_THOR_TITLE_IDS.has(unit.titleId)
+  const option = TEAM_THOR_TITLE_IDS.has(unit.titleId)
     ? { id: "collection-team-thor", title: "Team Thor" }
     : movieGroups.get(unit.titleId) ?? { id: unit.titleId, title: unit.title };
+  return { ...option, kind: unit.titleKind };
 }
 
 export function CatalogClient({ units, relationships, account, initialRemoteWatchedUnitIds }: Props) {
@@ -66,12 +68,11 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
   const watchedIds = useMemo(() => account ? new Set([...localWatched, ...remoteWatched]) : localWatched, [account, localWatched, remoteWatched]);
   const movieGroups = useMemo(() => buildMovieTitleFilterGroups([...new Map(units.map((unit) => [unit.titleId, { id: unit.titleId, title: unit.title, kind: unit.titleKind }])).values()], relationships), [units, relationships]);
   const titles = [...new Map(units.filter((unit) => kindFilter === "all" || unit.unitKind === kindFilter).map((unit) => { const option = titleFilterOption(unit, movieGroups); return [option.id, option]; })).values()].sort((a, b) => a.title.localeCompare(b.title));
-  const seasons = [...new Map(units.filter((unit) => titleFilterOption(unit, movieGroups).id === titleFilter && unit.seasonId).map((unit) => [unit.seasonId!, unit.seasonNumber!])).entries()].sort(([, a], [, b]) => a - b);
   const visibleUnits = units.filter((unit) => (statusFilter === "all" || (statusFilter === "watched") === watchedIds.has(unit.id)) && (kindFilter === "all" || unit.unitKind === kindFilter) && (titleFilter === "all" || titleFilterOption(unit, movieGroups).id === titleFilter) && (seasonFilter === "all" || unit.seasonId === seasonFilter));
   const allVisibleSelected = visibleUnits.length > 0 && visibleUnits.every((unit) => selectedIds.has(unit.id));
   const activeFilterCount = [statusFilter !== "all", kindFilter !== "all", titleFilter !== "all", seasonFilter !== "all"].filter(Boolean).length;
-  const titleOptions = [{ value: "all", label: "All titles" }, ...titles.map((title) => ({ value: title.id, label: title.title }))];
-  const seasonOptions = [{ value: "all", label: "All seasons" }, ...seasons.map(([id, number]) => ({ value: id, label: `Season ${number}` }))];
+  const titleOptions = [{ value: "all", label: "All titles" }, ...titles.map((title) => ({ value: title.id, label: title.title, meta: title.kind }))];
+  const seasonOptions = [{ value: "all", label: "All seasons" }, ...buildSeasonFilterOptions(units.filter((unit) => titleFilterOption(unit, movieGroups).id === titleFilter))];
 
   useGSAP(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -157,7 +158,7 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
           <FilterMenu label="Status" value={statusFilter} options={STATUS_OPTIONS} onChange={(value) => setStatusFilter(value as StatusFilter)} />
           <FilterMenu label="Type" value={kindFilter} options={TYPE_OPTIONS} onChange={(value) => { setKindFilter(value); setTitleFilter("all"); setSeasonFilter("all"); }} />
           <FilterMenu label="Title" value={titleFilter} options={titleOptions} searchable onChange={(value) => { setTitleFilter(value); setSeasonFilter("all"); }} />
-          {seasons.length > 0 && <FilterMenu label="Season" value={seasonFilter} options={seasonOptions} onChange={setSeasonFilter} />}
+          {seasonOptions.length > 1 && <FilterMenu label="Season" value={seasonFilter} options={seasonOptions} onChange={setSeasonFilter} />}
         </div>
         <div className={styles.toolbarActions}><button className={styles.resetFilters} type="button" onClick={clearFilters} disabled={activeFilterCount === 0}><RotateCcw size={15} /> Clear filters</button><div className={styles.viewSwitch} aria-label="Catalog layout"><button type="button" aria-pressed={viewMode === "table"} onClick={() => setViewMode("table")} title="Table view"><List size={17} /></button><button type="button" aria-pressed={viewMode === "cards"} onClick={() => setViewMode("cards")} title="Card grid view"><LayoutGrid size={17} /></button></div></div>
       </section>
@@ -229,7 +230,7 @@ function FilterMenu({ label, value, options, searchable = false, onChange }: { l
     <div className={styles.filterPopover}>
       <div className={styles.consoleHeader} aria-hidden="true"><span>STARK_ARCHIVE // {label.toUpperCase()}_INDEX</span><b><i /> LINK ACTIVE</b></div>
       {searchable && <label className={styles.filterSearch}><Search size={15} /><span className={styles.searchPrompt} aria-hidden="true">QRY</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ENTER TITLE QUERY..." aria-label="Search title options" /></label>}
-      <div className={styles.filterOptions} role="listbox" aria-label={`${label} options`}>{visibleOptions.length > 0 ? visibleOptions.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === value} onClick={() => { onChange(option.value); menu.current?.removeAttribute("open"); }}><span className={styles.filterOptionText}><code aria-hidden="true">IDX-{String(options.indexOf(option)).padStart(3, "0")}</code><span>{option.label}</span></span>{option.value === value ? <Check size={15} /> : <i />}</button>) : <p>No matching titles</p>}</div>
+      <div className={styles.filterOptions} role="listbox" aria-label={`${label} options`}>{visibleOptions.length > 0 ? visibleOptions.map((option) => <button key={option.value} type="button" role="option" aria-selected={option.value === value} onClick={() => { onChange(option.value); menu.current?.removeAttribute("open"); }}><span className={styles.filterOptionText}><code aria-hidden="true">IDX-{String(options.indexOf(option)).padStart(3, "0")}</code><span>{option.label}</span>{option.meta && <small>{option.meta}</small>}</span>{option.value === value ? <Check size={15} /> : <i />}</button>) : <p>No matching titles</p>}</div>
       <div className={styles.consoleFooter} aria-hidden="true"><span>{String(visibleOptions.length).padStart(3, "0")} RECORDS</span><span>NODE 04-A</span><span>MEM 7A:4F</span><b>QUERY READY</b></div>
     </div>
   </details>;

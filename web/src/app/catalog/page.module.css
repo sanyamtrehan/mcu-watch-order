@@ -29,13 +29,14 @@
 .searchPrompt { border-right: 1px solid rgb(36 215 255 / .22); color: var(--cyan); font-family: var(--font-geist-mono), monospace; font-size: .52rem; letter-spacing: .08em; padding-right: .5rem; }
 .filterSearch input { font-family: var(--font-geist-mono), monospace; letter-spacing: .035em; }
 .filterSearch input::placeholder { color: rgb(116 137 166); }
-.filterOptionText { align-items: center; display: grid; gap: .55rem; grid-template-columns: 3.35rem minmax(0, 1fr); min-width: 0; }
+.filterOptionText { align-items: center; display: grid; flex: 1; gap: .55rem; grid-template-columns: 3.35rem minmax(0, 1fr) auto; min-width: 0; }
 .filterOptionText code { color: rgb(84 122 158); font-family: var(--font-geist-mono), monospace; font-size: .5rem; letter-spacing: .07em; }
 .filterOptionText > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.filterOptionText small { color: rgb(104 145 180); font-family: var(--font-geist-mono), monospace; font-size: .46rem; letter-spacing: .08em; text-transform: uppercase; }
 .filterOptions button:hover .filterOptionText code, .filterOptions button[aria-selected="true"] .filterOptionText code { color: var(--cyan); }
 .consoleFooter { border-top: 1px solid rgb(36 215 255 / .14); justify-content: flex-start; margin: .35rem .1rem -.05rem; padding: .45rem .28rem .3rem; }
 .consoleFooter b { color: var(--cyan); font-size: inherit; margin-left: auto; }
-@media (max-width: 480px) { .consoleFooter span:nth-child(3) { display: none; }.filterOptionText { grid-template-columns: 3rem minmax(0, 1fr); } }
+@media (max-width: 480px) { .consoleFooter span:nth-child(3) { display: none; }.filterOptionText { grid-template-columns: 3rem minmax(0, 1fr) auto; } }
 .tableWrap { background: linear-gradient(180deg, rgb(7 17 38 / .96), rgb(4 11 27 / .92)); border-color: rgb(36 215 255 / .2); border-radius: 12px 12px 22px 22px; box-shadow: inset 0 1px rgb(255 255 255 / .04), 0 28px 80px rgb(0 6 24 / .28); padding: .45rem; position: relative; }
 .tableWrap::before { background: repeating-linear-gradient(180deg, transparent 0, transparent 4px, rgb(36 215 255 / .012) 5px); content: ""; inset: 0; pointer-events: none; position: absolute; }
 .tableConsoleHeader { align-items: center; border-bottom: 1px solid rgb(36 215 255 / .17); color: rgb(115 145 181); display: flex; font-family: var(--font-geist-mono), monospace; font-size: .52rem; justify-content: space-between; letter-spacing: .1em; margin: 0 .5rem .25rem; padding: .55rem .4rem .7rem; position: relative; text-transform: uppercase; }
