@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useGSAP } from "@gsap/react";
-import { Check, ChevronDown, LayoutGrid, List, RotateCcw, Search, SlidersHorizontal } from "lucide-react";
+import { Check, ChevronDown, LayoutGrid, List, Play, RotateCcw, Search, SlidersHorizontal } from "lucide-react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SoundToggle } from "@/components/sound-toggle";
 import type { DashboardUnit, TitleRelationship } from "@/lib/catalog/dashboard";
 import { catalogArtworkForTitle } from "@/lib/catalog/catalog-artwork";
+import { groupAdjacentEpisodeRuns, type EpisodeRun } from "@/lib/catalog/episode-runs";
 import { buildSeasonFilterOptions } from "@/lib/catalog/season-filter-options";
 import { buildMovieTitleFilterGroups, type TitleFilterGroup } from "@/lib/catalog/title-filter-groups";
 import { playScrollChime } from "@/lib/ui/scroll-chime";
@@ -23,6 +24,7 @@ type StatusFilter = "all" | "unwatched" | "watched";
 type Account = { id: string; email: string };
 type Props = { units: DashboardUnit[]; relationships: TitleRelationship[]; account: Account | null; initialRemoteWatchedUnitIds: string[] };
 type FilterOption = { value: string; label: string; meta?: string };
+type VisibleEpisodeRun = EpisodeRun<DashboardUnit> & { visibleUnits: DashboardUnit[] };
 
 const STATUS_OPTIONS: FilterOption[] = [
   { value: "all", label: "All progress" },
@@ -60,6 +62,7 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
   const [seasonFilter, setSeasonFilter] = useState("all");
   const [remoteWatched, setRemoteWatched] = useState(() => new Set(initialRemoteWatchedUnitIds));
   const [selectedIds, setSelectedIds] = useState<Set<string>>(() => new Set());
+  const [runExpansion, setRunExpansion] = useState<Record<string, boolean>>({});
   const [saving, setSaving] = useState(false);
   const [progressError, setProgressError] = useState<string | null>(null);
   const validUnitIds = useMemo(() => new Set(units.map((unit) => unit.id)), [units]);
@@ -67,8 +70,13 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
   const localWatched = useMemo(() => new Set(parseLocalProgress(serializedProgress, validUnitIds).watchedUnitIds), [serializedProgress, validUnitIds]);
   const watchedIds = useMemo(() => account ? new Set([...localWatched, ...remoteWatched]) : localWatched, [account, localWatched, remoteWatched]);
   const movieGroups = useMemo(() => buildMovieTitleFilterGroups([...new Map(units.map((unit) => [unit.titleId, { id: unit.titleId, title: unit.title, kind: unit.titleKind }])).values()], relationships), [units, relationships]);
+  const catalogRuns = useMemo(() => groupAdjacentEpisodeRuns(units), [units]);
   const titles = [...new Map(units.filter((unit) => kindFilter === "all" || unit.unitKind === kindFilter).map((unit) => { const option = titleFilterOption(unit, movieGroups); return [option.id, option]; })).values()].sort((a, b) => a.title.localeCompare(b.title));
-  const visibleUnits = units.filter((unit) => (statusFilter === "all" || (statusFilter === "watched") === watchedIds.has(unit.id)) && (kindFilter === "all" || unit.unitKind === kindFilter) && (titleFilter === "all" || titleFilterOption(unit, movieGroups).id === titleFilter) && (seasonFilter === "all" || unit.seasonId === seasonFilter));
+  const visibleRuns = catalogRuns.map((run) => ({ ...run, visibleUnits: run.units.filter((unit) => (statusFilter === "all" || (statusFilter === "watched") === watchedIds.has(unit.id)) && (kindFilter === "all" || unit.unitKind === kindFilter) && (titleFilter === "all" || titleFilterOption(unit, movieGroups).id === titleFilter) && (seasonFilter === "all" || unit.seasonId === seasonFilter)) })).filter((run) => run.visibleUnits.length > 0);
+  const visibleUnits = visibleRuns.flatMap((run) => run.visibleUnits);
+  const nextUnwatchedUnit = units.find((unit) => !watchedIds.has(unit.id));
+  const resumeRun = nextUnwatchedUnit ? catalogRuns.find((run) => run.units.some((unit) => unit.id === nextUnwatchedUnit.id)) : undefined;
+  const resumeRunId = resumeRun && isEpisodeRun(resumeRun) ? resumeRun.id : null;
   const allVisibleSelected = visibleUnits.length > 0 && visibleUnits.every((unit) => selectedIds.has(unit.id));
   const activeFilterCount = [statusFilter !== "all", kindFilter !== "all", titleFilter !== "all", seasonFilter !== "all"].filter(Boolean).length;
   const titleOptions = [{ value: "all", label: "All titles" }, ...titles.map((title) => ({ value: title.id, label: title.title, meta: title.kind }))];
@@ -140,6 +148,22 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
     });
   }
 
+  function toggleRunSelection(unitIds: string[]) {
+    setSelectedIds((current) => {
+      const next = new Set(current);
+      const allSelected = unitIds.every((unitId) => next.has(unitId));
+      for (const unitId of unitIds) {
+        if (allSelected) next.delete(unitId);
+        else next.add(unitId);
+      }
+      return next;
+    });
+  }
+
+  function toggleRun(runId: string, expandedByDefault: boolean) {
+    setRunExpansion((current) => ({ ...current, [runId]: !(current[runId] ?? expandedByDefault) }));
+  }
+
   function clearFilters() {
     setStatusFilter("all");
     setKindFilter("all");
@@ -147,29 +171,85 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
     setSeasonFilter("all");
   }
 
+  function continueWatching() {
+    if (!nextUnwatchedUnit) return;
+    clearFilters();
+    if (resumeRunId) setRunExpansion((current) => ({ ...current, [resumeRunId]: true }));
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const target = document.getElementById(`catalog-unit-${nextUnwatchedUnit.id}`);
+      target?.scrollIntoView({ behavior: "smooth", block: "center" });
+      target?.focus({ preventScroll: true });
+    }));
+  }
+
   return <main ref={shell} className={styles.page}>
     <header className={styles.nav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard">Dashboard</a><a href="/catalog" aria-current="page">Catalog</a></nav><div className={styles.navActions}><SoundToggle className={styles.soundButton} /><a className={styles.syncLink} href={account ? "/dashboard" : "/login"}>{account ? account.email : "Sync"}</a></div></header>
     <section className={styles.catalogHero} data-catalog-hero><Image className={styles.characterBackdrop} src="/images/iron-man-avengers.jpg" alt="Iron Man from The Avengers" fill priority sizes="100vw" /><div><p>J.A.R.V.I.S. ARCHIVE / FULL INVENTORY</p><h1>Every unit.<br /><span>On record.</span></h1><div className={styles.marvelMark}><Image src="/images/avengers-promo.webp" alt="Marvel Studios The Avengers" width={320} height={180} priority /></div></div><div className={styles.heroCount}><span>Archive integrity</span><strong>{units.length}</strong><small>indexed watch units</small></div><i /></section>
     <section className={styles.content}>
       <div className={styles.heading} data-catalog-workspace><div><p>Release order controls</p><h2>Filter the archive.</h2></div><span>{visibleUnits.length} of {units.length} entries</span></div>
-      <section className={styles.toolbar} aria-label="Catalog controls" data-catalog-workspace>
-        <header className={styles.filterHeader}><div><SlidersHorizontal size={18} /><span>Catalog query</span><strong>Refine release order</strong></div><p><b>{activeFilterCount}</b> {activeFilterCount === 1 ? "filter" : "filters"} active</p></header>
-        <div className={styles.filterGroup}>
-          <FilterMenu label="Status" value={statusFilter} options={STATUS_OPTIONS} onChange={(value) => setStatusFilter(value as StatusFilter)} />
-          <FilterMenu label="Type" value={kindFilter} options={TYPE_OPTIONS} onChange={(value) => { setKindFilter(value); setTitleFilter("all"); setSeasonFilter("all"); }} />
-          <FilterMenu label="Title" value={titleFilter} options={titleOptions} searchable onChange={(value) => { setTitleFilter(value); setSeasonFilter("all"); }} />
-          {seasonOptions.length > 1 && <FilterMenu label="Season" value={seasonFilter} options={seasonOptions} onChange={setSeasonFilter} />}
-        </div>
-        <div className={styles.toolbarActions}><button className={styles.resetFilters} type="button" onClick={clearFilters} disabled={activeFilterCount === 0}><RotateCcw size={15} /> Clear filters</button><div className={styles.viewSwitch} aria-label="Catalog layout"><button type="button" aria-pressed={viewMode === "table"} onClick={() => setViewMode("table")} title="Table view"><List size={17} /></button><button type="button" aria-pressed={viewMode === "cards"} onClick={() => setViewMode("cards")} title="Card grid view"><LayoutGrid size={17} /></button></div></div>
-      </section>
-      <section className={styles.bulkBar} aria-label="Bulk watch controls" data-catalog-workspace><div><strong>{selectedIds.size} selected</strong><span>Select entries, then update them together.</span></div><div><button className={styles.clearButton} type="button" onClick={toggleVisibleSelection} disabled={visibleUnits.length === 0}>{allVisibleSelected ? "Clear visible" : "Select visible"}</button>{selectedIds.size > 0 && <button className={styles.clearButton} type="button" onClick={() => setSelectedIds(new Set())}>Clear all</button>}<button className={styles.bulkUndoButton} type="button" onClick={() => void updateSelected(false)} disabled={selectedIds.size === 0 || saving}><RotateCcw size={16} /> {saving ? "Saving" : "Mark selected unwatched"}</button><button className={styles.bulkButton} type="button" onClick={() => void updateSelected(true)} disabled={selectedIds.size === 0 || saving}><Check size={16} /> {saving ? "Saving" : "Mark selected watched"}</button></div></section>
+      <div className={styles.stickyControls}>
+        <section className={styles.toolbar} aria-label="Catalog controls">
+          <header className={styles.filterHeader}><div><SlidersHorizontal size={18} /><span>Catalog query</span><strong>Refine release order</strong></div><p><b>{activeFilterCount}</b> {activeFilterCount === 1 ? "filter" : "filters"} active</p></header>
+          <div className={styles.filterGroup}>
+            <FilterMenu label="Status" value={statusFilter} options={STATUS_OPTIONS} onChange={(value) => setStatusFilter(value as StatusFilter)} />
+            <FilterMenu label="Type" value={kindFilter} options={TYPE_OPTIONS} onChange={(value) => { setKindFilter(value); setTitleFilter("all"); setSeasonFilter("all"); }} />
+            <FilterMenu label="Title" value={titleFilter} options={titleOptions} searchable onChange={(value) => { setTitleFilter(value); setSeasonFilter("all"); }} />
+            {seasonOptions.length > 1 && <FilterMenu label="Season" value={seasonFilter} options={seasonOptions} onChange={setSeasonFilter} />}
+          </div>
+          <div className={styles.toolbarActions}><button className={styles.resetFilters} type="button" onClick={clearFilters} disabled={activeFilterCount === 0}><RotateCcw size={15} /> Clear filters</button><div className={styles.viewSwitch} aria-label="Catalog layout"><button type="button" aria-pressed={viewMode === "table"} onClick={() => setViewMode("table")} title="Table view"><List size={17} /></button><button type="button" aria-pressed={viewMode === "cards"} onClick={() => setViewMode("cards")} title="Card grid view"><LayoutGrid size={17} /></button></div></div>
+        </section>
+        <section className={styles.bulkBar} aria-label="Catalog shortcuts and bulk watch controls"><div><strong>{selectedIds.size} selected</strong><span>Select entries, then update them together.</span></div><div><button className={styles.resumeButton} type="button" onClick={continueWatching} disabled={!nextUnwatchedUnit}><Play size={15} /> {nextUnwatchedUnit ? `Continue at #${String(nextUnwatchedUnit.position).padStart(3, "0")}` : "Archive complete"}</button><button className={styles.clearButton} type="button" aria-pressed={statusFilter === "unwatched"} onClick={() => setStatusFilter((current) => current === "unwatched" ? "all" : "unwatched")}>Remaining only</button><button className={styles.clearButton} type="button" onClick={toggleVisibleSelection} disabled={visibleUnits.length === 0}>{allVisibleSelected ? "Clear visible" : "Select visible"}</button>{selectedIds.size > 0 && <button className={styles.clearButton} type="button" onClick={() => setSelectedIds(new Set())}>Clear all</button>}<button className={styles.bulkUndoButton} type="button" onClick={() => void updateSelected(false)} disabled={selectedIds.size === 0 || saving}><RotateCcw size={16} /> {saving ? "Saving" : "Mark selected unwatched"}</button><button className={styles.bulkButton} type="button" onClick={() => void updateSelected(true)} disabled={selectedIds.size === 0 || saving}><Check size={16} /> {saving ? "Saving" : "Mark selected watched"}</button></div></section>
+      </div>
       {progressError && <p className={styles.progressError} role="alert">Unable to update progress: {progressError}</p>}
       {viewMode === "table" ? <div className={styles.tableWrap} data-catalog-workspace>
         <div className={styles.tableConsoleHeader} aria-hidden="true"><span>STARK_ARCHIVE // RELEASE_ORDER_MATRIX</span><div><b><i /> LIVE INDEX</b><span>{String(visibleUnits.length).padStart(3, "0")} RECORDS</span><span>SEQ / ASC</span></div></div>
-        <table><thead><tr><th aria-label="Select units">Select</th><th>Archive ref</th><th>Title / episode</th><th>Class</th><th>Released</th><th>Progress</th><th>Command</th></tr></thead><tbody>{visibleUnits.map((unit) => <CatalogRow key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</tbody></table>
-      </div> : <div className={styles.cardGrid} data-catalog-workspace>{visibleUnits.map((unit) => <CatalogCard key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</div>}
+        <table><thead><tr><th aria-label="Select units">Select</th><th>Archive ref</th><th>Title / episode</th><th>Class</th><th>Released</th><th>Progress</th><th>Command</th></tr></thead><tbody>{visibleRuns.map((run) => {
+          if (!isEpisodeRun(run)) {
+            const unit = run.visibleUnits[0];
+            return <CatalogRow key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />;
+          }
+          const expandedByDefault = run.id === resumeRunId;
+          const expanded = runExpansion[run.id] ?? expandedByDefault;
+          return <Fragment key={run.id}><tr id={`catalog-run-${run.id}`} className={styles.episodeRunRow}><td colSpan={7}><EpisodeRunSummary run={run} watchedIds={watchedIds} selectedIds={selectedIds} expanded={expanded} onSelect={toggleRunSelection} onToggle={() => toggleRun(run.id, expandedByDefault)} /></td></tr>{expanded && run.visibleUnits.map((unit) => <CatalogRow key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</Fragment>;
+        })}</tbody></table>
+      </div> : <div className={styles.cardGrid} data-catalog-workspace>{visibleRuns.map((run) => {
+        if (!isEpisodeRun(run)) {
+          const unit = run.visibleUnits[0];
+          return <CatalogCard key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />;
+        }
+        const expandedByDefault = run.id === resumeRunId;
+        const expanded = runExpansion[run.id] ?? expandedByDefault;
+        return <section key={run.id} id={`catalog-run-${run.id}`} className={styles.episodeRunCardGroup}><EpisodeRunSummary run={run} watchedIds={watchedIds} selectedIds={selectedIds} expanded={expanded} onSelect={toggleRunSelection} onToggle={() => toggleRun(run.id, expandedByDefault)} />{expanded && <div className={styles.episodeRunCards}>{run.visibleUnits.map((unit) => <CatalogCard key={unit.id} unit={unit} collection={titleFilterOption(unit, movieGroups).title} watched={watchedIds.has(unit.id)} selected={selectedIds.has(unit.id)} saving={saving} onSelect={toggleSelection} onChange={(item, watched) => void saveWatched([item.id], watched)} />)}</div>}</section>;
+      })}</div>}
     </section>
   </main>;
+}
+
+function isEpisodeRun(run: EpisodeRun<DashboardUnit>) {
+  return run.units.length > 1 && run.units[0].unitKind === "episode";
+}
+
+function EpisodeRunSummary({ run, watchedIds, selectedIds, expanded, onSelect, onToggle }: { run: VisibleEpisodeRun; watchedIds: Set<string>; selectedIds: Set<string>; expanded: boolean; onSelect: (unitIds: string[]) => void; onToggle: () => void }) {
+  const first = run.units[0];
+  const last = run.units.at(-1)!;
+  const selectedCount = run.visibleUnits.filter((unit) => selectedIds.has(unit.id)).length;
+  const watchedCount = run.units.filter((unit) => watchedIds.has(unit.id)).length;
+  const nextUnit = run.units.find((unit) => !watchedIds.has(unit.id));
+  const firstEpisode = String(first.episodeNumber).padStart(2, "0");
+  const lastEpisode = String(last.episodeNumber).padStart(2, "0");
+  const season = String(first.seasonNumber).padStart(2, "0");
+  const visibleUnitIds = run.visibleUnits.map((unit) => unit.id);
+
+  return <div className={styles.episodeRunSummary}>
+    <label className={styles.episodeRunSelector}><input type="checkbox" checked={selectedCount === run.visibleUnits.length} onChange={() => onSelect(visibleUnitIds)} aria-label={`Select ${run.visibleUnits.length} visible ${first.title} episodes`} /><span>{selectedCount > 0 ? `${selectedCount} selected` : "Select block"}</span></label>
+    <button className={styles.episodeRunToggle} type="button" aria-expanded={expanded} onClick={onToggle}>
+      <span className={styles.episodeRunRef}><small>Release block</small><strong>#{String(first.position).padStart(3, "0")}-{String(last.position).padStart(3, "0")}</strong></span>
+      <span className={styles.episodeRunTitle}><small>Series sequence</small><strong>{first.title}</strong><span>S{season} / E{firstEpisode}-E{lastEpisode} / {run.units.length} episodes</span></span>
+      <span className={styles.episodeRunProgress}><strong>{watchedCount}/{run.units.length}</strong><small>{nextUnit ? `Next E${String(nextUnit.episodeNumber).padStart(2, "0")}` : "Viewed"}</small></span>
+      {run.visibleUnits.length < run.units.length && <span className={styles.episodeRunMatches}>{run.visibleUnits.length} matching</span>}
+      <span className={styles.episodeRunCommand}>{expanded ? "Collapse" : "Expand"}<ChevronDown className={expanded ? styles.episodeRunChevronOpen : undefined} size={18} /></span>
+    </button>
+  </div>;
 }
 
 function CatalogCard({ unit, collection, watched, selected, saving, onSelect, onChange }: { unit: DashboardUnit; collection: string; watched: boolean; selected: boolean; saving: boolean; onSelect: (unitId: string) => void; onChange: (unit: DashboardUnit, watched: boolean) => void }) {
@@ -181,7 +261,7 @@ function CatalogCard({ unit, collection, watched, selected, saving, onSelect, on
   const artwork = catalogArtworkForTitle(unit.title);
   const className = [watched ? styles.watchedCard : styles.card, selected ? styles.selectedCard : ""].filter(Boolean).join(" ");
 
-  return <article className={className} tabIndex={0} data-selected={selected} data-artwork={artwork ?? undefined} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
+  return <article id={`catalog-unit-${unit.id}`} className={className} tabIndex={0} data-selected={selected} data-artwork={artwork ?? undefined} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
     {artwork && <span className={styles.cardArtwork} aria-hidden="true" />}
     <div className={styles.cardTerminal} aria-hidden="true"><span>{`STARK_DB // ${meta.code}_NODE_${archiveRef}`}</span><b><i /> {watched ? "LOGGED" : "LINK ACTIVE"}</b></div>
     <header className={styles.cardHeader}><div className={styles.cardIndex}><span>Archive ref</span><strong>{archiveRef}</strong></div><label className={styles.cardSelector} onClick={(event) => event.stopPropagation()}><input type="checkbox" checked={selected} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /><span>{selected ? "Selected" : "Select"}</span></label></header>
@@ -198,7 +278,7 @@ function CatalogRow({ unit, collection, watched, selected, saving, onSelect, onC
   const isEpisode = unit.unitKind === "episode";
   const season = String(unit.seasonNumber).padStart(2, "0");
   const episode = String(unit.episodeNumber).padStart(2, "0");
-  return <tr className={className || undefined} tabIndex={0} aria-selected={selected} data-artwork={artwork ?? undefined} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
+  return <tr id={`catalog-unit-${unit.id}`} className={className || undefined} tabIndex={0} aria-selected={selected} data-artwork={artwork ?? undefined} onClick={() => onSelect(unit.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(unit.id); } }}>
     <td className={styles.selectCell}><input type="checkbox" checked={selected} onClick={(event) => event.stopPropagation()} onChange={() => onSelect(unit.id)} aria-label={`Select ${unit.title} ${unitLabel(unit)}`} /></td>
     <td className={styles.recordCell}><strong>{String(unit.position).padStart(3, "0")}</strong><span>ARC/{meta.code}-{String(unit.position).padStart(3, "0")}</span></td>
     <td className={styles.titleCell}><strong>{unit.title}</strong>{isEpisode ? <div className={styles.episodeInline} aria-label={`Season ${unit.seasonNumber}, episode ${unit.episodeNumber}`}><span><small>Season</small><b>S{season}</b></span><i aria-hidden="true" /><span><small>Episode</small><b>E{episode}</b></span></div> : <div className={styles.rowMeta}><span>{unit.titleKind} title</span>{collection !== unit.title && <span>{collection} collection</span>}</div>}</td>
