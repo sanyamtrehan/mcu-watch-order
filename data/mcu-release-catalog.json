@@ -518,6 +518,12 @@
       "watchUnitId": "watch-special-werewolf-by-night"
     },
     {
+      "title": "Director by Night",
+      "releaseDate": "2022-11-04",
+      "id": "special-director-by-night",
+      "watchUnitId": "watch-special-director-by-night"
+    },
+    {
       "title": "The Guardians of the Galaxy Holiday Special",
       "releaseDate": "2022-11-25",
       "id": "special-the-guardians-of-the-galaxy-holiday-special",
@@ -528,6 +534,12 @@
       "releaseDate": "2024-03-27",
       "id": "special-the-spider-within-a-spider-verse-story",
       "watchUnitId": "watch-special-the-spider-within-a-spider-verse-story"
+    },
+    {
+      "title": "The Punisher: One Last Kill",
+      "releaseDate": "2026-05-12",
+      "id": "special-the-punisher-one-last-kill",
+      "watchUnitId": "watch-special-the-punisher-one-last-kill"
     }
   ],
   "series": [

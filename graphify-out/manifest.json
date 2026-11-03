@@ -230,9 +230,9 @@
     "semantic_hash": "bca7bfe87c64c692d467acbb9df6e926"
   },
   "data/mcu-release-catalog.json": {
-    "mtime": 1793569131.1032193,
-    "seen": 1793569156.301566,
-    "ast_hash": "51a8ac3c965cab59ac56995198fdb602",
+    "mtime": 1793663076.9879549,
+    "seen": 1793663099.375814,
+    "ast_hash": "6cfe528cd8862ffafb1573a7c8185da6",
     "semantic_hash": ""
   },
   "frontend/.vscode/extensions.json": {
@@ -730,9 +730,9 @@
     "semantic_hash": ""
   },
   "data/README.md": {
-    "mtime": 1790546871.649282,
-    "seen": 1793445600.616766,
-    "ast_hash": "bf66befc3a67498a383954b35f53af8c",
+    "mtime": 1793663077.0112398,
+    "seen": 1793663099.377515,
+    "ast_hash": "16a7e905e4090d6a69fe40d548871c02",
     "semantic_hash": ""
   },
   "docs/ASSET_SOURCES.md": {
