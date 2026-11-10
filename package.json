@@ -5,6 +5,7 @@
     "catalog:validate": "node scripts/validate-catalog-seed.js",
     "catalog:runtimes": "node scripts/fetch-catalog-runtimes.mjs",
     "catalog:import": "node scripts/import-catalog-seed.js",
+    "mcp:test": "node --test --experimental-strip-types supabase/functions/mcp/catalog.test.mjs",
     "supabase": "supabase",
     "web:build": "npm run build --prefix web",
     "web:dev": "npm run dev --prefix web"

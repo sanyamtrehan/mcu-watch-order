@@ -459,9 +459,9 @@
     "ast_empty": true
   },
   "package.json": {
-    "mtime": 1794335385.9326594,
-    "seen": 1794336472.9029188,
-    "ast_hash": "184de853fb47cb69b6321836c9af51c3",
+    "mtime": 1794352103.8609157,
+    "seen": 1794352122.5042582,
+    "ast_hash": "c2d3b0463a49067fc958479326b98f40",
     "semantic_hash": ""
   },
   "scripts/import-catalog-seed.js": {
@@ -496,9 +496,9 @@
     "semantic_hash": "154177f65fdb13f40bd06e8a890eacc6"
   },
   "web/package.json": {
-    "mtime": 1794320766.3291285,
-    "seen": 1794321529.789223,
-    "ast_hash": "15d37deaf6727e6bfbede5a91ead11b9",
+    "mtime": 1794351841.7914913,
+    "seen": 1794352122.5043662,
+    "ast_hash": "42ad6e9473a9036c938e4d52d337a868",
     "semantic_hash": ""
   },
   "web/src/app/auth/signout/route.ts": {
@@ -544,9 +544,9 @@
     "semantic_hash": "6ffffc356fd9e62acb3414546407cdce"
   },
   "web/src/app/login/page.tsx": {
-    "mtime": 1793468672.9132984,
-    "seen": 1793468772.375826,
-    "ast_hash": "a7424d1c74baf028929dde9384b32f88",
+    "mtime": 1794351841.775518,
+    "seen": 1794352122.504529,
+    "ast_hash": "d97bcc0ca7df34e7798b3f6a01966f56",
     "semantic_hash": ""
   },
   "web/src/app/page.tsx": {
@@ -1207,6 +1207,54 @@
     "mtime": 1794336419.7046728,
     "seen": 1794336472.90292,
     "ast_hash": "758979133eb26a2d2681fb9ac213fd12",
+    "semantic_hash": ""
+  },
+  "supabase/functions/mcp/catalog.test.mjs": {
+    "mtime": 1794352103.9014301,
+    "seen": 1794352122.504328,
+    "ast_hash": "4d8a10923e790ead5621bca8b241b6e6",
+    "semantic_hash": ""
+  },
+  "supabase/functions/mcp/catalog.ts": {
+    "mtime": 1794352103.882796,
+    "seen": 1794352122.504329,
+    "ast_hash": "96160924e7143946c9a983665e02d77a",
+    "semantic_hash": ""
+  },
+  "supabase/functions/mcp/index.ts": {
+    "mtime": 1794352103.9190197,
+    "seen": 1794352122.50433,
+    "ast_hash": "0c5b473726dc61dd12f7c84ba4ceb8b7",
+    "semantic_hash": ""
+  },
+  "web/src/app/oauth/consent/actions.ts": {
+    "mtime": 1794351841.8076482,
+    "seen": 1794352122.50453,
+    "ast_hash": "12cdfb6595e0291e9d2a79408953274e",
+    "semantic_hash": ""
+  },
+  "web/src/app/oauth/consent/page.tsx": {
+    "mtime": 1794351841.8233073,
+    "seen": 1794352122.50453,
+    "ast_hash": "abc7572545a9669147d392dafbf94647",
+    "semantic_hash": ""
+  },
+  "web/src/lib/auth/safe-redirect.test.mjs": {
+    "mtime": 1794351841.7562296,
+    "seen": 1794352122.5046139,
+    "ast_hash": "f02b10be9a33ece59cdead90a5f38950",
+    "semantic_hash": ""
+  },
+  "web/src/lib/auth/safe-redirect.ts": {
+    "mtime": 1794351841.735489,
+    "seen": 1794352122.5046148,
+    "ast_hash": "0e436c9bb067d17dd15c5bf2831393db",
+    "semantic_hash": ""
+  },
+  "docs/CHATGPT_MCP.md": {
+    "mtime": 1794351841.85385,
+    "seen": 1794352122.505452,
+    "ast_hash": "49c02e0188780170a5cfc906a14216fe",
     "semantic_hash": ""
   },
   "backend/package-lock.json": {

@@ -5,6 +5,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { validatePasswordReset } from "@/lib/auth/password-reset";
+import { safeRedirectPath } from "@/lib/auth/safe-redirect";
 import styles from "./page.module.css";
 
 type Mode = "signin" | "signup" | "forgot" | "reset";
@@ -117,7 +118,7 @@ export default function LoginPage() {
       return;
     }
 
-    router.replace("/dashboard");
+    router.replace(safeRedirectPath(new URLSearchParams(window.location.search).get("redirect")));
     router.refresh();
   }
 

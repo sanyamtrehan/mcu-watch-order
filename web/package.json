@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test --experimental-strip-types src/lib/catalog/title-filter-groups.test.mjs src/lib/catalog/catalog-artwork.test.mjs src/lib/catalog/catalog-metadata.test.mjs src/lib/catalog/episode-runs.test.mjs src/lib/catalog/season-filter-options.test.mjs src/lib/progress/local-progress.test.mjs src/lib/supabase/pagination.test.mjs src/lib/auth/password-reset.test.mjs"
+    "test": "node --test --experimental-strip-types src/lib/catalog/title-filter-groups.test.mjs src/lib/catalog/catalog-artwork.test.mjs src/lib/catalog/catalog-metadata.test.mjs src/lib/catalog/episode-runs.test.mjs src/lib/catalog/season-filter-options.test.mjs src/lib/progress/local-progress.test.mjs src/lib/supabase/pagination.test.mjs src/lib/auth/password-reset.test.mjs src/lib/auth/safe-redirect.test.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
