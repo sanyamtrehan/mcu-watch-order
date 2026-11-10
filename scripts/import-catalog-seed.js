@@ -47,15 +47,15 @@ async function importCatalog() {
     const seasonRows = catalog.series.flatMap((series) => series.seasons.map((season) => [season.id, series.id, season.number]));
     const episodeRows = catalog.series.flatMap((series) => series.seasons.flatMap((season) => season.episodes.map((episode) => [episode.id, season.id, episode.number, episode.releaseDate])));
     const watchUnitRows = [
-      ...catalog.movies.map((item) => [item.watchUnitId, item.id, "movie", item.releaseDate, null]),
-      ...catalog.specials.map((item) => [item.watchUnitId, item.id, "special", item.releaseDate, null]),
-      ...catalog.series.flatMap((series) => series.seasons.flatMap((season) => season.episodes.map((episode) => [episode.watchUnitId, series.id, "episode", episode.releaseDate, episode.id]))),
+      ...catalog.movies.map((item) => [item.watchUnitId, item.id, "movie", item.releaseDate, null, item.runtimeMinutes]),
+      ...catalog.specials.map((item) => [item.watchUnitId, item.id, "special", item.releaseDate, null, item.runtimeMinutes]),
+      ...catalog.series.flatMap((series) => series.seasons.flatMap((season) => season.episodes.map((episode) => [episode.watchUnitId, series.id, "episode", episode.releaseDate, episode.id, episode.runtimeMinutes]))),
     ];
 
     await bulkUpsert(client, "catalog_titles", ["id", "title", "kind", "release_date"], titleRows, ["id"], ["title", "kind", "release_date"], ["\"updated_at\" = now()"]);
     await bulkUpsert(client, "catalog_seasons", ["id", "title_id", "season_number"], seasonRows, ["id"], ["title_id", "season_number"]);
     await bulkUpsert(client, "catalog_episodes", ["id", "season_id", "episode_number", "release_date"], episodeRows, ["id"], ["season_id", "episode_number", "release_date"]);
-    await bulkUpsert(client, "watch_units", ["id", "title_id", "kind", "release_date", "episode_id"], watchUnitRows, ["id"], ["title_id", "kind", "release_date", "episode_id"]);
+    await bulkUpsert(client, "watch_units", ["id", "title_id", "kind", "release_date", "episode_id", "runtime_minutes"], watchUnitRows, ["id"], ["title_id", "kind", "release_date", "episode_id", "runtime_minutes"]);
     await bulkUpsert(client, "catalog_orderings", ["id", "label", "status", "description"], catalog.orderingDefinitions.map((item) => [item.id, item.label, item.status, item.description]), ["id"], ["label", "status", "description"]);
 
     await client.query("DELETE FROM title_relations");

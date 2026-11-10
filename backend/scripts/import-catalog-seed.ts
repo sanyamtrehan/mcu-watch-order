@@ -10,6 +10,7 @@ interface Episode {
   number: string;
   releaseDate: string;
   watchUnitId: string;
+  runtimeMinutes: number;
 }
 
 interface Season {
@@ -23,6 +24,7 @@ interface MovieOrSpecial {
   title: string;
   releaseDate: string;
   watchUnitId: string;
+  runtimeMinutes: number;
 }
 
 interface Series {
@@ -106,8 +108,8 @@ async function importCatalog() {
       ),
     );
     const watchUnitRows: unknown[][] = [
-      ...catalog.movies.map((movie) => [movie.watchUnitId, movie.id, 'movie', movie.releaseDate, null]),
-      ...catalog.specials.map((special) => [special.watchUnitId, special.id, 'special', special.releaseDate, null]),
+      ...catalog.movies.map((movie) => [movie.watchUnitId, movie.id, 'movie', movie.releaseDate, null, movie.runtimeMinutes]),
+      ...catalog.specials.map((special) => [special.watchUnitId, special.id, 'special', special.releaseDate, null, special.runtimeMinutes]),
       ...catalog.series.flatMap((series) =>
         series.seasons.flatMap((season) =>
           season.episodes.map((episode) => [
@@ -116,6 +118,7 @@ async function importCatalog() {
             'episode' as WatchUnitKind,
             episode.releaseDate,
             episode.id,
+            episode.runtimeMinutes,
           ]),
         ),
       ),
@@ -124,7 +127,7 @@ async function importCatalog() {
     await bulkUpsert(queryRunner, 'catalog_titles', ['id', 'title', 'kind', 'release_date'], titleRows, ['id'], ['title', 'kind', 'release_date'], ['"updated_at" = now()']);
     await bulkUpsert(queryRunner, 'catalog_seasons', ['id', 'title_id', 'season_number'], seasonRows, ['id'], ['title_id', 'season_number']);
     await bulkUpsert(queryRunner, 'catalog_episodes', ['id', 'season_id', 'episode_number', 'release_date'], episodeRows, ['id'], ['season_id', 'episode_number', 'release_date']);
-    await bulkUpsert(queryRunner, 'watch_units', ['id', 'title_id', 'kind', 'release_date', 'episode_id'], watchUnitRows, ['id'], ['title_id', 'kind', 'release_date', 'episode_id']);
+    await bulkUpsert(queryRunner, 'watch_units', ['id', 'title_id', 'kind', 'release_date', 'episode_id', 'runtime_minutes'], watchUnitRows, ['id'], ['title_id', 'kind', 'release_date', 'episode_id', 'runtime_minutes']);
     await bulkUpsert(
       queryRunner,
       'catalog_orderings',

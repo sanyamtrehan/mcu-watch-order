@@ -10,6 +10,7 @@ type WatchUnitRow = {
   episode_id: string | null;
   kind: "movie" | "special" | "episode";
   release_date: string;
+  runtime_minutes: number;
 };
 type OrderingRow = { position: number; watch_unit_id: string };
 type RelationRow = { from_title_id: string; to_title_id: string; type: string };
@@ -22,6 +23,7 @@ export type DashboardUnit = {
   titleKind: TitleRow["kind"];
   unitKind: WatchUnitRow["kind"];
   releaseDate: string;
+  runtimeMinutes: number;
   seasonNumber: number | null;
   seasonId: string | null;
   episodeNumber: string | null;
@@ -44,7 +46,7 @@ export async function getReleaseOrderCatalog(): Promise<ReleaseOrderCatalog> {
   const supabase = await createClient();
   const [orderingRows, unitRows, titleRows, episodeRows, seasonRows, relationRows] = await Promise.all([
     collectPages<OrderingRow>((from, to) => supabase.from("ordering_entries").select("position, watch_unit_id").eq("ordering_id", "release").order("position").range(from, to)),
-    collectPages<WatchUnitRow>((from, to) => supabase.from("watch_units").select("id, title_id, episode_id, kind, release_date").order("id").range(from, to)),
+    collectPages<WatchUnitRow>((from, to) => supabase.from("watch_units").select("id, title_id, episode_id, kind, release_date, runtime_minutes").order("id").range(from, to)),
     collectPages<TitleRow>((from, to) => supabase.from("catalog_titles").select("id, title, kind").order("id").range(from, to)),
     collectPages<EpisodeRow>((from, to) => supabase.from("catalog_episodes").select("id, season_id, episode_number").order("id").range(from, to)),
     collectPages<SeasonRow>((from, to) => supabase.from("catalog_seasons").select("id, season_number").order("id").range(from, to)),
@@ -72,6 +74,7 @@ export async function getReleaseOrderCatalog(): Promise<ReleaseOrderCatalog> {
       titleKind: title.kind,
       unitKind: unit.kind,
       releaseDate: unit.release_date,
+      runtimeMinutes: unit.runtime_minutes,
       seasonNumber: season?.season_number ?? null,
       seasonId: episode?.season_id ?? null,
       episodeNumber: episode?.episode_number ?? null,

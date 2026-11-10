@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "catalog:validate": "node scripts/validate-catalog-seed.js",
+    "catalog:runtimes": "node scripts/fetch-catalog-runtimes.mjs",
     "catalog:import": "node scripts/import-catalog-seed.js",
     "supabase": "supabase",
     "web:build": "npm run build --prefix web",

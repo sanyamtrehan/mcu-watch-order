@@ -44,6 +44,9 @@ assertUnique(watchUnits.map(({ watchUnitId }) => watchUnitId), 'Watch-unit IDs')
 assertUnique(episodes.map(({ id }) => id), 'Episode IDs');
 
 for (const item of watchUnits) {
+  if (!Number.isInteger(item.runtimeMinutes) || item.runtimeMinutes <= 0) {
+    throw new Error(`Invalid runtime for ${item.id}: ${item.runtimeMinutes}`);
+  }
   const parsedDate = new Date(`${item.releaseDate}T00:00:00.000Z`);
   if (
     !/^\d{4}-\d{2}-\d{2}$/.test(item.releaseDate)
