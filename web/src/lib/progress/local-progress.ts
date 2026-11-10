@@ -47,3 +47,25 @@ export function writeLocalProgress(watchedUnitIds: Iterable<string>): LocalProgr
   window.dispatchEvent(new Event(LOCAL_PROGRESS_EVENT));
   return progress;
 }
+
+export function serializeProgressBackup(watchedUnitIds: Iterable<string>) {
+  return JSON.stringify({
+    version: 1,
+    watchedUnitIds: [...new Set(watchedUnitIds)],
+    updatedAt: new Date().toISOString(),
+  } satisfies LocalProgress, null, 2);
+}
+
+export function parseProgressBackup(value: string, validUnitIds: Set<string>) {
+  let parsed: Partial<LocalProgress>;
+  try {
+    parsed = JSON.parse(value) as Partial<LocalProgress>;
+  } catch {
+    throw new Error("This is not a valid JSON backup.");
+  }
+  if (parsed.version !== 1 || !Array.isArray(parsed.watchedUnitIds) || parsed.watchedUnitIds.some((id) => typeof id !== "string")) {
+    throw new Error("This backup is not a supported MCU Watch Order export.");
+  }
+
+  return [...new Set(parsed.watchedUnitIds.filter((id): id is string => typeof id === "string" && validUnitIds.has(id)))];
+}

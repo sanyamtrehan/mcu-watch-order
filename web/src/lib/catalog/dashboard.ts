@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { collectPages } from "@/lib/supabase/pagination";
 
 type TitleRow = { id: string; title: string; kind: "movie" | "special" | "series" };
 type SeasonRow = { id: string; season_number: number };
@@ -10,6 +11,8 @@ type WatchUnitRow = {
   kind: "movie" | "special" | "episode";
   release_date: string;
 };
+type OrderingRow = { position: number; watch_unit_id: string };
+type RelationRow = { from_title_id: string; to_title_id: string; type: string };
 
 export type DashboardUnit = {
   id: string;
@@ -39,24 +42,21 @@ export type ReleaseOrderCatalog = {
 
 export async function getReleaseOrderCatalog(): Promise<ReleaseOrderCatalog> {
   const supabase = await createClient();
-  const [orderingResult, unitsResult, titlesResult, episodesResult, seasonsResult, relationsResult] = await Promise.all([
-    supabase.from("ordering_entries").select("position, watch_unit_id").eq("ordering_id", "release").order("position"),
-    supabase.from("watch_units").select("id, title_id, episode_id, kind, release_date"),
-    supabase.from("catalog_titles").select("id, title, kind"),
-    supabase.from("catalog_episodes").select("id, season_id, episode_number"),
-    supabase.from("catalog_seasons").select("id, season_number"),
-    supabase.from("title_relations").select("from_title_id, to_title_id, type"),
+  const [orderingRows, unitRows, titleRows, episodeRows, seasonRows, relationRows] = await Promise.all([
+    collectPages<OrderingRow>((from, to) => supabase.from("ordering_entries").select("position, watch_unit_id").eq("ordering_id", "release").order("position").range(from, to)),
+    collectPages<WatchUnitRow>((from, to) => supabase.from("watch_units").select("id, title_id, episode_id, kind, release_date").order("id").range(from, to)),
+    collectPages<TitleRow>((from, to) => supabase.from("catalog_titles").select("id, title, kind").order("id").range(from, to)),
+    collectPages<EpisodeRow>((from, to) => supabase.from("catalog_episodes").select("id, season_id, episode_number").order("id").range(from, to)),
+    collectPages<SeasonRow>((from, to) => supabase.from("catalog_seasons").select("id, season_number").order("id").range(from, to)),
+    collectPages<RelationRow>((from, to) => supabase.from("title_relations").select("from_title_id, to_title_id, type").order("from_title_id").order("to_title_id").range(from, to)),
   ]);
 
-  const errors = [orderingResult.error, unitsResult.error, titlesResult.error, episodesResult.error, seasonsResult.error, relationsResult.error].filter(Boolean);
-  if (errors.length > 0) throw new Error(`Unable to load catalog: ${errors[0]?.message}`);
+  const unitsById = new Map(unitRows.map((unit) => [unit.id, unit]));
+  const titlesById = new Map(titleRows.map((title) => [title.id, title]));
+  const episodesById = new Map(episodeRows.map((episode) => [episode.id, episode]));
+  const seasonsById = new Map(seasonRows.map((season) => [season.id, season]));
 
-  const unitsById = new Map(((unitsResult.data ?? []) as WatchUnitRow[]).map((unit) => [unit.id, unit]));
-  const titlesById = new Map(((titlesResult.data ?? []) as TitleRow[]).map((title) => [title.id, title]));
-  const episodesById = new Map(((episodesResult.data ?? []) as EpisodeRow[]).map((episode) => [episode.id, episode]));
-  const seasonsById = new Map(((seasonsResult.data ?? []) as SeasonRow[]).map((season) => [season.id, season]));
-
-  const units = (orderingResult.data ?? []).flatMap((entry) => {
+  const units = orderingRows.flatMap((entry) => {
     const unit = unitsById.get(entry.watch_unit_id);
     const title = unit ? titlesById.get(unit.title_id) : undefined;
     if (!unit || !title) return [];
@@ -78,7 +78,7 @@ export async function getReleaseOrderCatalog(): Promise<ReleaseOrderCatalog> {
     }];
   });
 
-  const relationships = (relationsResult.data ?? []).flatMap((relation) => {
+  const relationships = relationRows.flatMap((relation) => {
     const fromTitle = titlesById.get(relation.from_title_id);
     const toTitle = titlesById.get(relation.to_title_id);
     if (!fromTitle || !toTitle) return [];
