@@ -544,7 +544,1603 @@
   ],
   "series": [
     {
-      "title": "Agents Of Shield",
+      "title": "Mutant X",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2001-10-06",
+              "id": "series-mutant-x-season-1-episode-1",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2001-10-13",
+              "id": "series-mutant-x-season-1-episode-2",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2001-10-20",
+              "id": "series-mutant-x-season-1-episode-3",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2001-10-27",
+              "id": "series-mutant-x-season-1-episode-4",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2001-11-03",
+              "id": "series-mutant-x-season-1-episode-5",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2001-11-10",
+              "id": "series-mutant-x-season-1-episode-6",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2001-11-17",
+              "id": "series-mutant-x-season-1-episode-7",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2001-11-24",
+              "id": "series-mutant-x-season-1-episode-8",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2001-12-01",
+              "id": "series-mutant-x-season-1-episode-9",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2002-01-19",
+              "id": "series-mutant-x-season-1-episode-10",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2002-01-26",
+              "id": "series-mutant-x-season-1-episode-11",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2002-02-02",
+              "id": "series-mutant-x-season-1-episode-12",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-12"
+            },
+            {
+              "number": "13",
+              "releaseDate": "2002-02-09",
+              "id": "series-mutant-x-season-1-episode-13",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-13"
+            },
+            {
+              "number": "14",
+              "releaseDate": "2002-02-16",
+              "id": "series-mutant-x-season-1-episode-14",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-14"
+            },
+            {
+              "number": "15",
+              "releaseDate": "2002-02-23",
+              "id": "series-mutant-x-season-1-episode-15",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-15"
+            },
+            {
+              "number": "16",
+              "releaseDate": "2002-03-02",
+              "id": "series-mutant-x-season-1-episode-16",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-16"
+            },
+            {
+              "number": "17",
+              "releaseDate": "2002-04-20",
+              "id": "series-mutant-x-season-1-episode-17",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-17"
+            },
+            {
+              "number": "18",
+              "releaseDate": "2002-04-27",
+              "id": "series-mutant-x-season-1-episode-18",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-18"
+            },
+            {
+              "number": "19",
+              "releaseDate": "2002-05-04",
+              "id": "series-mutant-x-season-1-episode-19",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-19"
+            },
+            {
+              "number": "20",
+              "releaseDate": "2002-05-11",
+              "id": "series-mutant-x-season-1-episode-20",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-20"
+            },
+            {
+              "number": "21",
+              "releaseDate": "2002-05-18",
+              "id": "series-mutant-x-season-1-episode-21",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-21"
+            },
+            {
+              "number": "22",
+              "releaseDate": "2002-07-06",
+              "id": "series-mutant-x-season-1-episode-22",
+              "watchUnitId": "watch-series-mutant-x-season-1-episode-22"
+            }
+          ],
+          "id": "series-mutant-x-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2002-10-05",
+              "id": "series-mutant-x-season-2-episode-1",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2002-10-12",
+              "id": "series-mutant-x-season-2-episode-2",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2002-10-19",
+              "id": "series-mutant-x-season-2-episode-3",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2002-10-26",
+              "id": "series-mutant-x-season-2-episode-4",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2002-11-02",
+              "id": "series-mutant-x-season-2-episode-5",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2002-11-09",
+              "id": "series-mutant-x-season-2-episode-6",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2002-11-16",
+              "id": "series-mutant-x-season-2-episode-7",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2002-11-23",
+              "id": "series-mutant-x-season-2-episode-8",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2002-11-30",
+              "id": "series-mutant-x-season-2-episode-9",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2003-01-13",
+              "id": "series-mutant-x-season-2-episode-10",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2003-01-20",
+              "id": "series-mutant-x-season-2-episode-11",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2003-01-27",
+              "id": "series-mutant-x-season-2-episode-12",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-12"
+            },
+            {
+              "number": "13",
+              "releaseDate": "2003-02-03",
+              "id": "series-mutant-x-season-2-episode-13",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-13"
+            },
+            {
+              "number": "14",
+              "releaseDate": "2003-02-10",
+              "id": "series-mutant-x-season-2-episode-14",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-14"
+            },
+            {
+              "number": "15",
+              "releaseDate": "2003-02-17",
+              "id": "series-mutant-x-season-2-episode-15",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-15"
+            },
+            {
+              "number": "16",
+              "releaseDate": "2003-02-24",
+              "id": "series-mutant-x-season-2-episode-16",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-16"
+            },
+            {
+              "number": "17",
+              "releaseDate": "2003-04-07",
+              "id": "series-mutant-x-season-2-episode-17",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-17"
+            },
+            {
+              "number": "18",
+              "releaseDate": "2003-04-14",
+              "id": "series-mutant-x-season-2-episode-18",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-18"
+            },
+            {
+              "number": "19",
+              "releaseDate": "2003-04-21",
+              "id": "series-mutant-x-season-2-episode-19",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-19"
+            },
+            {
+              "number": "20",
+              "releaseDate": "2003-04-28",
+              "id": "series-mutant-x-season-2-episode-20",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-20"
+            },
+            {
+              "number": "21",
+              "releaseDate": "2003-05-05",
+              "id": "series-mutant-x-season-2-episode-21",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-21"
+            },
+            {
+              "number": "22",
+              "releaseDate": "2003-05-12",
+              "id": "series-mutant-x-season-2-episode-22",
+              "watchUnitId": "watch-series-mutant-x-season-2-episode-22"
+            }
+          ],
+          "id": "series-mutant-x-season-2"
+        },
+        {
+          "number": 3,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2003-09-29",
+              "id": "series-mutant-x-season-3-episode-1",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2003-10-06",
+              "id": "series-mutant-x-season-3-episode-2",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2003-10-13",
+              "id": "series-mutant-x-season-3-episode-3",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2003-10-20",
+              "id": "series-mutant-x-season-3-episode-4",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2003-10-27",
+              "id": "series-mutant-x-season-3-episode-5",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2003-11-03",
+              "id": "series-mutant-x-season-3-episode-6",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2003-11-10",
+              "id": "series-mutant-x-season-3-episode-7",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2003-11-17",
+              "id": "series-mutant-x-season-3-episode-8",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2004-01-12",
+              "id": "series-mutant-x-season-3-episode-9",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2004-01-19",
+              "id": "series-mutant-x-season-3-episode-10",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2004-01-26",
+              "id": "series-mutant-x-season-3-episode-11",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2004-02-02",
+              "id": "series-mutant-x-season-3-episode-12",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-12"
+            },
+            {
+              "number": "13",
+              "releaseDate": "2004-02-09",
+              "id": "series-mutant-x-season-3-episode-13",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-13"
+            },
+            {
+              "number": "14",
+              "releaseDate": "2004-02-16",
+              "id": "series-mutant-x-season-3-episode-14",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-14"
+            },
+            {
+              "number": "15",
+              "releaseDate": "2004-02-23",
+              "id": "series-mutant-x-season-3-episode-15",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-15"
+            },
+            {
+              "number": "16",
+              "releaseDate": "2004-04-05",
+              "id": "series-mutant-x-season-3-episode-16",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-16"
+            },
+            {
+              "number": "17",
+              "releaseDate": "2004-04-12",
+              "id": "series-mutant-x-season-3-episode-17",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-17"
+            },
+            {
+              "number": "18",
+              "releaseDate": "2004-04-19",
+              "id": "series-mutant-x-season-3-episode-18",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-18"
+            },
+            {
+              "number": "19",
+              "releaseDate": "2004-04-26",
+              "id": "series-mutant-x-season-3-episode-19",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-19"
+            },
+            {
+              "number": "20",
+              "releaseDate": "2004-05-03",
+              "id": "series-mutant-x-season-3-episode-20",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-20"
+            },
+            {
+              "number": "21",
+              "releaseDate": "2004-05-10",
+              "id": "series-mutant-x-season-3-episode-21",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-21"
+            },
+            {
+              "number": "22",
+              "releaseDate": "2004-05-17",
+              "id": "series-mutant-x-season-3-episode-22",
+              "watchUnitId": "watch-series-mutant-x-season-3-episode-22"
+            }
+          ],
+          "id": "series-mutant-x-season-3"
+        }
+      ],
+      "id": "series-mutant-x"
+    },
+    {
+      "title": "Blade: The Series",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2006-06-28",
+              "id": "series-blade-the-series-season-1-episode-1",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2006-07-05",
+              "id": "series-blade-the-series-season-1-episode-2",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2006-07-12",
+              "id": "series-blade-the-series-season-1-episode-3",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2006-07-19",
+              "id": "series-blade-the-series-season-1-episode-4",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2006-07-26",
+              "id": "series-blade-the-series-season-1-episode-5",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2006-08-02",
+              "id": "series-blade-the-series-season-1-episode-6",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2006-08-09",
+              "id": "series-blade-the-series-season-1-episode-7",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2006-08-16",
+              "id": "series-blade-the-series-season-1-episode-8",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2006-08-23",
+              "id": "series-blade-the-series-season-1-episode-9",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2006-08-30",
+              "id": "series-blade-the-series-season-1-episode-10",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2006-09-06",
+              "id": "series-blade-the-series-season-1-episode-11",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2006-09-13",
+              "id": "series-blade-the-series-season-1-episode-12",
+              "watchUnitId": "watch-series-blade-the-series-season-1-episode-12"
+            }
+          ],
+          "id": "series-blade-the-series-season-1"
+        }
+      ],
+      "id": "series-blade-the-series"
+    },
+    {
+      "title": "Powers",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2015-03-10",
+              "id": "series-powers-season-1-episode-1",
+              "watchUnitId": "watch-series-powers-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2015-03-10",
+              "id": "series-powers-season-1-episode-2",
+              "watchUnitId": "watch-series-powers-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2015-03-10",
+              "id": "series-powers-season-1-episode-3",
+              "watchUnitId": "watch-series-powers-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2015-03-17",
+              "id": "series-powers-season-1-episode-4",
+              "watchUnitId": "watch-series-powers-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2015-03-24",
+              "id": "series-powers-season-1-episode-5",
+              "watchUnitId": "watch-series-powers-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2015-03-31",
+              "id": "series-powers-season-1-episode-6",
+              "watchUnitId": "watch-series-powers-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2015-04-07",
+              "id": "series-powers-season-1-episode-7",
+              "watchUnitId": "watch-series-powers-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2015-04-14",
+              "id": "series-powers-season-1-episode-8",
+              "watchUnitId": "watch-series-powers-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2015-04-21",
+              "id": "series-powers-season-1-episode-9",
+              "watchUnitId": "watch-series-powers-season-1-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2015-04-28",
+              "id": "series-powers-season-1-episode-10",
+              "watchUnitId": "watch-series-powers-season-1-episode-10"
+            }
+          ],
+          "id": "series-powers-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2016-05-31",
+              "id": "series-powers-season-2-episode-1",
+              "watchUnitId": "watch-series-powers-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2016-05-31",
+              "id": "series-powers-season-2-episode-2",
+              "watchUnitId": "watch-series-powers-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2016-05-31",
+              "id": "series-powers-season-2-episode-3",
+              "watchUnitId": "watch-series-powers-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2016-06-07",
+              "id": "series-powers-season-2-episode-4",
+              "watchUnitId": "watch-series-powers-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2016-06-14",
+              "id": "series-powers-season-2-episode-5",
+              "watchUnitId": "watch-series-powers-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2016-06-21",
+              "id": "series-powers-season-2-episode-6",
+              "watchUnitId": "watch-series-powers-season-2-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2016-06-28",
+              "id": "series-powers-season-2-episode-7",
+              "watchUnitId": "watch-series-powers-season-2-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2016-07-05",
+              "id": "series-powers-season-2-episode-8",
+              "watchUnitId": "watch-series-powers-season-2-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2016-07-12",
+              "id": "series-powers-season-2-episode-9",
+              "watchUnitId": "watch-series-powers-season-2-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2016-07-19",
+              "id": "series-powers-season-2-episode-10",
+              "watchUnitId": "watch-series-powers-season-2-episode-10"
+            }
+          ],
+          "id": "series-powers-season-2"
+        }
+      ],
+      "id": "series-powers"
+    },
+    {
+      "title": "Legion",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2017-02-08",
+              "id": "series-legion-season-1-episode-1",
+              "watchUnitId": "watch-series-legion-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2017-02-15",
+              "id": "series-legion-season-1-episode-2",
+              "watchUnitId": "watch-series-legion-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2017-02-22",
+              "id": "series-legion-season-1-episode-3",
+              "watchUnitId": "watch-series-legion-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2017-03-01",
+              "id": "series-legion-season-1-episode-4",
+              "watchUnitId": "watch-series-legion-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2017-03-08",
+              "id": "series-legion-season-1-episode-5",
+              "watchUnitId": "watch-series-legion-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2017-03-15",
+              "id": "series-legion-season-1-episode-6",
+              "watchUnitId": "watch-series-legion-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2017-03-22",
+              "id": "series-legion-season-1-episode-7",
+              "watchUnitId": "watch-series-legion-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2017-03-29",
+              "id": "series-legion-season-1-episode-8",
+              "watchUnitId": "watch-series-legion-season-1-episode-8"
+            }
+          ],
+          "id": "series-legion-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2018-04-03",
+              "id": "series-legion-season-2-episode-1",
+              "watchUnitId": "watch-series-legion-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2018-04-10",
+              "id": "series-legion-season-2-episode-2",
+              "watchUnitId": "watch-series-legion-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2018-04-17",
+              "id": "series-legion-season-2-episode-3",
+              "watchUnitId": "watch-series-legion-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2018-04-24",
+              "id": "series-legion-season-2-episode-4",
+              "watchUnitId": "watch-series-legion-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2018-05-01",
+              "id": "series-legion-season-2-episode-5",
+              "watchUnitId": "watch-series-legion-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2018-05-08",
+              "id": "series-legion-season-2-episode-6",
+              "watchUnitId": "watch-series-legion-season-2-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2018-05-15",
+              "id": "series-legion-season-2-episode-7",
+              "watchUnitId": "watch-series-legion-season-2-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2018-05-22",
+              "id": "series-legion-season-2-episode-8",
+              "watchUnitId": "watch-series-legion-season-2-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2018-05-29",
+              "id": "series-legion-season-2-episode-9",
+              "watchUnitId": "watch-series-legion-season-2-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2018-06-05",
+              "id": "series-legion-season-2-episode-10",
+              "watchUnitId": "watch-series-legion-season-2-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2018-06-12",
+              "id": "series-legion-season-2-episode-11",
+              "watchUnitId": "watch-series-legion-season-2-episode-11"
+            }
+          ],
+          "id": "series-legion-season-2"
+        },
+        {
+          "number": 3,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2019-06-24",
+              "id": "series-legion-season-3-episode-1",
+              "watchUnitId": "watch-series-legion-season-3-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2019-07-01",
+              "id": "series-legion-season-3-episode-2",
+              "watchUnitId": "watch-series-legion-season-3-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2019-07-08",
+              "id": "series-legion-season-3-episode-3",
+              "watchUnitId": "watch-series-legion-season-3-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2019-07-15",
+              "id": "series-legion-season-3-episode-4",
+              "watchUnitId": "watch-series-legion-season-3-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2019-07-22",
+              "id": "series-legion-season-3-episode-5",
+              "watchUnitId": "watch-series-legion-season-3-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2019-07-29",
+              "id": "series-legion-season-3-episode-6",
+              "watchUnitId": "watch-series-legion-season-3-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2019-08-05",
+              "id": "series-legion-season-3-episode-7",
+              "watchUnitId": "watch-series-legion-season-3-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2019-08-12",
+              "id": "series-legion-season-3-episode-8",
+              "watchUnitId": "watch-series-legion-season-3-episode-8"
+            }
+          ],
+          "id": "series-legion-season-3"
+        }
+      ],
+      "id": "series-legion"
+    },
+    {
+      "title": "The Gifted",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2017-10-02",
+              "id": "series-the-gifted-season-1-episode-1",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2017-10-09",
+              "id": "series-the-gifted-season-1-episode-2",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2017-10-16",
+              "id": "series-the-gifted-season-1-episode-3",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2017-10-23",
+              "id": "series-the-gifted-season-1-episode-4",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2017-10-30",
+              "id": "series-the-gifted-season-1-episode-5",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2017-11-06",
+              "id": "series-the-gifted-season-1-episode-6",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2017-11-13",
+              "id": "series-the-gifted-season-1-episode-7",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2017-11-20",
+              "id": "series-the-gifted-season-1-episode-8",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2017-12-04",
+              "id": "series-the-gifted-season-1-episode-9",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2017-12-11",
+              "id": "series-the-gifted-season-1-episode-10",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2018-01-01",
+              "id": "series-the-gifted-season-1-episode-11",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2018-01-15",
+              "id": "series-the-gifted-season-1-episode-12",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-12"
+            },
+            {
+              "number": "13",
+              "releaseDate": "2018-01-15",
+              "id": "series-the-gifted-season-1-episode-13",
+              "watchUnitId": "watch-series-the-gifted-season-1-episode-13"
+            }
+          ],
+          "id": "series-the-gifted-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2018-09-25",
+              "id": "series-the-gifted-season-2-episode-1",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2018-10-02",
+              "id": "series-the-gifted-season-2-episode-2",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2018-10-09",
+              "id": "series-the-gifted-season-2-episode-3",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2018-10-16",
+              "id": "series-the-gifted-season-2-episode-4",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2018-10-30",
+              "id": "series-the-gifted-season-2-episode-5",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2018-11-06",
+              "id": "series-the-gifted-season-2-episode-6",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2018-11-13",
+              "id": "series-the-gifted-season-2-episode-7",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2018-11-27",
+              "id": "series-the-gifted-season-2-episode-8",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2018-12-04",
+              "id": "series-the-gifted-season-2-episode-9",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2019-01-01",
+              "id": "series-the-gifted-season-2-episode-10",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2019-01-08",
+              "id": "series-the-gifted-season-2-episode-11",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2019-01-15",
+              "id": "series-the-gifted-season-2-episode-12",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-12"
+            },
+            {
+              "number": "13",
+              "releaseDate": "2019-01-22",
+              "id": "series-the-gifted-season-2-episode-13",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-13"
+            },
+            {
+              "number": "14",
+              "releaseDate": "2019-02-12",
+              "id": "series-the-gifted-season-2-episode-14",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-14"
+            },
+            {
+              "number": "15",
+              "releaseDate": "2019-02-19",
+              "id": "series-the-gifted-season-2-episode-15",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-15"
+            },
+            {
+              "number": "16",
+              "releaseDate": "2019-02-26",
+              "id": "series-the-gifted-season-2-episode-16",
+              "watchUnitId": "watch-series-the-gifted-season-2-episode-16"
+            }
+          ],
+          "id": "series-the-gifted-season-2"
+        }
+      ],
+      "id": "series-the-gifted"
+    },
+    {
+      "title": "Agents of S.H.I.E.L.D.: Double Agent",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2015-03-04",
+              "id": "series-agents-of-shield-double-agent-season-1-episode-1",
+              "watchUnitId": "watch-series-agents-of-shield-double-agent-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2015-03-18",
+              "id": "series-agents-of-shield-double-agent-season-1-episode-2",
+              "watchUnitId": "watch-series-agents-of-shield-double-agent-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2015-04-01",
+              "id": "series-agents-of-shield-double-agent-season-1-episode-3",
+              "watchUnitId": "watch-series-agents-of-shield-double-agent-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2015-04-22",
+              "id": "series-agents-of-shield-double-agent-season-1-episode-4",
+              "watchUnitId": "watch-series-agents-of-shield-double-agent-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2015-05-06",
+              "id": "series-agents-of-shield-double-agent-season-1-episode-5",
+              "watchUnitId": "watch-series-agents-of-shield-double-agent-season-1-episode-5"
+            }
+          ],
+          "id": "series-agents-of-shield-double-agent-season-1"
+        }
+      ],
+      "id": "series-agents-of-shield-double-agent"
+    },
+    {
+      "title": "WHIH Newsfront",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2015-07-02",
+              "id": "series-whih-newsfront-season-1-episode-1",
+              "watchUnitId": "watch-series-whih-newsfront-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2015-07-07",
+              "id": "series-whih-newsfront-season-1-episode-2",
+              "watchUnitId": "watch-series-whih-newsfront-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2015-07-10",
+              "id": "series-whih-newsfront-season-1-episode-3",
+              "watchUnitId": "watch-series-whih-newsfront-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2015-07-13",
+              "id": "series-whih-newsfront-season-1-episode-4",
+              "watchUnitId": "watch-series-whih-newsfront-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2015-07-16",
+              "id": "series-whih-newsfront-season-1-episode-5",
+              "watchUnitId": "watch-series-whih-newsfront-season-1-episode-5"
+            }
+          ],
+          "id": "series-whih-newsfront-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2016-04-22",
+              "id": "series-whih-newsfront-season-2-episode-1",
+              "watchUnitId": "watch-series-whih-newsfront-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2016-04-26",
+              "id": "series-whih-newsfront-season-2-episode-2",
+              "watchUnitId": "watch-series-whih-newsfront-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2016-04-28",
+              "id": "series-whih-newsfront-season-2-episode-3",
+              "watchUnitId": "watch-series-whih-newsfront-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2016-05-03",
+              "id": "series-whih-newsfront-season-2-episode-4",
+              "watchUnitId": "watch-series-whih-newsfront-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2016-05-03",
+              "id": "series-whih-newsfront-season-2-episode-5",
+              "watchUnitId": "watch-series-whih-newsfront-season-2-episode-5"
+            }
+          ],
+          "id": "series-whih-newsfront-season-2"
+        }
+      ],
+      "id": "series-whih-newsfront"
+    },
+    {
+      "title": "Agents of S.H.I.E.L.D.: Slingshot",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2016-12-13",
+              "id": "series-agents-of-shield-slingshot-season-1-episode-1",
+              "watchUnitId": "watch-series-agents-of-shield-slingshot-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2016-12-13",
+              "id": "series-agents-of-shield-slingshot-season-1-episode-2",
+              "watchUnitId": "watch-series-agents-of-shield-slingshot-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2016-12-13",
+              "id": "series-agents-of-shield-slingshot-season-1-episode-3",
+              "watchUnitId": "watch-series-agents-of-shield-slingshot-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2016-12-13",
+              "id": "series-agents-of-shield-slingshot-season-1-episode-4",
+              "watchUnitId": "watch-series-agents-of-shield-slingshot-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2016-12-13",
+              "id": "series-agents-of-shield-slingshot-season-1-episode-5",
+              "watchUnitId": "watch-series-agents-of-shield-slingshot-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2016-12-13",
+              "id": "series-agents-of-shield-slingshot-season-1-episode-6",
+              "watchUnitId": "watch-series-agents-of-shield-slingshot-season-1-episode-6"
+            }
+          ],
+          "id": "series-agents-of-shield-slingshot-season-1"
+        }
+      ],
+      "id": "series-agents-of-shield-slingshot"
+    },
+    {
+      "title": "The Daily Bugle",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2019-10-23",
+              "id": "series-the-daily-bugle-season-1-episode-1",
+              "watchUnitId": "watch-series-the-daily-bugle-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2019-10-29",
+              "id": "series-the-daily-bugle-season-1-episode-2",
+              "watchUnitId": "watch-series-the-daily-bugle-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2019-10-29",
+              "id": "series-the-daily-bugle-season-1-episode-3",
+              "watchUnitId": "watch-series-the-daily-bugle-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2019-10-30",
+              "id": "series-the-daily-bugle-season-1-episode-4",
+              "watchUnitId": "watch-series-the-daily-bugle-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2019-11-06",
+              "id": "series-the-daily-bugle-season-1-episode-5",
+              "watchUnitId": "watch-series-the-daily-bugle-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2019-11-20",
+              "id": "series-the-daily-bugle-season-1-episode-6",
+              "watchUnitId": "watch-series-the-daily-bugle-season-1-episode-6"
+            }
+          ],
+          "id": "series-the-daily-bugle-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2021-11-24",
+              "id": "series-the-daily-bugle-season-2-episode-1",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2021-11-24",
+              "id": "series-the-daily-bugle-season-2-episode-2",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2021-11-24",
+              "id": "series-the-daily-bugle-season-2-episode-3",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2021-12-01",
+              "id": "series-the-daily-bugle-season-2-episode-4",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2021-12-02",
+              "id": "series-the-daily-bugle-season-2-episode-5",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2021-12-06",
+              "id": "series-the-daily-bugle-season-2-episode-6",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2021-12-09",
+              "id": "series-the-daily-bugle-season-2-episode-7",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2021-12-10",
+              "id": "series-the-daily-bugle-season-2-episode-8",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2021-12-14",
+              "id": "series-the-daily-bugle-season-2-episode-9",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2021-12-17",
+              "id": "series-the-daily-bugle-season-2-episode-10",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-10"
+            },
+            {
+              "number": "11",
+              "releaseDate": "2021-12-21",
+              "id": "series-the-daily-bugle-season-2-episode-11",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-11"
+            },
+            {
+              "number": "12",
+              "releaseDate": "2021-12-22",
+              "id": "series-the-daily-bugle-season-2-episode-12",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-12"
+            },
+            {
+              "number": "13",
+              "releaseDate": "2022-01-06",
+              "id": "series-the-daily-bugle-season-2-episode-13",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-13"
+            },
+            {
+              "number": "14",
+              "releaseDate": "2022-03-15",
+              "id": "series-the-daily-bugle-season-2-episode-14",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-14"
+            },
+            {
+              "number": "15",
+              "releaseDate": "2022-03-15",
+              "id": "series-the-daily-bugle-season-2-episode-15",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-15"
+            },
+            {
+              "number": "16",
+              "releaseDate": "2022-04-05",
+              "id": "series-the-daily-bugle-season-2-episode-16",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-16"
+            },
+            {
+              "number": "17",
+              "releaseDate": "2022-04-13",
+              "id": "series-the-daily-bugle-season-2-episode-17",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-17"
+            },
+            {
+              "number": "18",
+              "releaseDate": "2022-04-29",
+              "id": "series-the-daily-bugle-season-2-episode-18",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-18"
+            },
+            {
+              "number": "19",
+              "releaseDate": "2022-04-29",
+              "id": "series-the-daily-bugle-season-2-episode-19",
+              "watchUnitId": "watch-series-the-daily-bugle-season-2-episode-19"
+            }
+          ],
+          "id": "series-the-daily-bugle-season-2"
+        },
+        {
+          "number": 3,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2022-03-18",
+              "id": "series-the-daily-bugle-season-3-episode-1",
+              "watchUnitId": "watch-series-the-daily-bugle-season-3-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2022-03-25",
+              "id": "series-the-daily-bugle-season-3-episode-2",
+              "watchUnitId": "watch-series-the-daily-bugle-season-3-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2022-03-29",
+              "id": "series-the-daily-bugle-season-3-episode-3",
+              "watchUnitId": "watch-series-the-daily-bugle-season-3-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2022-04-01",
+              "id": "series-the-daily-bugle-season-3-episode-4",
+              "watchUnitId": "watch-series-the-daily-bugle-season-3-episode-4"
+            }
+          ],
+          "id": "series-the-daily-bugle-season-3"
+        }
+      ],
+      "id": "series-the-daily-bugle"
+    },
+    {
+      "title": "M.O.D.O.K.",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-1",
+              "watchUnitId": "watch-series-modok-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-2",
+              "watchUnitId": "watch-series-modok-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-3",
+              "watchUnitId": "watch-series-modok-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-4",
+              "watchUnitId": "watch-series-modok-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-5",
+              "watchUnitId": "watch-series-modok-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-6",
+              "watchUnitId": "watch-series-modok-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-7",
+              "watchUnitId": "watch-series-modok-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-8",
+              "watchUnitId": "watch-series-modok-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-9",
+              "watchUnitId": "watch-series-modok-season-1-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2021-05-21",
+              "id": "series-modok-season-1-episode-10",
+              "watchUnitId": "watch-series-modok-season-1-episode-10"
+            }
+          ],
+          "id": "series-modok-season-1"
+        }
+      ],
+      "id": "series-modok"
+    },
+    {
+      "title": "Hit-Monkey",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-1",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-2",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-3",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-4",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-5",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-6",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-7",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-8",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-9",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2021-11-17",
+              "id": "series-hit-monkey-season-1-episode-10",
+              "watchUnitId": "watch-series-hit-monkey-season-1-episode-10"
+            }
+          ],
+          "id": "series-hit-monkey-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-1",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-1"
+            },
+            {
+              "number": "2",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-2",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-2"
+            },
+            {
+              "number": "3",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-3",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-3"
+            },
+            {
+              "number": "4",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-4",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-4"
+            },
+            {
+              "number": "5",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-5",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-5"
+            },
+            {
+              "number": "6",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-6",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-6"
+            },
+            {
+              "number": "7",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-7",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-7"
+            },
+            {
+              "number": "8",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-8",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-8"
+            },
+            {
+              "number": "9",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-9",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-9"
+            },
+            {
+              "number": "10",
+              "releaseDate": "2024-07-15",
+              "id": "series-hit-monkey-season-2-episode-10",
+              "watchUnitId": "watch-series-hit-monkey-season-2-episode-10"
+            }
+          ],
+          "id": "series-hit-monkey-season-2"
+        }
+      ],
+      "id": "series-hit-monkey"
+    },
+    {
+      "title": "Agents of S.H.I.E.L.D.",
       "seasons": [
         {
           "number": 1,
@@ -1396,7 +2992,7 @@
       "id": "series-agents-of-shield"
     },
     {
-      "title": "Cloak& Dagger",
+      "title": "Cloak & Dagger",
       "seasons": [
         {
           "number": 1,
@@ -1840,7 +3436,7 @@
       "id": "series-hawkeye"
     },
     {
-      "title": "Helstorm",
+      "title": "Helstrom",
       "seasons": [
         {
           "number": 1,
@@ -3148,7 +4744,7 @@
       "id": "series-moon-knight"
     },
     {
-      "title": "Peggy Carter",
+      "title": "Agent Carter",
       "seasons": [
         {
           "number": 1,

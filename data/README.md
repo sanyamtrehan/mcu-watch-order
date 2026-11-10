@@ -1,11 +1,11 @@
 # MCU Release Catalog Seed
 
 `mcu-release-catalog.json` is the normalized catalog snapshot used by the
-Next.js/Supabase application. It contains 682 release-order entries:
+Next.js/Supabase application. It contains 916 release-order entries:
 
 - 71 movies
 - 14 specials and one-shots
-- 30 series with 597 episodes
+- 41 series with 831 episodes
 
 Each title, season, episode, and watchable item has a stable ID. Movies and
 specials have one watch unit; every TV episode has one watch unit. This lets
