@@ -11,3 +11,16 @@ test("assigns representative titles to their archive collection and source", () 
   assert.equal(catalogMetadata("special-the-spider-within-a-spider-verse-story").collectionId, "animation");
   assert.match(catalogMetadata("movie-blade").source.url, /^https:\/\//);
 });
+
+test("keeps series formats visibly distinct without changing their universe", () => {
+  assert.deepEqual(pickIdentifier("series-mutant-x"), ["MX-TV", "Mutant X series"]);
+  assert.deepEqual(pickIdentifier("series-legion"), ["LGN-TV", "Legion series"]);
+  assert.deepEqual(pickIdentifier("series-whih-newsfront"), ["WEB", "Web series"]);
+  assert.deepEqual(pickIdentifier("series-agents-of-shield"), ["TV", "Live-action TV series"]);
+  assert.deepEqual(pickIdentifier("series-hit-monkey"), ["ANM", "Animated series"]);
+});
+
+function pickIdentifier(titleId) {
+  const { mediaCode, mediaLabel } = catalogMetadata(titleId);
+  return [mediaCode, mediaLabel];
+}

@@ -508,9 +508,9 @@
     "semantic_hash": "fe284d600257aa57e1cf0134866ae88f"
   },
   "web/src/app/catalog/catalog-client.tsx": {
-    "mtime": 1794321423.5417247,
-    "seen": 1794321529.789255,
-    "ast_hash": "d1c225dcf60ce2566491ea0e6a4fecec",
+    "mtime": 1794322686.8806374,
+    "seen": 1794322720.9352582,
+    "ast_hash": "feee4d8bdc12e82593c6cada76865a0f",
     "semantic_hash": ""
   },
   "web/src/app/catalog/page.tsx": {
@@ -1174,15 +1174,15 @@
     "semantic_hash": ""
   },
   "web/src/lib/catalog/catalog-metadata.test.mjs": {
-    "mtime": 1794320766.3084695,
-    "seen": 1794321529.78948,
-    "ast_hash": "04146c77bfb7627bad88659c90f1b69b",
+    "mtime": 1794322686.8568993,
+    "seen": 1794322720.9355361,
+    "ast_hash": "ad2b3f9f7265ca6595a16561eca1cf65",
     "semantic_hash": ""
   },
   "web/src/lib/catalog/catalog-metadata.ts": {
-    "mtime": 1794320766.197646,
-    "seen": 1794321529.789481,
-    "ast_hash": "d749ced3a462260c77364fe491735a29",
+    "mtime": 1794322686.8272552,
+    "seen": 1794322720.9355369,
+    "ast_hash": "0d75d75c93c4bdd81ae6d1a915f4f8eb",
     "semantic_hash": ""
   },
   "web/src/lib/progress/local-progress.test.mjs": {

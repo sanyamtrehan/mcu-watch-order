@@ -30,6 +30,16 @@ const X_MEN = ["x-men", "movie-x2", "wolverine", "movie-logan", "movie-deadpool"
 const LEGACY = ["movie-blade", "series-blade", "fantastic-four-2005", "fantastic-four-rise", "fantastic-four-2015", "series-powers"];
 const MARVEL_TV = ["agents-of-shield", "series-peggy-carter", "series-cloak-and-dagger", "series-helstorm", "series-inhumans", "series-runaways"];
 
+function mediaIdentifier(titleId: string) {
+  if (titleId === "series-mutant-x") return { mediaCode: "MX-TV", mediaLabel: "Mutant X series" };
+  if (titleId === "series-legion") return { mediaCode: "LGN-TV", mediaLabel: "Legion series" };
+  if (WEB.some((part) => titleId.includes(part))) return { mediaCode: "WEB", mediaLabel: "Web series" };
+  if (titleId.startsWith("series-") && ANIMATION.some((part) => titleId.includes(part))) return { mediaCode: "ANM", mediaLabel: "Animated series" };
+  if (titleId.startsWith("series-")) return { mediaCode: "TV", mediaLabel: "Live-action TV series" };
+  if (ANIMATION.some((part) => titleId.includes(part))) return { mediaCode: "ANM", mediaLabel: titleId.startsWith("movie-") ? "Animated film" : "Animated short" };
+  return titleId.startsWith("movie-") ? { mediaCode: "MOV", mediaLabel: "Feature film" } : { mediaCode: "SPC", mediaLabel: "Special" };
+}
+
 export function catalogMetadata(titleId: string) {
   const collectionId: CatalogCollectionId = ANIMATION.some((part) => titleId.includes(part)) ? "animation"
     : WEB.some((part) => titleId.includes(part)) ? "web"
@@ -41,5 +51,5 @@ export function catalogMetadata(titleId: string) {
                 : "mcu";
   const collection = CATALOG_COLLECTIONS.find((item) => item.id === collectionId)!;
 
-  return { collectionId, collectionLabel: collection.label, source: SOURCES[collectionId], reviewedAt: "2026-11-02" };
+  return { collectionId, collectionLabel: collection.label, ...mediaIdentifier(titleId), source: SOURCES[collectionId], reviewedAt: "2026-11-02" };
 }

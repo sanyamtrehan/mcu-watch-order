@@ -1,17 +1,17 @@
 # Graph Report - mcu-watch-order  (2026-11-10)
 
 ## Corpus Check
-- 148 files · ~91,928 words
+- 148 files · ~92,096 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 25 file(s) not represented in the graph (top: (none) 9, .scss 6, .css 4)
 
 ## Summary
-- 1386 nodes · 1920 edges · 120 communities (94 shown, 26 thin omitted)
+- 1388 nodes · 1925 edges · 121 communities (95 shown, 26 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 27 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4eaf0c08`
+- Built from commit: `9c30bc81`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -130,6 +130,7 @@
 - web/AGENTS.md
 - source-map-support@^0.5.20
 - createClient
+- episode-runs.test.mjs
 - catalog/README.md
 - @typescript-eslint/eslint-plugin@^5.0.0
 
@@ -160,11 +161,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (120 total, 26 thin omitted)
+## Communities (121 total, 26 thin omitted)
 
 ### Community 0 - "catalog-client.tsx"
-Cohesion: 0.12
-Nodes (15): Account, FilterMenu(), FilterOption, Props, QueryChanges, STATUS_OPTIONS, StatusFilter, TEAM_THOR_TITLE_IDS (+7 more)
+Cohesion: 0.11
+Nodes (21): Account, CatalogCard(), CatalogRow(), FilterMenu(), FilterOption, formatFullDate(), Props, QueryChanges (+13 more)
 
 ### Community 1 - "frontend/package.json"
 Cohesion: 0.10
@@ -183,7 +184,7 @@ Cohesion: 0.08
 Nodes (25): dependencies, @nestjs/common@^8.0.0, @nestjs/core@^8.0.0, @nestjs/jwt@^8.0.0, @nestjs/passport@^8.2.1, @nestjs/platform-express@^8.0.0, @nestjs/swagger@^5.2.1, @nestjs/typeorm@^8.1.4 (+17 more)
 
 ### Community 5 - "app/app.module.ts"
-Cohesion: 0.22
+Cohesion: 0.21
 Nodes (7): AppComponent, AppRoutingModule, routes, AuthGuard, @angular/core, @angular/forms, @angular/router
 
 ### Community 6 - "CookieTokenService"
@@ -215,7 +216,7 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowSyntheticDefaultImports, baseUrl, declaration, emitDecoratorMetadata, experimentalDecorators, forceConsistentCasingInFileNames, incremental (+10 more)
 
 ### Community 13 - "SignInComponent"
-Cohesion: 0.15
+Cohesion: 0.16
 Nodes (4): Login, Register, AuthService, SignInComponent
 
 ### Community 14 - "compilerOptions"
@@ -231,8 +232,8 @@ Cohesion: 0.16
 Nodes (6): AppController, AppModule, AppService, McuModule, @nestjs/common, @nestjs/testing
 
 ### Community 17 - "CatalogClient"
-Cohesion: 0.10
-Nodes (26): CatalogClient(), changeCollection(), changeKind(), changeSeason(), changeStatus(), changeTitle(), changeView(), clearFilters() (+18 more)
+Cohesion: 0.11
+Nodes (25): CatalogClient(), changeCollection(), changeKind(), changeSeason(), changeStatus(), changeTitle(), changeView(), clearFilters() (+17 more)
 
 ### Community 18 - "mcu/mcu.service.ts"
 Cohesion: 0.13
@@ -339,8 +340,8 @@ Cohesion: 0.11
 Nodes (17): 1. Meta Information & Core Directive, 2. THE "ABSOLUTE ZERO" DIRECTIVE (STRICT ANTI-PATTERNS), 3. THE CREATIVE VARIANCE ENGINE, 4. HAPTIC MICRO-AESTHETICS (COMPONENT MASTERY), 5. MOTION CHOREOGRAPHY (FLUID DYNAMICS), 6. PERFORMANCE GUARDRAILS, 7. EXECUTION PROTOCOL, 8. PRE-OUTPUT CHECKLIST (+9 more)
 
 ### Community 47 - "catalog-metadata.ts"
-Cohesion: 0.13
-Nodes (17): CatalogCard(), CatalogRow(), formatFullDate(), TitleDrawer(), unitLabel(), WatchButton(), ANIMATION, CATALOG_COLLECTIONS (+9 more)
+Cohesion: 0.11
+Nodes (16): EpisodeRunSummary(), ANIMATION, CATALOG_COLLECTIONS, CatalogCollectionId, catalogMetadata(), DEFENDERS, LEGACY, MARVEL_TV (+8 more)
 
 ### Community 49 - "dashboard.ts"
 Cohesion: 0.09
@@ -355,8 +356,8 @@ Cohesion: 0.12
 Nodes (14): Current State, Decision, Next.js And Supabase Migration Plan, Phase 0: Audit And Baseline, Phase 1: Move Database Ownership To Supabase, Phase 2: Catalog Queries And Database Functions, Phase 3: Build The Next.js Application, Phase 4: Testing And Deployment (+6 more)
 
 ### Community 52 - "title-filter-groups.ts"
-Cohesion: 0.12
-Nodes (10): CatalogArtwork, catalogArtworkForTitle(), EXACT_ARTWORK, buildSeasonFilterOptions(), SeasonUnit, buildMovieTitleFilterGroups(), CatalogRelationship, CatalogTitle (+2 more)
+Cohesion: 0.38
+Nodes (5): buildMovieTitleFilterGroups(), CatalogRelationship, CatalogTitle, genericCollectionTitle(), TitleFilterGroup
 
 ### Community 56 - "Design System: Taste Standard"
 Cohesion: 0.13
@@ -538,6 +539,10 @@ Nodes (3): Deploy on Vercel, Getting Started, Learn More
 Cohesion: 0.23
 Nodes (9): lucide-react, react, lucide-react@^1.48.0, react@19.2.8, LoginPage(), handleSubmit(), Mode, validatePasswordReset() (+1 more)
 
+### Community 118 - "episode-runs.test.mjs"
+Cohesion: 0.33
+Nodes (3): EpisodeRun, EpisodeRunUnit, groupAdjacentEpisodeRuns()
+
 ## Knowledge Gaps
 - **1 isolated node(s):** `./tsconfig.json`
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 794 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
@@ -546,16 +551,16 @@ Nodes (9): lucide-react, react, lucide-react@^1.48.0, react@19.2.8, LoginPage(),
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `CommandNav()` connect `local-dashboard.tsx` to `sound-toggle.tsx`, `Dashboard Delivery Phases`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `next` connect `dashboard.ts` to `catalog-client.tsx`, `web/package.json`, `createClient`, `local-dashboard.tsx`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `CatalogClient()` (e.g. with `serverSnapshot()` and `snapshot()`) actually correct?**
   _`CatalogClient()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `./tsconfig.json` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `catalog-client.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.11695906432748537 - nodes in this community are weakly interconnected._
-- **Why does `Phase 2: Command Dashboard System` connect `Dashboard Delivery Phases` to `local-dashboard.tsx`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+  _Cohesion score 0.10541310541310542 - nodes in this community are weakly interconnected._
+- **Why does `CommandNav()` connect `local-dashboard.tsx` to `sound-toggle.tsx`, `Dashboard Delivery Phases`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09852216748768473 - nodes in this community are weakly interconnected._
 - **Should `mcu.controller.ts` be split into smaller, more focused modules?**
