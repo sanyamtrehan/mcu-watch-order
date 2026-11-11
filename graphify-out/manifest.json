@@ -1264,15 +1264,15 @@
     "semantic_hash": ""
   },
   "plugins/mcu-watch-order/plugin.json": {
-    "mtime": 1794356375.7612145,
-    "seen": 1794356384.412429,
-    "ast_hash": "3e347f93d09303c9375cf05f9d21ee43",
+    "mtime": 1794379011.7456982,
+    "seen": 1794379275.586551,
+    "ast_hash": "cdf2398af71787cc069793ecc99d742b",
     "semantic_hash": ""
   },
-  "plugins/mcu-watch-order/assets/icon-v1.png": {
-    "mtime": 1794356057.3523083,
-    "seen": 1794356384.414316,
-    "ast_hash": "01864ea8742880cc9fc648f51a949e68",
+  "plugins/mcu-watch-order/assets/icon.svg": {
+    "mtime": 1794379011.7231305,
+    "seen": 1794379275.590206,
+    "ast_hash": "7c29a224bf7330b7a29c8a18009ed192",
     "semantic_hash": ""
   },
   "backend/package-lock.json": {

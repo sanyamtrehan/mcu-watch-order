@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <path fill="#050914" d="M18 2h44l16 16v44L62 78H18L2 62V18z"/>
+  <g fill="none" stroke-width="12">
+    <circle cx="40" cy="40" r="23" stroke="#22d3ee" stroke-dasharray="13 5.064" transform="rotate(-90 40 40)"/>
+    <circle cx="40" cy="40" r="23" stroke="#ff3038" stroke-dasharray="13 131.513" transform="rotate(-2 40 40)"/>
+  </g>
+  <circle cx="40" cy="40" r="13" fill="#050914"/>
+</svg>
