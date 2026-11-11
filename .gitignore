@@ -3,6 +3,9 @@
 !.env.example
 node_modules
 
+# Generated plugin upload archives.
+/plugins/*.zip
+
 # Graphify: keep the shared graph, report, and incremental manifest only.
 graphify-out/*
 !graphify-out/graph.json

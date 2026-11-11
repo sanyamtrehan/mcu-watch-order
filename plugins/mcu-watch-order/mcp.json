@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "mcu-watch-order": {
+      "type": "streamable-http",
+      "url": "https://iczrgejefgbavoqmdxys.supabase.co/functions/v1/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "dcr"
+            },
+            "baseScopes": [
+              "openid",
+              "profile",
+              "email"
+            ],
+            "oidcEnabled": true
+          }
+        }
+      }
+    }
+  }
+}
