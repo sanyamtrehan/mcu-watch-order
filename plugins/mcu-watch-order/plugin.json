@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "mcu-watch-order",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Track MCU viewing progress and find what to watch next.",
   "author": {
     "name": "Sanyam Trehan"
@@ -14,8 +14,10 @@
         "longDescription": "Track movies, series, episodes, specials, runtime, and viewing progress across the MCU catalog.",
         "developerName": "Sanyam Trehan",
         "brandColor": "#22D3EE",
-        "logo": "./assets/icon.png",
-        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon-v1.png",
+        "logoDark": "./assets/icon-v1.png",
+        "composerIcon": "./assets/icon-v1.png",
+        "composerIconDark": "./assets/icon-v1.png",
         "defaultPrompt": [
           "What should I watch next?",
           "Show my MCU watch progress.",
