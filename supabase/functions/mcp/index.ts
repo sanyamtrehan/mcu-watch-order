@@ -5,9 +5,13 @@ import { pipeline } from 'npm:@supabase/middleware@1'
 import { withOAuthProtectedResource, withSupabase } from 'npm:@supabase/server@1'
 import type { SupabaseClient } from 'npm:@supabase/supabase-js@^2.117.2'
 import { z } from 'npm:zod@^4.3.6'
-import { summarizeProgress, type CatalogUnit } from './catalog.ts'
+import { summarizeProgress, summarizeTitleProgress, type CatalogUnit } from './catalog.ts'
 
 type Embedded<T> = T | T[] | null
+const oauthMeta = {
+  securitySchemes: [{ type: 'oauth2', scopes: ['openid', 'profile', 'email'] }],
+}
+
 type OrderingRecord = {
   position: number
   watch_unit: Embedded<{
@@ -98,7 +102,7 @@ Deno.serve(
       const handler = createMcpHandler(() => {
         const server = new McpServer(
           { name: 'mcu-watch-order', version: '1.0.0' },
-          { instructions: 'Use search_catalog to find stable watch-unit IDs. Use set_watch_status only after the user clearly asks to change progress. get_next_unwatched returns release order.' },
+          { instructions: 'Use search_catalog to find stable watch-unit IDs. Use get_title_progress for watched status within a movie, special, or series. Use set_watch_status only after the user clearly asks to change progress. get_next_unwatched returns release order.' },
         )
 
         server.registerTool(
@@ -111,6 +115,7 @@ Deno.serve(
               limit: z.number().int().min(1).max(50).default(20),
             }),
             annotations: { readOnlyHint: true },
+            _meta: oauthMeta,
           },
           async ({ query, type, limit }) => {
             const needle = query.trim().toLocaleLowerCase()
@@ -124,11 +129,26 @@ Deno.serve(
         )
 
         server.registerTool(
+          'get_title_progress',
+          {
+            description: 'Return watched status for every unit in one movie, special, or series, plus totals and the next unwatched unit. Use this when the user asks what episode they are on or their progress within a specific title.',
+            inputSchema: z.object({ title: z.string().trim().min(1).max(100) }),
+            annotations: { readOnlyHint: true },
+            _meta: oauthMeta,
+          },
+          async ({ title }) => {
+            const [units, watchedIds] = await Promise.all([loadCatalog(supabase), loadWatchedIds(supabase)])
+            return result(summarizeTitleProgress(units, watchedIds, title))
+          },
+        )
+
+        server.registerTool(
           'get_progress_summary',
           {
             description: 'Summarize the signed-in user’s MCU watch progress, including watched and remaining runtime. Use this for progress, percentage, or time-watched questions.',
             inputSchema: z.object({}),
             annotations: { readOnlyHint: true },
+            _meta: oauthMeta,
           },
           async () => {
             const [units, watchedIds] = await Promise.all([loadCatalog(supabase), loadWatchedIds(supabase)])
@@ -146,6 +166,7 @@ Deno.serve(
             description: 'Return the signed-in user’s next unwatched entries in release order. Use this when the user asks what to watch next.',
             inputSchema: z.object({ limit: z.number().int().min(1).max(25).default(10) }),
             annotations: { readOnlyHint: true },
+            _meta: oauthMeta,
           },
           async ({ limit }) => {
             const [units, watchedIds] = await Promise.all([loadCatalog(supabase), loadWatchedIds(supabase)])
@@ -163,6 +184,7 @@ Deno.serve(
               watched: z.boolean(),
             }),
             annotations: { destructiveHint: true },
+            _meta: oauthMeta,
           },
           async ({ watchUnitIds, watched }) => {
             const ids = [...new Set(watchUnitIds)]

@@ -1210,21 +1210,21 @@
     "semantic_hash": ""
   },
   "supabase/functions/mcp/catalog.test.mjs": {
-    "mtime": 1794352103.9014301,
-    "seen": 1794352122.504328,
-    "ast_hash": "4d8a10923e790ead5621bca8b241b6e6",
+    "mtime": 1794355386.9520638,
+    "seen": 1794355425.7512882,
+    "ast_hash": "68dda834888e3e95eb4b175212844c88",
     "semantic_hash": ""
   },
   "supabase/functions/mcp/catalog.ts": {
-    "mtime": 1794352103.882796,
-    "seen": 1794352122.504329,
-    "ast_hash": "96160924e7143946c9a983665e02d77a",
+    "mtime": 1794355386.902812,
+    "seen": 1794355425.7512891,
+    "ast_hash": "4a64e4ccf183a5c54f0faa45ffadc081",
     "semantic_hash": ""
   },
   "supabase/functions/mcp/index.ts": {
-    "mtime": 1794352103.9190197,
-    "seen": 1794352122.50433,
-    "ast_hash": "0c5b473726dc61dd12f7c84ba4ceb8b7",
+    "mtime": 1794355386.9701345,
+    "seen": 1794355425.75129,
+    "ast_hash": "0ae534a9344a4065500411e638d00693",
     "semantic_hash": ""
   },
   "web/src/app/oauth/consent/actions.ts": {
@@ -1252,9 +1252,9 @@
     "semantic_hash": ""
   },
   "docs/CHATGPT_MCP.md": {
-    "mtime": 1794351841.85385,
-    "seen": 1794352122.505452,
-    "ast_hash": "49c02e0188780170a5cfc906a14216fe",
+    "mtime": 1794355386.986622,
+    "seen": 1794355425.752584,
+    "ast_hash": "c909937326c87148fd060454f25d1211",
     "semantic_hash": ""
   },
   "backend/package-lock.json": {

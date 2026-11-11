@@ -21,6 +21,7 @@ In ChatGPT on the web, open **Plugins**, select **Add custom MCP server**, choos
 Available tools:
 
 - `search_catalog`
+- `get_title_progress`
 - `get_progress_summary`
 - `get_next_unwatched`
 - `set_watch_status`
