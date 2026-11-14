@@ -508,9 +508,9 @@
     "semantic_hash": "fe284d600257aa57e1cf0134866ae88f"
   },
   "web/src/app/catalog/catalog-client.tsx": {
-    "mtime": 1794336190.2124395,
-    "seen": 1794336472.903018,
-    "ast_hash": "1bb58c9b7ec660b41027687080ffd421",
+    "mtime": 1794678878.2745032,
+    "seen": 1794678891.084298,
+    "ast_hash": "77d045d42ed11013a5dcf6f3b0b89fab",
     "semantic_hash": ""
   },
   "web/src/app/catalog/page.tsx": {
@@ -1162,9 +1162,9 @@
     "semantic_hash": ""
   },
   "web/src/lib/catalog/episode-runs.test.mjs": {
-    "mtime": 1793615844.2432926,
-    "seen": 1793615871.255059,
-    "ast_hash": "0d19d77e31bb6669fd050b25caa9f33f",
+    "mtime": 1794678878.2938945,
+    "seen": 1794678891.084688,
+    "ast_hash": "33006255fb7bf761e896f908f26334b3",
     "semantic_hash": ""
   },
   "web/src/lib/catalog/episode-runs.ts": {
@@ -1273,6 +1273,12 @@
     "mtime": 1794379011.7231305,
     "seen": 1794379275.590206,
     "ast_hash": "7c29a224bf7330b7a29c8a18009ed192",
+    "semantic_hash": ""
+  },
+  "plugins/mcu-watch-order/assets/icon-80.png": {
+    "mtime": 1794379677.0566697,
+    "seen": 1794678891.08584,
+    "ast_hash": "c4a16e6c8ae0bd1c7dd0b36702264af1",
     "semantic_hash": ""
   },
   "backend/package-lock.json": {

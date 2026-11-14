@@ -27,3 +27,17 @@ test("groups only adjacent episodes from the same series and season", () => {
     ["unknown-2"],
   ]);
 });
+
+test("rejoins episodes made adjacent by filtering", () => {
+  const units = [
+    episode("a1", "show-a", "season-1"),
+    episode("a2", "show-a", "season-1"),
+    episode("b1", "show-b", "season-1"),
+    episode("b2", "show-b", "season-1"),
+    episode("a3", "show-a", "season-1"),
+  ];
+
+  const runs = groupAdjacentEpisodeRuns(units.filter((unit) => unit.titleId !== "show-b"));
+
+  assert.deepEqual(runs.map((run) => run.units.map((unit) => unit.id)), [["a1", "a2", "a3"]]);
+});
