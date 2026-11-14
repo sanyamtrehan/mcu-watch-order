@@ -1875,6 +1875,53 @@
       "id": "series-agents-of-shield-double-agent"
     },
     {
+      "title": "Agents of S.H.I.E.L.D.: Academy",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2016-03-09",
+              "id": "series-agents-of-shield-academy-season-1-episode-1",
+              "watchUnitId": "watch-series-agents-of-shield-academy-season-1-episode-1",
+              "runtimeMinutes": 5
+            },
+            {
+              "number": "2",
+              "releaseDate": "2016-03-23",
+              "id": "series-agents-of-shield-academy-season-1-episode-2",
+              "watchUnitId": "watch-series-agents-of-shield-academy-season-1-episode-2",
+              "runtimeMinutes": 5
+            },
+            {
+              "number": "3",
+              "releaseDate": "2016-04-06",
+              "id": "series-agents-of-shield-academy-season-1-episode-3",
+              "watchUnitId": "watch-series-agents-of-shield-academy-season-1-episode-3",
+              "runtimeMinutes": 5
+            },
+            {
+              "number": "4",
+              "releaseDate": "2016-04-20",
+              "id": "series-agents-of-shield-academy-season-1-episode-4",
+              "watchUnitId": "watch-series-agents-of-shield-academy-season-1-episode-4",
+              "runtimeMinutes": 5
+            },
+            {
+              "number": "5",
+              "releaseDate": "2016-05-04",
+              "id": "series-agents-of-shield-academy-season-1-episode-5",
+              "watchUnitId": "watch-series-agents-of-shield-academy-season-1-episode-5",
+              "runtimeMinutes": 5
+            }
+          ],
+          "id": "series-agents-of-shield-academy-season-1"
+        }
+      ],
+      "id": "series-agents-of-shield-academy"
+    },
+    {
       "title": "WHIH Newsfront",
       "seasons": [
         {

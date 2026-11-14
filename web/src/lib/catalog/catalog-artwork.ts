@@ -39,6 +39,7 @@ const EXACT_ARTWORK: Record<string, CatalogArtwork> = {
   "Agatha All Along": "wanda-vision",
   "Agent Carter": "agent-carter",
   "Agents of S.H.I.E.L.D.": "agents-shield",
+  "Agents of S.H.I.E.L.D.: Academy": "agents-shield",
   "Agents of S.H.I.E.L.D.: Double Agent": "agents-shield",
   "Agents of S.H.I.E.L.D.: Slingshot": "agents-shield",
   "All Hail the King": "iron-man",

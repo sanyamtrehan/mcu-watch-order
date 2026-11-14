@@ -230,9 +230,9 @@
     "semantic_hash": "bca7bfe87c64c692d467acbb9df6e926"
   },
   "data/mcu-release-catalog.json": {
-    "mtime": 1794336447.3135583,
-    "seen": 1794336472.902142,
-    "ast_hash": "d94cfccc06262cac0c3ad39b7cca366a",
+    "mtime": 1794689481.0527856,
+    "seen": 1794689635.7855859,
+    "ast_hash": "76896e557df630c4ad0592ab63ca96ea",
     "semantic_hash": ""
   },
   "frontend/.vscode/extensions.json": {
@@ -724,9 +724,9 @@
     "semantic_hash": ""
   },
   "backend/src/catalog/seed/README.md": {
-    "mtime": 1793569107.6454206,
-    "seen": 1793569156.30322,
-    "ast_hash": "b13ce2d60a306221132b01d1bd1d642a",
+    "mtime": 1794689502.4021757,
+    "seen": 1794689635.787926,
+    "ast_hash": "728a5983c9661a921c0ed5b1404722af",
     "semantic_hash": ""
   },
   "data/README.md": {
@@ -940,9 +940,9 @@
     "semantic_hash": ""
   },
   "web/src/lib/catalog/catalog-artwork.ts": {
-    "mtime": 1794252614.8275745,
-    "seen": 1794252632.092256,
-    "ast_hash": "6ef908678becb49edd593f4a0cc521c3",
+    "mtime": 1794689481.0979528,
+    "seen": 1794689635.787084,
+    "ast_hash": "babb995a0f0e359086f12f0634ece006",
     "semantic_hash": ""
   },
   "web/public/images/catalog/README.md": {
@@ -1174,15 +1174,15 @@
     "semantic_hash": ""
   },
   "web/src/lib/catalog/catalog-metadata.test.mjs": {
-    "mtime": 1794322686.8568993,
-    "seen": 1794322720.9355361,
-    "ast_hash": "ad2b3f9f7265ca6595a16561eca1cf65",
+    "mtime": 1794689481.117246,
+    "seen": 1794689635.787085,
+    "ast_hash": "ff752b56b7966c2b6029179a6ec67b08",
     "semantic_hash": ""
   },
   "web/src/lib/catalog/catalog-metadata.ts": {
-    "mtime": 1794322686.8272552,
-    "seen": 1794322720.9355369,
-    "ast_hash": "0d75d75c93c4bdd81ae6d1a915f4f8eb",
+    "mtime": 1794689481.0745523,
+    "seen": 1794689635.787086,
+    "ast_hash": "4505f08cf8494dbd5228d3155f496d38",
     "semantic_hash": ""
   },
   "web/src/lib/progress/local-progress.test.mjs": {

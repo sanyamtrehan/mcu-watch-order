@@ -1,12 +1,12 @@
 # MCU Release Catalog Seed
 
 [`data/mcu-release-catalog.json`](../../../../data/mcu-release-catalog.json) is
-the repository's canonical normalized catalog. It contains 680 release-order
-entries across 113 titles:
+the repository's canonical normalized catalog. It contains 921 release-order
+entries across 127 titles:
 
 - 71 movies
-- 12 specials and one-shots
-- 30 series with 597 episodes
+- 14 specials and one-shots
+- 42 series with 836 episodes
 
 Each title, season, episode, and watchable item has a stable ID. Movies and
 specials have one watch unit; every TV episode has one watch unit. This lets

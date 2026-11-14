@@ -16,6 +16,7 @@ test("keeps series formats visibly distinct without changing their universe", ()
   assert.deepEqual(pickIdentifier("series-mutant-x"), ["MX-TV", "Mutant X series"]);
   assert.deepEqual(pickIdentifier("series-legion"), ["LGN-TV", "Legion series"]);
   assert.deepEqual(pickIdentifier("series-whih-newsfront"), ["WEB", "Web series"]);
+  assert.deepEqual(pickIdentifier("series-agents-of-shield-academy"), ["WEB", "Web series"]);
   assert.deepEqual(pickIdentifier("series-agents-of-shield"), ["TV", "Live-action TV series"]);
   assert.deepEqual(pickIdentifier("series-hit-monkey"), ["ANM", "Animated series"]);
 });
