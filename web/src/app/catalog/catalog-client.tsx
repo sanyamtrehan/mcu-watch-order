@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useGSAP } from "@gsap/react";
 import { Check, ChevronDown, Download, ExternalLink, Info, LayoutGrid, List, Play, RotateCcw, Search, SlidersHorizontal, Upload, X } from "lucide-react";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SoundToggle } from "@/components/sound-toggle";
+import { WatchUndoToast } from "@/components/watch-undo-toast";
 import type { DashboardUnit, TitleRelationship } from "@/lib/catalog/dashboard";
 import { catalogArtworkForTitle } from "@/lib/catalog/catalog-artwork";
 import { groupAdjacentEpisodeRuns, type EpisodeRun } from "@/lib/catalog/episode-runs";
@@ -16,6 +17,7 @@ import { buildMovieTitleFilterGroups, type TitleFilterGroup } from "@/lib/catalo
 import { CATALOG_COLLECTIONS, catalogMetadata } from "@/lib/catalog/catalog-metadata";
 import { playScrollChime } from "@/lib/ui/scroll-chime";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, parseProgressBackup, serializeProgressBackup, writeLocalProgress } from "@/lib/progress/local-progress";
+import { appendLocalWatchHistory } from "@/lib/progress/watch-history";
 import { createClient as createBrowserClient } from "@/lib/supabase/client";
 import styles from "./page.module.css";
 
@@ -28,6 +30,7 @@ type Props = { units: DashboardUnit[]; relationships: TitleRelationship[]; accou
 type FilterOption = { value: string; label: string; meta?: string };
 type VisibleEpisodeRun = EpisodeRun<DashboardUnit> & { visibleUnits: DashboardUnit[] };
 type QueryChanges = Record<string, string>;
+type PendingUndo = { unitIds: string[]; restoreWatched: boolean; message: string };
 
 const STATUS_OPTIONS: FilterOption[] = [
   { value: "all", label: "All progress" },
@@ -75,6 +78,7 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
   const [saving, setSaving] = useState(false);
   const [progressError, setProgressError] = useState<string | null>(null);
   const [progressNotice, setProgressNotice] = useState<string | null>(null);
+  const [pendingUndo, setPendingUndo] = useState<PendingUndo | null>(null);
   const [activeTitleId, setActiveTitleId] = useState<string | null>(null);
   const validUnitIds = useMemo(() => new Set(units.map((unit) => unit.id)), [units]);
   const serializedProgress = useSyncExternalStore(subscribe, snapshot, serverSnapshot);
@@ -110,15 +114,16 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
     ScrollTrigger.create({ trigger: "[data-catalog-hero]", start: "bottom 24%", onLeave: () => { if (!heroChimed.current) { heroChimed.current = true; playScrollChime(); } } });
   }, { scope: shell });
 
-  async function saveWatched(unitIds: string[], watched: boolean) {
-    if (unitIds.length === 0) return false;
+  async function saveWatched(unitIds: string[], watched: boolean, offerUndo = true) {
+    const changedIds = [...new Set(unitIds)].filter((unitId) => watchedIds.has(unitId) !== watched);
+    if (changedIds.length === 0) return true;
     setSaving(true);
     setProgressError(null);
 
     if (account) {
       const supabase = createBrowserClient();
-      for (let start = 0; start < unitIds.length; start += 250) {
-        const batch = unitIds.slice(start, start + 250);
+      for (let start = 0; start < changedIds.length; start += 250) {
+        const batch = changedIds.slice(start, start + 250);
         const { error } = watched
           ? await supabase.from("watch_progress").upsert(batch.map((watchUnitId) => ({ user_id: account.id, watch_unit_id: watchUnitId, status: "watched", watched_at: new Date().toISOString() })), { onConflict: "user_id,watch_unit_id" })
           : await supabase.from("watch_progress").delete().eq("user_id", account.id).in("watch_unit_id", batch);
@@ -130,7 +135,7 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
       }
       setRemoteWatched((current) => {
         const next = new Set(current);
-        for (const unitId of unitIds) {
+        for (const unitId of changedIds) {
           if (watched) next.add(unitId);
           else next.delete(unitId);
         }
@@ -139,13 +144,34 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
     }
 
     const next = new Set(watchedIds);
-    for (const unitId of unitIds) {
+    for (const unitId of changedIds) {
       if (watched) next.add(unitId);
       else next.delete(unitId);
     }
     writeLocalProgress(next);
+    if (!account) {
+      try {
+        appendLocalWatchHistory(changedIds, watched ? "watched" : "unwatched", validUnitIds);
+      } catch {
+        setProgressError("Progress was saved, but this device could not store its activity history.");
+      }
+    }
+    if (offerUndo) {
+      const first = units.find((unit) => unit.id === changedIds[0]);
+      const subject = changedIds.length === 1 ? first?.title ?? "Entry" : `${first?.title ?? "Entry"} + ${changedIds.length - 1} more`;
+      setPendingUndo({ unitIds: changedIds, restoreWatched: !watched, message: `${subject} marked ${watched ? "watched" : "unwatched"}.` });
+    }
     setSaving(false);
     return true;
+  }
+
+  const dismissUndo = useCallback(() => setPendingUndo(null), []);
+
+  function undoLastAction() {
+    if (!pendingUndo) return;
+    const action = pendingUndo;
+    setPendingUndo(null);
+    void saveWatched(action.unitIds, action.restoreWatched, false);
   }
 
   async function updateSelected(watched: boolean) {
@@ -254,7 +280,7 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
   }
 
   return <main ref={shell} className={styles.page}>
-    <header className={styles.nav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard">Dashboard</a><a href="/catalog" aria-current="page">Catalog</a></nav><div className={styles.navActions}><SoundToggle className={styles.soundButton} /><a className={styles.syncLink} href={account ? "/dashboard" : "/login"}>{account ? account.email : "Sync"}</a></div></header>
+    <header className={styles.nav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard">Dashboard</a><a href="/catalog" aria-current="page">Catalog</a><a href="/history">History</a></nav><div className={styles.navActions}><SoundToggle className={styles.soundButton} /><a className={styles.syncLink} href={account ? "/dashboard" : "/login"}>{account ? account.email : "Sync"}</a></div></header>
     <section className={styles.catalogHero} data-catalog-hero><Image className={styles.characterBackdrop} src="/images/iron-man-avengers.jpg" alt="Iron Man from The Avengers" fill priority sizes="100vw" /><div><p>J.A.R.V.I.S. ARCHIVE / FULL INVENTORY</p><h1>Every unit.<br /><span>On record.</span></h1><div className={styles.marvelMark}><Image src="/images/avengers-promo.webp" alt="Marvel Studios The Avengers" width={320} height={180} priority /></div></div><div className={styles.heroCount}><span>Archive integrity</span><strong>{units.length}</strong><small>indexed watch units</small></div><i /></section>
     <section className={styles.content}>
       <div className={styles.heading} data-catalog-workspace><div><p>Release order controls</p><h2>Filter the archive.</h2></div><span>{visibleUnits.length} of {units.length} entries</span></div>
@@ -296,6 +322,7 @@ export function CatalogClient({ units, relationships, account, initialRemoteWatc
       })}</div>}
     </section>
     {activeTitleId && activeTitleUnits[0] && <TitleDrawer units={activeTitleUnits} relationships={activeRelations} watchedIds={watchedIds} saving={saving} onClose={() => setActiveTitleId(null)} onShowRemaining={showTitleRemaining} onChange={(ids, watched) => void saveWatched(ids, watched)} />}
+    {pendingUndo && <WatchUndoToast message={pendingUndo.message} saving={saving} onUndo={undoLastAction} onDismiss={dismissUndo} />}
   </main>;
 }
 

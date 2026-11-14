@@ -1,17 +1,17 @@
-# Graph Report - mcu-watch-order  (2026-11-11)
+# Graph Report - mcu-watch-order  (2026-11-14)
 
 ## Corpus Check
-- 160 files · ~97,522 words
+- 166 files · ~98,984 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 26 file(s) not represented in the graph (top: (none) 9, .scss 6, .css 5)
+- Unclassified: 28 file(s) not represented in the graph (top: (none) 9, .css 7, .scss 6)
 
 ## Summary
-- 1480 nodes · 2050 edges · 133 communities (103 shown, 30 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 29 edges (avg confidence: 0.85)
+- 1509 nodes · 2135 edges · 119 communities (98 shown, 21 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 33 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `21ee3e67`
+- Built from commit: `343882d4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -67,9 +67,9 @@
 - dashboard.ts
 - SKILL: Industrial Brutalism & Tactical Telemetry UI
 - Next.js And Supabase Migration Plan
-- rimraf@^3.0.2
+- reflect-metadata@^0.1.13
 - auth.module.ts
-- dependencies
+- eslint-config-prettier@^8.3.0
 - environment.prod.ts
 - Design System: Taste Standard
 - CORE DIRECTIVE: AWWWARDS-LEVEL IMAGE ART DIRECTION
@@ -82,7 +82,7 @@
 - 22. STYLE VARIATION ENGINE
 - Protocol: Premium Utilitarian Minimalism UI Architect
 - Catalog And Progress Model
-- app/app.module.ts
+- angular-material.module.ts
 - 11. COMPONENT EXECUTION GUIDELINES
 - 18. EXTRA CREATIVITY & IMPLEMENTATION EDGE
 - 9. AI TELLS (Forbidden Patterns)
@@ -119,44 +119,30 @@
 - AGENTS.md
 - ChatGPT MCP setup
 - login/page.tsx
-- mcu/mcu.service.ts
-- catalog-artwork.ts
-- ngx-cookie-service
-- season-filter-options.ts
+- ts-jest@^27.0.3
 - local-progress.ts
-- layout.tsx
 - seed/README.md
 - data/README.md
 - web/AGENTS.md
-- scripts
 - ref_node_assert
 - @types/supertest@^2.0.11
 - catalog/README.md
-- eslint.config.mjs
-- passport@^0.5.2
-- pg@^8.23.0
-- @typescript-eslint/eslint-plugin@^5.0.0
-- eslint@^8.0.1
 - source-map-support@^0.5.20
-- @nestjs/schematics@^8.0.0
 - ts-node@^10.0.0
-- typescript@^4.3.5
 - mcp.json
-- ts-loader@^9.2.3
-- @types/node@^16.0.0
 - @typescript-eslint/parser@^5.0.0
 
 ## God Nodes (most connected - your core abstractions)
-1. `CatalogClient()` - 45 edges
+1. `CatalogClient()` - 48 edges
 2. `CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE` - 39 edges
 3. `CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION` - 39 edges
-4. `@angular/core` - 22 edges
-5. `LocalDashboard()` - 22 edges
+4. `LocalDashboard()` - 28 edges
+5. `@angular/core` - 22 edges
 6. `CORE DIRECTIVE: AWWWARDS-LEVEL IMAGE ART DIRECTION` - 22 edges
 7. `CookieTokenService` - 20 edges
 8. `scripts` - 19 edges
 9. `compilerOptions` - 18 edges
-10. `compilerOptions` - 16 edges
+10. `createClient()` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Phase 2: Command Dashboard System` --references--> `CommandNav()`  [INFERRED]
@@ -165,59 +151,59 @@
   web/src/app/auth/signout/route.ts → web/src/lib/supabase/config.ts
 - `CatalogClient()` --calls--> `SoundToggle()`  [EXTRACTED]
   web/src/app/catalog/catalog-client.tsx → web/src/components/sound-toggle.tsx
+- `CatalogClient()` --calls--> `WatchUndoToast()`  [EXTRACTED]
+  web/src/app/catalog/catalog-client.tsx → web/src/components/watch-undo-toast.tsx
 - `CatalogClient()` --calls--> `catalogMetadata()`  [EXTRACTED]
   web/src/app/catalog/catalog-client.tsx → web/src/lib/catalog/catalog-metadata.ts
-- `CatalogClient()` --calls--> `groupAdjacentEpisodeRuns()`  [EXTRACTED]
-  web/src/app/catalog/catalog-client.tsx → web/src/lib/catalog/episode-runs.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (133 total, 30 thin omitted)
+## Communities (119 total, 21 thin omitted)
 
 ### Community 0 - "catalog-client.tsx"
-Cohesion: 0.13
-Nodes (20): Account, CatalogCard(), CatalogRow(), EpisodeRunSummary(), FilterMenu(), FilterOption, formatFullDate(), formatRuntime() (+12 more)
+Cohesion: 0.10
+Nodes (27): gsap, @gsap/react, gsap@^3.15.0, @gsap/react@^2.1.2, Account, CatalogCard(), CatalogRow(), EpisodeRunSummary() (+19 more)
 
 ### Community 1 - "frontend/package.json"
 Cohesion: 0.10
 Nodes (28): devDependencies, @angular/cli@~13.3.0, @angular/compiler-cli@~13.3.0, @angular-devkit/build-angular@~13.3.0, jasmine-core@~4.0.0, karma@~6.3.0, karma-chrome-launcher@~3.1.0, karma-coverage@~2.1.0 (+20 more)
 
 ### Community 2 - "mcu.controller.ts"
-Cohesion: 0.11
-Nodes (4): @nestjs/testing@^8.0.0, McuController, McuService, @nestjs/testing
+Cohesion: 0.10
+Nodes (5): FilterMcuDto, SecretKeyDto, McuController, McuService, @nestjs/passport
 
 ### Community 3 - "jwt.strategy.ts"
-Cohesion: 0.24
-Nodes (3): JwtStrategy, JwtPayload, @nestjs/passport
+Cohesion: 0.19
+Nodes (3): JwtStrategy, JwtPayload, ENVIRONMENT
 
 ### Community 4 - "dependencies"
-Cohesion: 0.08
-Nodes (25): dependencies, bcryptjs@^2.4.3, dotenv@^16.0.0, @nestjs/common@^8.0.0, @nestjs/core@^8.0.0, @nestjs/jwt@^8.0.0, @nestjs/passport@^8.2.1, @nestjs/platform-express@^8.0.0 (+17 more)
+Cohesion: 0.07
+Nodes (29): dependencies, bcryptjs@^2.4.3, dotenv@^16.0.0, @nestjs/common@^8.0.0, @nestjs/core@^8.0.0, @nestjs/jwt@^8.0.0, @nestjs/passport@^8.2.1, @nestjs/platform-express@^8.0.0 (+21 more)
 
 ### Community 5 - "app/app.module.ts"
-Cohesion: 0.32
-Nodes (3): AppComponent, @angular/core, @angular/router
+Cohesion: 0.22
+Nodes (7): AppComponent, AppRoutingModule, routes, AuthGuard, @angular/core, @angular/forms, @angular/router
 
 ### Community 6 - "CookieTokenService"
-Cohesion: 0.11
-Nodes (4): AuthGuard, TokenInterceptor, NavBarComponent, CookieTokenService
+Cohesion: 0.12
+Nodes (3): TokenInterceptor, NavBarComponent, CookieTokenService
 
 ### Community 7 - "dependencies"
-Cohesion: 0.10
-Nodes (21): dependencies, @angular/animations@~13.3.0, @angular/cdk@^13.3.1, @angular/common@~13.3.0, @angular/compiler@~13.3.0, @angular/core@~13.3.0, @angular/flex-layout@^13.0.0-beta.38, @angular/forms@~13.3.0 (+13 more)
+Cohesion: 0.09
+Nodes (22): dependencies, @angular/animations@~13.3.0, @angular/compiler@~13.3.0, @angular/core@~13.3.0, @angular/flex-layout@^13.0.0-beta.38, @angular/forms@~13.3.0, @angular/platform-browser@~13.3.0, @angular/router@~13.3.0 (+14 more)
 
 ### Community 8 - "MainComponent"
 Cohesion: 0.20
 Nodes (4): MainComponent, Mcu, McuFilter, McuService
 
 ### Community 9 - "web/package.json"
-Cohesion: 0.16
-Nodes (16): eslint-config-next, @types/react, @types/react-dom, devDependencies, eslint@^9, eslint-config-next@16.3.6, @types/node@^20, @types/react@^19 (+8 more)
+Cohesion: 0.06
+Nodes (35): eslint-config-next, geist, react-dom, @supabase/supabase-js, @types/react, @types/react-dom, eslintConfig, dependencies (+27 more)
 
 ### Community 10 - "devDependencies"
-Cohesion: 0.11
-Nodes (19): devDependencies, eslint-config-prettier@^8.3.0, eslint-plugin-prettier@^4.0.0, jest@^27.2.5, @nestjs/cli@^8.0.0, prettier@^2.3.2, ts-jest@^27.0.3, @types/express@^4.17.13 (+11 more)
+Cohesion: 0.08
+Nodes (24): devDependencies, eslint@^8.0.1, eslint-plugin-prettier@^4.0.0, jest@^27.2.5, @nestjs/cli@^8.0.0, @nestjs/schematics@^8.0.0, @nestjs/testing@^8.0.0, prettier@^2.3.2 (+16 more)
 
 ### Community 11 - "scripts"
 Cohesion: 0.11
@@ -228,8 +214,8 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowSyntheticDefaultImports, baseUrl, declaration, emitDecoratorMetadata, experimentalDecorators, forceConsistentCasingInFileNames, incremental (+10 more)
 
 ### Community 13 - "SignInComponent"
-Cohesion: 0.13
-Nodes (6): routes, Login, Register, AuthService, SignInComponent, @angular/forms
+Cohesion: 0.15
+Nodes (4): Login, Register, AuthService, SignInComponent
 
 ### Community 14 - "compilerOptions"
 Cohesion: 0.11
@@ -239,17 +225,21 @@ Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModu
 Cohesion: 0.12
 Nodes (18): dependencies, dotenv@^18.0.4, pg@^8.23.0, devDependencies, supabase@2.118.0, dotenv, pg, name (+10 more)
 
+### Community 16 - "app.controller.ts"
+Cohesion: 0.16
+Nodes (6): AppController, AppModule, AppService, McuModule, @nestjs/common, @nestjs/testing
+
 ### Community 17 - "CatalogClient"
-Cohesion: 0.11
-Nodes (23): CatalogClient(), changeCollection(), changeKind(), changeSeason(), changeStatus(), changeTitle(), changeView(), clearFilters() (+15 more)
+Cohesion: 0.10
+Nodes (25): CatalogClient(), changeCollection(), changeKind(), changeSeason(), changeStatus(), changeTitle(), changeView(), clearFilters() (+17 more)
 
 ### Community 18 - "mcu/mcu.service.ts"
-Cohesion: 0.09
-Nodes (5): User, InitialPostgresSchema1760000000000, NormalizedCatalog1760000001000, Mcu, typeorm
+Cohesion: 0.13
+Nodes (7): InitialPostgresSchema1760000000000, NormalizedCatalog1760000001000, Exceptions, Data, Mcu, @nestjs/typeorm, typeorm
 
 ### Community 19 - "backend/package.json"
-Cohesion: 0.15
-Nodes (12): author, description, supertest@^6.1.3, tsconfig-paths@^3.10.1, engines, node, license, name (+4 more)
+Cohesion: 0.12
+Nodes (16): author, description, supertest@^6.1.3, ts-loader@^9.2.3, @types/express@^4.17.13, @types/jest@27.4.1, engines, node (+8 more)
 
 ### Community 20 - "import-catalog-seed.ts"
 Cohesion: 0.17
@@ -264,8 +254,8 @@ Cohesion: 0.26
 Nodes (12): options, assets, index, inlineStyleLanguage, karmaConfig, main, outputPath, polyfills (+4 more)
 
 ### Community 23 - "frontend/src/main.ts"
-Cohesion: 0.29
-Nodes (4): @angular/platform-browser-dynamic@~13.3.0, zone.js@~0.11.4, @angular/platform-browser-dynamic, zone.js
+Cohesion: 0.18
+Nodes (6): @angular/platform-browser-dynamic@~13.3.0, zone.js@~0.11.4, AppModule, environment, @angular/platform-browser-dynamic, zone.js
 
 ### Community 24 - "brandkit/SKILL.md"
 Cohesion: 0.05
@@ -296,8 +286,8 @@ Cohesion: 0.05
 Nodes (29): cachePath, catalog, catalogPath, chooseShow(), episodeCandidates, getJson(), imdbBasicsPath, imdbEpisodesPath (+21 more)
 
 ### Community 32 - "auth/auth.service.ts"
-Cohesion: 0.16
-Nodes (5): AuthController, AuthService, CreateUserDto, LoginDto, @nestjs/jwt
+Cohesion: 0.17
+Nodes (5): AuthController, AuthService, CreateUserDto, LoginDto, @nestjs/swagger
 
 ### Community 33 - "production"
 Cohesion: 0.22
@@ -340,8 +330,8 @@ Cohesion: 0.11
 Nodes (18): 1. Define the Atmosphere, 2. Map the Color Palette, 3. Establish Typography Rules, 4. Define the Hero Section, 5. Describe Component Stylings, 6. Define Layout Principles, 7. Define Responsive Rules, 8. Encode Motion Philosophy (+10 more)
 
 ### Community 45 - "local-dashboard.tsx"
-Cohesion: 0.17
-Nodes (20): Account, AccountPanel(), CommandNav(), formatDate(), label(), LocalDashboard(), mergeProgress(), setWatched() (+12 more)
+Cohesion: 0.12
+Nodes (29): Account, AccountPanel(), CommandNav(), formatActivityTime(), formatDate(), historySnapshot(), label(), LocalDashboard() (+21 more)
 
 ### Community 46 - "Agent Skill: Principal UI/UX Architect & Motion Choreographer (Awwwards-Tier)"
 Cohesion: 0.11
@@ -356,8 +346,8 @@ Cohesion: 0.10
 Nodes (19): author, name, interface, description, extensions, com.openai, brandColor, composerIcon (+11 more)
 
 ### Community 49 - "dashboard.ts"
-Cohesion: 0.09
-Nodes (29): next, @supabase/ssr, nextConfig, POST(), CatalogPage(), dynamic, setWatchProgress(), DashboardPage() (+21 more)
+Cohesion: 0.07
+Nodes (40): next, @supabase/ssr, nextConfig, POST(), CatalogPage(), dynamic, setWatchProgress(), DashboardPage() (+32 more)
 
 ### Community 50 - "SKILL: Industrial Brutalism & Tactical Telemetry UI"
 Cohesion: 0.12
@@ -368,12 +358,8 @@ Cohesion: 0.12
 Nodes (14): Current State, Decision, Next.js And Supabase Migration Plan, Phase 0: Audit And Baseline, Phase 1: Move Database Ownership To Supabase, Phase 2: Catalog Queries And Database Functions, Phase 3: Build The Next.js Application, Phase 4: Testing And Deployment (+6 more)
 
 ### Community 53 - "auth.module.ts"
-Cohesion: 0.19
-Nodes (7): AppModule, AuthModule, ENVIRONMENT, PasswordService, McuModule, @nestjs/common, @nestjs/typeorm
-
-### Community 54 - "dependencies"
 Cohesion: 0.13
-Nodes (15): gsap, @gsap/react, lucide-react, react, react-dom, @supabase/supabase-js, dependencies, gsap@^3.15.0 (+7 more)
+Nodes (4): User, AuthModule, PasswordService, @nestjs/jwt
 
 ### Community 56 - "Design System: Taste Standard"
 Cohesion: 0.13
@@ -419,9 +405,9 @@ Nodes (9): 1. Protocol Overview, 2. Absolute Negative Constraints (Banned Elemen
 Cohesion: 0.20
 Nodes (9): Anonymous-First Tracking, Canonical Catalog, Catalog And Progress Model, Dashboard Contract, Data Pipeline, Delivery Order, Goal, Ordering Rules (+1 more)
 
-### Community 69 - "app/app.module.ts"
-Cohesion: 0.18
-Nodes (8): @angular/material@^13.3.1, AngularMaterialModule, materialModules, AppModule, AppRoutingModule, environment, @angular/common, @angular/material
+### Community 69 - "angular-material.module.ts"
+Cohesion: 0.20
+Nodes (8): @angular/cdk@^13.3.1, @angular/common@~13.3.0, @angular/material@^13.3.1, AngularMaterialModule, materialModules, @angular/cdk, @angular/common, @angular/material
 
 ### Community 70 - "11. COMPONENT EXECUTION GUIDELINES"
 Cohesion: 0.22
@@ -556,56 +542,36 @@ Cohesion: 0.50
 Nodes (3): Activate Supabase Auth, ChatGPT MCP setup, Connect ChatGPT
 
 ### Community 105 - "login/page.tsx"
-Cohesion: 0.29
-Nodes (6): LoginPage(), handleSubmit(), Mode, validatePasswordReset(), safeRedirectPath(), createClient()
-
-### Community 106 - "mcu/mcu.service.ts"
-Cohesion: 0.26
-Nodes (5): Exceptions, Data, FilterMcuDto, SecretKeyDto, @nestjs/swagger
-
-### Community 107 - "catalog-artwork.ts"
-Cohesion: 0.50
-Nodes (3): CatalogArtwork, catalogArtworkForTitle(), EXACT_ARTWORK
-
-### Community 108 - "ngx-cookie-service"
-Cohesion: 0.33
-Nodes (4): ngx-cookie-service@^13.1.2, tslib@^2.3.0, ngx-cookie-service, tslib
+Cohesion: 0.22
+Nodes (8): lucide-react, react, LoginPage(), handleSubmit(), Mode, validatePasswordReset(), safeRedirectPath(), createClient()
 
 ### Community 110 - "local-progress.ts"
 Cohesion: 0.24
 Nodes (8): exportProgress(), EMPTY_PROGRESS, LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, LocalProgress, parseLocalProgress(), readLocalProgress(), serializeProgressBackup()
 
-### Community 111 - "layout.tsx"
-Cohesion: 0.33
-Nodes (3): geist, geist@^1.7.2, metadata
-
-### Community 116 - "scripts"
-Cohesion: 0.33
-Nodes (6): scripts, build, dev, lint, start, test
-
 ### Community 117 - "ref_node_assert"
-Cohesion: 0.16
-Nodes (9): EpisodeRun, EpisodeRunUnit, groupAdjacentEpisodeRuns(), episode(), buildMovieTitleFilterGroups(), CatalogRelationship, CatalogTitle, genericCollectionTitle() (+1 more)
+Cohesion: 0.13
+Nodes (11): EpisodeRun, EpisodeRunUnit, groupAdjacentEpisodeRuns(), episode(), buildSeasonFilterOptions(), SeasonUnit, buildMovieTitleFilterGroups(), CatalogRelationship (+3 more)
 
 ## Knowledge Gaps
 - **1 isolated node(s):** `./tsconfig.json`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 851 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 858 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `next` connect `dashboard.ts` to `catalog-client.tsx`, `web/package.json`, `login/page.tsx`, `local-dashboard.tsx`, `layout.tsx`, `dependencies`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **Why does `CommandNav()` connect `local-dashboard.tsx` to `sound-toggle.tsx`, `Dashboard Delivery Phases`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `CatalogClient()` (e.g. with `serverSnapshot()` and `snapshot()`) actually correct?**
   _`CatalogClient()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `./tsconfig.json` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `catalog-client.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.13043478260869565 - nodes in this community are weakly interconnected._
-- **Why does `typeorm` connect `mcu/mcu.service.ts` to `auth/auth.service.ts`, `dependencies`, `mcu/mcu.service.ts`, `backend/package.json`, `import-catalog-seed.ts`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+  _Cohesion score 0.0967741935483871 - nodes in this community are weakly interconnected._
+- **Why does `Phase 2: Command Dashboard System` connect `Dashboard Delivery Phases` to `local-dashboard.tsx`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Are the 4 inferred relationships involving `LocalDashboard()` (e.g. with `historySnapshot()` and `serverSnapshot()`) actually correct?**
+  _`LocalDashboard()` has 4 INFERRED edges - model-reasoned connections that need verification._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09852216748768473 - nodes in this community are weakly interconnected._
-- **Why does `episode()` connect `ref_node_assert` to `fetch-catalog-runtimes.mjs`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._

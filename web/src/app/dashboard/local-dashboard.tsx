@@ -1,34 +1,42 @@
 "use client";
 
-import { useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useGSAP } from "@gsap/react";
 import { Check, Cloud, RotateCcw, UserRound } from "lucide-react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SoundToggle } from "@/components/sound-toggle";
+import { WatchUndoToast } from "@/components/watch-undo-toast";
 import type { DashboardUnit, ReleaseOrderCatalog } from "@/lib/catalog/dashboard";
 import { playScrollChime } from "@/lib/ui/scroll-chime";
 import { LOCAL_PROGRESS_EVENT, LOCAL_PROGRESS_KEY, parseLocalProgress, writeLocalProgress } from "@/lib/progress/local-progress";
+import { appendLocalWatchHistory, LOCAL_WATCH_HISTORY_EVENT, LOCAL_WATCH_HISTORY_KEY, parseLocalWatchHistory, type WatchHistoryEntry } from "@/lib/progress/watch-history";
 import { createClient as createBrowserClient } from "@/lib/supabase/client";
 import styles from "./page.module.css";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 type Account = { id: string; email: string };
-type Props = { catalog: ReleaseOrderCatalog; account: Account | null; initialRemoteWatchedUnitIds: string[] };
+type Props = { catalog: ReleaseOrderCatalog; account: Account | null; initialRemoteWatchedUnitIds: string[]; initialRemoteHistory: WatchHistoryEntry[] };
+type PendingUndo = { unit: DashboardUnit; restoreWatched: boolean; message: string };
 
-export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }: Props) {
+export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds, initialRemoteHistory }: Props) {
   const { units } = catalog;
   const shell = useRef<HTMLElement>(null);
   const bootSequence = useRef<HTMLElement>(null);
   const heroChimed = useRef(false);
   const [remoteWatched, setRemoteWatched] = useState(() => new Set(initialRemoteWatchedUnitIds));
+  const [remoteHistory, setRemoteHistory] = useState(initialRemoteHistory);
   const [syncError, setSyncError] = useState<string | null>(null);
   const [merging, setMerging] = useState(false);
+  const [pendingUndo, setPendingUndo] = useState<PendingUndo | null>(null);
   const validIds = useMemo(() => new Set(units.map((unit) => unit.id)), [units]);
   const stored = useSyncExternalStore(subscribe, snapshot, serverSnapshot);
+  const storedHistory = useSyncExternalStore(subscribe, historySnapshot, serverSnapshot);
   const localWatched = useMemo(() => new Set(parseLocalProgress(stored, validIds).watchedUnitIds), [stored, validIds]);
+  const localHistory = useMemo(() => parseLocalWatchHistory(storedHistory, validIds), [storedHistory, validIds]);
   const watchedIds = useMemo(() => account ? new Set([...localWatched, ...remoteWatched]) : localWatched, [account, localWatched, remoteWatched]);
+  const recentHistory = (account ? remoteHistory : localHistory).slice(0, 5);
 
   useGSAP(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !bootSequence.current) return;
@@ -74,13 +82,21 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
     { label: "Specials", value: watched.filter((unit) => unit.unitKind === "special").length, total: units.filter((unit) => unit.unitKind === "special").length, color: "var(--teal)" },
   ];
 
-  async function setWatched(unit: DashboardUnit, value: boolean) {
+  async function setWatched(unit: DashboardUnit, value: boolean, offerUndo = true) {
+    if (watchedIds.has(unit.id) === value) return;
     const next = new Set(watchedIds);
     if (value) next.add(unit.id);
     else next.delete(unit.id);
-    if (account) { setSyncError(null); const supabase = createBrowserClient(); const { error } = value ? await supabase.from("watch_progress").upsert({ user_id: account.id, watch_unit_id: unit.id, status: "watched", watched_at: new Date().toISOString() }, { onConflict: "user_id,watch_unit_id" }) : await supabase.from("watch_progress").delete().eq("user_id", account.id).eq("watch_unit_id", unit.id); if (error) { setSyncError(error.message); return; } setRemoteWatched((current) => { const updated = new Set(current); if (value) updated.add(unit.id); else updated.delete(unit.id); return updated; }); }
+    if (account) { setSyncError(null); const supabase = createBrowserClient(); const { error } = value ? await supabase.from("watch_progress").upsert({ user_id: account.id, watch_unit_id: unit.id, status: "watched", watched_at: new Date().toISOString() }, { onConflict: "user_id,watch_unit_id" }) : await supabase.from("watch_progress").delete().eq("user_id", account.id).eq("watch_unit_id", unit.id); if (error) { setSyncError(error.message); return; } setRemoteWatched((current) => { const updated = new Set(current); if (value) updated.add(unit.id); else updated.delete(unit.id); return updated; }); const activity = { id: crypto.randomUUID(), watchUnitId: unit.id, action: value ? "watched" : "unwatched", occurredAt: new Date().toISOString() } satisfies WatchHistoryEntry; setRemoteHistory((current) => [activity, ...current].slice(0, 5)); }
     writeLocalProgress(next);
+    if (!account) {
+      try { appendLocalWatchHistory([unit.id], value ? "watched" : "unwatched", validIds); }
+      catch { setSyncError("Progress was saved, but this device could not store its activity history."); }
+    }
+    if (offerUndo) setPendingUndo({ unit, restoreWatched: !value, message: `${unit.title} marked ${value ? "watched" : "unwatched"}.` });
   }
+  const dismissUndo = useCallback(() => setPendingUndo(null), []);
+  function undoLastAction() { if (!pendingUndo) return; const action = pendingUndo; setPendingUndo(null); void setWatched(action.unit, action.restoreWatched, false); }
   async function mergeProgress() {
     if (!account) return; setMerging(true); setSyncError(null); const merged = new Set([...localWatched, ...remoteWatched]); const missing = [...merged].filter((id) => !remoteWatched.has(id));
     if (missing.length > 0) { const supabase = createBrowserClient(); for (let start = 0; start < missing.length; start += 250) { const batch = missing.slice(start, start + 250); const { error } = await supabase.from("watch_progress").upsert(batch.map((watchUnitId) => ({ user_id: account.id, watch_unit_id: watchUnitId, status: "watched", watched_at: new Date().toISOString() })), { onConflict: "user_id,watch_unit_id" }); if (error) { setSyncError(error.message); setMerging(false); return; } } }
@@ -114,12 +130,13 @@ export function LocalDashboard({ catalog, account, initialRemoteWatchedUnitIds }
         <section className={`${styles.queuePanel} ${styles.panel}`} data-telemetry><header><div><p>Continuation queue</p><h2>Next in release order</h2></div><a href="/catalog?status=unwatched">Open remaining</a></header>{upcoming[0] && <button className={styles.priorityAction} type="button" onClick={() => void setWatched(upcoming[0], true)}><Check size={16} /> Complete next</button>}<ol>{upcoming.slice(0, 5).map((unit) => <li key={unit.id}><span>{String(unit.position).padStart(3, "0")}</span><div><strong>{unit.title}</strong><small>{label(unit)} · {formatDate(unit.releaseDate)}</small></div><button type="button" onClick={() => void setWatched(unit, true)} aria-label={`Mark ${unit.title} watched`}><Check size={15} /></button></li>)}</ol></section>
       </div></section>
       <AccountPanel account={account} local={localWatched} remote={remoteWatched} error={syncError} merging={merging} onMerge={mergeProgress} />
-      {watched.length > 0 && <section className={styles.recent} data-telemetry><p>Recent marks</p>{watched.slice(-5).reverse().map((unit) => <button key={unit.id} type="button" onClick={() => void setWatched(unit, false)}><RotateCcw size={14} /> {unit.title}</button>)}</section>}
+      {recentHistory.length > 0 && <section className={styles.recent} data-telemetry><header><p>Recent activity</p><a href="/history">View complete history</a></header>{recentHistory.map((entry) => { const unit = units.find((candidate) => candidate.id === entry.watchUnitId); return unit ? <article key={entry.id}>{entry.action === "watched" ? <Check size={14} /> : <RotateCcw size={14} />}<div><strong>{unit.title}</strong><small>{entry.action} · {formatActivityTime(entry.occurredAt)}</small></div></article> : null; })}</section>}
     </div>
+    {pendingUndo && <WatchUndoToast message={pendingUndo.message} saving={false} onUndo={undoLastAction} onDismiss={dismissUndo} />}
   </main>;
 }
 
-function CommandNav({ account }: { account: Account | null }) { return <header className={styles.commandNav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard" aria-current="page">Dashboard</a><a href="/catalog">Catalog</a></nav><div className={styles.navActions}><SoundToggle className={styles.soundButton} />{account ? <form action="/auth/signout" method="post"><button className={styles.accountButton} type="submit"><UserRound size={16} /><span>{account.email}</span></button></form> : <a className={styles.syncLink} href="/login"><Cloud size={16} /> Sync</a>}</div></header>; }
+function CommandNav({ account }: { account: Account | null }) { return <header className={styles.commandNav}><a href="/dashboard" className={styles.wordmark}>MCU <span>Watch Order</span></a><nav><a href="/dashboard" aria-current="page">Dashboard</a><a href="/catalog">Catalog</a><a href="/history">History</a></nav><div className={styles.navActions}><SoundToggle className={styles.soundButton} />{account ? <form action="/auth/signout" method="post"><button className={styles.accountButton} type="submit"><UserRound size={16} /><span>{account.email}</span></button></form> : <a className={styles.syncLink} href="/login"><Cloud size={16} /> Sync</a>}</div></header>; }
 function ReactorCore({ progress }: { progress: number }) { return <div className={styles.reactorAssembly} data-boot-core aria-label={`${progress}% archive completion`}><div className={styles.reactorOrbit} data-boot-orbit><i /><i /><i /></div><div className={styles.reactorHalo} /><div className={styles.reactorCore}><div><strong>{progress}%</strong><span>resolved</span></div></div><span className={styles.reactorCaption}>ARC // {String(progress).padStart(2, "0")}</span></div>; }
 function ReleaseSignal({ bins }: { bins: { total: number; watched: number; index: number; label: string }[] }) { const points = bins.map((bin, index) => `${index * 100 / (bins.length - 1)},${88 - percent(bin.watched, bin.total) * .72}`).join(" "); const area = `0,100 ${points} 100,100`; return <article className={`${styles.releaseSignal} ${styles.panel}`} data-telemetry><header><div><p>Release completion</p><h2>Sequence coverage</h2></div><span>12 release eras</span></header><div className={styles.areaChart}><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Completion by release era"><defs><linearGradient id="coverage-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#24d7ff" stopOpacity=".46" /><stop offset="1" stopColor="#24d7ff" stopOpacity="0" /></linearGradient></defs><path d={`M ${area.replaceAll(" ", " L ")} Z`} fill="url(#coverage-fill)" /><polyline data-signal-line points={points} fill="none" stroke="#24d7ff" strokeWidth="1.4" vectorEffect="non-scaling-stroke" /></svg><div className={styles.chartColumns}>{bins.map((bin) => <i key={bin.index} style={{ height: `${Math.max(4, percent(bin.watched, bin.total))}%` }} />)}</div></div><footer>{bins.map((bin) => <span key={bin.index}>{bin.label}</span>)}</footer></article>; }
 function MetricRing({ className, label, value, detail, color }: { className: string; label: string; value: number; detail: string; color: "cyan" | "magenta" }) { return <article className={`${className} ${styles.panel}`} data-telemetry><header><p>{label}</p><span className={styles.metricReadout}>live</span></header><div className={`${styles.ring} ${styles[color]}`} style={{ "--value": `${value * 3.6}deg` } as React.CSSProperties}><div><strong>{value}%</strong><span>{detail}</span></div></div><footer className={styles.metricFooter}><i /><span>Archive signal stable</span></footer></article>; }
@@ -129,7 +146,9 @@ function percent(value: number, total: number) { return total ? Math.round(value
 function progressClass(watched: number, total: number) { return watched === 0 ? "Empty" : watched === total ? "Complete" : "Partial"; }
 function label(unit: DashboardUnit) { return unit.unitKind === "episode" ? `S${unit.seasonNumber} E${unit.episodeNumber}` : unit.unitKind; }
 function formatDate(value: string) { return new Intl.DateTimeFormat("en", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`)); }
-function subscribe(onChange: () => void) { window.addEventListener("storage", onChange); window.addEventListener(LOCAL_PROGRESS_EVENT, onChange); return () => { window.removeEventListener("storage", onChange); window.removeEventListener(LOCAL_PROGRESS_EVENT, onChange); }; }
+function formatActivityTime(value: string) { return new Intl.DateTimeFormat("en", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "UTC" }).format(new Date(value)); }
+function subscribe(onChange: () => void) { window.addEventListener("storage", onChange); window.addEventListener(LOCAL_PROGRESS_EVENT, onChange); window.addEventListener(LOCAL_WATCH_HISTORY_EVENT, onChange); return () => { window.removeEventListener("storage", onChange); window.removeEventListener(LOCAL_PROGRESS_EVENT, onChange); window.removeEventListener(LOCAL_WATCH_HISTORY_EVENT, onChange); }; }
 function snapshot() { return window.localStorage.getItem(LOCAL_PROGRESS_KEY) ?? ""; }
+function historySnapshot() { return window.localStorage.getItem(LOCAL_WATCH_HISTORY_KEY) ?? ""; }
 function serverSnapshot() { return ""; }
 function setsEqual(left: Set<string>, right: Set<string>) { return left.size === right.size && [...left].every((id) => right.has(id)); }

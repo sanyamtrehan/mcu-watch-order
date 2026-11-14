@@ -1,0 +1,12 @@
+.toast { align-items: center; animation: arrive .22s ease-out; backdrop-filter: blur(18px); background: rgb(6 17 36 / .96); border: 1px solid rgb(36 215 255 / .42); border-radius: 10px; bottom: 1.2rem; box-shadow: 0 20px 60px rgb(0 0 0 / .48), inset 3px 0 var(--cyan); display: flex; gap: .8rem; left: 50%; max-width: calc(100vw - 2rem); min-width: min(28rem, calc(100vw - 2rem)); overflow: hidden; padding: .75rem .75rem .75rem 1rem; position: fixed; transform: translateX(-50%); z-index: 100; }
+.toast::after { animation: expire 12s linear forwards; background: var(--cyan); bottom: 0; content: ""; height: 2px; left: 0; position: absolute; width: 100%; }
+.toast > div { display: grid; flex: 1; gap: .15rem; min-width: 0; }
+.toast small { color: var(--cyan); font-family: var(--font-geist-mono), monospace; font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; }
+.toast strong { color: var(--ink); font-size: .75rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.undo, .close { align-items: center; background: rgb(36 215 255 / .1); border: 1px solid rgb(36 215 255 / .3); color: var(--cyan); cursor: pointer; display: inline-flex; justify-content: center; }
+.undo { border-radius: 999px; font-size: .68rem; font-weight: 750; gap: .35rem; padding: .45rem .7rem; }
+.close { background: transparent; border: 0; border-radius: 50%; height: 2rem; width: 2rem; }
+.undo:disabled { cursor: default; opacity: .55; }
+@keyframes arrive { from { opacity: 0; transform: translate(-50%, 12px); } }
+@keyframes expire { to { width: 0; } }
+@media (max-width: 520px) { .toast { bottom: .7rem; min-width: calc(100vw - 1.4rem); }.toast strong { max-width: 12rem; } }
