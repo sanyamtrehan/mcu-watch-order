@@ -10,6 +10,8 @@ test("maps franchise sequels to shared catalog artwork", () => {
   assert.equal(catalogArtworkForTitle("Avengers: Endgame"), "avengers");
   assert.equal(catalogArtworkForTitle("Thor"), "thor");
   assert.equal(catalogArtworkForTitle("Ghost Rider: Spirit of Vengeance"), "punisher");
+  assert.equal(catalogArtworkForTitle("The Punisher: Dirty Laundry"), "punisher");
+  assert.equal(catalogArtworkForTitle("VisionQuest"), "wanda-vision");
 });
 
 test("covers every title in the release catalog", () => {

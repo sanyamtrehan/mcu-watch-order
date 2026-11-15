@@ -1,7 +1,7 @@
 # Graph Report - mcu-watch-order  (2026-11-16)
 
 ## Corpus Check
-- 168 files · ~99,516 words
+- 169 files · ~100,657 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 28 file(s) not represented in the graph (top: (none) 9, .css 7, .scss 6)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a2efecf4`
+- Built from commit: `75a38e15`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

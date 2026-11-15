@@ -9,6 +9,9 @@ test("assigns representative titles to their archive collection and source", () 
   assert.equal(catalogMetadata("movie-spider-man-2002").collectionId, "spider");
   assert.equal(catalogMetadata("movie-x-men").collectionId, "x-men");
   assert.equal(catalogMetadata("movie-ghost-rider").collectionId, "legacy");
+  assert.equal(catalogMetadata("movie-hulk-2003").collectionId, "legacy");
+  assert.equal(catalogMetadata("special-no-good-deed").collectionId, "x-men");
+  assert.equal(catalogMetadata("special-peter-s-to-do-list").collectionId, "spider");
   assert.equal(catalogMetadata("special-the-spider-within-a-spider-verse-story").collectionId, "animation");
   assert.match(catalogMetadata("movie-blade").source.url, /^https:\/\//);
 });

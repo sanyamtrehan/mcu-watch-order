@@ -3,7 +3,7 @@
   "source": {
     "name": "Wikipedia and Marvel Cinematic Universe Wiki release catalog",
     "sourceType": "manual-cross-reference",
-    "lastReviewed": "2026-11-02",
+    "lastReviewed": "2026-11-16",
     "urls": [
       "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe:_Phase_Four",
       "https://en.wikipedia.org/wiki/Marvel_Cinematic_Universe:_Phase_Five",
@@ -16,21 +16,36 @@
       "https://en.wikipedia.org/wiki/Blade_(franchise)",
       "https://en.wikipedia.org/wiki/Ghost_Rider_(2007_film)",
       "https://en.wikipedia.org/wiki/Ghost_Rider:_Spirit_of_Vengeance",
+      "https://en.wikipedia.org/wiki/Hulk_(film)",
+      "https://en.wikipedia.org/wiki/The_Punisher_(2004_film)",
+      "https://en.wikipedia.org/wiki/Punisher:_War_Zone",
+      "https://en.wikipedia.org/wiki/The_Punisher:_Dirty_Laundry",
+      "https://en.wikipedia.org/wiki/No_Good_Deed_(2017_film)",
+      "https://en.wikipedia.org/wiki/Deadpool_and_Korg_React",
       "https://en.wikipedia.org/wiki/Daredevil_(film)",
       "https://en.wikipedia.org/wiki/Elektra_(2005_film)",
       "https://marvelcinematicuniverse.fandom.com/wiki/Deadpool_%26_Wolverine",
       "https://en.wikipedia.org/wiki/Spider-Noir",
       "https://en.wikipedia.org/wiki/Spider-Man:_Into_the_Spider-Verse",
       "https://en.wikipedia.org/wiki/Spider-Man:_Across_the_Spider-Verse",
-      "https://en.wikipedia.org/wiki/The_Spider_Within:_A_Spider-Verse_Story"
+      "https://en.wikipedia.org/wiki/The_Spider_Within:_A_Spider-Verse_Story",
+      "https://en.wikipedia.org/wiki/Spider-Man:_Brand_New_Day",
+      "https://en.wikipedia.org/wiki/Wonder_Man_(TV_series)",
+      "https://en.wikipedia.org/wiki/Daredevil:_Born_Again_season_2",
+      "https://en.wikipedia.org/wiki/VisionQuest"
     ],
-    "notes": "Release dates are cross-checked against Wikipedia and the Marvel Cinematic Universe Wiki. The release catalog includes MCU titles through Phase Five, The Fantastic Four: First Steps, and the live-action Marvel realities connected through the MCU multiverse: Raimi Spider-Man, Amazing Spider-Man, Sony Spider-Man Universe including the live-action Spider-Noir series and released animated Spider-Verse films and shorts, Fox X-Men, Fantastic Four, Blade, Ghost Rider, and Daredevil/Elektra. Existing stable IDs are preserved so catalog refreshes do not detach watch progress.",
+    "notes": "Release dates are cross-checked against Wikipedia and the Marvel Cinematic Universe Wiki. The release catalog includes MCU titles through Phase Five and released Phase Six titles through VisionQuest, plus the live-action Marvel realities connected through the MCU multiverse and selected legacy films and shorts: Raimi Spider-Man, Amazing Spider-Man, Sony Spider-Man Universe including the live-action Spider-Noir series and released animated Spider-Verse films and shorts, Fox X-Men, Fantastic Four, Blade, Ghost Rider, Hulk, Punisher, and Daredevil/Elektra. Existing stable IDs are preserved so catalog refreshes do not detach watch progress.",
     "completeMcuPhase": 5,
     "additionalMcuTitles": [
-      "The Fantastic Four: First Steps"
+      "The Fantastic Four: First Steps",
+      "Wonder Man",
+      "Daredevil: Born Again season 2",
+      "The Punisher: One Last Kill",
+      "Spider-Man: Brand New Day",
+      "VisionQuest"
     ],
     "runtime": {
-      "lastReviewed": "2026-11-11",
+      "lastReviewed": "2026-11-16",
       "providers": [
         {
           "name": "TVmaze",
@@ -97,6 +112,20 @@
       "id": "movie-x2",
       "watchUnitId": "watch-movie-x2",
       "runtimeMinutes": 134
+    },
+    {
+      "title": "Hulk (2003)",
+      "releaseDate": "2003-06-20",
+      "id": "movie-hulk-2003",
+      "watchUnitId": "watch-movie-hulk-2003",
+      "runtimeMinutes": 138
+    },
+    {
+      "title": "The Punisher (2004)",
+      "releaseDate": "2004-04-16",
+      "id": "movie-the-punisher-2004",
+      "watchUnitId": "watch-movie-the-punisher-2004",
+      "runtimeMinutes": 123
     },
     {
       "title": "Spider-Man 2",
@@ -167,6 +196,13 @@
       "id": "movie-the-incredible-hulk",
       "watchUnitId": "watch-movie-the-incredible-hulk",
       "runtimeMinutes": 112
+    },
+    {
+      "title": "Punisher: War Zone",
+      "releaseDate": "2008-12-05",
+      "id": "movie-punisher-war-zone",
+      "watchUnitId": "watch-movie-punisher-war-zone",
+      "runtimeMinutes": 103
     },
     {
       "title": "X-Men Origins: Wolverine",
@@ -566,6 +602,13 @@
       "id": "movie-the-fantastic-four-first-steps",
       "watchUnitId": "watch-movie-the-fantastic-four-first-steps",
       "runtimeMinutes": 115
+    },
+    {
+      "title": "Spider-Man: Brand New Day",
+      "releaseDate": "2026-07-31",
+      "id": "movie-spider-man-brand-new-day",
+      "watchUnitId": "watch-movie-spider-man-brand-new-day",
+      "runtimeMinutes": 145
     }
   ],
   "specials": [
@@ -582,6 +625,13 @@
       "id": "special-a-funny-thing-happened-on-the-way-to-thor-s-hammer",
       "watchUnitId": "watch-special-a-funny-thing-happened-on-the-way-to-thor-s-hammer",
       "runtimeMinutes": 4
+    },
+    {
+      "title": "The Punisher: Dirty Laundry",
+      "releaseDate": "2012-07-15",
+      "id": "special-the-punisher-dirty-laundry",
+      "watchUnitId": "watch-special-the-punisher-dirty-laundry",
+      "runtimeMinutes": 10
     },
     {
       "title": "Item 47",
@@ -619,6 +669,13 @@
       "runtimeMinutes": 5
     },
     {
+      "title": "No Good Deed",
+      "releaseDate": "2017-03-03",
+      "id": "special-no-good-deed",
+      "watchUnitId": "watch-special-no-good-deed",
+      "runtimeMinutes": 4
+    },
+    {
       "title": "Team Darryl",
       "releaseDate": "2018-02-20",
       "id": "special-team-darryl",
@@ -630,6 +687,20 @@
       "releaseDate": "2019-02-26",
       "id": "special-spider-ham-caught-in-a-ham",
       "watchUnitId": "watch-special-spider-ham-caught-in-a-ham",
+      "runtimeMinutes": 4
+    },
+    {
+      "title": "Peter's To-Do List",
+      "releaseDate": "2019-10-01",
+      "id": "special-peter-s-to-do-list",
+      "watchUnitId": "watch-special-peter-s-to-do-list",
+      "runtimeMinutes": 4
+    },
+    {
+      "title": "Deadpool and Korg React",
+      "releaseDate": "2021-07-13",
+      "id": "special-deadpool-and-korg-react",
+      "watchUnitId": "watch-special-deadpool-and-korg-react",
       "runtimeMinutes": 4
     },
     {
@@ -7091,6 +7162,68 @@
             }
           ],
           "id": "series-daredevil-born-again-season-1"
+        },
+        {
+          "number": 2,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2026-03-24",
+              "id": "series-daredevil-born-again-season-2-episode-1",
+              "watchUnitId": "watch-series-daredevil-born-again-season-2-episode-1",
+              "runtimeMinutes": 51
+            },
+            {
+              "number": "2",
+              "releaseDate": "2026-03-31",
+              "id": "series-daredevil-born-again-season-2-episode-2",
+              "watchUnitId": "watch-series-daredevil-born-again-season-2-episode-2",
+              "runtimeMinutes": 46
+            },
+            {
+              "number": "3",
+              "releaseDate": "2026-03-31",
+              "id": "series-daredevil-born-again-season-2-episode-3",
+              "watchUnitId": "watch-series-daredevil-born-again-season-2-episode-3",
+              "runtimeMinutes": 47
+            },
+            {
+              "number": "4",
+              "releaseDate": "2026-04-07",
+              "id": "series-daredevil-born-again-season-2-episode-4",
+              "watchUnitId": "watch-series-daredevil-born-again-season-2-episode-4",
+              "runtimeMinutes": 51
+            },
+            {
+              "number": "5",
+              "releaseDate": "2026-04-14",
+              "id": "series-daredevil-born-again-season-2-episode-5",
+              "watchUnitId": "watch-series-daredevil-born-again-season-2-episode-5",
+              "runtimeMinutes": 50
+            },
+            {
+              "number": "6",
+              "releaseDate": "2026-04-21",
+              "id": "series-daredevil-born-again-season-2-episode-6",
+              "watchUnitId": "watch-series-daredevil-born-again-season-2-episode-6",
+              "runtimeMinutes": 49
+            },
+            {
+              "number": "7",
+              "releaseDate": "2026-04-28",
+              "id": "series-daredevil-born-again-season-2-episode-7",
+              "watchUnitId": "watch-series-daredevil-born-again-season-2-episode-7",
+              "runtimeMinutes": 44
+            },
+            {
+              "number": "8",
+              "releaseDate": "2026-05-05",
+              "id": "series-daredevil-born-again-season-2-episode-8",
+              "watchUnitId": "watch-series-daredevil-born-again-season-2-episode-8",
+              "runtimeMinutes": 51
+            }
+          ],
+          "id": "series-daredevil-born-again-season-2"
         }
       ],
       "id": "series-daredevil-born-again"
@@ -7148,6 +7281,74 @@
         }
       ],
       "id": "series-ironheart"
+    },
+    {
+      "title": "Wonder Man",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2026-01-27",
+              "id": "series-wonder-man-season-1-episode-1",
+              "watchUnitId": "watch-series-wonder-man-season-1-episode-1",
+              "runtimeMinutes": 35
+            },
+            {
+              "number": "2",
+              "releaseDate": "2026-01-27",
+              "id": "series-wonder-man-season-1-episode-2",
+              "watchUnitId": "watch-series-wonder-man-season-1-episode-2",
+              "runtimeMinutes": 34
+            },
+            {
+              "number": "3",
+              "releaseDate": "2026-01-27",
+              "id": "series-wonder-man-season-1-episode-3",
+              "watchUnitId": "watch-series-wonder-man-season-1-episode-3",
+              "runtimeMinutes": 34
+            },
+            {
+              "number": "4",
+              "releaseDate": "2026-01-27",
+              "id": "series-wonder-man-season-1-episode-4",
+              "watchUnitId": "watch-series-wonder-man-season-1-episode-4",
+              "runtimeMinutes": 32
+            },
+            {
+              "number": "5",
+              "releaseDate": "2026-01-27",
+              "id": "series-wonder-man-season-1-episode-5",
+              "watchUnitId": "watch-series-wonder-man-season-1-episode-5",
+              "runtimeMinutes": 25
+            },
+            {
+              "number": "6",
+              "releaseDate": "2026-01-27",
+              "id": "series-wonder-man-season-1-episode-6",
+              "watchUnitId": "watch-series-wonder-man-season-1-episode-6",
+              "runtimeMinutes": 36
+            },
+            {
+              "number": "7",
+              "releaseDate": "2026-01-27",
+              "id": "series-wonder-man-season-1-episode-7",
+              "watchUnitId": "watch-series-wonder-man-season-1-episode-7",
+              "runtimeMinutes": 35
+            },
+            {
+              "number": "8",
+              "releaseDate": "2026-01-27",
+              "id": "series-wonder-man-season-1-episode-8",
+              "watchUnitId": "watch-series-wonder-man-season-1-episode-8",
+              "runtimeMinutes": 34
+            }
+          ],
+          "id": "series-wonder-man-season-1"
+        }
+      ],
+      "id": "series-wonder-man"
     },
     {
       "title": "Spider-Noir",
@@ -7216,6 +7417,74 @@
         }
       ],
       "id": "series-spider-noir"
+    },
+    {
+      "title": "VisionQuest",
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            {
+              "number": "1",
+              "releaseDate": "2026-10-13",
+              "id": "series-visionquest-season-1-episode-1",
+              "watchUnitId": "watch-series-visionquest-season-1-episode-1",
+              "runtimeMinutes": 53
+            },
+            {
+              "number": "2",
+              "releaseDate": "2026-10-13",
+              "id": "series-visionquest-season-1-episode-2",
+              "watchUnitId": "watch-series-visionquest-season-1-episode-2",
+              "runtimeMinutes": 45
+            },
+            {
+              "number": "3",
+              "releaseDate": "2026-10-20",
+              "id": "series-visionquest-season-1-episode-3",
+              "watchUnitId": "watch-series-visionquest-season-1-episode-3",
+              "runtimeMinutes": 52
+            },
+            {
+              "number": "4",
+              "releaseDate": "2026-10-20",
+              "id": "series-visionquest-season-1-episode-4",
+              "watchUnitId": "watch-series-visionquest-season-1-episode-4",
+              "runtimeMinutes": 48
+            },
+            {
+              "number": "5",
+              "releaseDate": "2026-10-27",
+              "id": "series-visionquest-season-1-episode-5",
+              "watchUnitId": "watch-series-visionquest-season-1-episode-5",
+              "runtimeMinutes": 46
+            },
+            {
+              "number": "6",
+              "releaseDate": "2026-10-27",
+              "id": "series-visionquest-season-1-episode-6",
+              "watchUnitId": "watch-series-visionquest-season-1-episode-6",
+              "runtimeMinutes": 54
+            },
+            {
+              "number": "7",
+              "releaseDate": "2026-11-03",
+              "id": "series-visionquest-season-1-episode-7",
+              "watchUnitId": "watch-series-visionquest-season-1-episode-7",
+              "runtimeMinutes": 62
+            },
+            {
+              "number": "8",
+              "releaseDate": "2026-11-10",
+              "id": "series-visionquest-season-1-episode-8",
+              "watchUnitId": "watch-series-visionquest-season-1-episode-8",
+              "runtimeMinutes": 69
+            }
+          ],
+          "id": "series-visionquest-season-1"
+        }
+      ],
+      "id": "series-visionquest"
     }
   ],
   "titleRelations": [
@@ -7473,6 +7742,41 @@
       "fromTitleId": "movie-spider-man-across-the-spider-verse",
       "toTitleId": "movie-spider-man-no-way-home",
       "type": "crossover"
+    },
+    {
+      "fromTitleId": "movie-spider-man-brand-new-day",
+      "toTitleId": "movie-spider-man-no-way-home",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "special-the-punisher-dirty-laundry",
+      "toTitleId": "movie-the-punisher-2004",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "special-no-good-deed",
+      "toTitleId": "movie-deadpool",
+      "type": "spin-off"
+    },
+    {
+      "fromTitleId": "special-peter-s-to-do-list",
+      "toTitleId": "movie-spider-man-far-from-home",
+      "type": "spin-off"
+    },
+    {
+      "fromTitleId": "special-deadpool-and-korg-react",
+      "toTitleId": "movie-deadpool-2",
+      "type": "crossover"
+    },
+    {
+      "fromTitleId": "special-deadpool-and-korg-react",
+      "toTitleId": "movie-thor-ragnarok",
+      "type": "crossover"
+    },
+    {
+      "fromTitleId": "series-visionquest",
+      "toTitleId": "series-wanda-vision",
+      "type": "spin-off"
     }
   ],
   "orderingDefinitions": [

@@ -25,9 +25,9 @@ const SOURCES: Record<CatalogCollectionId, { label: string; url: string }> = {
 const ANIMATION = ["spider-verse", "spider-ham", "spider-within", "series-modok", "series-hit-monkey", "series-what-if", "series-i-am-groot", "friendly-neighborhood"];
 const WEB = ["double-agent", "academy", "whih-newsfront", "slingshot", "daily-bugle"];
 const DEFENDERS = ["series-daredevil", "series-jessica-jones", "series-luke-cage", "series-iron-fist", "series-the-defenders", "series-the-punisher", "series-echo", "daredevil-born-again", "movie-daredevil", "movie-elektra", "punisher-one-last-kill"];
-const SPIDER = ["spider-man", "spider-noir", "movie-venom", "movie-morbius", "movie-madame-web", "movie-kraven"];
-const X_MEN = ["x-men", "movie-x2", "wolverine", "movie-logan", "movie-deadpool", "dark-phoenix", "new-mutants", "series-mutant-x", "series-legion", "series-the-gifted"];
-const LEGACY = ["movie-blade", "series-blade", "ghost-rider", "fantastic-four-2005", "fantastic-four-rise", "fantastic-four-2015", "series-powers"];
+const SPIDER = ["spider-man", "spider-noir", "peter-s-to-do-list", "movie-venom", "movie-morbius", "movie-madame-web", "movie-kraven"];
+const X_MEN = ["x-men", "movie-x2", "wolverine", "movie-logan", "movie-deadpool", "no-good-deed", "deadpool-and-korg-react", "dark-phoenix", "new-mutants", "series-mutant-x", "series-legion", "series-the-gifted"];
+const LEGACY = ["movie-blade", "series-blade", "ghost-rider", "movie-hulk-2003", "movie-the-punisher-2004", "movie-punisher-war-zone", "punisher-dirty-laundry", "fantastic-four-2005", "fantastic-four-rise", "fantastic-four-2015", "series-powers"];
 const MARVEL_TV = ["agents-of-shield", "series-peggy-carter", "series-cloak-and-dagger", "series-helstorm", "series-inhumans", "series-runaways"];
 
 function mediaIdentifier(titleId: string) {

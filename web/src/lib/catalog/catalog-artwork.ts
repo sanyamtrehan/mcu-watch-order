@@ -50,6 +50,7 @@ const EXACT_ARTWORK: Record<string, CatalogArtwork> = {
   "Daredevil (2003)": "daredevil",
   "Daredevil: Born Again": "daredevil",
   "Deadpool & Wolverine": "avengers",
+  "Deadpool and Korg React": "avengers",
   "Director by Night": "moon-knight",
   Echo: "hawkeye",
   Elektra: "daredevil",
@@ -72,9 +73,11 @@ const EXACT_ARTWORK: Record<string, CatalogArtwork> = {
   Morbius: "spider-man",
   "Moon Knight": "moon-knight",
   "Ms. Marvel": "captain-marvel",
+  "No Good Deed": "avengers",
   Legion: "avengers",
   "M.O.D.O.K.": "avengers",
   "Mutant X": "avengers",
+  "Peter's To-Do List": "spider-man",
   Powers: "avengers",
   Runaways: "runaways",
   "Secret Invasion": "captain-marvel",
@@ -94,19 +97,24 @@ const EXACT_ARTWORK: Record<string, CatalogArtwork> = {
   "The Marvels": "captain-marvel",
   "The Gifted": "avengers",
   "The Punisher": "punisher",
+  "The Punisher: Dirty Laundry": "punisher",
   "The Punisher: One Last Kill": "punisher",
   "The Spider Within: A Spider-Verse Story": "spider-man",
   "Thunderbolts*": "avengers",
   "Wanda Vision": "wanda-vision",
+  VisionQuest: "wanda-vision",
   "WHIH Newsfront": "avengers",
   "What If...?": "what-if",
   "Werewolf by Night": "moon-knight",
+  "Wonder Man": "avengers",
   "Your Friendly Neighborhood Spider-Man": "spider-man",
 };
 
 export function catalogArtworkForTitle(title: string): CatalogArtwork | null {
   if (title.startsWith("Blade")) return "punisher";
   if (title.startsWith("Ghost Rider")) return "punisher";
+  if (title.startsWith("Hulk")) return "hulk";
+  if (title.includes("Punisher")) return "punisher";
   if (title.startsWith("Fantastic Four") || title.startsWith("The Fantastic Four")) return "avengers";
   if (title.startsWith("Iron Man")) return "iron-man";
   if (title.startsWith("Captain America")) return "captain-america";
