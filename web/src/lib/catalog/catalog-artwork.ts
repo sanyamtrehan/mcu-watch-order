@@ -106,6 +106,7 @@ const EXACT_ARTWORK: Record<string, CatalogArtwork> = {
 
 export function catalogArtworkForTitle(title: string): CatalogArtwork | null {
   if (title.startsWith("Blade")) return "punisher";
+  if (title.startsWith("Ghost Rider")) return "punisher";
   if (title.startsWith("Fantastic Four") || title.startsWith("The Fantastic Four")) return "avengers";
   if (title.startsWith("Iron Man")) return "iron-man";
   if (title.startsWith("Captain America")) return "captain-america";

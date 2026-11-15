@@ -14,6 +14,8 @@
       "https://marvelcinematicuniverse.fandom.com/wiki/Multiverse",
       "https://en.wikipedia.org/wiki/Fantastic_Four_in_film",
       "https://en.wikipedia.org/wiki/Blade_(franchise)",
+      "https://en.wikipedia.org/wiki/Ghost_Rider_(2007_film)",
+      "https://en.wikipedia.org/wiki/Ghost_Rider:_Spirit_of_Vengeance",
       "https://en.wikipedia.org/wiki/Daredevil_(film)",
       "https://en.wikipedia.org/wiki/Elektra_(2005_film)",
       "https://marvelcinematicuniverse.fandom.com/wiki/Deadpool_%26_Wolverine",
@@ -22,7 +24,7 @@
       "https://en.wikipedia.org/wiki/Spider-Man:_Across_the_Spider-Verse",
       "https://en.wikipedia.org/wiki/The_Spider_Within:_A_Spider-Verse_Story"
     ],
-    "notes": "Release dates are cross-checked against Wikipedia and the Marvel Cinematic Universe Wiki. The release catalog includes MCU titles through Phase Five, The Fantastic Four: First Steps, and the live-action Marvel realities connected through the MCU multiverse: Raimi Spider-Man, Amazing Spider-Man, Sony Spider-Man Universe including the live-action Spider-Noir series and released animated Spider-Verse films and shorts, Fox X-Men, Fantastic Four, Blade, and Daredevil/Elektra. Existing stable IDs are preserved so catalog refreshes do not detach watch progress.",
+    "notes": "Release dates are cross-checked against Wikipedia and the Marvel Cinematic Universe Wiki. The release catalog includes MCU titles through Phase Five, The Fantastic Four: First Steps, and the live-action Marvel realities connected through the MCU multiverse: Raimi Spider-Man, Amazing Spider-Man, Sony Spider-Man Universe including the live-action Spider-Noir series and released animated Spider-Verse films and shorts, Fox X-Men, Fantastic Four, Blade, Ghost Rider, and Daredevil/Elektra. Existing stable IDs are preserved so catalog refreshes do not detach watch progress.",
     "completeMcuPhase": 5,
     "additionalMcuTitles": [
       "The Fantastic Four: First Steps"
@@ -132,6 +134,13 @@
       "runtimeMinutes": 104
     },
     {
+      "title": "Ghost Rider",
+      "releaseDate": "2007-02-16",
+      "id": "movie-ghost-rider",
+      "watchUnitId": "watch-movie-ghost-rider",
+      "runtimeMinutes": 110
+    },
+    {
       "title": "Spider-Man 3",
       "releaseDate": "2007-05-04",
       "id": "movie-spider-man-3",
@@ -193,6 +202,13 @@
       "id": "movie-captain-america-the-first-avenger",
       "watchUnitId": "watch-movie-captain-america-the-first-avenger",
       "runtimeMinutes": 124
+    },
+    {
+      "title": "Ghost Rider: Spirit of Vengeance",
+      "releaseDate": "2012-02-17",
+      "id": "movie-ghost-rider-spirit-of-vengeance",
+      "watchUnitId": "watch-movie-ghost-rider-spirit-of-vengeance",
+      "runtimeMinutes": 95
     },
     {
       "title": "Marvel's The Avengers",
@@ -7406,6 +7422,11 @@
     {
       "fromTitleId": "movie-blade-trinity",
       "toTitleId": "movie-blade-ii",
+      "type": "sequel"
+    },
+    {
+      "fromTitleId": "movie-ghost-rider-spirit-of-vengeance",
+      "toTitleId": "movie-ghost-rider",
       "type": "sequel"
     },
     {
